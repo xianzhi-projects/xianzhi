@@ -7,6 +7,7 @@
         <groupId>io.xianzhi</groupId>
         <artifactId>xianzhi-dependencies</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <description>The core package of the project includes the most basic code</description>
 
