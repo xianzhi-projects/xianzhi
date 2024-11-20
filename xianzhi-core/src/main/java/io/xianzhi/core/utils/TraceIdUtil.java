@@ -39,12 +39,16 @@ public class TraceIdUtil {
 
     /**
      * Trace ID key used in request headers or logs.
+     *
+     * @since 1.0.0
      */
     public static final String TRACE_ID = "XZ-TRACE-ID";
 
     /**
      * Trace provider used to obtain Trace ID and Span ID.
      * This can be a custom implementation loaded via ServiceLoader.
+     *
+     * @since 1.0.0
      */
     @Getter
     private static TraceProvider traceProvider;
@@ -67,6 +71,8 @@ public class TraceIdUtil {
 
     /**
      * Private constructor to prevent instantiation.
+     *
+     * @since 1.0.0
      */
     private TraceIdUtil() {
     }

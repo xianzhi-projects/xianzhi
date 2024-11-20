@@ -69,6 +69,7 @@ public class ResponseUtils {
      * @param result   The result object to be serialized as JSON and sent in the response
      * @param response The {@link HttpServletResponse} object used to send the response
      * @throws RuntimeException If an error occurs while writing to the response output stream
+     * @since 1.0.0
      */
     public static void responseUtf8(Result result, HttpServletResponse response) {
         try {
@@ -94,6 +95,7 @@ public class ResponseUtils {
      *
      * @return The current {@link HttpServletResponse} object
      * @throws BusinessException If the response object cannot be retrieved
+     * @since 1.0.0
      */
     public static HttpServletResponse getResponse() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -117,6 +119,7 @@ public class ResponseUtils {
      *
      * @return The current {@link HttpServletRequest} object
      * @throws BusinessException If the request object cannot be retrieved
+     * @since 1.0.0
      */
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

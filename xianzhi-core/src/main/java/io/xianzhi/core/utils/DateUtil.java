@@ -67,6 +67,7 @@ public class DateUtil {
      * Gets the current date and time as a formatted string.
      *
      * @return Current date and time string (format: yyyy-MM-dd HH:mm:ss)
+     * @since 1.0.0
      */
     public static String nowDateTime() {
         return formatDate(new Date(), DEFAULT_DATETIME_FORMAT);
@@ -76,6 +77,7 @@ public class DateUtil {
      * Gets the current date as a formatted string.
      *
      * @return Current date string (format: yyyy-MM-dd)
+     * @since 1.0.0
      */
     public static String nowDate() {
         return formatDate(new Date(), DEFAULT_DATE_FORMAT);
@@ -87,6 +89,7 @@ public class DateUtil {
      * @param date   The Date object to format
      * @param format The desired date format
      * @return Formatted date string, or null if date or format is invalid
+     * @since 1.0.0
      */
     public static String formatDate(Date date, String format) {
         if (Objects.isNull(date) || Objects.isNull(format) || format.isEmpty()) {
@@ -107,6 +110,7 @@ public class DateUtil {
      * @param format     The expected date format
      * @return Parsed Date object, or null if input is invalid
      * @throws ParseException If the date string doesn't match the format
+     * @since 1.0.0
      */
     public static Date parseDate(String dateString, String format) throws ParseException {
         if (Objects.isNull(dateString) || dateString.isEmpty() || Objects.isNull(format) || format.isEmpty()) {

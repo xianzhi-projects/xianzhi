@@ -29,6 +29,7 @@ public interface Result {
      * Returns a custom status code (non-HTTP).
      *
      * @return The custom status code
+     * @since 1.0.0
      */
     String code();
 
@@ -36,6 +37,7 @@ public interface Result {
      * Indicates whether the operation was successful or not.
      *
      * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @since 1.0.0
      */
     boolean success();
 
@@ -43,6 +45,7 @@ public interface Result {
      * Returns a custom message providing additional information about the operation.
      *
      * @return A custom message
+     * @since 1.0.0
      */
     String message();
 }

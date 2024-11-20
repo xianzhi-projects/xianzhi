@@ -33,7 +33,6 @@ import java.util.concurrent.Callable;
  * and cleaned up afterward to prevent any memory leaks or context pollution.</p>
  *
  * @param <T> the type of the result returned by this callable
- *
  * @author Max
  * @since 1.0.0
  */
@@ -61,6 +60,7 @@ public class XianZhiCallable<T> implements Callable<T> {
      * {@link Context} and trace ID at the time of creation.
      *
      * @param call the task to be executed
+     * @since 1.0.0
      */
     public XianZhiCallable(Callable<T> call) {
         this.call = call;
@@ -74,6 +74,7 @@ public class XianZhiCallable<T> implements Callable<T> {
      *
      * @return the result of the task
      * @throws Exception if the task execution fails
+     * @since 1.0.0
      */
     @Override
     public T call() throws Exception {

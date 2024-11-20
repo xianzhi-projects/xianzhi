@@ -83,6 +83,7 @@ public class ResponseResult<R> implements Result {
      *
      * @param result The result object containing status and message
      * @param data   The response data of type {@code R}
+     * @since 1.0.0
      */
     public ResponseResult(Result result, R data) {
         this.code = result.code();
@@ -109,6 +110,7 @@ public class ResponseResult<R> implements Result {
      *
      * @param <T> The type of the response data
      * @return A {@code ResponseResult} instance with a success status
+     * @since 1.0.0
      */
     public static <T> ResponseResult<T> ok() {
         return new ResponseResult<>(CommonCode.SUCCESS, null);
@@ -120,6 +122,7 @@ public class ResponseResult<R> implements Result {
      * @param data The data to include in the response
      * @param <T>  The type of the response data
      * @return A {@code ResponseResult} instance with a success status and data
+     * @since 1.0.0
      */
     public static <T> ResponseResult<T> ok(T data) {
         return new ResponseResult<>(CommonCode.SUCCESS, data);
@@ -132,6 +135,7 @@ public class ResponseResult<R> implements Result {
      * @param result The result object describing the failure
      * @param <T>    The type of the response data
      * @return A {@code ResponseResult} instance with a failure status
+     * @since 1.0.0
      */
     public static <T> ResponseResult<T> fail(Result result) {
         return new ResponseResult<>(result.success() ? CommonCode.FAILURE : result, null);
@@ -141,6 +145,7 @@ public class ResponseResult<R> implements Result {
      * Returns a custom status code (non-HTTP).
      *
      * @return The custom status code
+     * @since 1.0.0
      */
     @Override
     public String code() {
@@ -151,6 +156,7 @@ public class ResponseResult<R> implements Result {
      * Indicates whether the operation was successful or not.
      *
      * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @since 1.0.0
      */
     @Override
     public boolean success() {
@@ -161,6 +167,7 @@ public class ResponseResult<R> implements Result {
      * Returns a custom message providing additional information about the operation.
      *
      * @return A custom message
+     * @since 1.0.0
      */
     @Override
     public String message() {

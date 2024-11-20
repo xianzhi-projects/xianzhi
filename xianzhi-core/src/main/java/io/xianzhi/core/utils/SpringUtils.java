@@ -53,17 +53,23 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
      * This is necessary because beans annotated with "@PostConstruct" may encounter a null pointer exception
      * due to the application context not being fully loaded at that point. Therefore, this class implements
      * {@link BeanFactoryPostProcessor} to inject a {@link ConfigurableListableBeanFactory}.
+     *
+     * @since 1.0.0
      */
     private static ConfigurableListableBeanFactory beanFactory;
 
     /**
      * The Spring application context environment.
+     *
+     * @since 1.0.0
      */
     @Getter
     private static ApplicationContext applicationContext;
 
     /**
      * Private constructor to prevent instantiation of the utility class.
+     *
+     * @since 1.0.0
      */
     private SpringUtils() {
     }
@@ -74,8 +80,7 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
      *
      * @return The {@link ListableBeanFactory}.
      * @throws RuntimeException if neither the {@link ConfigurableListableBeanFactory} nor the {@link ApplicationContext}
-     *                           is injected, indicating that the Spring environment may not be properly initialized.
-     * @since 5.7.0
+     *                          is injected, indicating that the Spring environment may not be properly initialized.
      */
     public static ListableBeanFactory getBeanFactory() {
         final ListableBeanFactory factory = (null == beanFactory) ? applicationContext : beanFactory;
@@ -92,7 +97,6 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
      * @param <T>  The bean type.
      * @param type The class or interface to get beans for. Passing {@code null} will retrieve all beans.
      * @return A map of beans of the specified type, where the key is the bean name and the value is the bean instance.
-     * @since 5.3.3
      */
     public static <T> Map<String, T> getBeansOfType(Class<T> type) {
         return getBeanFactory().getBeansOfType(type);
