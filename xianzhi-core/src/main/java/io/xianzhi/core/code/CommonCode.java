@@ -35,6 +35,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CommonCode implements Result {
 
+
+    /**
+     * Parameter check failure.
+     * Indicates that the operation failed due to invalid parameters.
+     *
+     * @since 1.0.0
+     */
+    PARAMS_CHECK_FAIL("0000000", false, "params.check.fail"),
+
+
     /**
      * Success status code
      * Indicates that the operation was successful.
