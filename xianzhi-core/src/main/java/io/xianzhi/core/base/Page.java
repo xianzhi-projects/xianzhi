@@ -29,4 +29,15 @@ import java.io.Serializable;
  */
 @Data
 public class Page implements Serializable {
+
+    /**
+     * default page number
+     * @since 1.0.0
+     */
+    private Integer pageNo = 1;
+    /**
+     * default page size
+     * @since 1.0.0
+     */
+    private Integer pageSize = 10;
 }
