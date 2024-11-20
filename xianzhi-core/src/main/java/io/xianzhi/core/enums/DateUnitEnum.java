@@ -15,34 +15,37 @@
  *
  */
 
-package io.xianzhi.core.result;
+package io.xianzhi.core.enums;
 
 /**
- * Public response result
+ * Date unit
  *
  * @author Max
  * @since 1.0.0
  */
-public interface Result {
-
+public enum DateUnitEnum {
     /**
-     * Returns a custom status code (non-HTTP).
-     *
-     * @return The custom status code
+     * Year
      */
-    String code();
-
+    YEAR,
     /**
-     * Indicates whether the operation was successful or not.
-     *
-     * @return {@code true} if the operation was successful, {@code false} otherwise
+     * Month
      */
-    boolean success();
-
+    MONTH,
     /**
-     * Returns a custom message providing additional information about the operation.
-     *
-     * @return A custom message
+     * Day
      */
-    String message();
+    DAY,
+    /**
+     * Hour
+     */
+    HOUR,
+    /**
+     * Minute
+     */
+    MINUTE,
+    /**
+     * Second
+     */
+    SECOND
 }
