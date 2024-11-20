@@ -27,7 +27,6 @@
         <module>xianzhi-wechat-pay-spring-boot-starter</module>
         <module>xianzhi-dingtalk-spring-boot-starter</module>
         <module>xianzhi-feishu-spring-boot-starter</module>
-        <module>xianzhi-wecom-pay-spring-boot-starter</module>
     </modules>
 
     <properties>
