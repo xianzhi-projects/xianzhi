@@ -18,6 +18,7 @@ package io.xianzhi.mybatis.plus.base;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 /**
  * Data object representing a unique identifier.
@@ -27,6 +28,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @author Max
  * @since 1.0.0
  */
+@Data
 public class IdDO {
 
     /**
