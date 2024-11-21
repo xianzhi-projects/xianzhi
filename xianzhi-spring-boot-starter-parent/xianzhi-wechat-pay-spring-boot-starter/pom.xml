@@ -18,8 +18,12 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>io.xianzhi.core</groupId>
-            <artifactId>xianzhi-core</artifactId>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>xianzhi-pay</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.wechatpay-apiv3</groupId>
+            <artifactId>wechatpay-java</artifactId>
         </dependency>
     </dependencies>
 </project>
