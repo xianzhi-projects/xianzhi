@@ -22,7 +22,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * Page base class
+ * 基础分页对象，当查询列表的时候查询对象继承该对象
  *
  * @author Max
  * @since 1.0.0
@@ -31,12 +31,14 @@ import java.io.Serializable;
 public class Page implements Serializable {
 
     /**
-     * default page number
+     * 默认分页条数
+     *
      * @since 1.0.0
      */
     private Integer pageNo = 1;
     /**
-     * default page size
+     * 默认每页展示条数
+     *
      * @since 1.0.0
      */
     private Integer pageSize = 10;

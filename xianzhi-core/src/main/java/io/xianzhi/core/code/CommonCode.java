@@ -22,11 +22,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Common Response Status Codes
+ * 公共响应状态码
  * <p>
- * This enum defines the common status codes used across the application for indicating
- * the outcome of operations, such as success, failure, or errors. These codes are
- * non-HTTP and are used for custom application logic.
+ * 此枚举定义了整个应用程序中用于指示的通用状态代码
+ * 操作的结果，如成功、失败或错误。这些状态代码是 非HTTP 状态代码，用于自定义应用程序响应。
  *
  * @author Max
  * @since 1.0.0
@@ -37,8 +36,8 @@ public enum CommonCode implements Result {
 
 
     /**
-     * Parameter check failure.
-     * Indicates that the operation failed due to invalid parameters.
+     * 参数检查失败
+     * 表示操作因参数无效而失败。
      *
      * @since 1.0.0
      */
@@ -46,71 +45,68 @@ public enum CommonCode implements Result {
 
 
     /**
-     * Success status code
-     * Indicates that the operation was successful.
+     * 操作成功状态码
      *
      * @since 1.0.0
      */
     SUCCESS("200", true, "operation.success"),
 
     /**
-     * Failure status code
-     * Indicates that the operation failed.
+     * 操作失败状态码
      *
      * @since 1.0.0
      */
     FAILURE("500", false, "operation.failed"),
 
     /**
-     * Error status code
-     * Indicates a system error.
+     * 系统错误状态码，表示未知错误
      *
      * @since 1.0.0
      */
     ERROR("-1", false, "system.error"),
     /**
-     * Unauthorized or session expired
-     * Indicates that the user is not authorized or the authentication token has expired.
+     * 未经授权或会话已过期
+     * 表示用户未获得授权或身份验证令牌已过期
      *
      * @since 1.0.0
      */
     UNAUTHORIZED("401", false, "unauthorized"),
 
     /**
-     * Insufficient permissions
-     * Indicates that the user does not have the necessary permissions to perform the operation.
+     * 没有足够的权限
+     * 表示用户没有执行该操作所需的权限.
      *
      * @since 1.0.0
      */
     FORBIDDEN("403", false, "forbidden"),
 
     /**
-     * Resource not found
-     * Indicates that the requested resource could not be located.
+     * 资源不存在
+     * 表示访问一个不存在的资源.
      *
      * @since 1.0.0
      */
     NO_RESOURCE_FOUND_EXCEPTION("404", false, "resource.not.found"),
 
     /**
-     * Service unavailable
-     * Indicates that the service is temporarily unavailable.
+     * 服务不可用
+     * 表示服务暂时不可用.可能是在重启或者升级也有可能服务下线
      *
      * @since 1.0.0
      */
     SERVICE_UNAVAILABLE("503", false, "service.unavailable"),
 
     /**
-     * Unsupported HTTP request method
-     * Indicates that the HTTP method used in the request is not supported.
+     * 不支持的请求方式
+     * 表示不支持请求中使用的HTTP方法.比如接口定义的是POST请求，但是实际请求使用的是GET请求
      *
      * @since 1.0.0
      */
     HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION("-1", false, "request.method.not.supported"),
 
     /**
-     * Missing or empty request body
-     * Indicates that the request body is either missing or empty.
+     * 请求正文缺失或为空
+     * 没有传递请求参数，无法读取到请求体.
      *
      * @since 1.0.0
      */
