@@ -33,12 +33,9 @@ package io.xianzhi.core.context;
 public interface Context {
 
     /**
-     * Retrieves the unique identifier for this context.
-     * <p>
-     * The ID could represent various entities such as a session ID,
-     * transaction ID, or other domain-specific identifiers.
+     * 获取唯一标识，例如用户ID
      *
-     * @return The unique ID associated with the context
+     * @return 唯一标识
      * @since 1.0.0
      */
     String getId();
