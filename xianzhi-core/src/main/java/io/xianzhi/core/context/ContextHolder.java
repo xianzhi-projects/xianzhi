@@ -21,15 +21,8 @@ import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 
 /**
- * ContextHolder
- * <p>
- * A utility class to manage thread-local `Context` objects.
- * It provides methods to set, retrieve, and clear the context associated
- * with the current thread, ensuring thread safety and isolation.
- * <p>
- * This is particularly useful in scenarios where context information
- * (like user details, transaction information, etc.) needs to be accessed
- * consistently within a thread.
+ * 上下文持有者
+ * 一个用于管理线程本地“Context”对象的实用类。
  *
  * @author Max
  * @since 1.0.0
@@ -37,17 +30,16 @@ import io.xianzhi.core.exception.BusinessException;
 public class ContextHolder {
 
     /**
-     * Thread-local storage for the `Context` object.
-     * Each thread will have its own isolated `Context` instance.
+     * Context”对象的线程本地存储。
      *
      * @since 1.0.0
      */
     private static final ThreadLocal<Context> CONTEXT = new ThreadLocal<>();
 
     /**
-     * Retrieves the context associated with the current thread.
+     * 获取上下文
      *
-     * @return The current thread's context, or {@code null} if no context is set.
+     * @return 当前线程上下文，可能为空
      * @since 1.0.0
      */
     public static Context getContext() {
@@ -55,10 +47,10 @@ public class ContextHolder {
     }
 
     /**
-     * Sets the context for the current thread.
+     * 设置上下文
      *
-     * @param context The `Context` object to be associated with the current thread.
-     * @throws BusinessException If the provided context is {@code null}.
+     * @param context 上下文信息
+     * @throws BusinessException 如果传递的上下文信息为空的话则抛出异常
      * @since 1.0.0
      */
     public static void setContext(Context context) {
@@ -69,12 +61,10 @@ public class ContextHolder {
     }
 
     /**
-     * Retrieves the context associated with the current thread.
-     * <p>
-     * If no context is found, throws a {@link BusinessException}.
+     * 获取当前线程的上下文，如果为空的话则抛出异常
      *
-     * @return The current thread's context.
-     * @throws BusinessException If no context is associated with the current thread.
+     * @return 当前线程上下文
+     * @throws BusinessException 如果当前线程没有关联上下文
      * @since 1.0.0
      */
     public static Context getContextOrThrow() {
@@ -86,10 +76,10 @@ public class ContextHolder {
     }
 
     /**
-     * Retrieves the unique ID from the current thread's context.
+     * 获取唯一标识
      *
-     * @return The unique ID of the context.
-     * @throws BusinessException If no context is associated with the current thread.
+     * @return 唯一标识
+     * @throws BusinessException 如果当前线程没有关联上下文
      * @since 1.0.0
      */
     public static String getId() {
@@ -97,9 +87,7 @@ public class ContextHolder {
     }
 
     /**
-     * Clears the context associated with the current thread.
-     * <p>
-     * This method should be called at the end of the thread's lifecycle to prevent memory leaks.
+     * 清除上下文
      *
      * @since 1.0.0
      */

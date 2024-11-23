@@ -18,7 +18,7 @@
 package io.xianzhi.core.result;
 
 /**
- * Public response result
+ * 公共的响应结果
  *
  * @author Max
  * @since 1.0.0
@@ -26,25 +26,25 @@ package io.xianzhi.core.result;
 public interface Result {
 
     /**
-     * Returns a custom status code (non-HTTP).
+     * 返回自定义状态码
      *
-     * @return The custom status code
+     * @return 自定义状态码
      * @since 1.0.0
      */
     String code();
 
     /**
-     * Indicates whether the operation was successful or not.
+     * 表示操作是否成功
      *
-     * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @return {@code true} 表示成功, {@code false} 操作失败
      * @since 1.0.0
      */
     boolean success();
 
     /**
-     * Returns a custom message providing additional information about the operation.
+     * 返回自定操作提示信息
      *
-     * @return A custom message
+     * @return 自定义提示信息
      * @since 1.0.0
      */
     String message();

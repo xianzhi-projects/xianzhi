@@ -113,24 +113,24 @@ public enum CommonCode implements Result {
     HTTP_MESSAGE_NOT_READABLE_EXCEPTION("-1", false, "http.message.not.readable"),
 
     /**
-     * Request is not a multipart request
-     * Indicates that the request is expected to be a multipart request but is not.
+     * 请求不是上传文件
+     * 表示当前请求的入参不是上传文件.
      *
      * @since 1.0.0
      */
     REQUEST_NOT_MULTIPART("-1", false, "request.not.multipart"),
 
     /**
-     * Unsupported HTTP media type
-     * Indicates that the media type of the request is not supported.
+     * 不支持的HTTP媒体类型
+     * 表示不支持请求的媒体类型。.
      *
      * @since 1.0.0
      */
     HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION("-1", false, "http.media.type.not.supported"),
 
     /**
-     * Missing request parameter
-     * Indicates that a required request parameter is missing.
+     * 缺少请求参数
+     * 缺少必要的请求参数.
      *
      * @since 1.0.0
      */
@@ -138,27 +138,24 @@ public enum CommonCode implements Result {
     ;
 
     /**
-     * The custom status code
-     * This is a non-HTTP status code used for custom application responses.
+     * 自定义响应状态码
      */
     private final String code;
 
     /**
-     * Success flag
-     * Indicates whether the operation was successful or not.
+     * 是否操作成功
      */
     private final boolean success;
 
     /**
-     * Custom message
-     * Provides additional information about the operation.
+     * 自定义提示信息
      */
     private final String message;
 
     /**
-     * Returns a custom status code (non-HTTP).
+     * 返回自定义状态码
      *
-     * @return The custom status code
+     * @return 自定义状态码
      * @since 1.0.0
      */
     @Override
@@ -167,9 +164,9 @@ public enum CommonCode implements Result {
     }
 
     /**
-     * Indicates whether the operation was successful or not.
+     * 表示操作是否成功
      *
-     * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @return {@code true} 表示成功, {@code false} 操作失败
      * @since 1.0.0
      */
     @Override
@@ -178,9 +175,9 @@ public enum CommonCode implements Result {
     }
 
     /**
-     * Returns a custom message providing additional information about the operation.
+     * 返回自定操作提示信息
      *
-     * @return A custom message
+     * @return 自定义提示信息
      * @since 1.0.0
      */
     @Override

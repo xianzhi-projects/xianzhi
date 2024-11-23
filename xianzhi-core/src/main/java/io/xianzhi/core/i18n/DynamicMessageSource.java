@@ -26,8 +26,7 @@ import java.text.MessageFormat;
 import java.util.Locale;
 
 /**
- * Dynamic message source for handling internationalization (i18n) messages.
- * This class integrates with an external i18n provider to retrieve localized messages.
+ * 动态国际化消息源
  *
  * @author Max
  * @since 1.0.0
@@ -36,7 +35,7 @@ import java.util.Locale;
 public class DynamicMessageSource extends AbstractMessageSource {
 
     /**
-     * Internationalization message provider, optional for dynamic message retrieval.
+     * 国际化消息提供者
      */
     @Autowired(required = false)
     private I18nMessageProvider i18nMessageProvider;
@@ -58,8 +57,8 @@ public class DynamicMessageSource extends AbstractMessageSource {
      */
     @Override
     protected MessageFormat resolveCode(String code, Locale locale) {
-        if (null == i18nMessageProvider){
-            log.warn("i18nMessageProvider is null");
+        if (null == i18nMessageProvider) {
+            log.warn("动态国际化提供者为空!!!!");
             return null;
         }
         String i18nMessage = i18nMessageProvider.getDynamicMessage(locale, code);

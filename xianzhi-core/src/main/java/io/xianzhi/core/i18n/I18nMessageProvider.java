@@ -20,7 +20,7 @@ package io.xianzhi.core.i18n;
 import java.util.Locale;
 
 /**
- * Interface for providing dynamic internationalization (i18n) messages.
+ * 国际化消息提供者
  *
  * @author Max
  * @since 1.0.0
@@ -28,11 +28,11 @@ import java.util.Locale;
 public interface I18nMessageProvider {
 
     /**
-     * Retrieves dynamic internationalization message based on the specified locale and code.
+     * 根据指定的区域设置和代码检索动态国际化消息。
      *
-     * @param locale The locale for which the message is to be fetched.
-     * @param code The internationalization code to identify the message.
-     * @return The dynamic internationalization message.
+     * @param locale 要获取消息的区域.
+     * @param code   国际化消息编码.
+     * @return 动态国际化消息.
      * @since 1.0.0
      */
     String getDynamicMessage(Locale locale, String code);

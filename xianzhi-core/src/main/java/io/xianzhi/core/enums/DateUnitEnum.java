@@ -18,34 +18,34 @@
 package io.xianzhi.core.enums;
 
 /**
- * Date unit
+ * 日期单位枚举
  *
  * @author Max
  * @since 1.0.0
  */
 public enum DateUnitEnum {
     /**
-     * Year
+     * 年
      */
     YEAR,
     /**
-     * Month
+     * 月
      */
     MONTH,
     /**
-     * Day
+     * 日
      */
     DAY,
     /**
-     * Hour
+     * 时
      */
     HOUR,
     /**
-     * Minute
+     * 分
      */
     MINUTE,
     /**
-     * Second
+     * 秒
      */
     SECOND
 }

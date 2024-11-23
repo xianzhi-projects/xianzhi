@@ -20,21 +20,9 @@ package io.xianzhi.core.exception;
 import io.xianzhi.core.result.Result;
 import lombok.Getter;
 
-/**
- * 自定义业务异常
- *
- * @author Max
- * @since 1.0.0
- */
 
 /**
- * Custom Business Exception
- * <p>
- * Represents an exception that encapsulates business logic errors, carrying a
- * {@link Result} object to provide detailed information about the error.
- * <p>
- * This exception is a runtime exception and is used for propagating business-specific
- * error states within the application.
+ * 自定义业务异常，通常是指应用程序抛出的自定义业务异常
  *
  * @author Max
  * @since 1.0.0
@@ -43,21 +31,18 @@ import lombok.Getter;
 public class BusinessException extends RuntimeException {
 
     /**
-     * Encapsulated response result
-     * <p>
-     * Holds the {@link Result} object that provides the error code, success status,
-     * and message associated with this exception.
+     * 封装响应结果
      *
      * @since 1.0.0
      */
     private final Result result;
 
     /**
-     * Constructs a new BusinessException with the specified {@link Result}.
-     * <p>
-     * The exception message is derived from the {@link Result#message()} method.
+     * 使用指定的｛@link Result｝构造新的BusinessException。
+     * 异常消息来源于{@link Result#message（）}方法。
      *
-     * @param result The {@link Result} object containing details of the error
+     * @param result 包含错误详细信息的{@link Result}对象
+     * @since 1.0.0
      */
     public BusinessException(Result result) {
         super(result.message());

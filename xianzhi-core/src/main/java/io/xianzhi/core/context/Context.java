@@ -18,16 +18,14 @@
 package io.xianzhi.core.context;
 
 /**
- * Context Interface
+ * 上下文接口
  * <p>
- * Represents a generic context abstraction that provides a unique identifier.
- * This can be implemented by various classes to standardize the retrieval
- * of contextual information within the application.
+ * 表示提供唯一标识符的通用上下文抽象。这可以通过各种类来实现,应用程序中的上下文信息
  * <p>
- * Common use cases include:
- * - User context
- * - Client context
- * - Application-specific contexts
+ * 常见用例包括：
+ * -用户上下文
+ * -客户端上下文
+ * -特定于应用程序的上下文
  *
  * @author Max
  * @since 1.0.0
