@@ -33,37 +33,47 @@ import lombok.Getter;
 public enum SecurityCode implements Result {
 
     /**
-     * Username or password error.
-     * Indicates that the operation failed due to incorrect username or password.
+     * 用户名或者密码错误
      *
      * @since 1.0.0
      */
     USER_NAME_OR_PASSWORD_ERROR("1001", false, "security.username.or.password.error"),
 
+    /**
+     * 授权方式为空
+     *
+     * @since 1.0.0
+     */
+    GRANT_TYPE_IS_NULL("1002", false, "security.grant.type.is.null"),
+
+    /**
+     * 授权方式不支持
+     *
+     * @since 1.0.0
+     */
+    GRANT_TYPE_NOT_SUPPORT("1003", false, "security.grant.type.not.support"),
+
     ;
 
     /**
-     * The custom status code
-     * This is a non-HTTP status code used for custom application responses.
+     * 自定义响应状态码
      */
     private final String code;
 
     /**
-     * Success flag
-     * Indicates whether the operation was successful or not.
+     * 是否操作成功
      */
     private final boolean success;
 
     /**
-     * Custom message
-     * Provides additional information about the operation.
+     * 自定义提示信息
      */
     private final String message;
 
     /**
-     * Returns a custom status code (non-HTTP).
+     * 返回自定义状态码
      *
-     * @return The custom status code
+     * @return 自定义状态码
      * @since 1.0.0
      */
     @Override
@@ -72,9 +82,9 @@ public enum SecurityCode implements Result {
     }
 
     /**
-     * Indicates whether the operation was successful or not.
+     * 表示操作是否成功
      *
-     * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @return {@code true} 表示成功, {@code false} 操作失败
      * @since 1.0.0
      */
     @Override
@@ -83,9 +93,9 @@ public enum SecurityCode implements Result {
     }
 
     /**
-     * Returns a custom message providing additional information about the operation.
+     * 返回自定操作提示信息
      *
-     * @return A custom message
+     * @return 自定义提示信息
      * @since 1.0.0
      */
     @Override
