@@ -53,6 +53,13 @@ public enum SecurityCode implements Result {
      */
     GRANT_TYPE_NOT_SUPPORT("1003", false, "security.grant.type.not.support"),
 
+    /**
+     * Token无效
+     *
+     * @since 1.0.0
+     */
+    TOKEN_INVALID("1004", false, "security.token.invalid"),
+
     ;
 
     /**
