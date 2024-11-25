@@ -30,13 +30,9 @@ import org.springframework.util.ObjectUtils;
 import java.util.Map;
 
 /**
- * A generic class representing a unified response structure for API results.
- * <p>
- * This class implements the {@link Result} interface and provides additional fields and methods
- * to standardize API responses. It includes fields for status code, success flag, message, data, and trace ID.
- * </p>
+ * 响应结果类
  *
- * @param <R> The type of the response data
+ * @param <R> 响应结果泛型
  * @author Max
  * @since 1.0.0
  */
@@ -45,47 +41,38 @@ import java.util.Map;
 public class ResponseResult<R> implements Result {
 
     /**
-     * The custom status code.
-     * This is a non-HTTP status code used for custom application responses.
+     * 自定义状态码
      */
     private final String code;
 
     /**
-     * Success flag.
-     * Indicates whether the operation was successful or not.
+     * 是否操作成功
      */
     private final boolean success;
 
     /**
-     * Custom message.
-     * Provides additional information about the operation.
+     * 自定义提示信息
      */
     private final String message;
 
     /**
-     * The response data of type {@code R}.
+     * 返回的数据
      */
     private final R data;
 
     /**
-     * The trace ID for the request.
-     * Useful for logging and debugging.
+     * traceId
      */
     private final String traceId;
 
     /**
-     * Constructs a new {@code ResponseResult} object by copying the fields from an existing {@link Result} object
-     * and adding additional response data.
-     * <p>
-     * If a dynamic message source bean is available in the Spring context, it attempts to localize
-     * the message based on the current locale.
-     * </p>
+     * 构建返回结果
      *
-     * @param result The result object containing status and message
-     * @param data   The response data of type {@code R}
+     * @param result 响应结果
+     * @param data   查询的数据
      * @since 1.0.0
      */
-    public ResponseResult(Result result, R data) {
+    private ResponseResult(Result result, R data) {
         this.code = result.code();
         this.success = result.success();
         String oldMessage = result.message();
@@ -106,10 +93,10 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Creates a successful response without any data.
+     * 创建操作成功的响应结果
      *
-     * @param <T> The type of the response data
-     * @return A {@code ResponseResult} instance with a success status
+     * @param <T> 返回参数泛型
+     * @return 返回操作成功响应信息
      * @since 1.0.0
      */
     public static <T> ResponseResult<T> ok() {
@@ -117,11 +104,11 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Creates a successful response with the given data.
+     * 创建操作成功的响应结果，并返回数据
      *
-     * @param data The data to include in the response
-     * @param <T>  The type of the response data
-     * @return A {@code ResponseResult} instance with a success status and data
+     * @param data 返回的数据
+     * @param <T>  返回的数据泛型
+     * @return 返回相应操作成功响应信息
      * @since 1.0.0
      */
     public static <T> ResponseResult<T> ok(T data) {
@@ -129,8 +116,7 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Creates a failed response with the given result.
-     * If the given result indicates success, the failure response uses {@link CommonCode#FAILURE} instead.
+     * 创建一个操作失败的响应结果
      *
      * @param result The result object describing the failure
      * @param <T>    The type of the response data
@@ -142,9 +128,9 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Returns a custom status code (non-HTTP).
+     * 返回自定义状态码
      *
-     * @return The custom status code
+     * @return 自定义状态码
      * @since 1.0.0
      */
     @Override
@@ -153,9 +139,9 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Indicates whether the operation was successful or not.
+     * 表示操作是否成功
      *
-     * @return {@code true} if the operation was successful, {@code false} otherwise
+     * @return {@code true} 表示成功, {@code false} 操作失败
      * @since 1.0.0
      */
     @Override
@@ -164,9 +150,9 @@ public class ResponseResult<R> implements Result {
     }
 
     /**
-     * Returns a custom message providing additional information about the operation.
+     * 返回自定操作提示信息
      *
-     * @return A custom message
+     * @return 自定义提示信息
      * @since 1.0.0
      */
     @Override

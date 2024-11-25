@@ -23,7 +23,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * List query result return
+ * 列表查询结果
  *
  * @author Max
  * @since 1.0.0
@@ -34,24 +34,24 @@ public class ListResult<E> {
 
 
     /**
-     * List query data
+     * 查询的列表数据
      *
      * @since 1.0.0
      */
     private List<E> list;
 
     /**
-     * Query the total quantity for pagination
+     * 查询的总数
      *
      * @since 1.0.0
      */
     private long total;
 
     /**
-     * Creates and returns an empty {@code ListResult} object.
+     * 创建一个空的返回结果
      *
-     * @param <E> The type of elements in the {@code ListResult}
-     * @return An empty {@code ListResult} containing an empty list and a total count of 0
+     * @param <E> 返回结果泛型
+     * @return 空的返回结果
      * @since 1.0.0
      */
     public static <E> ListResult<E> empty() {
@@ -59,12 +59,12 @@ public class ListResult<E> {
     }
 
     /**
-     * Constructs a {@code ListResult} object with the provided query result data and total count.
+     * 构建返回结果
      *
-     * @param list  The list of queried data items
-     * @param total The total number of items matching the query
-     * @param <E>   The type of elements in the list
-     * @return A {@code ListResult} containing the query results and total count
+     * @param list  查询的列表数据
+     * @param total 查询的总数
+     * @param <E>   返回数据的泛型
+     * @return 列表查询结果
      * @since 1.0.0
      */
     public static <E> ListResult<E> of(List<E> list, long total) {
