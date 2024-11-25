@@ -21,18 +21,14 @@ import io.xianzhi.core.context.Context;
 import io.xianzhi.core.context.ContextHolder;
 import io.xianzhi.core.utils.TraceIdUtil;
 import lombok.Getter;
+import org.slf4j.MDC;
 
 import java.util.concurrent.Callable;
 
 /**
- * A wrapper for {@link Callable} that propagates a custom context and trace ID
- * across thread boundaries. This is particularly useful in multi-threaded environments
- * where thread-local context or trace information needs to be preserved.
+ * 自定义Callable，用于在任务执行前后设置和清理线程上下文。
  *
- * <p>The class ensures that the {@link Context} is set before the task execution
- * and cleaned up afterward to prevent any memory leaks or context pollution.</p>
- *
- * @param <T> the type of the result returned by this callable
+ * @param <T> 返回结果类型
  * @author Max
  * @since 1.0.0
  */
@@ -40,52 +36,56 @@ import java.util.concurrent.Callable;
 public class XianZhiCallable<T> implements Callable<T> {
 
     /**
-     * The actual task to be executed.
+     * 自定义任务
+     *
+     * @since 1.0.0
      */
     private final Callable<T> call;
 
     /**
-     * The context associated with the current thread.
-     * This is captured when the {@link XianZhiCallable} is created.
+     * 上下文信息
+     *
+     * @since 1.0.0
      */
     private final Context context;
 
     /**
-     * The trace ID for the current task, useful for distributed tracing.
+     * traceId
+     *
+     * @since 1.0.0
      */
     private final String traceId;
 
     /**
-     * Constructs a new {@code XianZhiCallable} instance, capturing the current
-     * {@link Context} and trace ID at the time of creation.
+     * 构造方法, 用于初始化任务和上下文信息
      *
-     * @param call the task to be executed
+     * @param call 任务
      * @since 1.0.0
      */
     public XianZhiCallable(Callable<T> call) {
         this.call = call;
-        this.context = ContextHolder.getContext(); // Capture the current context
-        this.traceId = TraceIdUtil.getTraceId();   // Capture the current trace ID
+        this.context = ContextHolder.getContext();
+        this.traceId = TraceIdUtil.getTraceId();
     }
 
     /**
-     * Executes the task, ensuring that the captured {@link Context} is set
-     * in the thread-local storage before execution and cleaned up afterward.
+     * Computes a result, or throws an exception if unable to do so.
      *
-     * @return the result of the task
-     * @throws Exception if the task execution fails
-     * @since 1.0.0
+     * @return computed result
+     * @throws Exception if unable to compute a result
      */
     @Override
     public T call() throws Exception {
         try {
-            // Set the captured context in the current thread
+            // 设置上下文
             ContextHolder.setContext(context);
-            // Execute the actual task
+            // 执行任务
             return call.call();
         } finally {
-            // Clean up the context after execution
+            // 清除上下文
             ContextHolder.removeContext();
+            // 清除traceId
+            MDC.clear();
         }
     }
 }

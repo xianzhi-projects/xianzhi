@@ -20,12 +20,7 @@ package io.xianzhi.core.trace;
 import java.util.UUID;
 
 /**
- * Default implementation of the {@link TraceProvider} interface.
- * <p>
- * This class provides default methods for retrieving Trace ID and Span ID.
- * The Trace ID and Span ID are typically used in distributed tracing systems
- * to track the flow of requests across different services.
- * </p>
+ * 默认traceId提供者
  *
  * @author Max
  * @since 1.0.0
@@ -33,14 +28,9 @@ import java.util.UUID;
 public class DefaultTraceProvider implements TraceProvider {
 
     /**
-     * Retrieves the current Trace ID.
-     * <p>
-     * This method generates a new unique Trace ID for the current request.
-     * The Trace ID is typically used to track the entire request flow across
-     * multiple services in distributed tracing systems.
-     * </p>
+     * 获取当前TraceId
      *
-     * @return The current Trace ID as a string.
+     * @return 当前TraceId
      * @since 1.0.0
      */
     @Override
@@ -49,14 +39,9 @@ public class DefaultTraceProvider implements TraceProvider {
     }
 
     /**
-     * Retrieves the current Span ID.
-     * <p>
-     * This method generates a new unique Span ID for the current request.
-     * The Span ID represents a single unit of work within the broader Trace ID
-     * and is used to track a specific operation or step in the request flow.
-     * </p>
+     * 获取当前Span ID
      *
-     * @return The current Span ID as a string.
+     * @return 当前Span ID
      * @since 1.0.0
      */
     @Override

@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Date tool
+ * 日期工具类
  *
  * @author Max
  * @since 1.0.0
@@ -42,20 +42,20 @@ public class DateUtil {
 
 
     /**
-     * Default date format
+     * 默认日期格式化
      *
      * @since 1.0.0
      */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     /**
-     * Default date and time format
+     * 默认日期时间格式化
      *
      * @since 1.0.0
      */
     public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
-     * Private Construction
+     * 私有构造方法
      *
      * @since 1.0.0
      */
@@ -64,9 +64,9 @@ public class DateUtil {
 
 
     /**
-     * Gets the current date and time as a formatted string.
+     * 获取当前日期时间字符串,使用默认格式: yyyy-MM-dd HH:mm:ss
      *
-     * @return Current date and time string (format: yyyy-MM-dd HH:mm:ss)
+     * @return 当前日期时间字符串，格式: yyyy-MM-dd HH:mm:ss
      * @since 1.0.0
      */
     public static String nowDateTime() {
