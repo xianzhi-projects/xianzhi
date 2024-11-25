@@ -20,6 +20,7 @@ package io.xianzhi.boot.security.processor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
@@ -30,6 +31,7 @@ import org.springframework.util.StringUtils;
  * @author Max
  * @since 1.0.0
  */
+@Component(value = "xz")
 public class PermissionProcessor {
 
     /**

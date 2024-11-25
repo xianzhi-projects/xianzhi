@@ -72,7 +72,7 @@ public class ResponseResult<R> implements Result {
      * @param data   查询的数据
      * @since 1.0.0
      */
-    private ResponseResult(Result result, R data) {
+    public ResponseResult(Result result, R data) {
         this.code = result.code();
         this.success = result.success();
         String oldMessage = result.message();
