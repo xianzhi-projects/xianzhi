@@ -3,6 +3,8 @@ package io.xianzhi.core.content;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 
+import java.util.Optional;
+
 /**
  * 上下文处理
  *
@@ -14,14 +16,14 @@ public class ContextHolder {
     /**
      * 上下文内容
      */
-    private final static ThreadLocal<Content> CONTENT = new ThreadLocal<>();
+    private final static ThreadLocal<Context> CONTENT = new ThreadLocal<>();
 
     /**
      * 设置上下问内容
      *
      * @param content 上下文内容
      */
-    public static void set(Content content) {
+    public static void set(Context content) {
         if (null == content) {
             throw new BusinessException(CommonCode.PARAM_CHECK_ERROR);
         }
@@ -33,9 +35,10 @@ public class ContextHolder {
      *
      * @return 上下文内容
      */
-    public static Content getContent() {
-        return CONTENT.get();
+    public static Optional<Context> getContent() {
+        return Optional.ofNullable(CONTENT.get());
     }
+
 
     /**
      * 移除上下文内容

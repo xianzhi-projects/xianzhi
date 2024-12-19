@@ -6,7 +6,7 @@ package io.xianzhi.core.content;
  * @author Max
  * @since 1.0.0
  */
-public interface Content {
+public interface Context {
 
     /**
      * 获取唯一标识
