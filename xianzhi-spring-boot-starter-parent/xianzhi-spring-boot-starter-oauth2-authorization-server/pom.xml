@@ -16,5 +16,14 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi.boot</groupId>
+            <artifactId>xianzhi-spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+    </dependencies>
 </project>

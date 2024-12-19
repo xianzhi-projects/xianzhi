@@ -217,9 +217,30 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <disruptor.version>3.4.2</disruptor.version>
+        <mybatis.plus.version>3.5.6</mybatis.plus.version>
+        <mybatis.spring.version>3.0.3</mybatis.spring.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!--            async log-->
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+
+            <!--            mybatis plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.xianzhi.core</groupId>
                 <artifactId>xianzhi-core</artifactId>

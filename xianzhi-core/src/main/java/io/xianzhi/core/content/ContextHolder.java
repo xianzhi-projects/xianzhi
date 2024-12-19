@@ -31,6 +31,14 @@ public class ContextHolder {
     }
 
     /**
+     * 获取上下文内容，如果不存在则抛出异常
+     * @return 上下文内容
+     */
+    public static Context getContextOrThrow() {
+        return Optional.ofNullable(CONTENT.get()).orElseThrow(() -> new BusinessException(CommonCode.UNAUTHORIZED));
+    }
+
+    /**
      * 获取上下文内容
      *
      * @return 上下文内容
