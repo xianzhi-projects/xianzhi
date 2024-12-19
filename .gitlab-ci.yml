@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+编译:
+  stage: build
+  script:
+    - cd xianzhi-core
+    - mvn clean install
+    - cd ../xianzhi-dependencies
+    - mvn clean install
+    - cd ../xianzhi-spring-boot-starter-parent
+    - mvn clean install
+  tags:
+    - common
+测试:
+  stage: test
+  script:
+    - mvn test -Dmaven.test.failure.ignore=true
+  tags:
+    - common
+
+部署:
+  stage: deploy
+  script:
+    - mvn deploy -Dmaven.test.skip=true -P xianzhi
+    - echo "部署成功"
+  tags:
+    - common
