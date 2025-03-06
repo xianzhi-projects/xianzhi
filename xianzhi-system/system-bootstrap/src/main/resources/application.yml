@@ -56,14 +56,12 @@ spring:
       max-pool-prepared-statement-per-connection-size: -1
       # 合并多个DruidDataSource的监控数据
       use-global-data-source-stat: true
-
       web-stat-filter: # 监控web
         enabled: true
         # 添加过滤规则
         url-pattern: /*
         # 忽略过滤的格式
-        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
-
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,/webjars/*
       stat-view-servlet: # 配置监控页面
         enabled: true
         # 访问路径为/druid
