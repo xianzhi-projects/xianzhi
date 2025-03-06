@@ -14,18 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.mapper;
+package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO;
+import io.xianzhi.system.bootstrap.dao.dataobj.DictItemDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 项目分组持久层
+ * 字典项目持久层
  *
  * @author Max
  * @since 1.0.0
  */
 @Mapper
-public interface ProjectGroupMapper extends BaseMapper<ProjectGroupDO> {
+public interface DictItemMapper extends BaseMapper<DictItemDO> {
 }

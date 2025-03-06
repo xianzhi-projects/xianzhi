@@ -14,18 +14,13 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.mapper;
-
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO;
-import org.apache.ibatis.annotations.Mapper;
+package io.xianzhi.system.facade;
 
 /**
- * 项目分组持久层
+ * 文件接口
  *
  * @author Max
  * @since 1.0.0
  */
-@Mapper
-public interface ProjectGroupMapper extends BaseMapper<ProjectGroupDO> {
+public interface FileFacade {
 }

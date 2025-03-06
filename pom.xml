@@ -29,11 +29,7 @@
         <module>xianzhi-code</module>
         <module>xianzhi-linke</module>
         <module>xianzhi-model</module>
-        <module>xianzhi-code/code-facade</module>
-        <module>xianzhi-linke/linke-facade</module>
-        <module>xianzhi-linke/linke-bootstrap</module>
         <module>xianzhi-system</module>
-        <module>xianzhi-code/code-bootstrap</module>
     </modules>
 
     <properties>

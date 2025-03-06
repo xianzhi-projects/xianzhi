@@ -14,18 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.mapper;
+package io.xianzhi.system.bootstrap.dao.dataobj;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO;
-import org.apache.ibatis.annotations.Mapper;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.xianzhi.common.mybatis.plus.base.BaseDO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * 项目分组持久层
+ * 定时任务实体
  *
  * @author Max
  * @since 1.0.0
  */
-@Mapper
-public interface ProjectGroupMapper extends BaseMapper<ProjectGroupDO> {
+@Data
+@TableName(value = "sys_task")
+@EqualsAndHashCode(callSuper = true)
+public class TaskDO extends BaseDO {
 }
