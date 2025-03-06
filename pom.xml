@@ -141,25 +141,22 @@
             <!--            代码托管-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
-                <artifactId>xianzhi-code</artifactId>
-                <version>${xianzhi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.xianzhi</groupId>
                 <artifactId>code-facade</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
             <!--            研发效能-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
-                <artifactId>xianzhi-linke</artifactId>
-                <version>${xianzhi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.xianzhi</groupId>
                 <artifactId>linke-facade</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <!--            系统服务-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>system-facade</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

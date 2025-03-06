@@ -20,8 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>io.xianzhi</groupId>
+            <artifactId>system-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
             <artifactId>common-web</artifactId>
-            <version>${xianzhi.version}</version>
         </dependency>
     </dependencies>
 
