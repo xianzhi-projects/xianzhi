@@ -14,7 +14,7 @@ spring:
     redis:
       host: 192.168.50.70
       port: 6379
-      password: xianzhi_2024
+      password: xianzhi9999
       lettuce:
         pool:
           max-active: 8 #最大连接
@@ -24,9 +24,9 @@ spring:
   datasource: # mysql 数据源配置
     type: com.alibaba.druid.pool.DruidDataSource # 配置连接池类型为 druid
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.50.70:3306/dev_xianzhi_cms?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.50.70:3306/xianzhi?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: xianzhi_2024
+    password: xianzhi9999
     druid:
       # 初始化时建立物理连接的个数
       initial-size: 5
