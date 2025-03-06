@@ -22,10 +22,21 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>system-facade</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>code-facade</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.xianzhi</groupId>
             <artifactId>common-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-mybatis-plus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-redis</artifactId>
         </dependency>
     </dependencies>
 </project>

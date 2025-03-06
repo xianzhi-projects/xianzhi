@@ -13,6 +13,10 @@
     <modules>
         <module>common-web</module>
         <module>common-log4j2</module>
+        <module>common-idempotent</module>
+        <module>common-mybatis-plus</module>
+        <module>common-oss</module>
+        <module>common-redis</module>
     </modules>
     <artifactId>xianzhi-common</artifactId>
 

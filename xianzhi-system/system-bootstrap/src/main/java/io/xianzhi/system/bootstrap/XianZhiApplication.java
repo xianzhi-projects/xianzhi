@@ -1,5 +1,6 @@
 package io.xianzhi.system.bootstrap;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -14,6 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class XianZhiApplication {
 
     public static void main(String[] args) {
-
+        SpringApplication.run(XianZhiApplication.class, args);
     }
 }

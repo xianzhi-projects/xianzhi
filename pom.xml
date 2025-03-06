@@ -12,10 +12,6 @@
         <module>xianzhi-common</module>
         <module>xianzhi-code</module>
         <module>xianzhi-linke</module>
-        <module>xianzhi-common/common-idempotent</module>
-        <module>xianzhi-common/common-mybatis-plus</module>
-        <module>xianzhi-common/common-redis</module>
-        <module>xianzhi-common/common-oss</module>
         <module>xianzhi-model</module>
         <module>xianzhi-code/code-facade</module>
         <module>xianzhi-linke/linke-facade</module>
@@ -44,8 +40,11 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
                 <exclusions>
-                    <!--                    全局使用log4j2-->
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter-logging</artifactId>

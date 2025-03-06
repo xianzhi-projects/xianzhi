@@ -1,0 +1,3 @@
+io.xianzhi.common.mybatis.plus.CustomMetaObjectHandler
+io.xianzhi.common.mybatis.plus.InsertBatchSqlInjector
+io.xianzhi.common.mybatis.plus.MyBatisPlusConfig
