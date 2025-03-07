@@ -129,12 +129,12 @@ public class DepartmentServiceImpl implements DepartmentService {
      */
     public DepartmentVO convert(DepartmentDO department) {
         DepartmentVO vo = new DepartmentVO();
-        vo.setId(department.getId());
-        vo.setDepartmentName(department.getDepartmentName());
-        vo.setDepartmentDesc(department.getDepartmentDesc());
-        vo.setDepartmentOwner(department.getDepartmentOwner());
-        vo.setDepartmentEmail(department.getDepartmentEmail());
-        vo.setDepartmentPhone(department.getDepartmentPhone());
+//        vo.setId(department.getId());
+//        vo.setDepartmentName(department.getDepartmentName());
+//        vo.setDepartmentDesc(department.getDepartmentDesc());
+//        vo.setDepartmentOwner(department.getDepartmentOwner());
+//        vo.setDepartmentEmail(department.getDepartmentEmail());
+//        vo.setDepartmentPhone(department.getDepartmentPhone());
         return vo;
     }
 }

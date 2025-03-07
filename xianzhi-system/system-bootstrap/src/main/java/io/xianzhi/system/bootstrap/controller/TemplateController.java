@@ -16,10 +16,24 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.idempotent.annotations.Idempotent;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import io.xianzhi.system.bootstrap.service.TemplateService;
+import io.xianzhi.system.model.dto.TemplateDTO;
+import io.xianzhi.system.model.page.TemplatePage;
+import io.xianzhi.system.model.vo.TemplateVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 模板接口
@@ -35,4 +49,53 @@ public class TemplateController {
      * 模板接口
      */
     private final TemplateService templateService;
+
+    /**
+     * 分页查询模板列表
+     *
+     * @param templatePage 分页查询参数
+     * @return 模板列表
+     */
+    @PreAuthorize("@xz.hasPermission('system:template:list')")
+    @PostMapping(value = "/pageTemplateList")
+    public ResponseResult<ListResult<TemplateVO>> pageTemplateList(@RequestBody TemplatePage templatePage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 新增模板
+     *
+     * @param templateDTO 模板信息入参
+     * @return 模板ID
+     */
+    @Idempotent
+    @PreAuthorize("@xz.hasPermission('system:template:create')")
+    @PostMapping(value = "/createTemplate")
+    public ResponseResult<String> createTemplate(@RequestBody @Validated(value = CreateGroup.class) TemplateDTO templateDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 更新模板
+     *
+     * @param templateDTO 模板信息入参
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('system:template:update')")
+    @PostMapping(value = "/updateTemplate")
+    public ResponseResult<Object> updateTemplate(@RequestBody @Validated(value = UpdateGroup.class) TemplateDTO templateDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除模板
+     *
+     * @param ids 模板ID列表
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('system:template:delete')")
+    @PostMapping(value = "/deletedTemplate")
+    public ResponseResult<Object> deletedTemplate(@RequestBody List<String> ids) {
+        return ResponseResult.success();
+    }
 }
