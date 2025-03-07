@@ -25,6 +25,7 @@ import io.xianzhi.system.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
      * @return 用户ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createUser(UserDTO userDTO) {
         return "";
     }
@@ -72,6 +74,7 @@ public class UserServiceImpl implements UserService {
      * @param userDTO 用户信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateUser(UserDTO userDTO) {
 
     }
@@ -82,6 +85,7 @@ public class UserServiceImpl implements UserService {
      * @param ids 用户ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedUser(List<String> ids) {
 
     }

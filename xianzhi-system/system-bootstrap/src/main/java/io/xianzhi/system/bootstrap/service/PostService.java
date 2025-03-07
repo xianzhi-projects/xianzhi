@@ -16,6 +16,13 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.PostDTO;
+import io.xianzhi.system.model.page.PostPage;
+import io.xianzhi.system.model.vo.PostVO;
+
+import java.util.List;
+
 /**
  * 岗位接口
  *
@@ -23,4 +30,34 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface PostService {
+    /**
+     * 分页查询岗位列表
+     *
+     * @param page 查询条件
+     * @return 岗位列表
+     */
+    ListResult<PostVO> pagePostList(PostPage page);
+
+    /**
+     * 新增岗位
+     *
+     * @param postDTO 岗位信息入参
+     * @return 岗位ID
+     */
+    String createPost(PostDTO postDTO);
+
+    /**
+     * 修改岗位
+     *
+     * @param postDTO 岗位信息入参
+     */
+    void updatePost(PostDTO postDTO);
+
+    /**
+     * 删除岗位
+     *
+     * @param ids 岗位ID
+     */
+    void deletedPost(List<String> ids);
+
 }

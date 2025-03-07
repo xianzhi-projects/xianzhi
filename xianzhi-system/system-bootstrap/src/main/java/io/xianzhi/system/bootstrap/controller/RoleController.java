@@ -59,7 +59,7 @@ public class RoleController {
     @PreAuthorize("@xz.hasPermission('system:role:list')")
     @PostMapping(value = "/pageRoleList")
     public ResponseResult<ListResult<RoleVO>> pageRoleList(@RequestBody RolePage rolePage) {
-        return ResponseResult.success();
+        return ResponseResult.success(roleService.pageRoleList(rolePage));
     }
 
     /**
@@ -72,7 +72,7 @@ public class RoleController {
     @PreAuthorize("@xz.hasPermission('system:role:create')")
     @PostMapping(value = "/createRole")
     public ResponseResult<String> createRole(@RequestBody @Validated(value = CreateGroup.class) RoleDTO roleDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(roleService.createRole(roleDTO));
     }
 
     /**
@@ -84,6 +84,7 @@ public class RoleController {
     @PreAuthorize("@xz.hasPermission('system:role:update')")
     @PostMapping(value = "/updateRole")
     public ResponseResult<Object> updateRole(@RequestBody @Validated(value = UpdateGroup.class) RoleDTO roleDTO) {
+        roleService.updateRole(roleDTO);
         return ResponseResult.success();
     }
 
@@ -96,6 +97,7 @@ public class RoleController {
     @PreAuthorize("@xz.hasPermission('system:role:delete')")
     @PostMapping(value = "/deletedRole")
     public ResponseResult<Object> deletedRole(@RequestBody List<String> ids) {
+        roleService.deletedRole(ids);
         return ResponseResult.success();
     }
 }

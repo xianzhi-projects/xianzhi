@@ -23,6 +23,7 @@ import io.xianzhi.system.model.vo.ResourceVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class ResourceServiceImpl implements ResourceService {
      * @return 资源ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createResource(ResourceDTO resourceDTO) {
         return "";
     }
@@ -79,6 +81,7 @@ public class ResourceServiceImpl implements ResourceService {
      * @param resourceDTO 资源信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateResource(ResourceDTO resourceDTO) {
 
     }
@@ -89,6 +92,7 @@ public class ResourceServiceImpl implements ResourceService {
      * @param id 资源ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedResource(String id) {
 
     }

@@ -25,6 +25,7 @@ import io.xianzhi.system.model.vo.NoticeVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @return 创建结果
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createNotice(NoticeDTO noticeDTO) {
         return "";
     }
@@ -72,6 +74,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @param noticeDTO 公告信息
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateNotice(NoticeDTO noticeDTO) {
 
     }
@@ -82,6 +85,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @param ids 公告ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedNotice(List<String> ids) {
 
     }

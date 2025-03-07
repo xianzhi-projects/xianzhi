@@ -16,6 +16,13 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.RoleDTO;
+import io.xianzhi.system.model.page.RolePage;
+import io.xianzhi.system.model.vo.RoleVO;
+
+import java.util.List;
+
 /**
  * 角色接口
  *
@@ -23,4 +30,33 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface RoleService {
+    /**
+     * 分页查询角色列表
+     *
+     * @param rolePage 分页查询参数
+     * @return 角色列表
+     */
+    ListResult<RoleVO> pageRoleList(RolePage rolePage);
+
+    /**
+     * 新增角色
+     *
+     * @param roleDTO 角色信息
+     * @return 角色ID
+     */
+    String createRole(RoleDTO roleDTO);
+
+    /**
+     * 更新角色
+     *
+     * @param roleDTO 角色信息
+     */
+    void updateRole(RoleDTO roleDTO);
+
+    /**
+     * 删除角色
+     *
+     * @param ids 角色ID
+     */
+    void deletedRole(List<String> ids);
 }

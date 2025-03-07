@@ -24,6 +24,7 @@ import io.xianzhi.system.model.vo.DepartmentVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Collections;
@@ -63,6 +64,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @return 部门ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createDepartment(DepartmentDTO departmentDTO) {
         return "";
     }
@@ -73,6 +75,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param departmentDTO 部门信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateDepartment(DepartmentDTO departmentDTO) {
 
     }
@@ -83,6 +86,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param id 部门ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedDepartment(String id) {
 
     }

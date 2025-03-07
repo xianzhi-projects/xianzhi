@@ -60,7 +60,7 @@ public class PostController {
     @PreAuthorize("@xz.hasPermission('system:post:list')")
     @PostMapping(value = "/pagePostList")
     public ResponseResult<ListResult<PostVO>> pagePostList(@RequestBody PostPage page) {
-        return ResponseResult.success();
+        return ResponseResult.success(postService.pagePostList(page));
     }
 
     /**
@@ -73,7 +73,7 @@ public class PostController {
     @PreAuthorize("@xz.hasPermission('system:post:create')")
     @PostMapping(value = "/createPost")
     public ResponseResult<String> createPost(@RequestBody @Validated(value = CreateGroup.class) PostDTO postDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(postService.createPost(postDTO));
     }
 
     /**
@@ -85,6 +85,7 @@ public class PostController {
     @PreAuthorize("@xz.hasPermission('system:post:update')")
     @PostMapping(value = "/updatePost")
     public ResponseResult<Object> updatePost(@RequestBody @Validated(value = UpdateGroup.class) PostDTO postDTO) {
+        postService.updatePost(postDTO);
         return ResponseResult.success();
     }
 
@@ -97,6 +98,7 @@ public class PostController {
     @PreAuthorize("@xz.hasPermission('system:post:delete')")
     @PostMapping(value = "/deletedPost")
     public ResponseResult<Object> deletedPost(@RequestBody @NotEmpty(message = "岗位ID不能为空") List<String> ids) {
+        postService.deletedPost(ids);
         return ResponseResult.success();
     }
 }

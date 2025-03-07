@@ -28,6 +28,7 @@ import io.xianzhi.system.model.vo.DictVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class DictServiceImpl implements DictService {
      * @return 字典ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createDict(DictDTO dictDTO) {
         return "";
     }
@@ -79,6 +81,7 @@ public class DictServiceImpl implements DictService {
      * @param dictDTO 字典信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateDict(DictDTO dictDTO) {
 
     }
@@ -89,6 +92,7 @@ public class DictServiceImpl implements DictService {
      * @param ids 字典ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedDict(List<Long> ids) {
 
     }
@@ -111,6 +115,7 @@ public class DictServiceImpl implements DictService {
      * @return 字典项ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createDictItem(DictItemDTO dictItemDTO) {
         return "";
     }
@@ -121,6 +126,7 @@ public class DictServiceImpl implements DictService {
      * @param dictItemDTO 字典项信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateDictItem(DictItemDTO dictItemDTO) {
 
     }
@@ -131,6 +137,7 @@ public class DictServiceImpl implements DictService {
      * @param ids 字典项ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedDictItem(List<String> ids) {
 
     }

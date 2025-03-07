@@ -25,6 +25,7 @@ import io.xianzhi.system.model.vo.TemplateVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class TemplateServiceImpl implements TemplateService {
      * @return 模板ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createTemplate(TemplateDTO templateDTO) {
         return "";
     }
@@ -72,6 +74,7 @@ public class TemplateServiceImpl implements TemplateService {
      * @param templateDTO 模板信息入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateTemplate(TemplateDTO templateDTO) {
 
     }
@@ -82,6 +85,7 @@ public class TemplateServiceImpl implements TemplateService {
      * @param ids 模板ID列表
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deletedTemplate(List<String> ids) {
 
     }

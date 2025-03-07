@@ -16,10 +16,18 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.RoleMapper;
 import io.xianzhi.system.bootstrap.service.RoleService;
+import io.xianzhi.system.model.dto.RoleDTO;
+import io.xianzhi.system.model.page.RolePage;
+import io.xianzhi.system.model.vo.RoleVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 角色接口实现
@@ -31,4 +39,54 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
+
+    /**
+     * 角色持久层
+     */
+    private final RoleMapper roleMapper;
+
+    /**
+     * 分页查询角色列表
+     *
+     * @param rolePage 分页查询参数
+     * @return 角色列表
+     */
+    @Override
+    public ListResult<RoleVO> pageRoleList(RolePage rolePage) {
+        return null;
+    }
+
+    /**
+     * 新增角色
+     *
+     * @param roleDTO 角色信息
+     * @return 角色ID
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String createRole(RoleDTO roleDTO) {
+        return "";
+    }
+
+    /**
+     * 更新角色
+     *
+     * @param roleDTO 角色信息
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateRole(RoleDTO roleDTO) {
+
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param ids 角色ID
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deletedRole(List<String> ids) {
+
+    }
 }
