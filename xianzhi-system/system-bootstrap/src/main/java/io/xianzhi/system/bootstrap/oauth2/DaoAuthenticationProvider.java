@@ -19,11 +19,11 @@
 package io.xianzhi.system.bootstrap.oauth2;
 
 import com.baomidou.mybatisplus.core.toolkit.Assert;
-import io.xianzhi.base.bootstrap.oauth2.service.XianZhiUserDetailsService;
-import io.xianzhi.boot.oauth2.exception.OAuth2Exception;
-import io.xianzhi.boot.security.constants.SecurityConstant;
+import io.xianzhi.common.oauth2.exception.OAuth2Exception;
+import io.xianzhi.common.security.constants.SecurityConstant;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.utils.SpringUtils;
+import io.xianzhi.system.bootstrap.oauth2.service.XianZhiUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;

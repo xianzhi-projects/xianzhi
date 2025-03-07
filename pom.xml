@@ -271,6 +271,11 @@
                 <artifactId>system-model</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>system-security</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
 
 
         </dependencies>

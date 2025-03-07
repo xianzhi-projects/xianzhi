@@ -14,7 +14,7 @@ spring:
     redis:
       host: 192.168.50.70
       port: 6379
-      password: xianzhi9999
+      password: XianZhi9999
       lettuce:
         pool:
           max-active: 8 #最大连接
@@ -26,7 +26,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.50.70:3306/xianzhi?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: xianzhi9999
+    password: XianZhi9999
     druid:
       # 初始化时建立物理连接的个数
       initial-size: 5
@@ -84,3 +84,9 @@ mybatis-plus:
     # 自动驼峰命名
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+xianzhi:
+  security:
+    oauth2:
+      key-pair-path: classpath:xianzhi.jks
+      key-pair-password: xianzhi_2024
+      key-pair-alias: xianzhi

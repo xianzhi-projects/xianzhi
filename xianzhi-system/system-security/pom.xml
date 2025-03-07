@@ -21,38 +21,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.xianzhi</groupId>
-        <artifactId>xianzhi</artifactId>
+        <artifactId>xianzhi-system</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>xianzhi-system</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>system-facade</module>
-        <module>system-bootstrap</module>
-        <module>system-model</module>
-        <module>system-security</module>
-    </modules>
+    <artifactId>system-security</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.xianzhi</groupId>
-                <artifactId>linke-bootstrap</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>io.xianzhi</groupId>
-                <artifactId>code-bootstrap</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+    <dependencies>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-oauth2-resource-server</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

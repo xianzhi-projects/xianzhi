@@ -16,7 +16,6 @@
 
 package io.xianzhi.linke.bootstrap.service.impl;
 
-import io.xianzhi.linke.bootstrap.dao.mapper.AppMapper;
 import io.xianzhi.linke.bootstrap.service.AppService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class AppServiceImpl implements AppService {
     /**
      * 应用持久层
      */
-    private final AppMapper appMapper;
+//    private final AppMapper appMapper;
 
 
 
