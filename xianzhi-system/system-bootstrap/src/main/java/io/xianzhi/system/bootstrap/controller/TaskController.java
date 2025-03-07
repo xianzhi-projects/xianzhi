@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/s/task")
 public class TaskController {
     /**
      * 定时任务接口

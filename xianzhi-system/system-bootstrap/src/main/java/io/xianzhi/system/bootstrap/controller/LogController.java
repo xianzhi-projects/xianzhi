@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/log")
+@RequestMapping(value = "/s/log")
 public class LogController {
 
     /**

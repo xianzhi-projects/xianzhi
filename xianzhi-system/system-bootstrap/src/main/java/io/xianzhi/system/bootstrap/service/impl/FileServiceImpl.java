@@ -14,25 +14,34 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.controller;
+package io.xianzhi.system.bootstrap.service.impl;
 
-import io.xianzhi.system.bootstrap.service.UserService;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.service.FileService;
+import io.xianzhi.system.model.page.FilePage;
+import io.xianzhi.system.model.vo.FileVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 用户接口
+ * 文件接口实现
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
+@Slf4j
+@Service
 @RequiredArgsConstructor
-@RequestMapping(value = "/s/user")
-public class UserController {
+public class FileServiceImpl implements FileService {
     /**
-     * 用户接口
+     * 分页查询文件列表
+     *
+     * @param filePage 分页查询参数
+     * @return 文件列表
      */
-    private final UserService userService;
+    @Override
+    public ListResult<FileVO> pageFileList(FilePage filePage) {
+        return null;
+    }
 }

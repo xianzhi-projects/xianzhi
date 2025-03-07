@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/role")
+@RequestMapping(value = "/s/role")
 public class RoleController {
     /**
      * 角色接口

@@ -14,25 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.controller;
+package io.xianzhi.system.model.vo;
 
-import io.xianzhi.system.bootstrap.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * 用户接口
+ * 文件信息出参
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/s/user")
-public class UserController {
-    /**
-     * 用户接口
-     */
-    private final UserService userService;
+@Data
+public class FileVO implements Serializable {
 }

@@ -14,26 +14,24 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.controller;
+package io.xianzhi.system.bootstrap.service;
 
-import io.xianzhi.system.bootstrap.service.EmailConfigService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.page.FilePage;
+import io.xianzhi.system.model.vo.FileVO;
 
 /**
- * 邮箱配置接口
+ * 文件接口
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/emailConfig")
-public class EmailConfigController {
-
+public interface FileService {
     /**
-     * 邮件配置接口
+     * 分页查询文件列表
+     *
+     * @param filePage 分页查询参数
+     * @return 文件列表
      */
-    private final EmailConfigService emailConfigService;
+    ListResult<FileVO> pageFileList(FilePage filePage);
 }

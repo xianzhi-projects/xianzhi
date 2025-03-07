@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/template")
+@RequestMapping(value = "/s/template")
 public class TemplateController {
     /**
      * 模板接口

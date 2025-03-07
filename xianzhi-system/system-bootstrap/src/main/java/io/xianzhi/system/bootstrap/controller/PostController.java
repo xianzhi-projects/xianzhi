@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/s/post")
 public class PostController {
     /**
      * 岗位接口

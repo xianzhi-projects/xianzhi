@@ -16,9 +16,19 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.system.bootstrap.service.FileService;
+import io.xianzhi.system.model.page.FilePage;
+import io.xianzhi.system.model.vo.FileVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 文件接口
@@ -28,6 +38,36 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/file")
+@RequestMapping(value = "/s/file")
 public class FileController {
+
+    /**
+     * 文件接口
+     */
+    private final FileService fileService;
+
+    /**
+     * 分页查询文件列表
+     *
+     * @param filePage 分页查询参数
+     * @return 文件列表
+     */
+    @PreAuthorize("@xz.hasPermission('system:file:page')")
+    @PostMapping(value = "/pageFileList")
+    public ResponseResult<ListResult<FileVO>> pageFileList(@RequestBody FilePage filePage) {
+        return ResponseResult.success(fileService.pageFileList(filePage));
+    }
+
+
+    /**
+     * 删除文件
+     *
+     * @param ids 文件ID
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('system:file:delete')")
+    @PostMapping(value = "/deletedFile")
+    public ResponseResult<Object> deletedFile(@RequestBody List<String> ids) {
+        return ResponseResult.success();
+    }
 }

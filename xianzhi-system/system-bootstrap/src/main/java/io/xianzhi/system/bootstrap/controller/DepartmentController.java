@@ -24,6 +24,7 @@ import io.xianzhi.system.bootstrap.service.DepartmentService;
 import io.xianzhi.system.model.dto.DepartmentDTO;
 import io.xianzhi.system.model.vo.DepartmentVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/department")
+@RequestMapping(value = "/s/department")
 public class DepartmentController {
 
     /**
@@ -51,6 +52,7 @@ public class DepartmentController {
      *
      * @return 树信息
      */
+    @PreAuthorize("@xz.hasPermission('system:department:tree')")
     @GetMapping(value = "/tree")
     public ResponseResult<List<DepartmentVO>> tree() {
         return ResponseResult.success(departmentService.tree());
@@ -63,6 +65,7 @@ public class DepartmentController {
      * @return 部门ID
      */
     @Idempotent
+    @PreAuthorize("@xz.hasPermission('system:department:create')")
     @PostMapping(value = "/createDepartment")
     public ResponseResult<String> createDepartment(@RequestBody @Validated(value = CreateGroup.class) DepartmentDTO departmentDTO) {
         return ResponseResult.success(departmentService.createDepartment(departmentDTO));
@@ -74,6 +77,7 @@ public class DepartmentController {
      * @param departmentDTO 部门信息入参
      * @return 响应信息
      */
+    @PreAuthorize("@xz.hasPermission('system:department:update')")
     @PostMapping(value = "/updateDepartment")
     public ResponseResult<Object> updateDepartment(@RequestBody @Validated(value = UpdateGroup.class) DepartmentDTO departmentDTO) {
         departmentService.updateDepartment(departmentDTO);
@@ -86,6 +90,7 @@ public class DepartmentController {
      * @param id 部门ID
      * @return 响应信息
      */
+    @PreAuthorize("@xz.hasPermission('system:department:deleted')")
     @PostMapping(value = "/deletedDepartment")
     public ResponseResult<Object> deletedDepartment(@RequestParam(value = "id") String id) {
         departmentService.deletedDepartment(id);

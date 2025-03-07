@@ -16,6 +16,11 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.system.model.dto.ResourceDTO;
+import io.xianzhi.system.model.vo.ResourceVO;
+
+import java.util.List;
+
 /**
  * 资源接口
  *
@@ -23,4 +28,39 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface ResourceService {
+    /**
+     * 查询资源树
+     *
+     * @return 资源树
+     */
+    List<ResourceVO> tree();
+
+    /**
+     * 查询当前用户资源信息
+     *
+     * @return 当前用户资源信息
+     */
+    List<ResourceVO> getCurrentUserResource();
+
+    /**
+     * 新增资源信息
+     *
+     * @param resourceDTO 资源信息入参
+     * @return 资源ID
+     */
+    String createResource(ResourceDTO resourceDTO);
+
+    /**
+     * 更新资源信息
+     *
+     * @param resourceDTO 资源信息入参
+     */
+    void updateResource(ResourceDTO resourceDTO);
+
+    /**
+     * 删除资源
+     *
+     * @param id 资源ID
+     */
+    void deletedResource(String id);
 }

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/notice")
+@RequestMapping(value = "/s/notice")
 public class NoticeController {
 
     /**
