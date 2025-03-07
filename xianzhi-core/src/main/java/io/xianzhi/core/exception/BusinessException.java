@@ -17,6 +17,7 @@
 package io.xianzhi.core.exception;
 
 import io.xianzhi.core.result.Result;
+import lombok.Getter;
 
 /**
  * 自定义业务异常
@@ -24,8 +25,8 @@ import io.xianzhi.core.result.Result;
  * @author Max
  * @since 1.0.0
  */
+@Getter
 public class BusinessException extends RuntimeException {
-
 
 
     /**
