@@ -43,6 +43,7 @@
         <module>common-oauth2-resource-server</module>
         <module>common-wecom</module>
         <module>common-websocket</module>
+        <module>common-email</module>
     </modules>
     <artifactId>xianzhi-common</artifactId>
 
