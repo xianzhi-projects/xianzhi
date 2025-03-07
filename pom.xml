@@ -52,6 +52,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--            全局使用log4j2-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
@@ -62,22 +63,22 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <!--            mybatis plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis.spring.version}</version>
-            </dependency>
+            <!--            分页-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-jsqlparser</artifactId>
                 <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
             </dependency>
             <!--            数据库连接池-->
             <dependency>
@@ -97,8 +98,6 @@
                 <artifactId>disruptor</artifactId>
                 <version>${disruptor.version}</version>
             </dependency>
-
-
             <!--            核心包-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
@@ -195,6 +194,12 @@
                 <artifactId>common-web</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+            <!--            企业微信-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-wecom</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
             <!--            代码托管-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
@@ -228,6 +233,7 @@
                 <artifactId>system-model</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>
