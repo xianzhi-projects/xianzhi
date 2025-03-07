@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.system.model.vo.CaptchaVO;
+
 /**
  * 验证码接口
  *
@@ -23,4 +25,11 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface CaptchaService {
+    /**
+     * 获取登录验证码
+     *
+     * @return 登录验证码
+     */
+    CaptchaVO getLoginCaptcha();
+
 }

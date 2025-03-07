@@ -14,31 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.service.impl;
+package io.xianzhi.system.model.vo;
 
-import io.xianzhi.system.bootstrap.service.CaptchaService;
-import io.xianzhi.system.model.vo.CaptchaVO;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * 验证码接口实现
+ * 验证码信息出参
  *
  * @author Max
  * @since 1.0.0
  */
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class CaptchaServiceImpl implements CaptchaService {
-    /**
-     * 获取登录验证码
-     *
-     * @return 登录验证码
-     */
-    @Override
-    public CaptchaVO getLoginCaptcha() {
-        return null;
-    }
+@Data
+public class CaptchaVO implements Serializable {
 }

@@ -14,31 +14,20 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.service.impl;
+package io.xianzhi.system.bootstrap.controller;
 
-import io.xianzhi.system.bootstrap.service.CaptchaService;
-import io.xianzhi.system.model.vo.CaptchaVO;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 验证码接口实现
+ * 文件接口
  *
  * @author Max
  * @since 1.0.0
  */
-@Slf4j
-@Service
+@RestController
 @RequiredArgsConstructor
-public class CaptchaServiceImpl implements CaptchaService {
-    /**
-     * 获取登录验证码
-     *
-     * @return 登录验证码
-     */
-    @Override
-    public CaptchaVO getLoginCaptcha() {
-        return null;
-    }
+@RequestMapping(value = "/file")
+public class FileController {
 }

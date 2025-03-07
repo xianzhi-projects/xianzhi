@@ -16,9 +16,13 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.system.bootstrap.service.CaptchaService;
+import io.xianzhi.system.model.vo.CaptchaVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 验证码接口
@@ -27,10 +31,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @since 1.0.0
  */
 @RestController
-@RestControllerAdvice
+@RequiredArgsConstructor
 @RequestMapping(value = "/captcha")
 public class CaptchaController {
 
+    /**
+     * 验证码服务
+     */
+    private final CaptchaService captchaService;
+
+
+    /**
+     * 获取登录验证码
+     *
+     * @return 登录验证码
+     */
+    @GetMapping(value = "/login")
+    public ResponseResult<CaptchaVO> getLoginCaptcha() {
+        return ResponseResult.success(captchaService.getLoginCaptcha());
+    }
 
 
 }
