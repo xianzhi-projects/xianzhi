@@ -16,10 +16,17 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.TemplateMapper;
 import io.xianzhi.system.bootstrap.service.TemplateService;
+import io.xianzhi.system.model.dto.TemplateDTO;
+import io.xianzhi.system.model.page.TemplatePage;
+import io.xianzhi.system.model.vo.TemplateVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 模板接口实现
@@ -31,4 +38,51 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TemplateServiceImpl implements TemplateService {
+
+    /**
+     * 模板信息持久层
+     */
+    private final TemplateMapper templateMapper;
+
+    /**
+     * 分页查询模板列表
+     *
+     * @param templatePage 分页查询参数
+     * @return 模板列表
+     */
+    @Override
+    public ListResult<TemplateVO> pageTemplateList(TemplatePage templatePage) {
+        return null;
+    }
+
+    /**
+     * 新增模板
+     *
+     * @param templateDTO 模板信息入参
+     * @return 模板ID
+     */
+    @Override
+    public String createTemplate(TemplateDTO templateDTO) {
+        return "";
+    }
+
+    /**
+     * 更新模板
+     *
+     * @param templateDTO 模板信息入参
+     */
+    @Override
+    public void updateTemplate(TemplateDTO templateDTO) {
+
+    }
+
+    /**
+     * 删除模板
+     *
+     * @param ids 模板ID列表
+     */
+    @Override
+    public void deletedTemplate(List<String> ids) {
+
+    }
 }

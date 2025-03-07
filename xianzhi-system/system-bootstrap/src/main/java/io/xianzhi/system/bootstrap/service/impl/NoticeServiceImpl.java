@@ -16,11 +16,17 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.mapper.NoticeMapper;
 import io.xianzhi.system.bootstrap.service.NoticeService;
+import io.xianzhi.system.model.dto.NoticeDTO;
+import io.xianzhi.system.model.page.NoticePage;
+import io.xianzhi.system.model.vo.NoticeVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 公告接口实现
@@ -37,4 +43,46 @@ public class NoticeServiceImpl implements NoticeService {
      * 公告信息持久层
      */
     private final NoticeMapper noticeMapper;
+
+    /**
+     * 分页查询公告列表
+     *
+     * @param noticePage 分页查询参数
+     * @return 公告列表
+     */
+    @Override
+    public ListResult<NoticeVO> pageNoticeList(NoticePage noticePage) {
+        return null;
+    }
+
+    /**
+     * 创建公告
+     *
+     * @param noticeDTO 公告信息
+     * @return 创建结果
+     */
+    @Override
+    public String createNotice(NoticeDTO noticeDTO) {
+        return "";
+    }
+
+    /**
+     * 更新公告
+     *
+     * @param noticeDTO 公告信息
+     */
+    @Override
+    public void updateNotice(NoticeDTO noticeDTO) {
+
+    }
+
+    /**
+     * 删除公告
+     *
+     * @param ids 公告ID
+     */
+    @Override
+    public void deletedNotice(List<String> ids) {
+
+    }
 }

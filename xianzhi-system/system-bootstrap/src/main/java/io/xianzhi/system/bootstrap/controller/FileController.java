@@ -21,6 +21,7 @@ import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.system.bootstrap.service.FileService;
 import io.xianzhi.system.model.page.FilePage;
 import io.xianzhi.system.model.vo.FileVO;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,7 +68,7 @@ public class FileController {
      */
     @PreAuthorize("@xz.hasPermission('system:file:delete')")
     @PostMapping(value = "/deletedFile")
-    public ResponseResult<Object> deletedFile(@RequestBody List<String> ids) {
+    public ResponseResult<Object> deletedFile(@RequestBody @NotEmpty(message = "文件ID不能为空") List<String> ids) {
         return ResponseResult.success();
     }
 }

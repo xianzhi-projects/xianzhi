@@ -26,6 +26,7 @@ import io.xianzhi.system.model.dto.DictItemDTO;
 import io.xianzhi.system.model.page.DictPage;
 import io.xianzhi.system.model.vo.DictItemVO;
 import io.xianzhi.system.model.vo.DictVO;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -95,7 +96,7 @@ public class DictController {
      */
     @PreAuthorize("@xz.hasPermission('system:dict:delete')")
     @PostMapping(value = "/deletedDict")
-    public ResponseResult<Object> deletedDict(@RequestBody List<Long> ids) {
+    public ResponseResult<Object> deletedDict(@RequestBody @NotEmpty(message = "字典ID不能为空") List<Long> ids) {
         dictService.deletedDict(ids);
         return ResponseResult.success();
     }
@@ -145,7 +146,7 @@ public class DictController {
      */
     @PreAuthorize("@xz.hasPermission('system:dict:item:delete')")
     @PostMapping(value = "/deletedDictItem")
-    public ResponseResult<Object> deletedDictItem(@RequestBody List<String> ids) {
+    public ResponseResult<Object> deletedDictItem(@RequestBody @NotEmpty(message = "字典项ID不能为空") List<String> ids) {
         dictService.deletedDictItem(ids);
         return ResponseResult.success();
     }

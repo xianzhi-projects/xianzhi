@@ -16,6 +16,13 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.NoticeDTO;
+import io.xianzhi.system.model.page.NoticePage;
+import io.xianzhi.system.model.vo.NoticeVO;
+
+import java.util.List;
+
 /**
  * 公告接口
  *
@@ -23,4 +30,34 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface NoticeService {
+
+    /**
+     * 分页查询公告列表
+     *
+     * @param noticePage 分页查询参数
+     * @return 公告列表
+     */
+    ListResult<NoticeVO> pageNoticeList(NoticePage noticePage);
+
+    /**
+     * 创建公告
+     *
+     * @param noticeDTO 公告信息
+     * @return 创建结果
+     */
+    String createNotice(NoticeDTO noticeDTO);
+
+    /**
+     * 更新公告
+     *
+     * @param noticeDTO 公告信息
+     */
+    void updateNotice(NoticeDTO noticeDTO);
+
+    /**
+     * 删除公告
+     *
+     * @param ids 公告ID
+     */
+    void deletedNotice(List<String> ids);
 }

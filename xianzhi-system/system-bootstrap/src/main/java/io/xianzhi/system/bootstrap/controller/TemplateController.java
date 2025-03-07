@@ -59,7 +59,7 @@ public class TemplateController {
     @PreAuthorize("@xz.hasPermission('system:template:list')")
     @PostMapping(value = "/pageTemplateList")
     public ResponseResult<ListResult<TemplateVO>> pageTemplateList(@RequestBody TemplatePage templatePage) {
-        return ResponseResult.success();
+        return ResponseResult.success(templateService.pageTemplateList(templatePage));
     }
 
     /**
@@ -72,7 +72,7 @@ public class TemplateController {
     @PreAuthorize("@xz.hasPermission('system:template:create')")
     @PostMapping(value = "/createTemplate")
     public ResponseResult<String> createTemplate(@RequestBody @Validated(value = CreateGroup.class) TemplateDTO templateDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(templateService.createTemplate(templateDTO));
     }
 
     /**
@@ -84,6 +84,7 @@ public class TemplateController {
     @PreAuthorize("@xz.hasPermission('system:template:update')")
     @PostMapping(value = "/updateTemplate")
     public ResponseResult<Object> updateTemplate(@RequestBody @Validated(value = UpdateGroup.class) TemplateDTO templateDTO) {
+        templateService.updateTemplate(templateDTO);
         return ResponseResult.success();
     }
 
@@ -96,6 +97,7 @@ public class TemplateController {
     @PreAuthorize("@xz.hasPermission('system:template:delete')")
     @PostMapping(value = "/deletedTemplate")
     public ResponseResult<Object> deletedTemplate(@RequestBody List<String> ids) {
+        templateService.deletedTemplate(ids);
         return ResponseResult.success();
     }
 }
