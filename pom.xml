@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.xianzhi</groupId>
     <artifactId>xianzhi</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>xianzhi-core</module>
@@ -35,7 +35,6 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <xianzhi.version>1.0-SNAPSHOT</xianzhi.version>
         <spring.boot.version>3.2.5</spring.boot.version>
         <druid3.version>1.2.24</druid3.version>
         <mybatis.plus.version>3.5.10.1</mybatis.plus.version>
@@ -98,130 +97,130 @@
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>xianzhi-core</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            公共代码包-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>xianzhi-common</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            钉钉-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-ding-talk</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            Excel-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-excel</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            飞书-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-feishu</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            接口幂等处理-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-idempotent</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            shell-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-jsch</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            k8s-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-k8s</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            日志-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-log4j2</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            Mybatis Plus-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-mybatis-plus</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            授权服务-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-oauth2-authorization-server</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            资源服务-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-oauth2-resource-server</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            OSS-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-oss</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            Redis-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-redis</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            spring boot starter security 简单封装-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-security</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            spring boot starter web 简单封装-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-web</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            代码托管-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>code-facade</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>code-model</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            研发效能-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>linke-facade</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>linke-model</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--            系统服务-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>system-facade</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>system-model</artifactId>
-                <version>${xianzhi.version}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
         </dependencies>
