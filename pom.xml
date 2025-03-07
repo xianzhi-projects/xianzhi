@@ -23,6 +23,32 @@
     <artifactId>xianzhi</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>研发效能平台 | 先知</name>
+    <description>提升研发效能，加速交付，助力企业高效研发</description>
+    <url>https://xianzhi.io</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Max</name>
+            <email>max@xianzhi.io</email>
+            <roles>
+                <role>Founder</role>
+                <role>Lead Developer</role>
+                <role>Developer</role>
+            </roles>
+            <organization>XianZhi Group.</organization>
+            <organizationUrl>https://www.xianzhi.io</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/xianzhi-projects/xianzhi</url>
+    </scm>
     <modules>
         <module>xianzhi-core</module>
         <module>xianzhi-common</module>
