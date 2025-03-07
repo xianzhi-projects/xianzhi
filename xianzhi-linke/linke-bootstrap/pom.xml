@@ -39,6 +39,10 @@
         </dependency>
         <dependency>
             <groupId>io.xianzhi</groupId>
+            <artifactId>system-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
             <artifactId>code-facade</artifactId>
         </dependency>
         <dependency>
@@ -57,10 +61,6 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>common-security</artifactId>
         </dependency>
-        <!--            资源服务-->
-        <dependency>
-            <groupId>io.xianzhi</groupId>
-            <artifactId>common-oauth2-resource-server</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
