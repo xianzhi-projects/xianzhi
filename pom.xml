@@ -166,6 +166,12 @@
                 <artifactId>common-redis</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <!--            spring boot starter security 简单封装-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-security</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
             <!--            spring boot starter web 简单封装-->
             <dependency>
                 <groupId>io.xianzhi</groupId>

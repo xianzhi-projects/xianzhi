@@ -53,5 +53,9 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>common-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
     </dependencies>
 </project>

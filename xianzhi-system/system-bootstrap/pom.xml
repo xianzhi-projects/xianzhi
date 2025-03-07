@@ -57,8 +57,10 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>common-redis</artifactId>
         </dependency>
-
-
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
