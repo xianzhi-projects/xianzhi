@@ -19,6 +19,10 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 资源持久层
@@ -28,4 +32,18 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ResourceMapper extends BaseMapper<ResourceDO> {
+    /**
+     * 查询所有的资源信息
+     *
+     * @return 查询所有的资源信息
+     */
+    List<ResourceDO> selectAllResource();
+
+    /**
+     * 根据ID查询资源信息
+     *
+     * @param id 资源ID
+     * @return 资源信息
+     */
+    Optional<ResourceDO> selectResourceById(@Param("id") String id);
 }

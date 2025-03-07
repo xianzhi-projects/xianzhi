@@ -1,0 +1,3 @@
+io.xianzhi.common.oauth2.resource.config.OAuth2ResourceServerConfig
+io.xianzhi.common.oauth2.resource.config.XianZhiBearerTokenResolver
+io.xianzhi.common.oauth2.resource.config.XianZhiOpaqueTokenIntrospector

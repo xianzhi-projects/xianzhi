@@ -17,4 +17,11 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper">
+
+    <select id="selectAllResource" resultType="io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO">
+
+    </select>
+
+    <select id="selectResourceById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO">
+    </select>
 </mapper>

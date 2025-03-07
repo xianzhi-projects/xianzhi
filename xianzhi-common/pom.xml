@@ -39,6 +39,8 @@
         <module>common-k8s</module>
         <module>common-ding-talk</module>
         <module>common-security</module>
+        <module>common-oauth2-authorization-server</module>
+        <module>common-oauth2-resource-server</module>
     </modules>
     <artifactId>xianzhi-common</artifactId>
 

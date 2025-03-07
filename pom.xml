@@ -154,6 +154,18 @@
                 <artifactId>common-mybatis-plus</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <!--            授权服务-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-oauth2-authorization-server</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <!--            资源服务-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-oauth2-resource-server</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
             <!--            OSS-->
             <dependency>
                 <groupId>io.xianzhi</groupId>

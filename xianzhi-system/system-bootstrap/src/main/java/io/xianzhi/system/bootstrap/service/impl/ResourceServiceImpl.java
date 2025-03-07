@@ -16,10 +16,15 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper;
 import io.xianzhi.system.bootstrap.service.ResourceService;
+import io.xianzhi.system.model.dto.ResourceDTO;
+import io.xianzhi.system.model.vo.ResourceVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 资源接口实现
@@ -31,4 +36,60 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ResourceServiceImpl implements ResourceService {
+
+    /**
+     * 资源持久层
+     */
+    private final ResourceMapper resourceMapper;
+
+    /**
+     * 查询资源树
+     *
+     * @return 资源树
+     */
+    @Override
+    public List<ResourceVO> tree() {
+        return List.of();
+    }
+
+    /**
+     * 查询当前用户资源信息
+     *
+     * @return 当前用户资源信息
+     */
+    @Override
+    public List<ResourceVO> getCurrentUserResource() {
+        return List.of();
+    }
+
+    /**
+     * 新增资源信息
+     *
+     * @param resourceDTO 资源信息入参
+     * @return 资源ID
+     */
+    @Override
+    public String createResource(ResourceDTO resourceDTO) {
+        return "";
+    }
+
+    /**
+     * 更新资源信息
+     *
+     * @param resourceDTO 资源信息入参
+     */
+    @Override
+    public void updateResource(ResourceDTO resourceDTO) {
+
+    }
+
+    /**
+     * 删除资源
+     *
+     * @param id 资源ID
+     */
+    @Override
+    public void deletedResource(String id) {
+
+    }
 }
