@@ -227,5 +227,20 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 设置deploy的地址 -->
+    <distributionManagement>
+        <repository>
+            <id>xianzhi</id>
+            <name>先知发布版本仓库</name>
+            <url>http://10.168.1.12/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>xianzhi</id>
+            <name>先知快照版本仓库</name>
+            <url>http://10.168.1.12/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 
 </project>

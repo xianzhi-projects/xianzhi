@@ -16,6 +16,8 @@
 
 package io.xianzhi.code.model.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
