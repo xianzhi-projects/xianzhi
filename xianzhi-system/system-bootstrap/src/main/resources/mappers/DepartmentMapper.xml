@@ -17,4 +17,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper">
+
+    <select id="selectAllDepartment" resultType="io.xianzhi.system.model.vo.DepartmentVO">
+
+    </select>
 </mapper>

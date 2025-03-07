@@ -19,6 +19,7 @@ package io.xianzhi.system.model.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 部门信息出参
@@ -28,4 +29,34 @@ import java.io.Serializable;
  */
 @Data
 public class DepartmentVO implements Serializable {
+
+
+    /**
+     * 主键ID
+     */
+    private String id;
+    /**
+     * 部门名称
+     */
+    private String departmentName;
+    /**
+     * 部门描述
+     */
+    private String departmentDesc;
+    /**
+     * 部门负责人ID
+     */
+    private UserVO departmentOwner;
+    /**
+     * 部门邮箱地址
+     */
+    private String departmentEmail;
+    /**
+     * 部门电话
+     */
+    private String departmentPhone;
+    /**
+     * 子集部门
+     */
+    private List<DepartmentVO> children;
 }

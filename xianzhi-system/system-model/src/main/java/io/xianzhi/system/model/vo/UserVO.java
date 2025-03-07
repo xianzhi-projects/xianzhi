@@ -28,4 +28,18 @@ import java.io.Serializable;
  */
 @Data
 public class UserVO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    private String id;
+    /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
+     * 真实姓名
+     */
+    private String realName;
 }

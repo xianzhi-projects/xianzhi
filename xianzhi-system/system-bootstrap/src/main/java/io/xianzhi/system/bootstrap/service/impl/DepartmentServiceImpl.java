@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.service.DepartmentService;
 import io.xianzhi.system.model.dto.DepartmentDTO;
@@ -23,7 +24,9 @@ import io.xianzhi.system.model.vo.DepartmentVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,6 +52,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      */
     @Override
     public List<DepartmentVO> tree() {
+        List<DepartmentVO> departments = departmentMapper.selectAllDepartment();
         return List.of();
     }
 
@@ -81,5 +85,56 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void deletedDepartment(String id) {
 
+    }
+
+    /**
+     * 转换部门信息树
+     *
+     * @param departments 部门信息
+     * @return 部门信息出参
+     */
+    public List<DepartmentVO> convert(List<DepartmentDO> departments) {
+        if (ObjectUtils.isEmpty(departments)) {
+            return Collections.emptyList();
+        }
+        return departments.stream().filter(item -> null == item.getParentId() || "-1".equals(item.getParentId()))
+                .map(item -> {
+                    DepartmentVO vo = convert(item);
+                    vo.setChildren(getChildren(item.getId(), departments));
+                    return vo;
+                }).toList();
+    }
+
+    /**
+     * 获取子集部门
+     *
+     * @param parentId    父级ID
+     * @param departments 部门信息
+     * @return 部门信息出参
+     */
+    private List<DepartmentVO> getChildren(String parentId, List<DepartmentDO> departments) {
+        return departments.stream().filter(item -> parentId.equals(item.getParentId()))
+                .map(item -> {
+                    DepartmentVO vo = convert(item);
+                    vo.setChildren(getChildren(item.getId(), departments));
+                    return vo;
+                }).toList();
+    }
+
+    /**
+     * 转换换部门信息出参
+     *
+     * @param department 部门信息
+     * @return 部门信息出参
+     */
+    public DepartmentVO convert(DepartmentDO department) {
+        DepartmentVO vo = new DepartmentVO();
+        vo.setId(department.getId());
+        vo.setDepartmentName(department.getDepartmentName());
+        vo.setDepartmentDesc(department.getDepartmentDesc());
+        vo.setDepartmentOwner(department.getDepartmentOwner());
+        vo.setDepartmentEmail(department.getDepartmentEmail());
+        vo.setDepartmentPhone(department.getDepartmentPhone());
+        return vo;
     }
 }

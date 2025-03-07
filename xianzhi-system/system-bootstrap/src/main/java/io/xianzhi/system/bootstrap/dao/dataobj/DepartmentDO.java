@@ -31,4 +31,35 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_department")
 @EqualsAndHashCode(callSuper = true)
 public class DepartmentDO extends BaseDO {
+
+    /**
+     * 部门名称
+     */
+    private String departmentName;
+
+    /**
+     * 部门描述
+     */
+    private String departmentDesc;
+    /**
+     * 部门负责人ID
+     */
+    private String departmentOwner;
+
+    /**
+     * 部门地址
+     */
+    private String departmentLocation;
+    /**
+     * 部门邮箱地址
+     */
+    private String departmentEmail;
+    /**
+     * 部门电话
+     */
+    private String departmentPhone;
+    /**
+     * 父级部门ID
+     */
+    private String parentId;
 }
