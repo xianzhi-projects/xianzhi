@@ -38,6 +38,7 @@
         <spring.boot.version>3.2.5</spring.boot.version>
         <druid3.version>1.2.24</druid3.version>
         <mybatis.plus.version>3.5.10.1</mybatis.plus.version>
+        <mybatis.spring.version>3.0.3</mybatis.spring.version>
         <jsch.version>0.2.23</jsch.version>
         <disruptor.version>3.4.2</disruptor.version>
     </properties>
@@ -67,6 +68,11 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
