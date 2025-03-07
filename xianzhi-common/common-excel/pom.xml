@@ -21,30 +21,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.xianzhi</groupId>
-        <artifactId>xianzhi</artifactId>
+        <artifactId>xianzhi-common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <packaging>pom</packaging>
-    <description>公共包</description>
-    <modules>
-        <module>common-web</module>
-        <module>common-log4j2</module>
-        <module>common-idempotent</module>
-        <module>common-mybatis-plus</module>
-        <module>common-oss</module>
-        <module>common-redis</module>
-        <module>common-jsch</module>
-        <module>common-feishu</module>
-        <module>common-excel</module>
-        <module>common-k8s</module>
-        <module>common-ding-talk</module>
-    </modules>
-    <artifactId>xianzhi-common</artifactId>
+
+    <artifactId>common-excel</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>xianzhi-core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -106,10 +106,40 @@
                 <artifactId>xianzhi-common</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <!--            钉钉-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-ding-talk</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <!--            Excel-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-excel</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <!--            飞书-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-feishu</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
             <!--            接口幂等处理-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>common-idempotent</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <!--            shell-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-jsch</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <!--            k8s-->
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>common-k8s</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
             <!--            日志-->
