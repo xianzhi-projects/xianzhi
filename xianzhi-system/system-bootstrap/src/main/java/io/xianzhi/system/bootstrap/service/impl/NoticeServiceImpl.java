@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.mapper.NoticeMapper;
 import io.xianzhi.system.bootstrap.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,4 +32,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
+
+    /**
+     * 公告信息持久层
+     */
+    private final NoticeMapper noticeMapper;
 }

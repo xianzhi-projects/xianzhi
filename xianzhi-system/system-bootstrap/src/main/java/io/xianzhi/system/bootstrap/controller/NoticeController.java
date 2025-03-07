@@ -16,11 +16,24 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.system.bootstrap.service.NoticeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 通知公告接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/notice")
 public class NoticeController {
+
+    /**
+     * 公告接口
+     */
+    private final NoticeService noticeService;
 }

@@ -16,11 +16,24 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.system.bootstrap.service.EmailConfigService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 邮箱配置接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/emailConfig")
 public class EmailConfigController {
+
+    /**
+     * 邮件配置接口
+     */
+    private final EmailConfigService emailConfigService;
 }

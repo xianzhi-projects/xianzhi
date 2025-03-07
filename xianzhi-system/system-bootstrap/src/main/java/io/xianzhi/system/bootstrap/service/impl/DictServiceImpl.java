@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.mapper.DictItemMapper;
+import io.xianzhi.system.bootstrap.dao.mapper.DictMapper;
 import io.xianzhi.system.bootstrap.service.DictService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,4 +33,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DictServiceImpl implements DictService {
+
+    /**
+     * 字典信息持久层
+     */
+    private final DictMapper dictMapper;
+    /**
+     * 字典项信息持久层
+     */
+    private final DictItemMapper dictItemMapper;
 }

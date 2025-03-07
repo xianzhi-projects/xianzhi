@@ -16,11 +16,24 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.system.bootstrap.service.ResourceService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 资源接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/resource")
 public class ResourceController {
+
+    /**
+     * 资源服务
+     */
+    private final ResourceService resourceService;
 }

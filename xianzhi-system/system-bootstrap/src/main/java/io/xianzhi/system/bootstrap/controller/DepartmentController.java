@@ -16,11 +16,81 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.idempotent.annotations.Idempotent;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
+import io.xianzhi.system.bootstrap.service.DepartmentService;
+import io.xianzhi.system.model.dto.DepartmentDTO;
+import io.xianzhi.system.model.vo.DepartmentVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 /**
  * 部门接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/department")
 public class DepartmentController {
+
+    /**
+     * 部门接口
+     */
+    private final DepartmentService departmentService;
+
+
+    /**
+     * 查询部门树结构信息
+     *
+     * @return 树信息
+     */
+    @GetMapping(value = "/tree")
+    public ResponseResult<List<DepartmentVO>> tree() {
+        return ResponseResult.success(departmentService.tree());
+    }
+
+    /**
+     * 新增部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     * @return 部门ID
+     */
+    @Idempotent
+    @PostMapping(value = "/createDepartment")
+    public ResponseResult<String> createDepartment(@RequestBody @Validated(value = CreateGroup.class) DepartmentDTO departmentDTO) {
+        return ResponseResult.success(departmentService.createDepartment(departmentDTO));
+    }
+
+    /**
+     * 更新部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     * @return 响应信息
+     */
+    @PostMapping(value = "/updateDepartment")
+    public ResponseResult<Object> updateDepartment(@RequestBody @Validated(value = UpdateGroup.class) DepartmentDTO departmentDTO) {
+        departmentService.updateDepartment(departmentDTO);
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除部门
+     *
+     * @param id 部门ID
+     * @return 响应信息
+     */
+    @PostMapping(value = "/deletedDepartment")
+    public ResponseResult<Object> deletedDepartment(@RequestParam(value = "id") String id) {
+        departmentService.deletedDepartment(id);
+        return ResponseResult.success();
+    }
+
+
 }

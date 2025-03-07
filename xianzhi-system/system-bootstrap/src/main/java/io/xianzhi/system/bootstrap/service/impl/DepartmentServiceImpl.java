@@ -16,10 +16,15 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.service.DepartmentService;
+import io.xianzhi.system.model.dto.DepartmentDTO;
+import io.xianzhi.system.model.vo.DepartmentVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 部门接口实现
@@ -31,4 +36,50 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
+
+    /**
+     * 部门信息持久层
+     */
+    private final DepartmentMapper departmentMapper;
+
+    /**
+     * 查询部门树结构信息
+     *
+     * @return 树信息
+     */
+    @Override
+    public List<DepartmentVO> tree() {
+        return List.of();
+    }
+
+    /**
+     * 新增部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     * @return 部门ID
+     */
+    @Override
+    public String createDepartment(DepartmentDTO departmentDTO) {
+        return "";
+    }
+
+    /**
+     * 更新部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     */
+    @Override
+    public void updateDepartment(DepartmentDTO departmentDTO) {
+
+    }
+
+    /**
+     * 删除部门
+     *
+     * @param id 部门ID
+     */
+    @Override
+    public void deletedDepartment(String id) {
+
+    }
 }

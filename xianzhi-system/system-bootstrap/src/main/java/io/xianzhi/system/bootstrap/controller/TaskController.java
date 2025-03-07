@@ -16,11 +16,23 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.system.bootstrap.service.TaskService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 定时任务接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/task")
 public class TaskController {
+    /**
+     * 定时任务接口
+     */
+    private final TaskService taskService;
 }

@@ -16,11 +16,24 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.system.bootstrap.service.LogService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 日志接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/log")
 public class LogController {
+
+    /**
+     * 日志接口
+     */
+    private final LogService logService;
 }

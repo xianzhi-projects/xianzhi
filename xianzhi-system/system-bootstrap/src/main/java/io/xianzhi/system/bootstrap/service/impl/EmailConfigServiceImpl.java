@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.mapper.EmailConfigMapper;
 import io.xianzhi.system.bootstrap.service.EmailConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,4 +32,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmailConfigServiceImpl implements EmailConfigService {
+
+    /**
+     * 邮件配置持久层
+     */
+    private final EmailConfigMapper emailConfigMapper;
 }

@@ -16,6 +16,11 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.system.model.dto.DepartmentDTO;
+import io.xianzhi.system.model.vo.DepartmentVO;
+
+import java.util.List;
+
 /**
  * 部门接口
  *
@@ -23,4 +28,32 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface DepartmentService {
+    /**
+     * 查询部门树结构信息
+     *
+     * @return 树信息
+     */
+    List<DepartmentVO> tree();
+
+    /**
+     * 新增部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     * @return 部门ID
+     */
+    String createDepartment(DepartmentDTO departmentDTO);
+
+    /**
+     * 更新部门信息
+     *
+     * @param departmentDTO 部门信息入参
+     */
+    void updateDepartment(DepartmentDTO departmentDTO);
+
+    /**
+     * 删除部门
+     *
+     * @param id 部门ID
+     */
+    void deletedDepartment(String id);
 }

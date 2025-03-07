@@ -32,5 +32,23 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>xianzhi-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
