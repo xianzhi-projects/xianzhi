@@ -13,7 +13,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "4.x",
+    "axios": "^1.8.1",
+    "nprogress": "^0.2.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
@@ -21,6 +24,7 @@
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.4",
+    "@types/nprogress": "^0.2.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.4.0",
@@ -28,6 +32,8 @@
     "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
     "jiti": "^2.4.2",
+    "less": "^4.2.2",
+    "less-loader": "^12.2.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "^3.5.1",
     "typescript": "~5.7.3",
