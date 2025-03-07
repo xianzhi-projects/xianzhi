@@ -50,11 +50,6 @@
                 <artifactId>code-bootstrap</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>io.xianzhi</groupId>
-                <artifactId>system-model</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

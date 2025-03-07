@@ -28,7 +28,6 @@
         <module>xianzhi-common</module>
         <module>xianzhi-code</module>
         <module>xianzhi-linke</module>
-        <module>xianzhi-model</module>
         <module>xianzhi-system</module>
     </modules>
 
@@ -101,12 +100,6 @@
                 <artifactId>xianzhi-core</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
-            <!--            公共模型-->
-            <dependency>
-                <groupId>io.xianzhi</groupId>
-                <artifactId>xianzhi-model</artifactId>
-                <version>${xianzhi.version}</version>
-            </dependency>
             <!--            公共代码包-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
@@ -155,16 +148,31 @@
                 <artifactId>code-facade</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>code-model</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
             <!--            研发效能-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>linke-facade</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>linke-model</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
             <!--            系统服务-->
             <dependency>
                 <groupId>io.xianzhi</groupId>
                 <artifactId>system-facade</artifactId>
+                <version>${xianzhi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.xianzhi</groupId>
+                <artifactId>system-model</artifactId>
                 <version>${xianzhi.version}</version>
             </dependency>
 
