@@ -16,6 +16,7 @@
 
 package io.xianzhi.linke.bootstrap.service.impl;
 
+import io.xianzhi.linke.bootstrap.dao.mapper.IterationMapper;
 import io.xianzhi.linke.bootstrap.service.IterationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,4 +32,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class IterationServiceImpl implements IterationService {
+    /**
+     * 迭代持久层
+     */
+    private final IterationMapper iterationMapper;
 }

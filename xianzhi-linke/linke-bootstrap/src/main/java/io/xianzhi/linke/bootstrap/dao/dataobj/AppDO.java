@@ -16,11 +16,19 @@
 
 package io.xianzhi.linke.bootstrap.dao.dataobj;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.xianzhi.common.mybatis.plus.base.BaseDO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * 应用信息实体
  *
  * @author Max
  * @since 1.0.0
  */
-public class AppDO {
+@Data
+@TableName(value = "l_app")
+@EqualsAndHashCode(callSuper = true)
+public class AppDO extends BaseDO {
 }

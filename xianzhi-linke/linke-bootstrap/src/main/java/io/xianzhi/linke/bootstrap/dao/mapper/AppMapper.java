@@ -16,11 +16,16 @@
 
 package io.xianzhi.linke.bootstrap.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.linke.bootstrap.dao.dataobj.AppDO;
+import org.apache.ibatis.annotations.Mapper;
+
 /**
  * 应用持久层
  *
  * @author Max
  * @since 1.0.0
  */
-public interface AppMapper {
+@Mapper
+public interface AppMapper extends BaseMapper<AppDO> {
 }

@@ -16,6 +16,7 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
+import io.xianzhi.linke.bootstrap.service.IterationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/iteration")
-public class IterationController  {
+public class IterationController {
+    /**
+     * 迭代接口
+     */
+    private final IterationService iterationService;
 }

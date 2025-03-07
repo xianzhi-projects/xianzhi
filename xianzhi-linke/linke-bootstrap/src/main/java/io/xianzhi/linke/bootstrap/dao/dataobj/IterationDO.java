@@ -14,28 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.linke.bootstrap.controller;
+package io.xianzhi.linke.bootstrap.dao.dataobj;
 
-import io.xianzhi.linke.bootstrap.service.AppService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.xianzhi.common.mybatis.plus.base.BaseDO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * 应用接口
+ * 迭代信息实体
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/app")
-public class AppController {
-
-    /**
-     * 应用接口
-     */
-    private final AppService appService;
-
-
+@Data
+@TableName(value = "l_iteration")
+@EqualsAndHashCode(callSuper = true)
+public class IterationDO extends BaseDO {
 }
