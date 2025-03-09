@@ -20,18 +20,7 @@ import {useUserStore} from "@/stores/userStore.ts";
  * token信息出参
  */
 export interface TokenVO {
-  /**
-   * 用户ID
-   */
-  id: string
-  /**
-   * 用户头像
-   */
-  avatar: string
-  /**
-   * 用户昵称
-   */
-  nickName: string
+
   /**
    * 用户邮箱
    */
@@ -40,18 +29,6 @@ export interface TokenVO {
    * 刷新token
    */
   refreshToken: string
-  /**
-   * 用户工号
-   */
-  workNumber: string
-  /**
-   * 域账号
-   */
-  domainAccount: string
-  /**
-   * 真实姓名
-   */
-  realName: string
 }
 
 /**

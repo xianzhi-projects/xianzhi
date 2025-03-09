@@ -5,9 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,27 +28,36 @@ public class PermissionHandler {
      * @return 是否可以访问
      */
     public boolean hasPermission(String... requiredPermissions) {
+        // 提前检查空或无权限情况
         if (requiredPermissions == null || requiredPermissions.length == 0) {
-            return false; // 无需权限时直接拒绝
+            return false;
         }
 
+        // 获取认证信息并验证
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication.getAuthorities() == null) {
-            return false; // 当前用户未认证时直接拒绝
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return false;
         }
 
-        // 将用户权限转换为集合以提高查询效率
-        Set<String> userPermissions = authentication.getAuthorities().stream()
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if (authorities == null || authorities.isEmpty()) {
+            return false;
+        }
+
+        // 转换为用户权限集合，只执行一次转换
+        Set<String> userPermissions = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .filter(StringUtils::hasText)
+                .filter(Objects::nonNull)  // 使用更强的空检查
                 .collect(Collectors.toSet());
 
-        // 检查是否匹配任一所需权限
+        // 检查所需权限
         return Arrays.stream(requiredPermissions)
-                .filter(StringUtils::hasText) // 过滤掉空白权限
-                .anyMatch(requiredPermission ->
+                .filter(Objects::nonNull)  // 检查null而不是空字符串
+                .anyMatch(required ->
                         userPermissions.stream()
-                                .anyMatch(userPermission -> PatternMatchUtils.simpleMatch(userPermission, requiredPermission))
+                                .filter(Objects::nonNull)
+                                .anyMatch(userPerm ->
+                                        PatternMatchUtils.simpleMatch(userPerm, required))
                 );
     }
 }

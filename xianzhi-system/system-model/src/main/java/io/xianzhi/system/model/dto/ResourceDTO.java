@@ -28,4 +28,50 @@ import java.io.Serializable;
  */
 @Data
 public class ResourceDTO implements Serializable {
+
+    /**
+     * 资源ID
+     */
+    private String id;
+    /**
+     * 资源名称
+     */
+    private String resourceName;
+    /**
+     * 资源类型
+     */
+    private String resourceType;
+    /**
+     * 资源标识
+     */
+    private String resourceKey;
+    /**
+     * 资源描述
+     */
+    private String resourceDesc;
+
+    /**
+     * 资源排序
+     */
+    private Integer resourceSorted;
+    /**
+     * 是否显示
+     */
+    private Boolean showFlag;
+    /**
+     * 是否启用
+     */
+    private Boolean enableFlag;
+    /**
+     * 菜单ICON
+     */
+    private String menuIcon;
+    /**
+     * 菜单组件
+     */
+    private String menuComponent;
+    /**
+     * 父级ID
+     */
+    private String parentId;
 }

@@ -62,7 +62,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<ResourceVO> getCurrentUserResource() {
         if (UserContextHolder.admin()) {
-            resourceMapper.selectAdminResource();
+            resourceMapper.selectAllResource();
         } else {
 
         }
