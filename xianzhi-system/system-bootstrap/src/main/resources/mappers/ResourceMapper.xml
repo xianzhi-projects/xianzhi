@@ -19,10 +19,10 @@
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper">
 
     <select id="selectAllResource" resultType="io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO">
-
+        SELECT * FROM sys_resource WHERE deleted_flag =0 AND enable_flag =1 ORDER BY resource_sorted ASC
     </select>
 
     <select id="selectResourceById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO">
-        SELECT * FROM sys_resource WHERE id = #{id,jdbcType=VARCHAR} deleted_flag =0
+        SELECT * FROM sys_resource WHERE id = #{id,jdbcType=VARCHAR} and  deleted_flag =0
     </select>
 </mapper>

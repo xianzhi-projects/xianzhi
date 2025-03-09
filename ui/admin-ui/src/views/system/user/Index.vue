@@ -13,25 +13,15 @@
   -  See the License for the specific language governing permissions and
   -  limitations under the License.
   -->
+
 <script lang="ts" setup>
 
-import Sider from "@/layout/components/Sider.vue";
-import Header from "@/layout/components/Header.vue";
-import Content from "@/layout/components/Content.vue";
-import Footer from "@/layout/components/Footer.vue";
 </script>
 
 <template>
-  <a-layout style="min-height: 100vh">
-    <Sider />
-    <a-layout>
-      <Header />
-      <Content />
-      <Footer />
-    </a-layout>
-  </a-layout>
+<div>User</div>
 </template>
 
 <style scoped>
-/* 无需额外样式 */
+
 </style>

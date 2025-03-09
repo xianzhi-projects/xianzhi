@@ -1,23 +1,22 @@
 <script lang="ts" setup>
-
-import model from '@/layout/index.ts'
+import model from '@/layout/index.ts';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   SearchOutlined,
   SettingOutlined
-} from '@ant-design/icons-vue'
+} from '@ant-design/icons-vue';
 </script>
 
 <template>
   <a-layout-header>
     <div class="trigger" @click="() => (model.collapsed.value = !model.collapsed.value)">
-      <MenuUnfoldOutlined v-if="model.collapsed.value"/>
-      <MenuFoldOutlined v-else/>
+      <menu-unfold-outlined v-if="model.collapsed.value" />
+      <menu-fold-outlined v-else />
     </div>
     <div class="header-right">
-      <SearchOutlined class="icon"/>
-      <SettingOutlined class="icon"/>
+      <search-outlined class="icon" />
+      <setting-outlined class="icon" />
       <a-avatar class="avatar">USER</a-avatar>
       <a-space>超级管理员</a-space>
     </div>
@@ -67,5 +66,4 @@ import {
     }
   }
 }
-
 </style>

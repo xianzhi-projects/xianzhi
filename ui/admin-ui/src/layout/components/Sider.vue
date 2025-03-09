@@ -1,33 +1,29 @@
 <script lang="ts" setup>
+import {onBeforeMount} from 'vue';
+import {useRouterStore} from '@/stores/routerStore.ts';
+import {refreshMenu} from '@/layout/index.ts';
 
-import {onBeforeMount} from 'vue'
-import model, {refreshMenu} from '@/layout/index.ts'
-import {useRouterStore} from '@/stores/routerStore.ts'
-
+// 初始化菜单数据
 const routerStore = useRouterStore();
 
-// 页面加载的时候，将路由配置转换为菜单配置
 onBeforeMount(() => {
-  refreshMenu(routerStore.routerList)
-})
-
-
-
+  refreshMenu(routerStore.routerList);
+});
 </script>
 
 <template>
   <a-layout-sider
-    :collapsed="model.collapsed.value"
+    v-model:collapsed="model.collapsed.value"
     :collapsed-width="80"
     :trigger="null"
     :width="260"
     collapsible
   >
     <div class="layout-sider-logo">
-      <img height="32" src="@/assets/logo/logo.png" width="32"/>
+      <img height="32" src="@/assets/logo/logo.png" width="32" />
       <span v-if="!model.collapsed.value">先知后台管理系统</span>
     </div>
-    <!-- 使用 a-menu 渲染菜单 -->
+    <!-- 动态菜单 -->
     <a-menu
       v-model:openKeys="model.state.value.openKeys"
       v-model:selectedKeys="model.state.value.selectedKeys"
@@ -35,7 +31,7 @@ onBeforeMount(() => {
       mode="inline"
       theme="dark"
       @select="model.onSelect"
-    ></a-menu>
+    />
   </a-layout-sider>
 </template>
 
@@ -44,9 +40,11 @@ onBeforeMount(() => {
   height: 100vh;
   background-color: #191a23 !important;
   color: white;
+
   :deep(.ant-menu) {
     background-color: #191a23 !important;
   }
+
   .layout-sider-logo {
     height: 32px;
     margin: 16px;
@@ -55,9 +53,15 @@ onBeforeMount(() => {
     font-size: 20px;
     line-height: 32px;
     padding: 5px;
+
+    img {
+      vertical-align: middle;
+    }
+
+    span {
+      margin-left: 8px;
+      vertical-align: middle;
+    }
   }
-
 }
-
-
 </style>

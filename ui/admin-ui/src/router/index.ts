@@ -13,15 +13,23 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import type {RouteRecordRaw} from 'vue-router';
+import type {RouteMeta, RouteRecordRaw} from 'vue-router';
 import {createRouter, createWebHistory} from 'vue-router';
-import Layout from '@/layout/Index.vue';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import {useUserStore} from '@/stores/userStore';
 import {useRouterStore} from '@/stores/routerStore';
 import type {ResourceVO} from '@/api/resourceApi.ts';
 import {getCurrentUserResource, ResourceType} from '@/api/resourceApi';
+import Layout from "@/layout/index.ts";
+
+// 定义 CustomRouteMeta，扩展 RouteMeta
+interface CustomRouteMeta extends RouteMeta {
+  title?: string;
+  icon?: string;
+  showFlag?: boolean;
+  resourceType?: ResourceType;
+}
 
 // 基础路由配置
 const baseRoutes: RouteRecordRaw[] = [
@@ -68,42 +76,38 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
   const routerStore = useRouterStore();
 
-  // 公共路径直接放行
+  console.log('To:', to.path, 'isLogin:', userStore.isLogin, 'routerList:', routerStore.routerList);
+
   if (publicPaths.includes(to.path)) {
     next();
     return;
   }
 
-  // 未登录用户重定向到登录页
   if (!userStore.isLogin && to.path !== '/login') {
     next({ path: '/login', query: { redirect: to.path } });
     return;
   }
 
-  // 已登录用户访问登录页，重定向到首页
   if (userStore.isLogin && to.path === '/login') {
     next({ path: '/' });
     return;
   }
 
-  // 动态路由未加载时，加载动态路由
   if (userStore.isLogin && (!routerStore.routerList || routerStore.routerList.length === 0)) {
     try {
       const { data } = await getCurrentUserResource();
+      console.log('Loaded resources:', data);
       if (!data || data.length === 0) {
         userStore.removeUser();
         next({ path: '/login' });
         return;
       }
 
-      // 生成动态路由
       const asyncRouter = generateRoutes(data);
-      routerStore.setRouterList(asyncRouter.children); // 适配 undefined
-
-      // 添加动态路由
+      routerStore.setRouterList(asyncRouter.children);
+      console.log('Dynamic routes:', asyncRouter.children);
       addRoutesSafely(asyncRouter);
-
-      // 重新导航到目标路径
+      console.log(router.getRoutes())
       next({ ...to, replace: true });
     } catch (error) {
       console.error('动态路由加载失败:', error);
@@ -150,12 +154,11 @@ function convertResourceToRoute(item: ResourceVO): RouteRecordRaw {
       showFlag: item.showFlag,
       resourceType: item.resourceType,
       title: item.resourceDesc,
-    },
+    } as CustomRouteMeta, // 类型兼容 RouteMeta
     component: undefined,
     children: [],
   };
 
-  // 处理菜单类型资源
   if (item.resourceType === ResourceType.MENU) {
     const componentPath = item.menuComponent || item.resourceKey;
     const moduleKey = modulesRoutesKeys.find((key) => key.includes(componentPath));
@@ -167,7 +170,6 @@ function convertResourceToRoute(item: ResourceVO): RouteRecordRaw {
     }
   }
 
-  // 处理目录类型资源
   if (item.resourceType === ResourceType.DIRECTORY && item.children?.length) {
     route.children = item.children.map(convertResourceToRoute);
   }

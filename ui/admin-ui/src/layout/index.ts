@@ -1,81 +1,138 @@
-import {h, ref} from 'vue'
-import type {ItemType, MenuMode} from 'ant-design-vue'
-import router from '@/router'
-import type {RouteRecordRaw} from 'vue-router'
-import * as antIcons from '@ant-design/icons-vue'
-import {ResourceType} from "@/api/resourceApi.ts";
-// 菜单顶部缩放
-const collapsed = ref<boolean>(false);
-// 菜单信息
-const MenuOptions = ref<ItemType[]>([])
-const state = ref({
-  mode: 'inline' as MenuMode,
-  selectedKeys: [''],
-  openKeys: [],
-})
+import {h, ref, type VNode} from 'vue';
+import type {ItemType, MenuMode} from 'ant-design-vue';
+import router from '@/router';
+import type {RouteRecordRaw} from 'vue-router';
+import * as antIcons from '@ant-design/icons-vue';
+import {ResourceType} from '@/api/resourceApi.ts';
 
-export function refreshMenu(routerList: RouteRecordRaw[] | undefined) {
-  MenuOptions.value = resolveRouter(routerList)
-  console.log(MenuOptions.value)
-  // 设置选中的菜单
-  state.value.selectedKeys = [router.currentRoute.value.meta.fullPath]
+// 定义自定义的 RouteMeta 类型
+interface CustomRouteMeta {
+  title?: string;
+  icon?: string;
+  showFlag?: boolean;
+  resourceType?: ResourceType;
 }
 
+// 侧边栏折叠状态
+export const collapsed = ref<boolean>(false);
+
+// 菜单选项
+export const MenuOptions = ref<ItemType[]>([]);
+
+// 菜单状态
+export const state = ref({
+  mode: 'inline' as MenuMode,
+  selectedKeys: [''],
+  openKeys: [] as string[],
+});
+
+/**
+ * 刷新菜单数据
+ * @param routerList 路由列表
+ */
+export function refreshMenu(routerList: RouteRecordRaw[] | undefined) {
+  MenuOptions.value = resolveRouter(routerList);
+  const currentPath = router.currentRoute.value.path;
+  state.value.selectedKeys = [currentPath];
+  const parentPath = findParentPath(routerList, currentPath);
+  if (parentPath) {
+    state.value.openKeys = [parentPath];
+  }
+}
+
+/**
+ * 查找父路径以展开子菜单
+ * @param routers 路由列表
+ * @param currentPath 当前路径
+ * @returns 父路径
+ */
+const findParentPath = (routers: RouteRecordRaw[] | undefined, currentPath: string): string | null => {
+  if (!routers) return null;
+  for (const route of routers) {
+    if (route.children?.some((child) => child.path === currentPath)) {
+      return route.path;
+    }
+    const found = findParentPath(route.children, currentPath);
+    if (found) return found;
+  }
+  return null;
+};
 
 /**
  * 转换路由配置为菜单配置
  * @param routers 路由信息
+ * @returns 菜单项数组
  */
 const resolveRouter = (routers: RouteRecordRaw[] | undefined): ItemType[] => {
-  const childrenItems: ItemType[] = []
-  if (routers) {
-    routers.forEach((route: RouteRecordRaw) => {
-      if (route.meta && route.meta.showFlag) {
-        if (route.meta.resourceType === ResourceType.DIRECTORY) {
-          if (route?.children && route?.children?.length != 0) {
-            const configItem = decodeConfig(route)
-            const childrenData = resolveRouter(route?.children )
-            if (childrenData.length != 0) {
-              if (configItem) {
-                configItem['children'] = childrenData
-              }
-            }
-            childrenItems.push(configItem)
-          }
-        } else {
-          childrenItems.push(decodeConfig(route, null))
+  const menuItems: ItemType[] = [];
+  if (!routers) return menuItems;
+
+  routers.forEach((route: RouteRecordRaw) => {
+    if (route.meta && route.meta.showFlag !== false) {
+      if (route.meta.resourceType === ResourceType.DIRECTORY) {
+        const children = resolveRouter(route.children);
+        if (children.length > 0) {
+          const menuItem = decodeConfig(route, true) as {
+            key: string;
+            label: string;
+            icon?: () => VNode;
+            children?: ItemType[];
+          };
+          menuItem.children = children;
+          menuItems.push(menuItem);
         }
+      } else if (route.meta.resourceType === ResourceType.MENU) {
+        menuItems.push(decodeConfig(route, false));
       }
-    })
-  }
-  return childrenItems
-}
+    }
+  });
+  return menuItems;
+};
 
+/**
+ * 将路由配置转换为菜单项
+ * @param item 路由项
+ * @param hasChildren 是否有子菜单
+ * @returns 菜单项配置
+ */
+const decodeConfig = (item: RouteRecordRaw, hasChildren: boolean): ItemType => {
+  const routeMeta = item.meta as CustomRouteMeta || {}; // 使用自定义类型
 
-// 获取单个导航菜单的数据
-const decodeConfig = (item: RouteRecordRaw) => {
-  const routeMeta = item?.meta ?? {}
-  console.log(item)
-  const menuItem: ItemType = {
-    key: item?.path ,
-    label: item?.name,
-  }
-  // 动态生成图标
-  if (routeMeta?.icon) {
-    const IconComponent = antIcons[routeMeta.icon as keyof typeof antIcons]
-    // 从全局注册的图标中取出
+  const baseItem: {
+    key: string;
+    label: string;
+    icon?: () => VNode;
+    children?: ItemType[];
+  } = {
+    key: item.path,
+    // 确保 label 是 string 类型
+    label: routeMeta.title || (typeof item.name === 'string' ? item.name : item.path) || item.path,
+  };
+
+  // 添加图标
+  if (routeMeta.icon) {
+    const IconComponent = antIcons[routeMeta.icon as keyof typeof antIcons];
     if (IconComponent) {
-      menuItem.icon = () => h(IconComponent) // 使用 h 函数生成图标
+      baseItem.icon = () => h(IconComponent);
     }
   }
-  return menuItem
-}
 
-// 当选中菜单的时候，跳转到对应的路由
-const onSelect = event => {
-  router.push({path: event.key})
-}
+  return baseItem as ItemType;
+};
 
+/**
+ * 菜单选中时的路由跳转
+ * @param event 选中事件
+ */
+export const onSelect = (event: { key: string }) => {
+  state.value.selectedKeys = [event.key];
+  router.push({ path: event.key });
+};
 
-export default {collapsed, state, onSelect, MenuOptions, refreshMenu}
-
+export default {
+  collapsed,
+  state,
+  onSelect,
+  MenuOptions,
+  refreshMenu,
+};

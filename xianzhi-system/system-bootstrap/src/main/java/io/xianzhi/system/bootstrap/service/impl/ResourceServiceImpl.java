@@ -26,8 +26,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,12 +66,13 @@ public class ResourceServiceImpl implements ResourceService {
      */
     @Override
     public List<ResourceVO> getCurrentUserResource() {
+        List<ResourceDO> resource;
         if (UserContextHolder.admin()) {
-            resourceMapper.selectAllResource();
+            resource = resourceMapper.selectAllResource();
         } else {
-
+            resource = new ArrayList<>();
         }
-        return List.of();
+        return convertResourceTree(resource);
     }
 
     /**
@@ -123,5 +127,60 @@ public class ResourceServiceImpl implements ResourceService {
             resource = new ResourceDO();
         }
         return resource;
+    }
+
+
+
+    /**
+     * 转换资源信息出参
+     *
+     * @param resources 资源信息实体
+     * @return 资源信息出参
+     */
+    public List<ResourceVO> convertResourceTree(List<ResourceDO> resources) {
+        if (ObjectUtils.isEmpty(resources)) {
+            return Collections.emptyList();
+        }
+        return resources.stream().filter(item -> !StringUtils.hasText(item.getParentId()) || "-1".equals(item.getParentId()))
+                .map(item -> convertResourceVO(item, resources)).toList();
+    }
+
+    /**
+     * 获取子集资源
+     *
+     * @param parentId  父级资源ID
+     * @param resources 资源信息
+     * @return 子集资源信息
+     */
+    private List<ResourceVO> getChildren(String parentId, List<ResourceDO> resources) {
+        return resources.stream().filter(item -> item.getParentId().equals(parentId))
+                .map(item -> convertResourceVO(item, resources)).toList();
+    }
+
+    /**
+     * 获取资源信息出参
+     *
+     * @param item      资源信息
+     * @param resources 所有资源信息
+     * @return 资源信息出参
+     */
+    public ResourceVO convertResourceVO(ResourceDO item, List<ResourceDO> resources) {
+        if (null == item) {
+            return null;
+        }
+        ResourceVO resourceVO = new ResourceVO();
+        resourceVO.setId(item.getId());
+        resourceVO.setResourceName(item.getResourceName());
+        resourceVO.setResourceType(item.getResourceType());
+        resourceVO.setResourceDesc(item.getResourceDesc());
+        resourceVO.setResourceKey(item.getResourceKey());
+        resourceVO.setResourceSorted(item.getResourceSorted());
+        resourceVO.setMenuIcon(item.getMenuIcon());
+        resourceVO.setMenuComponent(item.getMenuComponent());
+        resourceVO.setShowFlag(item.getShowFlag());
+        if (!ObjectUtils.isEmpty(resources)) {
+            resourceVO.setChildren(getChildren(item.getId(), resources));
+        }
+        return resourceVO;
     }
 }
