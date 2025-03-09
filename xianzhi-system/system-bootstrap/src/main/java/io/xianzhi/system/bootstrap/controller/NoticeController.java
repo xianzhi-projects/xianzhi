@@ -59,6 +59,7 @@ public class NoticeController {
      * @param noticePage 分页查询参数
      * @return 公告列表
      */
+    @PreAuthorize("@xz.hasPermission('system:notice:page')")
     @PostMapping(value = "/pageNoticeList")
     public ResponseResult<ListResult<NoticeVO>> pageNoticeList(NoticePage noticePage) {
         return ResponseResult.success(noticeService.pageNoticeList(noticePage));

@@ -74,6 +74,11 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>common-oauth2-authorization-server</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+            <version>5.8.34</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

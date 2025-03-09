@@ -14,28 +14,19 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.model.vo;
+package io.xianzhi.linke.model.page;
 
+import io.xianzhi.core.base.Page;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 验证码信息出参
+ * 迭代查询条件
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-public class CaptchaVO implements Serializable {
-
-    /**
-     * 唯一标识
-     */
-    private String key;
-
-    /**
-     * 验证码图片
-     */
-    private String image;
+public class IterationPage extends Page implements Serializable {
 }

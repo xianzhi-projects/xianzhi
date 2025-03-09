@@ -16,8 +16,15 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.linke.bootstrap.service.AppService;
+import io.xianzhi.linke.model.page.AppPage;
+import io.xianzhi.linke.model.vo.AppVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +43,18 @@ public class AppController {
      * 应用接口
      */
     private final AppService appService;
+
+
+    /**
+     * 分页查询应用列表
+     * @param appPage 查询条件
+     * @return 应用列表
+     */
+    @PreAuthorize("@xz.hasPermission('linke:app:list')")
+    @PostMapping(value = "/pageAppList")
+    public ResponseResult<ListResult<AppVO>> pageAppList(@RequestBody AppPage appPage){
+        return ResponseResult.success();
+    }
 
 
 }

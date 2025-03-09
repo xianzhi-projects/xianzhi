@@ -47,6 +47,10 @@
         </dependency>
         <dependency>
             <groupId>io.xianzhi</groupId>
+            <artifactId>linke-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
             <artifactId>common-web</artifactId>
         </dependency>
         <dependency>

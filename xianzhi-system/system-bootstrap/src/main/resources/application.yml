@@ -90,3 +90,8 @@ xianzhi:
       key-pair-path: classpath:xianzhi.jks
       key-pair-password: xianzhi_2024
       key-pair-alias: xianzhi
+    permit-all-list:
+      # 登录接口
+      - /oauth/token
+      # 登录验证码接口
+      - /s/captcha/login

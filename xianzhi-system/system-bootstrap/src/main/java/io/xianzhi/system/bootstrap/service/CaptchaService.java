@@ -32,4 +32,12 @@ public interface CaptchaService {
      */
     CaptchaVO getLoginCaptcha();
 
+    /**
+     * 检查验证码
+     *
+     * @param captchaKey 验证码key
+     * @param captcha    验证码内容
+     */
+    void checkCaptcha(String captchaKey, String captcha);
+
 }

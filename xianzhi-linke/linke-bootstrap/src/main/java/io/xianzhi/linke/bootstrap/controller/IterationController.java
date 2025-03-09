@@ -16,8 +16,15 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.linke.bootstrap.service.IterationService;
+import io.xianzhi.linke.model.page.IterationPage;
+import io.xianzhi.linke.model.vo.IterationVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,4 +42,15 @@ public class IterationController {
      * 迭代接口
      */
     private final IterationService iterationService;
+
+    /**
+     * 分页查询迭代列表
+     * @param iterationPage 查询条件
+     * @return 迭代列表
+     */
+    @PreAuthorize("@xz.hasPermission('linke:iteration:list')")
+    @PostMapping(value = "/pageIterationList")
+    public ResponseResult<ListResult<IterationVO>> pageIterationList(@RequestBody IterationPage iterationPage){
+        return ResponseResult.success();
+    }
 }
