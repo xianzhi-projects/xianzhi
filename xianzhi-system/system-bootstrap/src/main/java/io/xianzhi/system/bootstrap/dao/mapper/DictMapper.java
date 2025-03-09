@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 字典持久层
@@ -28,4 +31,33 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DictMapper extends BaseMapper<DictDO> {
+
+
+    /**
+     * 根据ID查询字典信息
+     *
+     * @param id 字典ID
+     * @return 字典信息
+     */
+    Optional<DictDO> selectDictById(@Param("id") String id);
+
+    /**
+     * 判断字典编码是否存在
+     *
+     * @param dictCode 字典编码
+     * @return 是否存在
+     */
+    boolean existsDictByDictCode(@Param("dictCode") String dictCode);
+
+    /**
+     * 判断字典名称是否存在
+     *
+     * @param dictName 字典名称
+     * @param id       字典ID
+     * @return 是否存在
+     */
+    boolean existsDictByDictNameAndIdNot(@Param("dictName") String dictName, @Param("id") String id);
+
+
+
 }

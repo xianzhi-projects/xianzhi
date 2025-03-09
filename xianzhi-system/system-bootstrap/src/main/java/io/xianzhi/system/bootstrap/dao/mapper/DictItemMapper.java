@@ -19,6 +19,10 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictItemDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 字典项目持久层
@@ -28,4 +32,31 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DictItemMapper extends BaseMapper<DictItemDO> {
+
+
+    /**
+     * 根据ID查询字典项目信息
+     *
+     * @param id 字典项目ID
+     * @return 字典项目信息
+     */
+    Optional<DictItemDO> selectDictItemById(@Param("id") String id);
+
+
+    /**
+     * 判断字典项 名称是否存在
+     *
+     * @param dictId   字典ID
+     * @param itemName 字典项名称
+     * @param id       字典项ID
+     * @return 是否存在
+     */
+    boolean existsDictItemByDictIdAndItemNameAndIdNot(@Param("dictId") String dictId, @Param("itemName") String itemName, @Param("id") String id);
+
+    /**
+     * 根据ID删除字典项
+     *
+     * @param ids 字典项ID
+     */
+    void deletedDictItem(@Param("ids") List<String> ids);
 }

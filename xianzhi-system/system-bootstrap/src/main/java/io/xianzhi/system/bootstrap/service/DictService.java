@@ -57,7 +57,7 @@ public interface DictService {
      *
      * @param ids 字典ID
      */
-    void deletedDict(List<Long> ids);
+    void deletedDict(List<String> ids);
     /**
      * 根据字典ID查询字典项
      *

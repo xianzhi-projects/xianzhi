@@ -16,7 +16,10 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.DictDO;
+import io.xianzhi.system.bootstrap.dao.dataobj.DictItemDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DictItemMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.DictMapper;
 import io.xianzhi.system.bootstrap.service.DictService;
@@ -29,6 +32,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -72,7 +77,9 @@ public class DictServiceImpl implements DictService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createDict(DictDTO dictDTO) {
-        return "";
+        DictDO dictDO = checkedDictDTO(dictDTO);
+        dictMapper.insert(dictDO);
+        return dictDO.getId();
     }
 
     /**
@@ -83,6 +90,8 @@ public class DictServiceImpl implements DictService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateDict(DictDTO dictDTO) {
+        DictDO dictDO = checkedDictDTO(dictDTO);
+        dictMapper.updateById(dictDO);
 
     }
 
@@ -93,7 +102,7 @@ public class DictServiceImpl implements DictService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deletedDict(List<Long> ids) {
+    public void deletedDict(List<String> ids) {
 
     }
 
@@ -117,7 +126,9 @@ public class DictServiceImpl implements DictService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createDictItem(DictItemDTO dictItemDTO) {
-        return "";
+        DictItemDO dictItemDO = checkedDictItemDTO(dictItemDTO);
+        dictItemMapper.insert(dictItemDO);
+        return dictItemDO.getId();
     }
 
     /**
@@ -128,7 +139,8 @@ public class DictServiceImpl implements DictService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateDictItem(DictItemDTO dictItemDTO) {
-
+        DictItemDO dictItemDO = checkedDictItemDTO(dictItemDTO);
+        dictItemMapper.updateById(dictItemDO);
     }
 
     /**
@@ -139,6 +151,57 @@ public class DictServiceImpl implements DictService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deletedDictItem(List<String> ids) {
+        if (!ObjectUtils.isEmpty(ids)) {
+            dictItemMapper.deletedDictItem(ids);
+        }
+    }
 
+    /**
+     * 检查字典信息入参
+     *
+     * @param dictDTO 字典信息入参
+     * @return 字典信息
+     */
+    private DictDO checkedDictDTO(DictDTO dictDTO) {
+        DictDO dict;
+        if (StringUtils.hasText(dictDTO.getId())) {
+            dict = dictMapper.selectDictById(dictDTO.getId()).orElseThrow(() -> new BusinessException("字典不存在"));
+        } else {
+            dict = new DictDO();
+            if (dictMapper.existsDictByDictCode(dictDTO.getDictCode())) {
+                throw new BusinessException("字典编码已存在");
+            }
+            dict.setDictCode(dictDTO.getDictCode());
+        }
+        if (dictMapper.existsDictByDictNameAndIdNot(dictDTO.getDictName(), dict.getId())) {
+            throw new BusinessException("字典名称已存在");
+        }
+        dict.setDictName(dictDTO.getDictName());
+        dict.setDictDesc(dictDTO.getDictDesc());
+        return dict;
+    }
+
+    /**
+     * 检查字典项信息入参
+     *
+     * @param dictItemDTO 字典项信息入参
+     * @return 字典项信息
+     */
+    private DictItemDO checkedDictItemDTO(DictItemDTO dictItemDTO) {
+        DictDO dict = dictMapper.selectDictById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException("字典不存在"));
+        DictItemDO dictItem;
+        if (StringUtils.hasText(dictItemDTO.getId())) {
+            dictItem = dictItemMapper.selectDictItemById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException("字典项不存在"));
+        } else {
+            dictItem = new DictItemDO();
+            dictItem.setDictCode(dict.getDictCode());
+        }
+        if (dictItemMapper.existsDictItemByDictIdAndItemNameAndIdNot(dictItemDTO.getDictId(), dictItemDTO.getItemName(), dictItem.getId())) {
+            throw new BusinessException("字典项值已存在");
+        }
+        dictItem.setDictId(dictItemDTO.getDictId());
+        dictItem.setItemValue(dictItemDTO.getItemValue());
+        dictItem.setItemName(dictItemDTO.getItemName());
+        return dictItem;
     }
 }

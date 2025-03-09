@@ -96,7 +96,7 @@ public class DictController {
      */
     @PreAuthorize("@xz.hasPermission('system:dict:delete')")
     @PostMapping(value = "/deletedDict")
-    public ResponseResult<Object> deletedDict(@RequestBody @NotEmpty(message = "字典ID不能为空") List<Long> ids) {
+    public ResponseResult<Object> deletedDict(@RequestBody @NotEmpty(message = "字典ID不能为空") List<String> ids) {
         dictService.deletedDict(ids);
         return ResponseResult.success();
     }

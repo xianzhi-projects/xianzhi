@@ -17,4 +17,19 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.DictMapper">
+
+    <select id="selectDictById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DictDO">
+        SELECT * FROM sys_dict WHERE id = #{id,jdbcType=VARCHAR} AND deleted_flag = 0
+    </select>
+
+    <select id="existsDictByDictCode" resultType="boolean">
+        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_code = #{dictCode,jdbcType=VARCHAR} and deleted_flag = 0 ),0)
+    </select>
+
+    <select id="existsDictByDictNameAndIdNot" resultType="boolean">
+        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_name = #{dictName,jdbcType=VARCHAR}  and deleted_flag = 0
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if> ),0)
+    </select>
 </mapper>

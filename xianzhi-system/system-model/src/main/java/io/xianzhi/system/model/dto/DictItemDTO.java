@@ -28,4 +28,21 @@ import java.io.Serializable;
  */
 @Data
 public class DictItemDTO implements Serializable {
+
+    /**
+     * 字典项ID
+     */
+    private String id;
+    /**
+     * 字典ID
+     */
+    private String dictId;
+    /**
+     * 字典项名称
+     */
+    private String itemName;
+    /**
+     * 字典项值
+     */
+    private String itemValue;
 }

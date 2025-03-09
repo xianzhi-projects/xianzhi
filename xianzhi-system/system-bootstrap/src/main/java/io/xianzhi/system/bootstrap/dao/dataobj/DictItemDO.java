@@ -31,4 +31,21 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_dict_item")
 @EqualsAndHashCode(callSuper = true)
 public class DictItemDO extends BaseDO {
+
+    /**
+     * 字典ID
+     */
+    private String dictId;
+    /**
+     * 字典编码
+     */
+    private String dictCode;
+    /**
+     * 字典项名称
+     */
+    private String itemName;
+    /**
+     * 字典项值
+     */
+    private String itemValue;
 }
