@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO;
 import io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper;
 import io.xianzhi.system.bootstrap.service.ResourceService;
 import io.xianzhi.system.model.dto.ResourceDTO;
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -78,7 +80,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createResource(ResourceDTO resourceDTO) {
-        return "";
+        ResourceDO resourceDO = checkedResourceDTO(resourceDTO);
+        resourceMapper.insert(resourceDO);
+        return resourceDO.getId();
     }
 
     /**
@@ -89,7 +93,8 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateResource(ResourceDTO resourceDTO) {
-
+        ResourceDO resourceDO = checkedResourceDTO(resourceDTO);
+        resourceMapper.updateById(resourceDO);
     }
 
     /**
@@ -101,5 +106,22 @@ public class ResourceServiceImpl implements ResourceService {
     @Transactional(rollbackFor = Exception.class)
     public void deletedResource(String id) {
 
+    }
+
+
+    /**
+     * 检查资源信息入参
+     *
+     * @param resourceDTO 资源信息入参
+     * @return 资源信息
+     */
+    private ResourceDO checkedResourceDTO(ResourceDTO resourceDTO) {
+        ResourceDO resource;
+        if (StringUtils.hasText(resourceDTO.getId())) {
+            resource = resourceMapper.selectResourceById(resourceDTO.getId()).orElseThrow(() -> new RuntimeException("资源不存在"));
+        } else {
+            resource = new ResourceDO();
+        }
+        return resource;
     }
 }

@@ -23,5 +23,6 @@
     </select>
 
     <select id="selectResourceById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO">
+        SELECT * FROM sys_resource WHERE id = #{id,jdbcType=VARCHAR} deleted_flag =0
     </select>
 </mapper>
