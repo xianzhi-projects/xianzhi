@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 import http, {type ResponseResult} from '@/api/index'
+import {useUserStore} from "@/stores/userStore.ts";
 
 /**
  * token信息出参
@@ -85,7 +86,7 @@ export interface PasswordLoginDTO {
  */
 export async function refreshToken(refreshToken: string): Promise<ResponseResult<TokenVO>> {
   return http.request({
-    url: '/s/oauth2/token',
+    url: '/oauth2/token',
     method: 'POST',
     params: {grant_type: 'refresh_token', refresh_token: refreshToken},
     headers: {
@@ -99,8 +100,9 @@ export async function refreshToken(refreshToken: string): Promise<ResponseResult
  * @param loginDTO 登录入参
  */
 export async function passwordLogin(loginDTO: PasswordLoginDTO): Promise<ResponseResult<TokenVO>> {
+  useUserStore().removeUser()
   return http.request({
-    url: '/s/oauth2/token',
+    url: '/oauth2/token',
     method: 'POST',
     params: {grant_type: 'password'},
     data: loginDTO,

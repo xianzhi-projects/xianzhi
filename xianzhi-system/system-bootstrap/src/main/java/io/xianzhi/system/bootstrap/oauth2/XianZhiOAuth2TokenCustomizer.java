@@ -16,8 +16,10 @@
 
 package io.xianzhi.system.bootstrap.oauth2;
 
+import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.stereotype.Component;
@@ -40,6 +42,8 @@ public class XianZhiOAuth2TokenCustomizer implements OAuth2TokenCustomizer<JwtEn
     @Override
     public void customize(JwtEncodingContext context) {
         Authentication principal = context.getPrincipal();
-
+        XianZhiOAuth2UserDetails userDetails = (XianZhiOAuth2UserDetails) principal.getPrincipal();
+        JwtClaimsSet.Builder claims = context.getClaims();
+        claims.claim("id", userDetails.getId());
     }
 }

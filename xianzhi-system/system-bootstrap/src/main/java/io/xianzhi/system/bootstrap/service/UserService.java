@@ -59,4 +59,12 @@ public interface UserService {
      * @param ids 用户ID
      */
     void deletedUser(List<String> ids);
+
+    /**
+     * 获取当前用户信息
+     *
+     * @return 用户信息
+     */
+    UserVO getUserInfo();
+
 }

@@ -17,6 +17,7 @@
 package io.xianzhi.system.bootstrap.service.impl;
 
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.UserService;
 import io.xianzhi.system.model.dto.UserDTO;
@@ -44,6 +45,10 @@ public class UserServiceImpl implements UserService {
      * 用户信息持久层
      */
     private final UserMapper userMapper;
+    /**
+     * 部门信息持久层
+     */
+    private final DepartmentMapper departmentMapper;
 
     /**
      * 分页查询用户列表
@@ -89,4 +94,15 @@ public class UserServiceImpl implements UserService {
     public void deletedUser(List<String> ids) {
 
     }
+
+    /**
+     * 获取当前用户信息
+     *
+     * @return 用户信息
+     */
+    @Override
+    public UserVO getUserInfo() {
+        return null;
+    }
+
 }

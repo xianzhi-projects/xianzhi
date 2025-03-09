@@ -59,6 +59,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<DepartmentVO> tree() {
         List<DepartmentVO> departments = departmentMapper.selectAllDepartment();
+//        if (ObjectUtils.isEmpty(departments)) {
+//            departments.stream().filter(item -> null == item.getParentId() || item.getParentId().equals("-1"))
+//                    .map(item -> {
+//                        item.setChildren(getChildren(item.getId(), departments));
+//                        return item;
+//                    });
+//        }
         return List.of();
     }
 

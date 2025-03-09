@@ -50,11 +50,6 @@ public class XianZhiAuthenticationSuccessHandler implements AuthenticationSucces
     private TokenVO getTokenVO(OAuth2AccessTokenAuthenticationToken auth2AccessTokenAuthenticationToken, OAuth2AccessToken accessToken, OAuth2RefreshToken refreshToken) {
         Map<String, Object> additionalParameters = auth2AccessTokenAuthenticationToken.getAdditionalParameters();
         TokenVO tokenVO = new TokenVO();
-        tokenVO.setId((String) additionalParameters.get("id"));
-        tokenVO.setAvatar((String) additionalParameters.get("avatar"));
-        tokenVO.setNickName((String) additionalParameters.get("nickName"));
-        tokenVO.setWorkNumber((String) additionalParameters.get("workNumber"));
-        tokenVO.setDomainAccount((String) additionalParameters.get("domainAccount"));
         tokenVO.setAccessToken(accessToken.getTokenValue());
         if (null != refreshToken) {
             tokenVO.setRefreshToken(refreshToken.getTokenValue());

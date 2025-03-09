@@ -1,5 +1,6 @@
 package io.xianzhi.system.security.context;
 
+import io.xianzhi.core.content.Context;
 import io.xianzhi.core.content.ContextHolder;
 
 /**
@@ -16,7 +17,8 @@ public class UserContextHolder extends ContextHolder {
      * @return 当前用户ID
      */
     public static String getCurrentUserId() {
-        return getContextOrThrow().getUniqueKey();
+        Context contextOrThrow = getContextOrThrow();
+        return contextOrThrow.getUniqueKey();
     }
 
     /**

@@ -56,6 +56,10 @@ public class DepartmentVO implements Serializable {
      */
     private String departmentPhone;
     /**
+     * 父级ID
+     */
+    private String parentId;
+    /**
      * 子集部门
      */
     private List<DepartmentVO> children;

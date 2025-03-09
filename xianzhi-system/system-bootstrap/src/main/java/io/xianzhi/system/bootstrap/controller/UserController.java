@@ -101,4 +101,14 @@ public class UserController {
         userService.deletedUser(ids);
         return ResponseResult.success();
     }
+
+
+    /**
+     * 获取用户信息
+     *
+     * @return 用户信息
+     */
+    public ResponseResult<UserVO> getUserInfo() {
+        return ResponseResult.success(userService.getUserInfo());
+    }
 }

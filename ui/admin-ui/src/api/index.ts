@@ -189,6 +189,7 @@ const handleResponseSuccess = (response: AxiosResponse) => {
   }
   return response
 }
+const publicPath = ['/oauth2/token']
 
 // 请求拦截器
 instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {

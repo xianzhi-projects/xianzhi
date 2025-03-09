@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 
@@ -43,10 +42,6 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
      */
     private String nickName;
     /**
-     * 用户电话
-     */
-    private String mobileNumber;
-    /**
      * 用户邮箱地址
      */
     private String email;
@@ -54,22 +49,12 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
      * 用户真实姓名
      */
     private String realName;
-    /**
-     * 用户性别 字典值
-     */
-    private String genderCode;
-    /**
-     * 用户生日
-     */
-    private LocalDate birthday;
+
     /**
      * 用户头像
      */
     private String avatar;
-    /**
-     * 用户工号
-     */
-    private String workNumber;
+
     /**
      * 用户域账号
      */
@@ -78,13 +63,10 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
     /**
      * 用户状态 字典值
      */
-    private String statusCode;
+    private String userStatus;
 
 
-    /**
-     * 数据权限编码
-     */
-    private String dataPermission;
+
 
 
     /**
@@ -156,7 +138,7 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return statusCode.equals("01");
+        return userStatus.equals("01");
     }
 
     /**

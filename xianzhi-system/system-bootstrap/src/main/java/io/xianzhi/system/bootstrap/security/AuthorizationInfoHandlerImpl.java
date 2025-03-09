@@ -18,11 +18,14 @@ package io.xianzhi.system.bootstrap.security;
 
 import io.xianzhi.common.oauth2.OAuth2UserDetails;
 import io.xianzhi.common.oauth2.resource.AuthorizationInfoHandler;
+import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -43,6 +46,9 @@ public class AuthorizationInfoHandlerImpl implements AuthorizationInfoHandler {
      */
     @Override
     public Optional<OAuth2UserDetails> loadAuthorizationInfo(Jwt jwt) {
-        return Optional.empty();
+        XianZhiOAuth2UserDetails userDetails = new XianZhiOAuth2UserDetails();
+        userDetails.setId(jwt.getClaim("id"));
+        userDetails.setAuthorities(Collections.singleton(new SimpleGrantedAuthority("**")));
+        return Optional.of(userDetails);
     }
 }

@@ -26,10 +26,13 @@ import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.Collections;
 
 /**
  * 密码方式
@@ -103,8 +106,9 @@ public class PasswordUserDetailsServiceImpl implements XianZhiUserDetailsService
         XianZhiOAuth2UserDetails userDetails = new XianZhiOAuth2UserDetails();
         userDetails.setUsername(username);
         userDetails.setPassword(user.getPassword());
-        userDetails.setStatusCode(user.getUserStatus());
+        userDetails.setUserStatus(user.getUserStatus());
         userDetails.setId(user.getId());
+        userDetails.setAuthorities(Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
         return userDetails;
 
     }

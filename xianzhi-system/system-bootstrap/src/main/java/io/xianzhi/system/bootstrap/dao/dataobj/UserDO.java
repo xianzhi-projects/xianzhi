@@ -31,7 +31,10 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_user")
 @EqualsAndHashCode(callSuper = true)
 public class UserDO extends BaseDO {
-
+    /**
+     * 部门ID
+     */
+    private String departmentId;
     /**
      * 用户名
      */

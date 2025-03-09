@@ -19,23 +19,23 @@ public enum SecurityCode implements Result {
     /**
      * 用户名或密码错误
      */
-    USER_NAME_PASSWORD_ERROR("90000001", "security:username.or.password.error"),
+    USER_NAME_PASSWORD_ERROR("90000001", "用户名或密码错误"),
     /**
      * 账号被禁用
      */
-    ACCOUNT_DISABLED("90000002", "security:account.disabled"),
+    ACCOUNT_DISABLED("90000002", "账号被禁用"),
     /**
      * 账号被锁定
      */
-    ACCOUNT_LOCKED("90000003", "security:account.locked"),
+    ACCOUNT_LOCKED("90000003", "账号被锁定"),
     /**
      * 账号凭证过期
      */
-    ACCOUNT_CREDENTIALS_EXPIRED("90000004", "security:account.credentials.expired"),
+    ACCOUNT_CREDENTIALS_EXPIRED("90000004", "账号凭证过期"),
     /**
      * 验证码错误
      */
-    CAPTCHA_ERROR("90000005", "security:captcha.error"),
+    CAPTCHA_ERROR("90000005", "验证码错误"),
 
     ;
     /**
