@@ -21,4 +21,29 @@
     <select id="selectAllDepartment" resultType="io.xianzhi.system.model.vo.DepartmentVO">
 
     </select>
+
+    <select id="selectDepartmentById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">
+        SELECT * FROM sys_department WHERE id = #{id,jdbcType=VARCHAR} and deleted_flag = 0
+    </select>
+
+    <select id="existsDepartmentByNameAndIdNot" resultType="boolean">
+        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_name = #{departmentName,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if> ),0)
+    </select>
+
+    <select id="existsDepartmentByEmailAndIdNot" resultType="boolean">
+        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_email = #{departmentEmail,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if> ),0)
+    </select>
+
+    <select id="existsDepartmentByPhoneAndIdNot" resultType="boolean">
+        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_phone = #{departmentPhone,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if> ),0)
+    </select>
 </mapper>

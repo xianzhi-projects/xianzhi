@@ -37,7 +37,7 @@
         <a-form-item>
           <a-form-item name="remember" no-style>
             <a-checkbox v-model:checked="passwordLoginDTO.remember" class="x-left"
-              >记住我
+            >记住我
             </a-checkbox>
           </a-form-item>
           <a class="x-right" href="">忘记密码?</a>
@@ -51,25 +51,45 @@
 </template>
 
 <script lang="ts" setup>
+import router from '@/router'
 import {onMounted, reactive, ref, type UnwrapRef} from 'vue'
 import {LockOutlined, UserOutlined} from '@ant-design/icons-vue'
+import {message} from 'ant-design-vue'
+import {passwordLogin, type PasswordLoginDTO} from '@/api/authorization.ts'
 import loginRules from '@/views/authentication/index.ts'
-
+import {useUserStore} from '@/stores/userStore.ts'
+import {getLoginCaptcha} from '@/api/captchaApi.ts'
 
 const formRef = ref()
 const captchaSrc = ref<string>('')
-const passwordLoginDTO = reactive({
+const passwordLoginDTO: UnwrapRef<PasswordLoginDTO> = reactive({
+  remember: false,
   username: '',
   password: '',
-  captcha: '',
+  // captcha: '',
   captchaKey: '',
-  remember: false
-}) as UnwrapRef<typeof passwordLoginDTO>
+})
 /**
  * 登录逻辑
  */
 const handleLogin = () => {
-
+  // 检查字段格式是否合法
+  formRef.value.validate().then(async () => {
+    try {
+      // 密码登录
+      const { data, code, message: str } = await passwordLogin(passwordLoginDTO)
+      if (code === '200' && data) {
+        message.success('登录成功')
+        useUserStore().setUser(data)
+        // 跳转到首页
+        await router.push('/')
+      } else {
+        message.error(str)
+      }
+    } finally {
+      await refreshCaptcha()
+    }
+  })
 }
 /**
  * 当页面加载的时候获取一个新的验证码
@@ -81,7 +101,13 @@ onMounted(() => {
  * 获取验证码
  */
 const refreshCaptcha = async () => {
-
+  const { data } = await getLoginCaptcha()
+  if (data) {
+    captchaSrc.value = data.image
+    passwordLoginDTO.captchaKey = data.key
+  } else {
+    message.error('获取验证码失败')
+  }
 }
 </script>
 

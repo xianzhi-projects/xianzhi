@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 用户信息持久层
@@ -28,4 +31,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<UserDO> {
+
+    /**
+     * 根据ID查询用户信息
+     *
+     * @param id 用户ID
+     * @return 用户信息
+     */
+    Optional<UserDO> selectUserById(@Param("id") String id);
 }

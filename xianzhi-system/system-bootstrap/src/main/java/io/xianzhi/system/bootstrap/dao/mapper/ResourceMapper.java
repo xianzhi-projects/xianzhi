@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO;
+import io.xianzhi.system.model.vo.ResourceVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -46,4 +47,7 @@ public interface ResourceMapper extends BaseMapper<ResourceDO> {
      * @return 资源信息
      */
     Optional<ResourceDO> selectResourceById(@Param("id") String id);
+
+    List<ResourceVO> selectAdminResource();
+
 }

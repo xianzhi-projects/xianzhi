@@ -14,15 +14,29 @@
  *  limitations under the License.
  */
 
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import type {ResponseResult} from '@/api/index'
+import http from '@/api/index'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+/**
+ * 验证码出参
+ */
+export interface CaptchaVO {
+  /**
+   * 唯一标识
+   */
+  key: string
+  /**
+   * Base64编码图片
+   */
+  image: string
+}
 
-  return { count, doubleCount, increment }
-})
+/**
+ * 获取登录验证码
+ */
+export async function getLoginCaptcha(): Promise<ResponseResult<CaptchaVO>> {
+  return http.request({
+    url: '/s/captcha/login',
+    method: 'GET',
+  })
+}

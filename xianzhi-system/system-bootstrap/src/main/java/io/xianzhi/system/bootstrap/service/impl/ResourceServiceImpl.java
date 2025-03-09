@@ -20,6 +20,7 @@ import io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper;
 import io.xianzhi.system.bootstrap.service.ResourceService;
 import io.xianzhi.system.model.dto.ResourceDTO;
 import io.xianzhi.system.model.vo.ResourceVO;
+import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,11 @@ public class ResourceServiceImpl implements ResourceService {
      */
     @Override
     public List<ResourceVO> getCurrentUserResource() {
+        if (UserContextHolder.admin()) {
+            resourceMapper.selectAdminResource();
+        } else {
+
+        }
         return List.of();
     }
 

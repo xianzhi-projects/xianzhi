@@ -45,11 +45,6 @@ public class DepartmentDO extends BaseDO {
      * 部门负责人ID
      */
     private String departmentOwner;
-
-    /**
-     * 部门地址
-     */
-    private String departmentLocation;
     /**
      * 部门邮箱地址
      */

@@ -20,8 +20,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO;
 import io.xianzhi.system.model.vo.DepartmentVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 部门信息持久层
@@ -38,4 +40,38 @@ public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
      * @return 所有部门信息
      */
     List<DepartmentVO> selectAllDepartment();
+
+
+    /**
+     * 根据ID查询部门信息
+     *
+     * @param id 部门ID
+     * @return 部门信息
+     */
+    Optional<DepartmentDO> selectDepartmentById(@Param("id") String id);
+
+    /**
+     * 判断部门名称是否存在
+     *
+     * @param departmentName 部门名称
+     * @param id             部门ID
+     * @return 是否存在
+     */
+    boolean existsDepartmentByNameAndIdNot(@Param("departmentName") String departmentName, @Param("id") String id);
+
+    /**
+     * 判断部门邮箱是否存在
+     * @param departmentEmail 部门邮箱
+     * @param id 部门ID
+     * @return 是否存在
+     */
+    boolean existsDepartmentByEmailAndIdNot(@Param("departmentEmail") String departmentEmail, @Param("id") String id);
+
+    /**
+     * 判断部门电话是否存在
+     * @param departmentPhone 部门电话
+     * @param id 部门ID
+     * @return 是否存在
+     */
+    boolean existsDepartmentByPhoneAndIdNot(@Param("departmentPhone") String departmentPhone, @Param("id") String id);
 }

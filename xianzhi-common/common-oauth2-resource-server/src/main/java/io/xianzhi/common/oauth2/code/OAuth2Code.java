@@ -31,7 +31,7 @@ public enum OAuth2Code implements Result {
     /**
      * 授权类型不支持
      */
-    INVALID_GRANT_TYPE("91000004", "security:grant.type.invalid"),
+    INVALID_GRANT_TYPE("91000004", "授权类型不支持"),
 
     /**
      * 客户端无效

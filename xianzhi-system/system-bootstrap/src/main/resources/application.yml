@@ -92,6 +92,6 @@ xianzhi:
       key-pair-alias: xianzhi
     permit-all-list:
       # 登录接口
-      - /oauth/token
+      - /oauth2/token
       # 登录验证码接口
       - /s/captcha/login

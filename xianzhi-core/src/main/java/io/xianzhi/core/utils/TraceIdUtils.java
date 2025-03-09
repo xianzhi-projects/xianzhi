@@ -16,6 +16,8 @@
 
 package io.xianzhi.core.utils;
 
+import java.util.UUID;
+
 /**
  * TraceId工具类
  *
@@ -30,7 +32,7 @@ public class TraceIdUtils {
      * @return 当前请求的TraceID
      */
     public static String getTraceId() {
-        return "";
+        return System.currentTimeMillis() + UUID.randomUUID().toString().replace("-", "");
     }
 
 }
