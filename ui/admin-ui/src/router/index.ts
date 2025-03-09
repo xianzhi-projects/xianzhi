@@ -26,6 +26,11 @@ const router = createRouter({
       component: Dashboard,
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/authentication/Login.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('@/views/error/404.vue'),
     },
