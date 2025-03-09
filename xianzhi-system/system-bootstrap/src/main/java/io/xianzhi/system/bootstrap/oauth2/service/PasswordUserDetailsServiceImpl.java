@@ -21,7 +21,9 @@ package io.xianzhi.system.bootstrap.oauth2.service;
 
 import io.xianzhi.common.oauth2.authorization.enums.GrantTypeEnum;
 import io.xianzhi.common.redis.RedisHandler;
+import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
+import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -97,8 +99,13 @@ public class PasswordUserDetailsServiceImpl implements XianZhiUserDetailsService
         if (!StringUtils.hasText(username)) {
             throw new UsernameNotFoundException("用户名不能为空");
         }
-
-        return null;
+        UserDO user = userMapper.selectUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户名或者密码错误"));
+        XianZhiOAuth2UserDetails userDetails = new XianZhiOAuth2UserDetails();
+        userDetails.setUsername(username);
+        userDetails.setPassword(user.getPassword());
+        userDetails.setStatusCode(user.getUserStatus());
+        userDetails.setId(user.getId());
+        return userDetails;
 
     }
 }

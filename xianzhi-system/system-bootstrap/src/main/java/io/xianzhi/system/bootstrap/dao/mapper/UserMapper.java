@@ -39,4 +39,22 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return 用户信息
      */
     Optional<UserDO> selectUserById(@Param("id") String id);
+
+    /**
+     * 判断部门ID是否绑定用户
+     *
+     * @param departmentId 部门ID
+     * @return 是否绑定
+     */
+    boolean existsByDepartmentId(@Param("departmentId") String departmentId);
+
+
+    /**
+     * 根据用户名/邮箱/手机号码查询用户信息
+     *
+     * @param username 用户名/邮箱/手机号码
+     * @return 用户信息
+     */
+    Optional<UserDO> selectUserByUsername(@Param("username") String username);
+
 }

@@ -74,4 +74,17 @@ public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
      * @return 是否存在
      */
     boolean existsDepartmentByPhoneAndIdNot(@Param("departmentPhone") String departmentPhone, @Param("id") String id);
+
+    /**
+     * 判断是否存在子部门
+     * @param parentId 父部门ID
+     * @return  是否存在
+     */
+    boolean existsByParentId(@Param("parentId") String parentId);
+
+    /**
+     * 删除部门
+     * @param id 部门ID
+     */
+    void deletedDepartmentById(@Param("id") String id);
 }

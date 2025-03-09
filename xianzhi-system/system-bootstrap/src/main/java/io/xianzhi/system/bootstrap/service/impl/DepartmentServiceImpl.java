@@ -27,10 +27,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -99,61 +97,22 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deletedDepartment(String id) {
-
-    }
-
-    /**
-     * 转换部门信息树
-     *
-     * @param departments 部门信息
-     * @return 部门信息出参
-     */
-    public List<DepartmentVO> convert(List<DepartmentDO> departments) {
-        if (ObjectUtils.isEmpty(departments)) {
-            return Collections.emptyList();
+        if (userMapper.existsByDepartmentId(id)) {
+            throw new BusinessException("部门下存在用户，无法删除");
         }
-        return departments.stream().filter(item -> null == item.getParentId() || "-1".equals(item.getParentId()))
-                .map(item -> {
-                    DepartmentVO vo = convert(item);
-                    vo.setChildren(getChildren(item.getId(), departments));
-                    return vo;
-                }).toList();
+        if (departmentMapper.existsByParentId(id)) {
+            throw new BusinessException("部门下存在子部门，无法删除");
+        }
+        departmentMapper.deletedDepartmentById(id);
     }
+
 
     /**
-     * 获取子集部门
+     * 检查部门信息入参
      *
-     * @param parentId    父级ID
-     * @param departments 部门信息
-     * @return 部门信息出参
+     * @param departmentDTO 部门信息入参
+     * @return 部门信息
      */
-    private List<DepartmentVO> getChildren(String parentId, List<DepartmentDO> departments) {
-        return departments.stream().filter(item -> parentId.equals(item.getParentId()))
-                .map(item -> {
-                    DepartmentVO vo = convert(item);
-                    vo.setChildren(getChildren(item.getId(), departments));
-                    return vo;
-                }).toList();
-    }
-
-    /**
-     * 转换换部门信息出参
-     *
-     * @param department 部门信息
-     * @return 部门信息出参
-     */
-    public DepartmentVO convert(DepartmentDO department) {
-        DepartmentVO vo = new DepartmentVO();
-//        vo.setId(department.getId());
-//        vo.setDepartmentName(department.getDepartmentName());
-//        vo.setDepartmentDesc(department.getDepartmentDesc());
-//        vo.setDepartmentOwner(department.getDepartmentOwner());
-//        vo.setDepartmentEmail(department.getDepartmentEmail());
-//        vo.setDepartmentPhone(department.getDepartmentPhone());
-        return vo;
-    }
-
-
     private DepartmentDO checkedDepartmentDTO(DepartmentDTO departmentDTO) {
         DepartmentDO department;
         if (StringUtils.hasText(departmentDTO.getId())) {
