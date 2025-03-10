@@ -19,7 +19,7 @@
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper">
     <select id="selectAllDepartment" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">
         SELECT *
-        FROM sys_resource
+        FROM sys_department
         where deleted_flag = 0
     </select>
     <select id="selectDepartmentById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">

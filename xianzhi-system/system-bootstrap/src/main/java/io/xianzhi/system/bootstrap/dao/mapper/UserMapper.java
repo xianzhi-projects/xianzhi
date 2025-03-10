@@ -18,9 +18,11 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
+import io.xianzhi.system.model.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -56,5 +58,13 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return 用户信息
      */
     Optional<UserDO> selectUserByUsername(@Param("username") String username);
+
+    /**
+     * 查询简单用户列表，仅包含ID nickName, realName, 用户状态，头像地址
+     *
+     * @param userIds 用户ID
+     * @return 用户列表
+     */
+    List<UserVO> selectSimpleUserList(@Param("userIds") List<String> userIds);
 
 }

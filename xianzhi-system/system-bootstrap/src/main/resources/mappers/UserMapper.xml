@@ -34,4 +34,14 @@
         or
         phone like concat('%',#{username,jdbcType=VARCHAR},'%'))
     </select>
+
+    <select id="selectSimpleUserList" resultType="io.xianzhi.system.model.vo.UserVO">
+        SELECT id, nick_name, real_name, avatar, user_status
+        from sys_user
+        where deleted_flag = 0
+          and id in
+        <foreach collection="userIds" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

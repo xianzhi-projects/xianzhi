@@ -27,27 +27,27 @@ public class MyBatisConstant {
     /**
      * 新增用户
      */
-    public static final String CREATE_BY = "createBy";
+    public static final String CREATE_BY = "create_by";
 
     /**
      * 新增时间
      */
-    public static final String CREATE_AT = "createAt";
+    public static final String CREATE_AT = "create_at";
 
     /**
      * 修改用户
      */
-    public static final String UPDATE_BY = "updateBy";
+    public static final String UPDATE_BY = "update_by";
 
     /**
      * 修改时间
      */
-    public static final String UPDATE_AT = "updateAt";
+    public static final String UPDATE_AT = "update_at";
 
     /**
      * 是否删除
      */
-    public static final String DELETED_FLAG = "deletedFlag";
+    public static final String DELETED_FLAG = "deleted_flag";
 
 
 }

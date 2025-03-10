@@ -71,16 +71,9 @@ public class DepartmentServiceImpl implements DepartmentService {
             return List.of();
         }
         List<String> ownerIds = departments.stream().map(DepartmentDO::getDepartmentOwner).distinct().toList();
-        List<UserVO> owners = userBusiness.getSimpleUserByIds(ownerIds);
+        List<UserVO> owners = userMapper.selectSimpleUserList(ownerIds);
         return departments.stream().filter(item -> null == item.getParentId() || item.getParentId().equals("-1"))
-                .map(item -> {
-                    DepartmentVO vo = convert(item);
-                    if (!ObjectUtils.isEmpty(owners)) {
-                        owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
-                    }
-                    vo.setChildren(getChildren(item.getId(), departments, owners));
-                    return vo;
-                }).toList();
+                .map(item -> convert(item, owners, departments)).toList();
     }
 
 
@@ -144,7 +137,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         // 检查父级部门信息
         if (StringUtils.hasText(departmentDTO.getParentId())) {
-            if (departmentDTO.getId().equals(departmentDTO.getParentId())) {
+            if (StringUtils.hasText(departmentDTO.getId()) && departmentDTO.getId().equals(departmentDTO.getParentId())) {
                 throw new BusinessException("父级部门不能为自己");
             }
             DepartmentDO parent = departmentMapper.selectDepartmentById(departmentDTO.getParentId()).orElseThrow(() -> new BusinessException("父级部门不存在"));
@@ -167,7 +160,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             }
         }
         // 检查部门负责人
-        userMapper.selectUserById(department.getDepartmentOwner()).orElseThrow(() -> new BusinessException("部门负责人不存在"));
+        userMapper.selectUserById(departmentDTO.getDepartmentOwner()).orElseThrow(() -> new BusinessException("部门负责人不存在"));
         department.setDepartmentName(departmentDTO.getDepartmentName());
         department.setDepartmentDesc(departmentDTO.getDepartmentDesc());
         department.setDepartmentOwner(departmentDTO.getDepartmentOwner());
@@ -187,14 +180,17 @@ public class DepartmentServiceImpl implements DepartmentService {
      */
     private List<DepartmentVO> getChildren(String id, List<DepartmentDO> departments, List<UserVO> owners) {
         return departments.stream().filter(item -> null != item.getParentId() && item.getParentId().equals(id))
-                .map(item -> {
-                    DepartmentVO vo = convert(item);
-                    if (!ObjectUtils.isEmpty(owners)) {
-                        owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
-                    }
-                    vo.setChildren(getChildren(item.getId(), departments, owners));
-                    return vo;
-                }).toList();
+                .map(item -> convert(item, owners, departments)).toList();
+    }
+
+
+    private DepartmentVO convert(DepartmentDO item, List<UserVO> owners, List<DepartmentDO> departments) {
+        DepartmentVO vo = convert(item);
+        if (!ObjectUtils.isEmpty(owners)) {
+            owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
+        }
+        vo.setChildren(getChildren(item.getId(), departments, owners));
+        return vo;
     }
 
 
