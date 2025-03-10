@@ -17,12 +17,14 @@
 package io.xianzhi.system.bootstrap.service.impl;
 
 import io.xianzhi.core.exception.BusinessException;
+import io.xianzhi.system.bootstrap.business.UserBusiness;
 import io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.DepartmentService;
 import io.xianzhi.system.model.dto.DepartmentDTO;
 import io.xianzhi.system.model.vo.DepartmentVO;
+import io.xianzhi.system.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -53,6 +55,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final UserMapper userMapper;
 
     /**
+     * 用户业务类
+     */
+    private final UserBusiness userBusiness;
+
+    /**
      * 查询部门树结构信息
      *
      * @return 树信息
@@ -60,11 +67,22 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<DepartmentVO> tree() {
         List<DepartmentDO> departments = departmentMapper.selectAllDepartment();
-        if (ObjectUtils.isEmpty(departments)){
+        if (ObjectUtils.isEmpty(departments)) {
             return List.of();
         }
-        return List.of();
+        List<String> ownerIds = departments.stream().map(DepartmentDO::getDepartmentOwner).distinct().toList();
+        List<UserVO> owners = userBusiness.getSimpleUserByIds(ownerIds);
+        return departments.stream().filter(item -> null == item.getParentId() || item.getParentId().equals("-1"))
+                .map(item -> {
+                    DepartmentVO vo = convert(item);
+                    if (!ObjectUtils.isEmpty(owners)) {
+                        owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
+                    }
+                    vo.setChildren(getChildren(item.getId(), departments, owners));
+                    return vo;
+                }).toList();
     }
+
 
     /**
      * 新增部门信息
@@ -158,4 +176,37 @@ public class DepartmentServiceImpl implements DepartmentService {
         return department;
 
     }
+
+    /**
+     * 获取子集部门信息
+     *
+     * @param id          父级部门ID
+     * @param departments 部门信息
+     * @param owners      负责人信息
+     * @return 子集部门信息
+     */
+    private List<DepartmentVO> getChildren(String id, List<DepartmentDO> departments, List<UserVO> owners) {
+        return departments.stream().filter(item -> null != item.getParentId() && item.getParentId().equals(id))
+                .map(item -> {
+                    DepartmentVO vo = convert(item);
+                    if (!ObjectUtils.isEmpty(owners)) {
+                        owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
+                    }
+                    vo.setChildren(getChildren(item.getId(), departments, owners));
+                    return vo;
+                }).toList();
+    }
+
+
+    public DepartmentVO convert(DepartmentDO departmentDO) {
+        DepartmentVO vo = new DepartmentVO();
+        vo.setId(departmentDO.getId());
+        vo.setDepartmentName(departmentDO.getDepartmentName());
+        vo.setDepartmentDesc(departmentDO.getDepartmentDesc());
+        vo.setDepartmentEmail(departmentDO.getDepartmentEmail());
+        vo.setDepartmentPhone(departmentDO.getDepartmentPhone());
+        return vo;
+
+    }
+
 }
