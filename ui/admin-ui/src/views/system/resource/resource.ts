@@ -15,7 +15,7 @@ const selectedKeys = ref<(string | number)[]>([])
 export async function initTreeData() {
   const response = await resourceTree()
   if (response.data) {
-    treeData.value = response.data.map((resource) => convertTree(resource))
+    treeData.value = response.data.map((item: ResourceVO) => convertTree(item))
     selectedNode.value = treeData.value[0]
     // 默认选中第一个节点
     selectedKeys.value.push(treeData.value[0].key)
@@ -39,12 +39,11 @@ function convertTree(resource: ResourceVO): TreeDataNode {
     menuIcon: resource.menuIcon,
     resourceKey: resource.resourceKey,
     menuComponent: resource.menuComponent,
-    resourceSort: resource.resourceSort,
+    resourceSort: resource.resourceSorted,
     resourceDesc: resource.resourceDesc,
     showFlag: resource.showFlag,
-    enableFlag: resource.enableFlag,
     children: resource.children?.map((child) => convertTree(child)),
   }
 }
 
-export { treeData, selectedNode, selectedKeys }
+export {treeData, selectedNode, selectedKeys}

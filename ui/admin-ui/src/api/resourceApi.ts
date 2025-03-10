@@ -29,6 +29,7 @@ export interface ResourceVO{
   resourceDesc: string,
   resourceType: ResourceType,
   resourceKey: string,
+  resourceSorted: number,
   parentId: string
   menuIcon: string
   menuComponent: string

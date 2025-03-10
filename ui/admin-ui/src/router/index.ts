@@ -142,7 +142,7 @@ function convertResourceToRoute(item: ResourceVO, parentPath: string): RouteReco
       showFlag: item.showFlag,
       resourceType: item.resourceType,
       title: item.resourceDesc,
-      fullPath,
+      fullPath: fullPath,
     } as CustomRouteMeta,
     component: undefined,
     children: [],
