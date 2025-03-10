@@ -31,4 +31,13 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class DictPage extends Page implements Serializable {
+
+    /**
+     * 字典名称或者字典描述
+     */
+    private String dictNameOrDesc;
+    /**
+     * 字典编码
+     */
+    private String dictCode;
 }

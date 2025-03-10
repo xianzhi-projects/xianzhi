@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictDO;
+import io.xianzhi.system.model.page.DictPage;
+import io.xianzhi.system.model.vo.DictVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,6 +62,12 @@ public interface DictMapper extends BaseMapper<DictDO> {
      */
     boolean existsDictByDictNameAndIdNot(@Param("dictName") String dictName, @Param("id") String id);
 
-
-
+    /**
+     * 分页查询字典信息
+     *
+     * @param page     分页条件
+     * @param dictPage 查询条件
+     * @return 字典信息
+     */
+    IPage<DictDO> pageDictList(Page<DictVO> page, @Param("dictPage") DictPage dictPage);
 }

@@ -17,19 +17,35 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.DictMapper">
-
     <select id="selectDictById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DictDO">
-        SELECT * FROM sys_dict WHERE id = #{id,jdbcType=VARCHAR} AND deleted_flag = 0
+        SELECT *
+        FROM sys_dict
+        WHERE id = #{id,jdbcType=VARCHAR}
+          AND deleted_flag = 0
     </select>
 
     <select id="existsDictByDictCode" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_code = #{dictCode,jdbcType=VARCHAR} and deleted_flag = 0 ),0)
+        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_code = #{dictCode,jdbcType=VARCHAR} and deleted_flag = 0), 0)
     </select>
 
     <select id="existsDictByDictNameAndIdNot" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_name = #{dictName,jdbcType=VARCHAR}  and deleted_flag = 0
+        SELECT IFNULL((SELECT 1 FROM sys_dict where dict_name = #{dictName,jdbcType=VARCHAR} and deleted_flag = 0
         <if test="id != null and id != ''">
             and id != #{id,jdbcType=VARCHAR}
-        </if> ),0)
+        </if>
+        ), 0)
+    </select>
+
+    <select id="pageDictList" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DictDO">
+        SELECT id, dict_name, dict_code, dict_desc, create_by, create_at
+        from sys_dict where deleted_flag = 0
+        <if test="dictPage.dictNameOrDesc != null and dictPage.dictNameOrDesc != ''">
+            and (dict_name like concat('%', #{dictPage.dictNameOrDesc,jdbcType=VARCHAR}, '%') or
+                 dict_desc like concat('%', #{dictPage.dictNameOrDesc,jdbcType=VARCHAR}, '%'))
+        </if>
+        <if test="dictPage.dictCode != null and dictPage.dictCode != ''">
+            and dict_code like concat('%', #{dictPage.dictCode,jdbcType=VARCHAR}, '%')
+        </if>
+        order by create_at desc
     </select>
 </mapper>

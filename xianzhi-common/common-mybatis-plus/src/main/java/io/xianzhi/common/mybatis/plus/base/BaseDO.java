@@ -18,11 +18,10 @@ package io.xianzhi.common.mybatis.plus.base;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import io.xianzhi.common.mybatis.plus.MyBatisConstant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 基础实体
@@ -44,7 +43,7 @@ public class BaseDO extends IdDO {
      * 新增时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private Date createAt;
+    private LocalDateTime createAt;
 
     /**
      * 修改用户
@@ -56,11 +55,11 @@ public class BaseDO extends IdDO {
      * 修改时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateAt;
+    private LocalDateTime updateAt;
 
     /**
      * 删除标识
      */
-    @TableField(value = MyBatisConstant.DELETED_FLAG)
+    @TableField(value = "deleted_flag")
     private Boolean deletedFlag;
 }

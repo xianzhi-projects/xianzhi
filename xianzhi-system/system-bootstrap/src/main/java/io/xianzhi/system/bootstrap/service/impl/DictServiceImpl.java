@@ -16,18 +16,22 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictDO;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictItemDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DictItemMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.DictMapper;
+import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.DictService;
 import io.xianzhi.system.model.dto.DictDTO;
 import io.xianzhi.system.model.dto.DictItemDTO;
 import io.xianzhi.system.model.page.DictPage;
 import io.xianzhi.system.model.vo.DictItemVO;
 import io.xianzhi.system.model.vo.DictVO;
+import io.xianzhi.system.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -56,6 +60,10 @@ public class DictServiceImpl implements DictService {
      * 字典项信息持久层
      */
     private final DictItemMapper dictItemMapper;
+    /**
+     * 用户信息持久层
+     */
+    private final UserMapper userMapper;
 
     /**
      * 分页查询字典列表
@@ -65,7 +73,25 @@ public class DictServiceImpl implements DictService {
      */
     @Override
     public ListResult<DictVO> pageDictList(DictPage dictPage) {
-        return null;
+        IPage<DictDO> result = dictMapper.pageDictList(new Page<>(dictPage.getPageNo(), dictPage.getPageSize()), dictPage);
+        List<DictDO> records = result.getRecords();
+        if (ObjectUtils.isEmpty(records)) {
+            return ListResult.empty();
+        }
+        List<String> userIds = records.stream().map(DictDO::getCreateBy).distinct().toList();
+        List<UserVO> users = userMapper.selectSimpleUserList(userIds);
+        List<DictVO> list = records.stream().map(item -> {
+            DictVO dictVO = new DictVO();
+            dictVO.setId(item.getId());
+            dictVO.setDictCode(item.getDictCode());
+            dictVO.setDictName(item.getDictName());
+            dictVO.setDictDesc(item.getDictDesc());
+            dictVO.setCreateBy(users.stream().filter(user -> user.getId().equals(item.getCreateBy())).findFirst().orElse(null));
+            dictVO.setCreateAt(item.getCreateAt());
+            return dictVO;
+        }).toList();
+
+        return ListResult.of(list, result.getTotal());
     }
 
     /**

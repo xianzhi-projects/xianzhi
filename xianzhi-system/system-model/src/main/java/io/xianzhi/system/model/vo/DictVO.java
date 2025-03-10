@@ -19,6 +19,7 @@ package io.xianzhi.system.model.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 字典出参
@@ -28,4 +29,29 @@ import java.io.Serializable;
  */
 @Data
 public class DictVO implements Serializable {
+
+    /**
+     * 字典ID
+     */
+    private String id;
+    /**
+     * 字典名称
+     */
+    private String dictName;
+    /**
+     * 字典描述
+     */
+    private String dictDesc;
+    /**
+     * 字典编码
+     */
+    private String dictCode;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createAt;
+    /**
+     * 新增用户
+     */
+    private UserVO createBy;
 }
