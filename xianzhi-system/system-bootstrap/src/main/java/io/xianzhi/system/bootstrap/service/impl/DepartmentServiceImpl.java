@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -58,14 +59,10 @@ public class DepartmentServiceImpl implements DepartmentService {
      */
     @Override
     public List<DepartmentVO> tree() {
-        List<DepartmentVO> departments = departmentMapper.selectAllDepartment();
-//        if (ObjectUtils.isEmpty(departments)) {
-//            departments.stream().filter(item -> null == item.getParentId() || item.getParentId().equals("-1"))
-//                    .map(item -> {
-//                        item.setChildren(getChildren(item.getId(), departments));
-//                        return item;
-//                    });
-//        }
+        List<DepartmentDO> departments = departmentMapper.selectAllDepartment();
+        if (ObjectUtils.isEmpty(departments)){
+            return List.of();
+        }
         return List.of();
     }
 

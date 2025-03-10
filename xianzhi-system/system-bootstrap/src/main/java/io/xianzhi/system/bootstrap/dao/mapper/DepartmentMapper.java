@@ -18,7 +18,6 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO;
-import io.xianzhi.system.model.vo.DepartmentVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,7 +38,7 @@ public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
      *
      * @return 所有部门信息
      */
-    List<DepartmentVO> selectAllDepartment();
+    List<DepartmentDO> selectAllDepartment();
 
 
     /**

@@ -17,42 +17,59 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper">
-
-    <select id="selectAllDepartment" resultType="io.xianzhi.system.model.vo.DepartmentVO">
-
+    <select id="selectAllDepartment" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">
+        SELECT *
+        FROM sys_resource
+        where deleted_flag = 0
     </select>
-
     <select id="selectDepartmentById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">
-        SELECT * FROM sys_department WHERE id = #{id,jdbcType=VARCHAR} and deleted_flag = 0
+        SELECT *
+        FROM sys_department
+        WHERE id = #{id,jdbcType=VARCHAR}
+          and deleted_flag = 0
     </select>
 
     <select id="existsDepartmentByNameAndIdNot" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_name = #{departmentName,jdbcType=VARCHAR}
+        SELECT IFNULL((SELECT 1
+                       FROM sys_department where deleted_flag = 0
+                                             and department_name = #{departmentName,jdbcType=VARCHAR}
         <if test="id != null and id != ''">
             and id != #{id,jdbcType=VARCHAR}
-        </if> ),0)
+        </if>
+        ), 0)
     </select>
 
     <select id="existsDepartmentByEmailAndIdNot" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_email = #{departmentEmail,jdbcType=VARCHAR}
+        SELECT IFNULL((SELECT 1
+                       FROM sys_department where deleted_flag = 0
+                                             and department_email = #{departmentEmail,jdbcType=VARCHAR}
         <if test="id != null and id != ''">
             and id != #{id,jdbcType=VARCHAR}
-        </if> ),0)
+        </if>
+        ), 0)
     </select>
 
     <select id="existsDepartmentByPhoneAndIdNot" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_department where deleted_flag = 0 and department_phone = #{departmentPhone,jdbcType=VARCHAR}
+        SELECT IFNULL((SELECT 1
+                       FROM sys_department where deleted_flag = 0
+                                             and department_phone = #{departmentPhone,jdbcType=VARCHAR}
         <if test="id != null and id != ''">
             and id != #{id,jdbcType=VARCHAR}
-        </if> ),0)
+        </if>
+        ), 0)
     </select>
 
     <select id="existsByParentId" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_department where parent_id = #{parentId,jdbcType=VARCHAR} and deleted_flag =
-        0),0)
+        SELECT IFNULL((SELECT 1
+                       FROM sys_department
+                       where parent_id = #{parentId,jdbcType=VARCHAR}
+                         and deleted_flag =
+                             0), 0)
     </select>
 
     <update id="deletedDepartmentById">
-        UPDATE sys_department SET deleted_flag = 1 WHERE id = #{id,jdbcType=VARCHAR}
+        UPDATE sys_department
+        SET deleted_flag = 1
+        WHERE id = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>
