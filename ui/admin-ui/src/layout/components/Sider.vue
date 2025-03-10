@@ -22,7 +22,7 @@ onBeforeMount(() => {
   >
     <!-- 侧边栏顶部 Logo 和标题 -->
     <div class="layout-sider-logo">
-      <!-- <img height="32" src="@/assets/logo/logo.png" width="32" /> -->
+       <img height="28" src="@/assets/images/logo.png" width="28" />
       <span v-if="!model.collapsed.value">先知后台管理系统</span>
     </div>
     <!-- 动态菜单 -->
