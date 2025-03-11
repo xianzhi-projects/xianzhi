@@ -67,9 +67,17 @@
         <mybatis.spring.version>3.0.3</mybatis.spring.version>
         <jsch.version>0.2.23</jsch.version>
         <disruptor.version>3.4.2</disruptor.version>
+        <aws.s3.version>2.30.37</aws.s3.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.s3.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--            spring boot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

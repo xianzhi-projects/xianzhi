@@ -24,10 +24,7 @@ import io.xianzhi.system.model.vo.FileVO;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -70,5 +67,11 @@ public class FileController {
     @PostMapping(value = "/deletedFile")
     public ResponseResult<Object> deletedFile(@RequestBody @NotEmpty(message = "文件ID不能为空") List<String> ids) {
         return ResponseResult.success();
+    }
+
+
+    @GetMapping(value = "/getPreUploadUrl")
+    public ResponseResult<String> getPreUploadUrl() {
+        return ResponseResult.success(fileService.getPreUploadUrl());
     }
 }

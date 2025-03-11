@@ -14,27 +14,46 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.service;
+package io.xianzhi.common.oss;
 
-import io.xianzhi.core.result.ListResult;
-import io.xianzhi.system.model.page.FilePage;
-import io.xianzhi.system.model.vo.FileVO;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 
 /**
- * 文件接口
+ * OSS配置类
  *
  * @author Max
  * @since 1.0.0
  */
-public interface FileService {
-    /**
-     * 分页查询文件列表
-     *
-     * @param filePage 分页查询参数
-     * @return 文件列表
-     */
-    ListResult<FileVO> pageFileList(FilePage filePage);
+@Data
+@ConfigurationProperties(prefix = "xianzhi.oss")
+public class OSSProperties {
 
-    String getPreUploadUrl();
+    /**
+     * 访问ID
+     */
+    private String accessKey;
+    /**
+     * 访问密钥
+     */
+    private String accessSecret;
+    /**
+     * 存储空间
+     */
+    private String endpoint;
+
+    /**
+     * 区域
+     */
+    private String region = "us-east-1";
+
+
+
+    /**
+     * 是否使用路径样式访问
+     */
+    private Boolean pathStyleAccess = true;
+
 
 }

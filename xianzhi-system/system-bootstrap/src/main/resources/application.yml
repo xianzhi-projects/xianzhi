@@ -102,3 +102,7 @@ xianzhi:
       - /s/captcha/login
   idempotent:
     enable: false
+  oss:
+    endpoint: http://192.168.50.240:9001/
+    access-key: 32aFDOlYVOAxWp7u
+    access-secret: gO316AfvxcG2JIcgOIWdz2stOEXJdDRb

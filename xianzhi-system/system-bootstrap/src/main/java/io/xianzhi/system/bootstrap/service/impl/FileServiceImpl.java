@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.common.oss.OSSHandler;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.service.FileService;
 import io.xianzhi.system.model.page.FilePage;
@@ -23,6 +24,8 @@ import io.xianzhi.system.model.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
 
 /**
  * 文件接口实现
@@ -34,6 +37,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
+
+    /**
+     * OSS处理
+     */
+    private final OSSHandler ossHandler;
+
     /**
      * 分页查询文件列表
      *
@@ -43,5 +52,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public ListResult<FileVO> pageFileList(FilePage filePage) {
         return null;
+    }
+
+    @Override
+    public String getPreUploadUrl() {
+        return ossHandler.generatePresignedUrlForUpload("xianzhi", "2025/03/11/1.jpg", Duration.ofMinutes(5L));
     }
 }
