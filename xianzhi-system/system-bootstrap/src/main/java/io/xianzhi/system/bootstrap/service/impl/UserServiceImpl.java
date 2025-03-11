@@ -17,6 +17,7 @@
 package io.xianzhi.system.bootstrap.service.impl;
 
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.UserService;
@@ -102,6 +103,16 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserVO getUserInfo() {
+        return null;
+    }
+
+    /**
+     * 检查用户信息入参
+     *
+     * @param userDTO 用户信息入参
+     * @return 用户信息实体
+     */
+    private UserDO checkedUserDTO(UserDTO userDTO) {
         return null;
     }
 

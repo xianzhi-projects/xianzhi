@@ -16,6 +16,12 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.page.LoginLogPage;
+import io.xianzhi.system.model.page.OperationLogPage;
+import io.xianzhi.system.model.vo.LoginLogVO;
+import io.xianzhi.system.model.vo.OperationLogVO;
+
 /**
  * 日志接口
  *
@@ -23,4 +29,32 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface LogService {
+
+    /**
+     * 分页查询操作日志列表
+     * @param operationLogPage 操作日志查询条件
+     * @return 操作日志列表
+     */
+    ListResult<OperationLogVO> pageOperationLogList(OperationLogPage operationLogPage);
+
+    /**
+     * 查询操作日志详情
+     * @param id 操作日志ID
+     * @return 操作日志详情
+     */
+    OperationLogVO getOperationLogDetails(String id);
+
+    /**
+     * 分页查询登录日志列表
+     * @param loginLogPage 登录日志查询条件
+     * @return 登录日志列表
+     */
+    ListResult<LoginLogVO> pageLoginLogList(LoginLogPage loginLogPage);
+
+    /**
+     * 查询登录日志详情
+     * @param id 登录日志ID
+     * @return 登录日志详情
+     */
+    LoginLogVO getLoginLogDetails(String id);
 }
