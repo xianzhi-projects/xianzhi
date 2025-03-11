@@ -16,11 +16,24 @@
 
 package io.xianzhi.code.bootstrap.controller;
 
+import io.xianzhi.code.bootstrap.service.TagService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * Tag接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/c/tag")
 public class TagController {
+
+    /**
+     * Tag接口
+     */
+    private final TagService tagService;
 }

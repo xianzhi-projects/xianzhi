@@ -16,11 +16,16 @@
 
 package io.xianzhi.code.bootstrap.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO;
+import org.apache.ibatis.annotations.Mapper;
+
 /**
  * 项目信息持久层
  *
  * @author Max
  * @since 1.0.0
  */
-public interface ProjectMapper {
+@Mapper
+public interface ProjectMapper extends BaseMapper<ProjectDO> {
 }

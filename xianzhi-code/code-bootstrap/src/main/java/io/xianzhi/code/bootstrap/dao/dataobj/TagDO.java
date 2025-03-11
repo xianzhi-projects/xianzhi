@@ -14,25 +14,17 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.controller;
+package io.xianzhi.code.bootstrap.dao.dataobj;
 
-import io.xianzhi.code.bootstrap.service.ProjectGroupService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.xianzhi.common.mybatis.plus.base.BaseDO;
+import lombok.Data;
 
 /**
- * 项目分组接口
+ * Tag实体
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/c/projectGroup")
-public class ProjectGroupController {
-    /**
-     * 项目分组接口
-     */
-    private final ProjectGroupService projectGroupService;
+@Data
+public class TagDO extends BaseDO {
 }

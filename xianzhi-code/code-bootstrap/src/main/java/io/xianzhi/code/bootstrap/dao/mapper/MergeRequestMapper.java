@@ -14,25 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.controller;
+package io.xianzhi.code.bootstrap.dao.mapper;
 
-import io.xianzhi.code.bootstrap.service.ProjectGroupService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.code.bootstrap.dao.dataobj.MergeRequestDO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 项目分组接口
+ * MR持久层
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/c/projectGroup")
-public class ProjectGroupController {
-    /**
-     * 项目分组接口
-     */
-    private final ProjectGroupService projectGroupService;
+@Mapper
+public interface MergeRequestMapper extends BaseMapper<MergeRequestDO> {
 }

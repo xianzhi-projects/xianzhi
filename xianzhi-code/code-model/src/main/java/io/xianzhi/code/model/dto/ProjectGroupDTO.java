@@ -14,25 +14,13 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.controller;
-
-import io.xianzhi.code.bootstrap.service.ProjectGroupService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+package io.xianzhi.code.model.dto;
 
 /**
- * 项目分组接口
+ * 项目分组实体
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/c/projectGroup")
-public class ProjectGroupController {
-    /**
-     * 项目分组接口
-     */
-    private final ProjectGroupService projectGroupService;
+public class ProjectGroupDTO {
 }

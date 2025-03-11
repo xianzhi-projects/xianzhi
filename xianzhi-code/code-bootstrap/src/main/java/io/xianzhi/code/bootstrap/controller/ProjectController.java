@@ -16,11 +16,24 @@
 
 package io.xianzhi.code.bootstrap.controller;
 
+import io.xianzhi.code.bootstrap.service.ProjectService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * 项目接口
  *
  * @author Max
  * @since 1.0.0
  */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/c/project")
 public class ProjectController {
+
+    /**
+     * 项目信息接口
+     */
+    private final ProjectService projectService;
 }

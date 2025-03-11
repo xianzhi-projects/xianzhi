@@ -14,25 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.controller;
+package io.xianzhi.code.bootstrap.service.impl;
 
-import io.xianzhi.code.bootstrap.service.ProjectGroupService;
+import io.xianzhi.code.bootstrap.service.LabelService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 项目分组接口
+ * label接口实现
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
+@Slf4j
+@Service
 @RequiredArgsConstructor
-@RequestMapping(value = "/c/projectGroup")
-public class ProjectGroupController {
-    /**
-     * 项目分组接口
-     */
-    private final ProjectGroupService projectGroupService;
+public class LabelServiceImpl implements LabelService {
 }
