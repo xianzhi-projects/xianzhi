@@ -16,6 +16,11 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.AgentDTO;
+import io.xianzhi.code.model.page.AgentPage;
+import io.xianzhi.code.model.vo.AgentVO;
+import io.xianzhi.core.result.ListResult;
+
 /**
  * agent接口
  *
@@ -23,4 +28,33 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface AgentService {
+    /**
+     * 分页查询agent列表
+     *
+     * @param agentPage 分页查询参数
+     * @return agent列表
+     */
+    ListResult<AgentVO> pageAgentList(AgentPage agentPage);
+
+    /**
+     * 薪资agent
+     *
+     * @param agentDTO agent入参
+     * @return 响应信息
+     */
+    String createAgent(AgentDTO agentDTO);
+
+    /**
+     * 更新agent
+     *
+     * @param agentDTO agent入参
+     */
+    void updateAgent(AgentDTO agentDTO);
+
+    /**
+     * 删除agent
+     *
+     * @param id agentID
+     */
+    void deletedAgent(String id);
 }

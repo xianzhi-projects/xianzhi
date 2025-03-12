@@ -14,21 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.service.impl;
+package io.xianzhi.code.model.dto;
 
-import io.xianzhi.code.bootstrap.service.AgentGroupService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * agent分组接口实现
+ * agent如此那
  *
  * @author Max
  * @since 1.0.0
  */
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class AgentGroupServiceImpl implements AgentGroupService {
+@Data
+public class AgentDTO implements Serializable {
 }

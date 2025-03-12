@@ -16,7 +16,13 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import io.xianzhi.code.bootstrap.dao.mapper.AgentGroupMapper;
+import io.xianzhi.code.bootstrap.dao.mapper.AgentMapper;
 import io.xianzhi.code.bootstrap.service.AgentService;
+import io.xianzhi.code.model.dto.AgentDTO;
+import io.xianzhi.code.model.page.AgentPage;
+import io.xianzhi.code.model.vo.AgentVO;
+import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +37,55 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AgentServiceImpl implements AgentService {
+    /**
+     * agent持久层
+     */
+    private final AgentMapper agentMapper;
+
+    /**
+     * agent 分组持久层
+     */
+    private final AgentGroupMapper agentGroupMapper;
+
+    /**
+     * 分页查询agent列表
+     *
+     * @param agentPage 分页查询参数
+     * @return agent列表
+     */
+    @Override
+    public ListResult<AgentVO> pageAgentList(AgentPage agentPage) {
+        return null;
+    }
+
+    /**
+     * 薪资agent
+     *
+     * @param agentDTO agent入参
+     * @return 响应信息
+     */
+    @Override
+    public String createAgent(AgentDTO agentDTO) {
+        return "";
+    }
+
+    /**
+     * 更新agent
+     *
+     * @param agentDTO agent入参
+     */
+    @Override
+    public void updateAgent(AgentDTO agentDTO) {
+
+    }
+
+    /**
+     * 删除agent
+     *
+     * @param id agentID
+     */
+    @Override
+    public void deletedAgent(String id) {
+
+    }
 }
