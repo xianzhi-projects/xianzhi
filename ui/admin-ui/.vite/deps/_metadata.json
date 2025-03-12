@@ -1,0 +1,40 @@
+{
+  "hash": "d8be2beb",
+  "configHash": "60983985",
+  "lockfileHash": "01b82a2e",
+  "browserHash": "fc99f60a",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/.pnpm/vue@3.5.13_typescript@5.7.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "daaaf82a",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/.pnpm/pinia@3.0.1_typescript@5.7.3_vue@3.5.13_typescript@5.7.3_/node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "d933940f",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/.pnpm/vue-router@4.5.0_vue@3.5.13_typescript@5.7.3_/node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "0aaa9685",
+      "needsInterop": false
+    },
+    "nprogress": {
+      "src": "../../node_modules/.pnpm/nprogress@0.2.0/node_modules/nprogress/nprogress.js",
+      "file": "nprogress.js",
+      "fileHash": "2a0f7e49",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-XQJJI4VF": {
+      "file": "chunk-XQJJI4VF.js"
+    },
+    "chunk-BUSYA2B4": {
+      "file": "chunk-BUSYA2B4.js"
+    }
+  }
+}
