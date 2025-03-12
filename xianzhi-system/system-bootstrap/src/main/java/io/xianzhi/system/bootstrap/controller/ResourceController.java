@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
@@ -73,6 +74,7 @@ public class ResourceController {
      * @param resourceDTO 资源信息入参
      * @return 资源ID
      */
+    @Idempotent
     @PreAuthorize("@xz.hasPermission('system:resource:create')")
     @PostMapping(value = "/createResource")
     public ResponseResult<String> createResource(@RequestBody @Validated(value = CreateGroup.class) ResourceDTO resourceDTO) {

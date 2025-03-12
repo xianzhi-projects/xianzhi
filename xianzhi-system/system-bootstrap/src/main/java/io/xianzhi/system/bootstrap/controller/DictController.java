@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
@@ -69,6 +70,7 @@ public class DictController {
      * @param dictDTO 字典信息入参
      * @return 字典ID
      */
+    @Idempotent
     @PreAuthorize("@xz.hasPermission('system:dict:create')")
     @PostMapping(value = "/createDict")
     public ResponseResult<String> createDict(@RequestBody @Validated(value = CreateGroup.class) DictDTO dictDTO) {
@@ -119,6 +121,7 @@ public class DictController {
      * @param dictItemDTO 字典项信息入参
      * @return 字典项ID
      */
+    @Idempotent
     @PreAuthorize("@xz.hasPermission('system:dict:item:create')")
     @PostMapping(value = "/creteDictItem")
     public ResponseResult<String> creteDictItem(@RequestBody @Validated(value = CreateGroup.class) DictItemDTO dictItemDTO) {

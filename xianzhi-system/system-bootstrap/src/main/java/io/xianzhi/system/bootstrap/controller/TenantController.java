@@ -16,13 +16,19 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.idempotent.annotations.Idempotent;
+import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import io.xianzhi.system.bootstrap.service.TenantService;
+import io.xianzhi.system.model.dto.TenantDTO;
+import io.xianzhi.system.model.page.TenantPage;
 import io.xianzhi.system.model.vo.TenantVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,5 +56,42 @@ public class TenantController {
     @GetMapping("/getUserTenantList")
     public ResponseResult<List<TenantVO>> getUserTenantList() {
         return ResponseResult.success(tenantService.getUserTenantList());
+    }
+
+    /**
+     * 分页查询租户列表
+     *
+     * @param tenantPage 租户查询条件
+     * @return 租户列表
+     */
+    @PreAuthorize("@xz.hasPermission('system:tenant:list')")
+    @PostMapping(value = "/pageTenantList")
+    public ResponseResult<ListResult<TenantVO>> pageTenantList(TenantPage tenantPage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 创建租户
+     *
+     * @param tenantDTO 租户信息入参
+     * @return 租户ID
+     */
+    @Idempotent
+    @PreAuthorize("@xz.hasPermission('system:tenant:create')")
+    @PostMapping(value = "/createTenant")
+    public ResponseResult<String> createTenant(@RequestBody @Validated(value = CreateGroup.class) TenantDTO tenantDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 修改租户
+     *
+     * @param tenantDTO 租户信息入参
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('system:tenant:update')")
+    @PostMapping(value = "/updateTenant")
+    public ResponseResult<Object> updateTenant(@RequestBody @Validated(value = UpdateGroup.class) TenantDTO tenantDTO) {
+        return ResponseResult.success();
     }
 }

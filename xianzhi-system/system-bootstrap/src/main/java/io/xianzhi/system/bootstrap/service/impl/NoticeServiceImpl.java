@@ -17,6 +17,7 @@
 package io.xianzhi.system.bootstrap.service.impl;
 
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO;
 import io.xianzhi.system.bootstrap.dao.mapper.NoticeMapper;
 import io.xianzhi.system.bootstrap.service.NoticeService;
 import io.xianzhi.system.model.dto.NoticeDTO;
@@ -88,5 +89,10 @@ public class NoticeServiceImpl implements NoticeService {
     @Transactional(rollbackFor = Exception.class)
     public void deletedNotice(List<String> ids) {
 
+    }
+
+
+    private NoticeDO checkedNoticeDTO(NoticeDTO noticeDTO) {
+        return null;
     }
 }
