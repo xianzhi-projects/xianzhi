@@ -16,6 +16,9 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.TenantDTO;
+import io.xianzhi.system.model.page.TenantPage;
 import io.xianzhi.system.model.vo.TenantVO;
 
 import java.util.List;
@@ -34,4 +37,26 @@ public interface TenantService {
      */
     List<TenantVO> getUserTenantList();
 
+    /**
+     * 分页查询租户列表
+     *
+     * @param tenantPage 租户查询条件
+     * @return 租户列表
+     */
+    ListResult<TenantVO> pageTenantList(TenantPage tenantPage);
+
+    /**
+     * 创建租户
+     *
+     * @param tenantDTO 租户信息入参
+     * @return 租户ID
+     */
+    String createTenant(TenantDTO tenantDTO);
+
+    /**
+     * 修改租户
+     *
+     * @param tenantDTO 租户信息入参
+     */
+    void updateTenant(TenantDTO tenantDTO);
 }

@@ -66,8 +66,8 @@ public class TenantController {
      */
     @PreAuthorize("@xz.hasPermission('system:tenant:list')")
     @PostMapping(value = "/pageTenantList")
-    public ResponseResult<ListResult<TenantVO>> pageTenantList(TenantPage tenantPage) {
-        return ResponseResult.success();
+    public ResponseResult<ListResult<TenantVO>> pageTenantList(@RequestBody TenantPage tenantPage) {
+        return ResponseResult.success(tenantService.pageTenantList(tenantPage));
     }
 
     /**
@@ -80,7 +80,7 @@ public class TenantController {
     @PreAuthorize("@xz.hasPermission('system:tenant:create')")
     @PostMapping(value = "/createTenant")
     public ResponseResult<String> createTenant(@RequestBody @Validated(value = CreateGroup.class) TenantDTO tenantDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(tenantService.createTenant(tenantDTO));
     }
 
     /**
@@ -92,6 +92,7 @@ public class TenantController {
     @PreAuthorize("@xz.hasPermission('system:tenant:update')")
     @PostMapping(value = "/updateTenant")
     public ResponseResult<Object> updateTenant(@RequestBody @Validated(value = UpdateGroup.class) TenantDTO tenantDTO) {
+        tenantService.updateTenant(tenantDTO);
         return ResponseResult.success();
     }
 }

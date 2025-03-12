@@ -16,7 +16,11 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.TenantMapper;
 import io.xianzhi.system.bootstrap.service.TenantService;
+import io.xianzhi.system.model.dto.TenantDTO;
+import io.xianzhi.system.model.page.TenantPage;
 import io.xianzhi.system.model.vo.TenantVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +38,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TenantServiceImpl implements TenantService {
+
+    /**
+     * 租户接口
+     */
+    private final TenantMapper tenantMapper;
     /**
      * 查询用户租户信息
      *
@@ -42,5 +51,37 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public List<TenantVO> getUserTenantList() {
         return List.of();
+    }
+
+    /**
+     * 分页查询租户列表
+     *
+     * @param tenantPage 租户查询条件
+     * @return 租户列表
+     */
+    @Override
+    public ListResult<TenantVO> pageTenantList(TenantPage tenantPage) {
+        return null;
+    }
+
+    /**
+     * 创建租户
+     *
+     * @param tenantDTO 租户信息入参
+     * @return 租户ID
+     */
+    @Override
+    public String createTenant(TenantDTO tenantDTO) {
+        return "";
+    }
+
+    /**
+     * 修改租户
+     *
+     * @param tenantDTO 租户信息入参
+     */
+    @Override
+    public void updateTenant(TenantDTO tenantDTO) {
+
     }
 }
