@@ -36,7 +36,6 @@ public class DepartmentDO extends BaseDO {
      * 部门名称
      */
     private String departmentName;
-
     /**
      * 部门描述
      */

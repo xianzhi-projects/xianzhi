@@ -353,149 +353,6 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "c_issues",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "主键ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "project_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "项目ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "project_id"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "id",
-                  "keyLength": 0,
-                  "order": "ASC",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_issues_c_project_1",
-                "fields": [
-                  "project_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "c_project",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
             "name": "c_tag",
             "comment": "tag信息表",
             "engine": "",
@@ -618,149 +475,6 @@
               {
                 "objectType": "ForeignKey_MYSQL",
                 "name": "fk_c_tag_c_project_1",
-                "fields": [
-                  "project_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "c_project",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "c_merge_request",
-            "comment": "合并请求ID",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "主键ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "project_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "项目ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "project_id"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "id",
-                  "keyLength": 0,
-                  "order": "ASC",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_merge_request_c_project_1",
                 "fields": [
                   "project_id"
                 ],
@@ -9466,149 +9180,6 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "c_project_group",
-            "comment": "项目分组",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "主键ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "tenant_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "租户ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "tenant_id"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "id",
-                  "keyLength": 0,
-                  "order": "ASC",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_project_group_sys_tenant_1",
-                "fields": [
-                  "tenant_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "sys_tenant",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
             "name": "l_iteration",
             "comment": "迭代信息表",
             "engine": "",
@@ -9831,235 +9402,6 @@
                 ],
                 "referenceSchema": "default",
                 "referenceTable": "l_app",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "checks": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "c_project",
-            "comment": "项目信息表",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "主键ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "owner_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "所有者",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "owner_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "tenant_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "租户ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "tenant_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "project_group_id",
-                "type": "varchar",
-                "length": 20,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "分组ID",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "project_group_id"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "id",
-                  "keyLength": 0,
-                  "order": "ASC",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_project_sys_user_1",
-                "fields": [
-                  "owner_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "sys_user",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_project_c_project_group_1",
-                "fields": [
-                  "project_group_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "c_project_group",
-                "referenceFields": [
-                  "id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_c_project_sys_tenant_1",
-                "fields": [
-                  "tenant_id"
-                ],
-                "referenceSchema": "default",
-                "referenceTable": "sys_tenant",
                 "referenceFields": [
                   "id"
                 ],
@@ -10580,6 +9922,1600 @@
             "checks": [],
             "triggers": [],
             "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "c_issues",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "主键ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "project_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "项目ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "project_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "issues_title",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "issues标题",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "issues_title"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "issues_desc",
+                "type": "text",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "issues内容",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "issues_desc"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "issuse_status",
+                "type": "varchar",
+                "length": 32,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "issues状态",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "issuse_status"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "issuse_label_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "label",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "issuse_label_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "deleted_flag",
+                "type": "tinyint",
+                "length": 1,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "是否删除",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "deleted_flag"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_at"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_at"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "id",
+                  "keyLength": 0,
+                  "order": "ASC",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_issues_c_project_1",
+                "fields": [
+                  "project_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "c_project",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "c_project",
+            "comment": "项目信息表",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "主键ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "owner_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "所有者",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "owner_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "tenant_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "租户ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "tenant_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "project_group_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "分组ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "project_group_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "project_name",
+                "type": "varchar",
+                "length": 64,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "项目名称",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "project_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "project_desc",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "项目描述",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "project_desc"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "deleted_flag",
+                "type": "tinyint",
+                "length": 1,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "0",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "是否删除",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "deleted_flag"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_at"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_at"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "id",
+                  "keyLength": 0,
+                  "order": "ASC",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_project_sys_user_1",
+                "fields": [
+                  "owner_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "sys_user",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_project_c_project_group_1",
+                "fields": [
+                  "project_group_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "c_project_group",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_project_sys_tenant_1",
+                "fields": [
+                  "tenant_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "sys_tenant",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "c_merge_request",
+            "comment": "合并请求ID",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "主键ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "project_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "项目ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "project_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mr_title",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "标题",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mr_title"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mr_desc",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "描述",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mr_desc"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "source_branch_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "源分支",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "source_branch_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "traget_branch_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "目标分支",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "traget_branch_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mr_status",
+                "type": "varchar",
+                "length": 32,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "MR状态",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mr_status"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "deleted_flag",
+                "type": "tinyint",
+                "length": 1,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "0",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "是否删除",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "deleted_flag"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_at"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_at"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "id",
+                  "keyLength": 0,
+                  "order": "ASC",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_merge_request_c_project_1",
+                "fields": [
+                  "project_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "c_project",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "c_project_group",
+            "comment": "项目分组",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "主键ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "tenant_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "租户ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "tenant_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "group_name",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "分组名称",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "group_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "group_path",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "分组路径",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "group_path"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "parent_id",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "上级分组ID",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "parent_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "group_desc",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "分组描述",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "group_desc"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "group_logo",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "分组logo",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "group_logo"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "deleted_flag",
+                "type": "tinyint",
+                "length": 1,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "0",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "是否删除",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "deleted_flag"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "create_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "新增时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "create_at"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_by",
+                "type": "varchar",
+                "length": 20,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改用户",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_by"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "update_at",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "修改时间",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "update_at"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "id",
+                  "keyLength": 0,
+                  "order": "ASC",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_c_project_group_sys_tenant_1",
+                "fields": [
+                  "tenant_id"
+                ],
+                "referenceSchema": "default",
+                "referenceTable": "sys_tenant",
+                "referenceFields": [
+                  "id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "checks": [],
+            "triggers": [],
+            "tablePartitions": []
           }
         ],
         "views": []
@@ -10589,7 +11525,7 @@
   "diagrams": [
     {
       "name": "Diagram 1",
-      "paperWidth": 3,
+      "paperWidth": 4,
       "paperHeight": 2,
       "tableFont": "Arial Unicode MS",
       "tableFontSize": 14,
@@ -10604,7 +11540,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_user",
-          "x": 2840,
+          "x": 2960,
           "y": 940,
           "width": 296,
           "height": 408,
@@ -10620,7 +11556,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_role",
-          "x": 1220,
+          "x": 1270,
           "y": 80,
           "width": 263,
           "height": 303,
@@ -10636,7 +11572,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_resource",
-          "x": 580,
+          "x": 630,
           "y": 30,
           "width": 296,
           "height": 408,
@@ -10653,7 +11589,7 @@
           "schemaName": "default",
           "tableName": "sys_dict",
           "x": 1970,
-          "y": 2030,
+          "y": 2110,
           "width": 250,
           "height": 261,
           "isBold": false,
@@ -10669,7 +11605,7 @@
           "schemaName": "default",
           "tableName": "sys_dict_item",
           "x": 1670,
-          "y": 2030,
+          "y": 2110,
           "width": 263,
           "height": 261,
           "isBold": false,
@@ -10684,7 +11620,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "l_app",
-          "x": 2280,
+          "x": 2390,
           "y": 290,
           "width": 300,
           "height": 366,
@@ -10700,7 +11636,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "l_iteration",
-          "x": 2290,
+          "x": 2400,
           "y": 700,
           "width": 274,
           "height": 177,
@@ -10716,8 +11652,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_department",
-          "x": 3190,
-          "y": 1030,
+          "x": 3360,
+          "y": 1050,
           "width": 317,
           "height": 324,
           "isBold": false,
@@ -10733,7 +11669,7 @@
           "schemaName": "default",
           "tableName": "sys_template",
           "x": 1310,
-          "y": 2040,
+          "y": 2110,
           "width": 293,
           "height": 282,
           "isBold": false,
@@ -10749,7 +11685,7 @@
           "schemaName": "default",
           "tableName": "sys_notice",
           "x": 910,
-          "y": 2040,
+          "y": 2110,
           "width": 335,
           "height": 303,
           "isBold": false,
@@ -10764,7 +11700,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_post",
-          "x": 2860,
+          "x": 2970,
           "y": 1680,
           "width": 267,
           "height": 282,
@@ -10780,7 +11716,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_user_post",
-          "x": 2870,
+          "x": 2980,
           "y": 1390,
           "width": 248,
           "height": 240,
@@ -10797,9 +11733,9 @@
           "schemaName": "default",
           "tableName": "c_project",
           "x": 370,
-          "y": 1520,
-          "width": 270,
-          "height": 156,
+          "y": 1400,
+          "width": 370,
+          "height": 290,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -10812,10 +11748,10 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_project_group",
-          "x": 1620,
-          "y": 1050,
-          "width": 229,
-          "height": 114,
+          "x": 1680,
+          "y": 1020,
+          "width": 340,
+          "height": 320,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -10828,10 +11764,10 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_merge_request",
-          "x": 390,
-          "y": 1720,
-          "width": 232,
-          "height": 114,
+          "x": 380,
+          "y": 1740,
+          "width": 360,
+          "height": 310,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -10844,8 +11780,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_project_member",
-          "x": 1910,
-          "y": 1270,
+          "x": 2010,
+          "y": 1250,
           "width": 232,
           "height": 135,
           "isBold": false,
@@ -10860,8 +11796,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_web_hooks",
-          "x": 1280,
-          "y": 1080,
+          "x": 1330,
+          "y": 1050,
           "width": 294,
           "height": 114,
           "isBold": false,
@@ -10877,7 +11813,7 @@
           "schemaName": "default",
           "tableName": "l_agent",
           "x": 2300,
-          "y": 2030,
+          "y": 2110,
           "width": 264,
           "height": 114,
           "isBold": false,
@@ -10893,7 +11829,7 @@
           "schemaName": "default",
           "tableName": "c_tag",
           "x": 30,
-          "y": 1540,
+          "y": 1480,
           "width": 232,
           "height": 114,
           "isBold": false,
@@ -10909,9 +11845,9 @@
           "schemaName": "default",
           "tableName": "c_issues",
           "x": 300,
-          "y": 530,
-          "width": 232,
-          "height": 93,
+          "y": 330,
+          "width": 270,
+          "height": 280,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -10924,8 +11860,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_label",
-          "x": 1960,
-          "y": 1620,
+          "x": 2020,
+          "y": 1600,
           "width": 266,
           "height": 135,
           "isBold": false,
@@ -10940,8 +11876,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_issues_label",
-          "x": 290,
-          "y": 340,
+          "x": 320,
+          "y": 140,
           "width": 241,
           "height": 135,
           "isBold": false,
@@ -10956,8 +11892,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_branch",
-          "x": 540,
-          "y": 670,
+          "x": 610,
+          "y": 660,
           "width": 232,
           "height": 114,
           "isBold": false,
@@ -10972,8 +11908,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_commit",
-          "x": 1970,
-          "y": 1450,
+          "x": 2020,
+          "y": 1430,
           "width": 232,
           "height": 114,
           "isBold": false,
@@ -10988,8 +11924,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "c_project_group_member",
-          "x": 1900,
-          "y": 1030,
+          "x": 2010,
+          "y": 1000,
           "width": 294,
           "height": 135,
           "isBold": false,
@@ -11005,7 +11941,7 @@
           "schemaName": "default",
           "tableName": "l_agent_group",
           "x": 2630,
-          "y": 2040,
+          "y": 2110,
           "width": 189,
           "height": 104,
           "isBold": false,
@@ -11021,7 +11957,7 @@
           "schemaName": "default",
           "tableName": "sys_file",
           "x": 510,
-          "y": 2040,
+          "y": 2110,
           "width": 330,
           "height": 345,
           "isBold": false,
@@ -11036,8 +11972,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_user_details",
-          "x": 3190,
-          "y": 600,
+          "x": 3300,
+          "y": 630,
           "width": 323,
           "height": 324,
           "isBold": false,
@@ -11053,7 +11989,7 @@
           "schemaName": "default",
           "tableName": "sys_login_log",
           "x": 2890,
-          "y": 2040,
+          "y": 2110,
           "width": 189,
           "height": 104,
           "isBold": false,
@@ -11068,7 +12004,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_operation_log",
-          "x": 2840,
+          "x": 2960,
           "y": 480,
           "width": 301,
           "height": 408,
@@ -11085,7 +12021,7 @@
           "schemaName": "default",
           "tableName": "l_host",
           "x": 3150,
-          "y": 2040,
+          "y": 2110,
           "width": 189,
           "height": 104,
           "isBold": false,
@@ -11100,7 +12036,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "l_iteration_member",
-          "x": 2310,
+          "x": 2420,
           "y": 930,
           "width": 248,
           "height": 219,
@@ -11116,7 +12052,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_role_resource",
-          "x": 930,
+          "x": 970,
           "y": 110,
           "width": 248,
           "height": 240,
@@ -11133,7 +12069,7 @@
           "schemaName": "default",
           "tableName": "sys_task",
           "x": 320,
-          "y": 2560,
+          "y": 2630,
           "width": 189,
           "height": 104,
           "isBold": false,
@@ -11149,7 +12085,7 @@
           "schemaName": "default",
           "tableName": "sys_task_log",
           "x": 30,
-          "y": 2550,
+          "y": 2630,
           "width": 217,
           "height": 114,
           "isBold": false,
@@ -11165,7 +12101,7 @@
           "schemaName": "default",
           "tableName": "sys_mail_config",
           "x": 890,
-          "y": 2560,
+          "y": 2630,
           "width": 189,
           "height": 104,
           "isBold": false,
@@ -11181,7 +12117,7 @@
           "schemaName": "default",
           "tableName": "sys_mail_log",
           "x": 580,
-          "y": 2550,
+          "y": 2630,
           "width": 242,
           "height": 114,
           "isBold": false,
@@ -11197,7 +12133,7 @@
           "schemaName": "default",
           "tableName": "sys_oauth2_client",
           "x": 30,
-          "y": 2040,
+          "y": 2110,
           "width": 406,
           "height": 450,
           "isBold": false,
@@ -11212,8 +12148,8 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_tenant",
-          "x": 1600,
-          "y": 700,
+          "x": 1650,
+          "y": 690,
           "width": 277,
           "height": 282,
           "isBold": false,
@@ -11228,7 +12164,7 @@
           "type": "table",
           "schemaName": "default",
           "tableName": "sys_tenant_user_role",
-          "x": 1540,
+          "x": 1590,
           "y": 100,
           "width": 248,
           "height": 261,
@@ -11251,21 +12187,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 3350,
-              "y": 939
+              "x": 3470,
+              "y": 969
             },
             {
-              "x": 3350,
-              "y": 980
+              "x": 3470,
+              "y": 1000
             },
             {
-              "x": 3151,
-              "y": 980
+              "x": 3271,
+              "y": 1000
             }
           ],
           "label": {
-            "x": 3200,
-            "y": 888,
+            "x": 3320,
+            "y": 918,
             "width": 208,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11289,17 +12225,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 3151,
-              "y": 1190
+              "x": 3271,
+              "y": 1140
             },
             {
-              "x": 3175,
-              "y": 1190
+              "x": 3345,
+              "y": 1140
             }
           ],
           "label": {
-            "x": 3141,
-            "y": 1151,
+            "x": 3261,
+            "y": 1101,
             "width": 205,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11323,25 +12259,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2595,
-              "y": 610
+              "x": 2705,
+              "y": 600
             },
             {
-              "x": 2730,
-              "y": 610
+              "x": 2840,
+              "y": 600
             },
             {
-              "x": 2730,
-              "y": 1030
+              "x": 2840,
+              "y": 1020
             },
             {
-              "x": 2825,
-              "y": 1030
+              "x": 2945,
+              "y": 1020
             }
           ],
           "label": {
-            "x": 2591,
-            "y": 581,
+            "x": 2701,
+            "y": 571,
             "width": 138,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11365,25 +12301,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2579,
-              "y": 840
+              "x": 2689,
+              "y": 820
             },
             {
-              "x": 2670,
-              "y": 840
+              "x": 2780,
+              "y": 820
             },
             {
-              "x": 2670,
+              "x": 2780,
               "y": 1080
             },
             {
-              "x": 2825,
+              "x": 2945,
               "y": 1080
             }
           ],
           "label": {
-            "x": 2404,
-            "y": 801,
+            "x": 2514,
+            "y": 781,
             "width": 165,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11407,16 +12343,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2430,
+              "x": 2540,
               "y": 915
             },
             {
-              "x": 2430,
+              "x": 2540,
               "y": 892
             }
           ],
           "label": {
-            "x": 2438,
+            "x": 2548,
             "y": 894,
             "width": 230,
             "height": 31,
@@ -11441,25 +12377,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2573,
-              "y": 1110
+              "x": 2683,
+              "y": 1090
             },
             {
-              "x": 2610,
-              "y": 1110
+              "x": 2720,
+              "y": 1090
             },
             {
-              "x": 2610,
+              "x": 2720,
               "y": 1130
             },
             {
-              "x": 2825,
+              "x": 2945,
               "y": 1130
             }
           ],
           "label": {
-            "x": 2563,
-            "y": 1071,
+            "x": 2673,
+            "y": 1051,
             "width": 225,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11483,33 +12419,33 @@
           "visible": true,
           "vertices": [
             {
-              "x": 655,
-              "y": 1570
+              "x": 755,
+              "y": 1490
             },
             {
-              "x": 1790,
-              "y": 1570
+              "x": 1850,
+              "y": 1490
             },
             {
-              "x": 1790,
-              "y": 1220
+              "x": 1850,
+              "y": 1190
             },
             {
-              "x": 2190,
-              "y": 1220
+              "x": 2300,
+              "y": 1190
             },
             {
-              "x": 2190,
+              "x": 2300,
               "y": 1260
             },
             {
-              "x": 2825,
+              "x": 2945,
               "y": 1260
             }
           ],
           "label": {
-            "x": 484,
-            "y": 1531,
+            "x": 584,
+            "y": 1451,
             "width": 161,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11533,25 +12469,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1895,
-              "y": 1360
+              "x": 1995,
+              "y": 1320
             },
             {
-              "x": 1850,
-              "y": 1360
+              "x": 1910,
+              "y": 1320
             },
             {
-              "x": 1850,
-              "y": 1590
+              "x": 1910,
+              "y": 1520
             },
             {
-              "x": 655,
-              "y": 1590
+              "x": 755,
+              "y": 1520
             }
           ],
           "label": {
-            "x": 1905,
-            "y": 1321,
+            "x": 2005,
+            "y": 1281,
             "width": 222,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11575,16 +12511,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2157,
+              "x": 2257,
               "y": 1310
             },
             {
-              "x": 2825,
+              "x": 2945,
               "y": 1310
             }
           ],
           "label": {
-            "x": 2147,
+            "x": 2247,
             "y": 1271,
             "width": 221,
             "height": 31,
@@ -11609,21 +12545,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 525,
-              "y": 730
+              "x": 595,
+              "y": 720
             },
             {
-              "x": 490,
-              "y": 730
+              "x": 550,
+              "y": 720
             },
             {
-              "x": 490,
-              "y": 1505
+              "x": 550,
+              "y": 1385
             }
           ],
           "label": {
-            "x": 372,
-            "y": 691,
+            "x": 442,
+            "y": 681,
             "width": 163,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11647,17 +12583,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 410,
-              "y": 638
+              "x": 440,
+              "y": 625
             },
             {
-              "x": 410,
-              "y": 1505
+              "x": 440,
+              "y": 1385
             }
           ],
           "label": {
-            "x": 253,
-            "y": 587,
+            "x": 283,
+            "y": 574,
             "width": 159,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11681,16 +12617,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2990,
+              "x": 3110,
               "y": 1375
             },
             {
-              "x": 2990,
+              "x": 3110,
               "y": 1363
             }
           ],
           "label": {
-            "x": 2992,
+            "x": 3112,
             "y": 1344,
             "width": 194,
             "height": 31,
@@ -11715,16 +12651,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2990,
+              "x": 3110,
               "y": 1645
             },
             {
-              "x": 2990,
+              "x": 3110,
               "y": 1665
             }
           ],
           "label": {
-            "x": 2992,
+            "x": 3112,
             "y": 1594,
             "width": 193,
             "height": 31,
@@ -11749,21 +12685,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 655,
-              "y": 1550
+              "x": 755,
+              "y": 1450
             },
             {
-              "x": 1730,
-              "y": 1550
+              "x": 1790,
+              "y": 1450
             },
             {
-              "x": 1730,
-              "y": 1179
+              "x": 1790,
+              "y": 1355
             }
           ],
           "label": {
-            "x": 645,
-            "y": 1511,
+            "x": 745,
+            "y": 1411,
             "width": 206,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11788,16 +12724,16 @@
           "vertices": [
             {
               "x": 277,
-              "y": 1600
+              "y": 1540
             },
             {
               "x": 355,
-              "y": 1600
+              "y": 1540
             }
           ],
           "label": {
             "x": 128,
-            "y": 1561,
+            "y": 1501,
             "width": 139,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11821,17 +12757,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 500,
-              "y": 1705
+              "x": 560,
+              "y": 1725
             },
             {
-              "x": 500,
-              "y": 1691
+              "x": 560,
+              "y": 1705
             }
           ],
           "label": {
-            "x": 287,
-            "y": 1674,
+            "x": 347,
+            "y": 1694,
             "width": 215,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11855,25 +12791,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1265,
-              "y": 1150
+              "x": 1315,
+              "y": 1130
             },
             {
-              "x": 1220,
-              "y": 1150
+              "x": 1280,
+              "y": 1130
             },
             {
-              "x": 1220,
-              "y": 1530
+              "x": 1280,
+              "y": 1420
             },
             {
-              "x": 655,
-              "y": 1530
+              "x": 755,
+              "y": 1420
             }
           ],
           "label": {
-            "x": 1085,
-            "y": 1111,
+            "x": 1135,
+            "y": 1091,
             "width": 190,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11897,17 +12833,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1589,
-              "y": 1120
+              "x": 1639,
+              "y": 1100
             },
             {
-              "x": 1605,
-              "y": 1120
+              "x": 1665,
+              "y": 1100
             }
           ],
           "label": {
-            "x": 1407,
-            "y": 1081,
+            "x": 1457,
+            "y": 1061,
             "width": 234,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11931,17 +12867,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1885,
-              "y": 1090
+              "x": 1995,
+              "y": 1080
             },
             {
-              "x": 1864,
-              "y": 1090
+              "x": 2035,
+              "y": 1080
             }
           ],
           "label": {
-            "x": 1723,
-            "y": 1051,
+            "x": 1833,
+            "y": 1041,
             "width": 310,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -11965,25 +12901,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2209,
-              "y": 1120
+              "x": 2319,
+              "y": 1080
             },
             {
-              "x": 2250,
-              "y": 1120
+              "x": 2360,
+              "y": 1080
             },
             {
-              "x": 2250,
-              "y": 1200
+              "x": 2360,
+              "y": 1210
             },
             {
-              "x": 2825,
-              "y": 1200
+              "x": 2945,
+              "y": 1210
             }
           ],
           "label": {
-            "x": 1934,
-            "y": 1081,
+            "x": 2044,
+            "y": 1041,
             "width": 265,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12007,17 +12943,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 410,
-              "y": 490
+              "x": 440,
+              "y": 290
             },
             {
-              "x": 410,
-              "y": 515
+              "x": 440,
+              "y": 315
             }
           ],
           "label": {
-            "x": 219,
-            "y": 439,
+            "x": 249,
+            "y": 239,
             "width": 193,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12041,16 +12977,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1945,
+              "x": 2005,
               "y": 1660
             },
             {
-              "x": 655,
+              "x": 755,
               "y": 1660
             }
           ],
           "label": {
-            "x": 1806,
+            "x": 1866,
             "y": 1621,
             "width": 149,
             "height": 31,
@@ -12075,25 +13011,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1955,
-              "y": 1530
+              "x": 2005,
+              "y": 1510
             },
             {
-              "x": 1910,
-              "y": 1530
+              "x": 1970,
+              "y": 1510
             },
             {
-              "x": 1910,
-              "y": 1600
+              "x": 1970,
+              "y": 1560
             },
             {
-              "x": 655,
-              "y": 1600
+              "x": 755,
+              "y": 1560
             }
           ],
           "label": {
-            "x": 1800,
-            "y": 1491,
+            "x": 1850,
+            "y": 1471,
             "width": 165,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12117,16 +13053,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1193,
+              "x": 1233,
               "y": 230
             },
             {
-              "x": 1205,
+              "x": 1255,
               "y": 230
             }
           ],
           "label": {
-            "x": 968,
+            "x": 1008,
             "y": 191,
             "width": 215,
             "height": 31,
@@ -12151,16 +13087,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 915,
+              "x": 955,
               "y": 230
             },
             {
-              "x": 891,
+              "x": 941,
               "y": 230
             }
           ],
           "label": {
-            "x": 931,
+            "x": 971,
             "y": 232,
             "width": 247,
             "height": 31,
@@ -12186,16 +13122,16 @@
           "vertices": [
             {
               "x": 2579,
-              "y": 2090
+              "y": 2170
             },
             {
               "x": 2615,
-              "y": 2090
+              "y": 2170
             }
           ],
           "label": {
             "x": 2569,
-            "y": 2051,
+            "y": 2131,
             "width": 184,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12219,16 +13155,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2990,
+              "x": 3110,
               "y": 903
             },
             {
-              "x": 2990,
+              "x": 3110,
               "y": 925
             }
           ],
           "label": {
-            "x": 2774,
+            "x": 2894,
             "y": 852,
             "width": 218,
             "height": 31,
@@ -12254,16 +13190,16 @@
           "vertices": [
             {
               "x": 1948,
-              "y": 2175
+              "y": 2255
             },
             {
               "x": 1955,
-              "y": 2175
+              "y": 2255
             }
           ],
           "label": {
             "x": 1756,
-            "y": 2136,
+            "y": 2216,
             "width": 182,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12288,16 +13224,16 @@
           "vertices": [
             {
               "x": 1948,
-              "y": 2145
+              "y": 2225
             },
             {
               "x": 1955,
-              "y": 2145
+              "y": 2225
             }
           ],
           "label": {
             "x": 1756,
-            "y": 2106,
+            "y": 2186,
             "width": 182,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12322,16 +13258,16 @@
           "vertices": [
             {
               "x": 262,
-              "y": 2610
+              "y": 2690
             },
             {
               "x": 305,
-              "y": 2610
+              "y": 2690
             }
           ],
           "label": {
             "x": 70,
-            "y": 2571,
+            "y": 2651,
             "width": 182,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12356,16 +13292,16 @@
           "vertices": [
             {
               "x": 837,
-              "y": 2610
+              "y": 2690
             },
             {
               "x": 875,
-              "y": 2610
+              "y": 2690
             }
           ],
           "label": {
             "x": 634,
-            "y": 2571,
+            "y": 2651,
             "width": 193,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12389,16 +13325,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1660,
+              "x": 1710,
               "y": 376
             },
             {
-              "x": 1660,
-              "y": 685
+              "x": 1710,
+              "y": 675
             }
           ],
           "label": {
-            "x": 1662,
+            "x": 1712,
             "y": 325,
             "width": 250,
             "height": 31,
@@ -12423,24 +13359,24 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1803,
+              "x": 1853,
               "y": 230
             },
             {
-              "x": 2790,
+              "x": 2910,
               "y": 230
             },
             {
-              "x": 2790,
+              "x": 2910,
               "y": 970
             },
             {
-              "x": 2825,
+              "x": 2945,
               "y": 970
             }
           ],
           "label": {
-            "x": 1555,
+            "x": 1605,
             "y": 191,
             "width": 238,
             "height": 31,
@@ -12465,16 +13401,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1525,
+              "x": 1575,
               "y": 230
             },
             {
-              "x": 1498,
+              "x": 1548,
               "y": 230
             }
           ],
           "label": {
-            "x": 1535,
+            "x": 1585,
             "y": 191,
             "width": 234,
             "height": 31,
@@ -12499,20 +13435,20 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2265,
+              "x": 2375,
               "y": 470
             },
             {
-              "x": 1730,
+              "x": 1820,
               "y": 470
             },
             {
-              "x": 1730,
-              "y": 685
+              "x": 1820,
+              "y": 675
             }
           ],
           "label": {
-            "x": 2275,
+            "x": 2385,
             "y": 431,
             "width": 150,
             "height": 31,
@@ -12537,17 +13473,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1730,
-              "y": 1035
+              "x": 1790,
+              "y": 1005
             },
             {
-              "x": 1730,
-              "y": 997
+              "x": 1790,
+              "y": 987
             }
           ],
           "label": {
-            "x": 1515,
-            "y": 1004,
+            "x": 1575,
+            "y": 974,
             "width": 217,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12571,21 +13507,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 560,
-              "y": 1505
+              "x": 670,
+              "y": 1385
             },
             {
-              "x": 560,
-              "y": 840
+              "x": 670,
+              "y": 830
             },
             {
-              "x": 1585,
-              "y": 840
+              "x": 1635,
+              "y": 830
             }
           ],
           "label": {
-            "x": 562,
-            "y": 1474,
+            "x": 672,
+            "y": 1354,
             "width": 173,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -12609,16 +13545,16 @@
           "visible": true,
           "vertices": [
             {
-              "x": 2430,
+              "x": 2540,
               "y": 685
             },
             {
-              "x": 2430,
+              "x": 2540,
               "y": 671
             }
           ],
           "label": {
-            "x": 2438,
+            "x": 2548,
             "y": 695,
             "width": 143,
             "height": 31,

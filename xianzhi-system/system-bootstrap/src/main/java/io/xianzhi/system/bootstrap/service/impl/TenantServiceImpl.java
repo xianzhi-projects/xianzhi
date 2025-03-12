@@ -22,6 +22,7 @@ import io.xianzhi.system.bootstrap.service.TenantService;
 import io.xianzhi.system.model.dto.TenantDTO;
 import io.xianzhi.system.model.page.TenantPage;
 import io.xianzhi.system.model.vo.TenantVO;
+import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,7 @@ public class TenantServiceImpl implements TenantService {
      */
     @Override
     public List<TenantVO> getUserTenantList() {
+        String userId = UserContextHolder.getCurrentUserId();
         return List.of();
     }
 
