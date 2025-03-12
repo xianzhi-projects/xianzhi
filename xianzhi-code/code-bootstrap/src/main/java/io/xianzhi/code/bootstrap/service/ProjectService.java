@@ -16,6 +16,8 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.ProjectDTO;
+
 /**
  * 项目接口
  *
@@ -23,4 +25,24 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface ProjectService {
+
+    /**
+     * 新增项目
+     *
+     * @param projectDTO 项目信息入参
+     * @return 项目ID
+     */
+    String createProject(ProjectDTO projectDTO);
+    /**
+     * 更新项目
+     *
+     * @param projectDTO 项目信息入参
+     */
+    void updateProject(ProjectDTO projectDTO);
+    /**
+     * 删除项目
+     *
+     * @param id 项目ID
+     */
+    void deletedProject(String id);
 }

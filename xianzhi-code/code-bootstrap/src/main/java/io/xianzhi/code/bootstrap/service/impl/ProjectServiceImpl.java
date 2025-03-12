@@ -17,6 +17,7 @@
 package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.ProjectService;
+import io.xianzhi.code.model.dto.ProjectDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,34 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
+    /**
+     * 新增项目
+     *
+     * @param projectDTO 项目信息入参
+     * @return 项目ID
+     */
+    @Override
+    public String createProject(ProjectDTO projectDTO) {
+        return "";
+    }
+
+    /**
+     * 更新项目
+     *
+     * @param projectDTO 项目信息入参
+     */
+    @Override
+    public void updateProject(ProjectDTO projectDTO) {
+
+    }
+
+    /**
+     * 删除项目
+     *
+     * @param id 项目ID
+     */
+    @Override
+    public void deletedProject(String id) {
+
+    }
 }
