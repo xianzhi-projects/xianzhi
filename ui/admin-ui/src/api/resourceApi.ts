@@ -16,13 +16,13 @@
 import type {ResponseResult} from '@/api/index'
 import http from '@/api/index'
 
-export enum ResourceType{
+export enum ResourceType {
   DIRECTORY = 'DIRECTORY',
   MENU = 'MENU',
   BUTTON = 'BUTTON'
 }
 
-export interface ResourceVO{
+export interface ResourceVO {
 
   id: string
   resourceName: string,
@@ -36,12 +36,23 @@ export interface ResourceVO{
   showFlag: boolean
   children: ResourceVO[]
 }
+
 /**
  * 获取当前用户资源信息
  */
 export function getCurrentUserResource(): Promise<ResponseResult<ResourceVO[]>> {
   return http.request({
-    url:  '/s/resource/getCurrentUserResource',
+    url: '/s/resource/getCurrentUserResource',
+    method: 'GET',
+  })
+}
+
+/**
+ * 获取所有资源树
+ */
+export function resourceTree(): Promise<ResponseResult<ResourceVO[]>> {
+  return http.request({
+    url: '/s/resource/tree',
     method: 'GET',
   })
 }

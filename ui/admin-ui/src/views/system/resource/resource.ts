@@ -1,5 +1,4 @@
-import type {ResourceVO} from '@/api/resourceApi.ts'
-import {resourceTree} from '@/api/resourceApi.ts'
+import {resourceTree, type ResourceVO} from '@/api/resourceApi.ts'
 import * as antIcons from '@ant-design/icons-vue'
 import {h, ref} from 'vue'
 import {message} from 'ant-design-vue'
