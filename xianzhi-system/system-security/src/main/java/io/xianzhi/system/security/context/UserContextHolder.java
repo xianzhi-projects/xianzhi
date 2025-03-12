@@ -1,6 +1,5 @@
 package io.xianzhi.system.security.context;
 
-import io.xianzhi.core.content.Context;
 import io.xianzhi.core.content.ContextHolder;
 
 /**
@@ -17,8 +16,7 @@ public class UserContextHolder extends ContextHolder {
      * @return 当前用户ID
      */
     public static String getCurrentUserId() {
-        Context contextOrThrow = getContextOrThrow();
-        return contextOrThrow.getUniqueKey();
+        return getContextOrThrow().getUniqueKey();
     }
 
     /**
@@ -27,7 +25,7 @@ public class UserContextHolder extends ContextHolder {
      * @return 是否超级管理员
      */
     public static boolean admin() {
-        return getCurrentUserId().equals("-1");
+        return getCurrentUserOrThrow().getUsername().equals("admin");
     }
 
 
@@ -40,8 +38,10 @@ public class UserContextHolder extends ContextHolder {
         return (XianZhiOAuth2UserDetails) getContextOrThrow();
     }
 
-
+    /**
+     * 设置系统用户，用于定时任务，或者其他无法获取用户信息
+     */
     public static void setAnonymousUser() {
-        set(() -> "anonymous");
+        set(() -> "system");
     }
 }

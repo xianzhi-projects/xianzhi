@@ -56,16 +56,9 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
     private String avatar;
 
     /**
-     * 用户域账号
-     */
-    private String domainAccount;
-
-    /**
      * 用户状态 字典值
      */
     private String userStatus;
-
-
 
 
 
