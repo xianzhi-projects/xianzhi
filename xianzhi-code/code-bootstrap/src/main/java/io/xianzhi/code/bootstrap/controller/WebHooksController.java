@@ -17,9 +17,22 @@
 package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.WebHooksService;
+import io.xianzhi.code.model.dto.WebHooksDTO;
+import io.xianzhi.code.model.page.WebHooksPage;
+import io.xianzhi.code.model.vo.WebHooksVO;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * web钩子接口
@@ -36,4 +49,48 @@ public class WebHooksController {
      * 钩子接口
      */
     private final WebHooksService webHooksService;
+
+    /**
+     * 分页查询webHooks列表
+     *
+     * @param webHooksPage 分页查询参数
+     * @return webHooks列表
+     */
+    @PostMapping(value = "/pageWebHooksList")
+    public ResponseResult<ListResult<WebHooksVO>> pageWebHooksList(@RequestBody WebHooksPage webHooksPage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 创建webHooks
+     *
+     * @param webHooksDTO webHooks信息入参
+     * @return 创建结果
+     */
+    @PostMapping(value = "/createWebHooks")
+    public ResponseResult<String> createWebHooks(@RequestBody @Validated(value = CreateGroup.class) WebHooksDTO webHooksDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 更新webHooks
+     *
+     * @param webHooksDTO webHooks信息入参
+     * @return 更新结果
+     */
+    @PostMapping(value = "/updateWebHooks")
+    public ResponseResult<String> updateWebHooks(@RequestBody @Validated(value = UpdateGroup.class) WebHooksDTO webHooksDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除webHooks
+     *
+     * @param ids webHooks ID
+     * @return 删除结果
+     */
+    @PostMapping(value = "/deleteWebHooks")
+    public ResponseResult<String> deleteWebHooks(@RequestBody @NotEmpty(message = "ID不能为空") List<String> ids) {
+        return ResponseResult.success();
+    }
 }

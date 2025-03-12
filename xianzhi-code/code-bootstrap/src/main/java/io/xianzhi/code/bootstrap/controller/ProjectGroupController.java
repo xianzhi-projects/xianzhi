@@ -17,7 +17,13 @@
 package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.ProjectGroupService;
+import io.xianzhi.code.model.dto.ProjectGroupDTO;
+import io.xianzhi.code.model.page.ProjectGroupPage;
+import io.xianzhi.code.model.vo.ProjectGroupVO;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,4 +41,48 @@ public class ProjectGroupController {
      * 项目分组接口
      */
     private final ProjectGroupService projectGroupService;
+
+    /**
+     * 分页查询项目分组列表
+     *
+     * @param groupPage 分页查询参数
+     * @return 项目分组列表
+     */
+    @PostMapping(value = "/pageProjectGroupList")
+    public ResponseResult<ListResult<ProjectGroupVO>> pageProjectGroupList(ProjectGroupPage groupPage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 创建项目分组
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     * @return 项目分组ID
+     */
+    @PostMapping(value = "/createProjectGroup")
+    public ResponseResult<String> createProjectGroup(ProjectGroupDTO projectGroupDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 更新项目分组
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     * @return 响应信息
+     */
+    @PostMapping(value = "/updateProjectGroup")
+    public ResponseResult<Object> updateProjectGroup(ProjectGroupDTO projectGroupDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除项目分组
+     *
+     * @param id 项目分组ID
+     * @return 响应信息
+     */
+    @PostMapping(value = "/deletedProjectGroup")
+    public ResponseResult<Object> deletedProjectGroup(String id) {
+        return ResponseResult.success();
+    }
 }

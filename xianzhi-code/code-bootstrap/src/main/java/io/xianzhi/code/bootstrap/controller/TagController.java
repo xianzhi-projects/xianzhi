@@ -17,9 +17,14 @@
 package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.TagService;
+import io.xianzhi.code.model.dto.TagDTO;
+import io.xianzhi.code.model.page.TagPage;
+import io.xianzhi.code.model.vo.TagVO;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Tag接口
@@ -36,4 +41,39 @@ public class TagController {
      * Tag接口
      */
     private final TagService tagService;
+
+
+    /**
+     * 分页查询tag列表
+     *
+     * @param tagPage 分页查询参数
+     * @return tag列表
+     */
+    @PostMapping(value = "/pageTagList")
+    public ResponseResult<ListResult<TagVO>> pageTagList(@RequestBody TagPage tagPage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 新增tag
+     *
+     * @param tagDTO tag入参
+     * @return 响应信息
+     */
+    @PostMapping(value = "/createTag")
+    public ResponseResult<String> createTag(@RequestBody @Validated TagDTO tagDTO) {
+        return ResponseResult.success();
+    }
+
+
+    /**
+     * 删除tag
+     *
+     * @param id tag ID
+     * @return 响应信息
+     */
+    @PostMapping(value = "/deletedTag")
+    public ResponseResult<Object> deletedTag(@RequestParam String id) {
+        return ResponseResult.success();
+    }
 }

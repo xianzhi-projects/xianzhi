@@ -17,9 +17,15 @@
 package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.IssuesService;
+import io.xianzhi.code.model.dto.IssuesDTO;
+import io.xianzhi.code.model.page.IssuesPage;
+import io.xianzhi.code.model.vo.IssuesVO;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Issues接口
@@ -36,4 +42,48 @@ public class IssuesController {
      * Issues接口
      */
     private final IssuesService issuesService;
+
+    /**
+     * 分页查询Issues列表
+     *
+     * @param issuesPage 分页查询参数
+     * @return Issues列表
+     */
+    @PostMapping(value = "/pageIssuesList")
+    public ResponseResult<IssuesVO> pageIssuesList(@RequestBody IssuesPage issuesPage) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 创建Issues
+     *
+     * @param issuesDTO Issues信息入参
+     * @return Issues ID
+     */
+    @PostMapping(value = "/createIssues")
+    public ResponseResult<String> createIssues(@RequestBody @Validated(value = CreateGroup.class) IssuesDTO issuesDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 更新Issues
+     *
+     * @param issuesDTO Issues信息入参
+     * @return 响应信息
+     */
+    @PostMapping(value = "/updateIssues")
+    public ResponseResult<Object> updateIssues(@RequestBody @Validated(value = UpdateGroup.class) IssuesDTO issuesDTO) {
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除Issues
+     *
+     * @param id Issues ID
+     * @return 响应信息
+     */
+    @PostMapping(value = "/deleteIssues")
+    public ResponseResult<Object> deleteIssues(@RequestParam(value = "id") String id) {
+        return ResponseResult.success();
+    }
 }
