@@ -29,7 +29,10 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 import software.amazon.awssdk.services.s3.presigner.model.UploadPartPresignRequest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -139,6 +142,26 @@ public class OSSHandler {
                 .build();
         ResponseInputStream<GetObjectResponse> response = s3Client.getObject(request);
         return response.readAllBytes();
+    }
+
+    /**
+     * 从 OSS URL 下载数据。
+     *
+     * @param fileUrl OSS URL
+     * @return 文件的字节数组
+     * @throws IOException 如果网络请求或数据读取失败
+     */
+    public static byte[] downloadImageData(String fileUrl) throws IOException {
+        URL url = new URL(fileUrl);
+        try (InputStream inputStream = url.openStream();
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+            return baos.toByteArray();
+        }
     }
 
     /**

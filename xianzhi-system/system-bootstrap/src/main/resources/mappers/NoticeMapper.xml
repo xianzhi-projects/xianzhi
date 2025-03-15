@@ -17,4 +17,22 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.NoticeMapper">
+
+    <select id="selectNoticeById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO">
+        SELECT *
+        FROM sys_notice
+        where id = #{id,jdbcType=VARCHAR}
+          and deleted_flag = 0
+    </select>
+
+    <select id="existsNoticeByTitleAndCategoryAndIdNot" resultType="boolean">
+        SELECT IFNULL((select 1
+                       from sys_notice where notice_title = #{title,jdbcType=VARCHAR}
+                                         and notice_category = #{category,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if>
+        and deleted_flag = 0
+        ), 0)
+    </select>
 </mapper>

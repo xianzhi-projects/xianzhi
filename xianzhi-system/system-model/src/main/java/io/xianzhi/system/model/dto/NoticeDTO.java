@@ -28,4 +28,23 @@ import java.io.Serializable;
  */
 @Data
 public class NoticeDTO implements Serializable {
+
+    /**
+     * 主键id
+     */
+    private String id;
+
+    /**
+     * 公告标题
+     */
+    private String noticeTitle;
+    /**
+     * 公告分类
+     */
+    private String noticeCategory;
+
+    /**
+     * 公告类型
+     */
+    private String noticeContent;
 }

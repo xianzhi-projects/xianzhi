@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 公告持久层
@@ -28,4 +31,24 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface NoticeMapper extends BaseMapper<NoticeDO> {
+
+    /**
+     * 根据ID查询公告信息
+     *
+     * @param id 公告ID
+     * @return 公告信息
+     */
+    Optional<NoticeDO> selectNoticeById(@Param("id") String id);
+
+    /**
+     * 判断公告标题是否存在
+     *
+     * @param title    公告标题
+     * @param category 公告类型
+     * @param id       公告ID
+     * @return 是否存在
+     */
+    boolean existsNoticeByTitleAndCategoryAndIdNot(@Param("title") String title,
+                                                   @Param("category") String category,
+                                                   @Param("id") String id);
 }

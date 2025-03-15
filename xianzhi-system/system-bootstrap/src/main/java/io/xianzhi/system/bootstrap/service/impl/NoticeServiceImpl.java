@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO;
 import io.xianzhi.system.bootstrap.dao.mapper.NoticeMapper;
@@ -27,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -93,6 +95,15 @@ public class NoticeServiceImpl implements NoticeService {
 
 
     private NoticeDO checkedNoticeDTO(NoticeDTO noticeDTO) {
-        return null;
+        NoticeDO noticeDO;
+        if (StringUtils.hasText(noticeDTO.getId())) {
+            noticeDO = noticeMapper.selectNoticeById(noticeDTO.getId()).orElseThrow(() -> new BusinessException("公告ID不能为空"));
+        } else {
+            noticeDO = new NoticeDO();
+        }
+        if (noticeMapper.existsNoticeByTitleAndCategoryAndIdNot(noticeDTO.getNoticeTitle(), noticeDTO.getNoticeCategory(), noticeDTO.getId())) {
+            throw new BusinessException("已经存在相同公告标题");
+        }
+        return noticeDO;
     }
 }
