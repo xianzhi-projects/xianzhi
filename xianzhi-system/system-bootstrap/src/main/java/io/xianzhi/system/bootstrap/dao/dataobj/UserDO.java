@@ -64,7 +64,7 @@ public class UserDO extends BaseDO {
      */
     private String avatar;
     /**
-     * 部门ID
+     * 用户状态
      */
     private String userStatus;
 }
