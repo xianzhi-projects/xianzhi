@@ -31,4 +31,11 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_login_log")
 @EqualsAndHashCode(callSuper = true)
 public class LoginLogDO extends BaseDO {
+
+
+    private String loginAccount;
+
+    private String loginParams;
+
+    private Boolean successFlag;
 }

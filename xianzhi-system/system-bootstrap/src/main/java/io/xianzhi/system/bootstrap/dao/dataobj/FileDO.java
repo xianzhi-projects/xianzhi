@@ -31,4 +31,38 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_file")
 @EqualsAndHashCode(callSuper = true)
 public class FileDO extends BaseDO {
+
+    /**
+     * 文件名称
+     */
+    private String fileName;
+
+    /**
+     * 远程文件名称
+     */
+    private String fileOriginName;
+
+    /**
+     * 文件地址
+     */
+    private String fileOriginUrl;
+
+    /**
+     * 文件类型
+     */
+    private String fileType;
+
+    /**
+     * 文件分类
+     */
+    private String fileCategory;
+    /**
+     * 文件大小
+     */
+    private Long fileSize;
+
+    /**
+     * 所在桶
+     */
+    private String bucketName;
 }

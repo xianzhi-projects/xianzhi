@@ -30,16 +30,35 @@ import java.io.Serializable;
 public class UserVO implements Serializable {
 
     /**
-     * 主键ID
+     * 部门
      */
-    private String id;
+    private DepartmentVO department;
+    /**
+     * 用户名
+     */
+    private String username;
     /**
      * 昵称
      */
     private String nickName;
-
     /**
      * 真实姓名
      */
     private String realName;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 手机号码
+     */
+    private String phone;
+    /**
+     * 头像
+     */
+    private String avatar;
+    /**
+     * 用户状态
+     */
+    private String userStatus;
 }
