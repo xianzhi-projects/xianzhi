@@ -44,3 +44,4 @@ ui/*/yarn-error.log
 ui/*/yarn.lock
 ui/*/package-lock.json
 ui/*/components.d.ts
+ui/*/.vite
