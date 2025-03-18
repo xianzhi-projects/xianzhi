@@ -32,5 +32,15 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-websocket</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
