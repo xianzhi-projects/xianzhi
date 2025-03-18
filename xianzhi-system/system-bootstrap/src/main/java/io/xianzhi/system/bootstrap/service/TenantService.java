@@ -59,4 +59,17 @@ public interface TenantService {
      * @param tenantDTO 租户信息入参
      */
     void updateTenant(TenantDTO tenantDTO);
+    /**
+     * 获取租户详情
+     *
+     * @param id 租户ID
+     * @return 租户详情
+     */
+    TenantVO getTenantDetails(String id);
+    /**
+     * 删除租户
+     *
+     * @param id 租户ID
+     */
+    void deletedTenant(String id);
 }

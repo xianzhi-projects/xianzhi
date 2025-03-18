@@ -103,6 +103,27 @@ public class TenantServiceImpl implements TenantService {
 
     }
 
+    /**
+     * 获取租户详情
+     *
+     * @param id 租户ID
+     * @return 租户详情
+     */
+    @Override
+    public TenantVO getTenantDetails(String id) {
+        return null;
+    }
+
+    /**
+     * 删除租户
+     *
+     * @param id 租户ID
+     */
+    @Override
+    public void deletedTenant(String id) {
+
+    }
+
 
     private TenantDO checkedTenantDTO(TenantDTO tenantDTO) {
         TenantDO tenant;

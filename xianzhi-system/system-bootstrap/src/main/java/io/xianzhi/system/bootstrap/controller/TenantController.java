@@ -95,4 +95,29 @@ public class TenantController {
         tenantService.updateTenant(tenantDTO);
         return ResponseResult.success();
     }
+
+    /**
+     * 获取租户详情
+     *
+     * @param id 租户ID
+     * @return 租户详情
+     */
+    @PreAuthorize("@xz.hasPermission('system:tenant:detail','system:tenant:create','system:tenant:update')")
+    @GetMapping(value = "/getTenantDetails")
+    public ResponseResult<TenantVO> getTenantDetails(@RequestParam(value = "id") String id) {
+        return ResponseResult.success(tenantService.getTenantDetails(id));
+    }
+
+    /**
+     * 删除租户
+     *
+     * @param id 租户ID
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('system:tenant:delete')")
+    @PostMapping(value = "/deletedTenant")
+    public ResponseResult<Object> deletedTenant(@RequestParam(value = "id") String id) {
+        tenantService.deletedTenant(id);
+        return ResponseResult.success();
+    }
 }
