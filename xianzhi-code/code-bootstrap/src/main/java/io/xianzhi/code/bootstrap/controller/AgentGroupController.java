@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.AgentGroupService;
 import io.xianzhi.code.model.dto.AgentGroupDTO;
 import io.xianzhi.code.model.page.AgentGroupPage;
 import io.xianzhi.code.model.vo.AgentGroupVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,7 @@ public class AgentGroupController {
      * @param agentGroupDTO agent分组参数
      * @return agent分组id
      */
+    @Idempotent
     @PreAuthorize("@xz.hasPermission('code:agentGroup:create')")
     @PostMapping(value = "/createAgentGroup")
     public ResponseResult<String> createAgentGroup(AgentGroupDTO agentGroupDTO) {

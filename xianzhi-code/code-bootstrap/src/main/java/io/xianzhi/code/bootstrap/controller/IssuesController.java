@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.IssuesService;
 import io.xianzhi.code.model.dto.IssuesDTO;
 import io.xianzhi.code.model.page.IssuesPage;
 import io.xianzhi.code.model.vo.IssuesVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
@@ -60,6 +61,7 @@ public class IssuesController {
      * @param issuesDTO Issues信息入参
      * @return Issues ID
      */
+    @Idempotent
     @PostMapping(value = "/createIssues")
     public ResponseResult<String> createIssues(@RequestBody @Validated(value = CreateGroup.class) IssuesDTO issuesDTO) {
         return ResponseResult.success();

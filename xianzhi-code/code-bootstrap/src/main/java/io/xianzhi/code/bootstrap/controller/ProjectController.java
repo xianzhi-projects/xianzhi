@@ -18,6 +18,7 @@ package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.ProjectService;
 import io.xianzhi.code.model.dto.ProjectDTO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
@@ -47,6 +48,7 @@ public class ProjectController {
      * @param projectDTO 项目信息入参
      * @return 项目ID
      */
+    @Idempotent
     @PostMapping(value = "/createProject")
     public ResponseResult<String> createProject(@RequestBody @Validated(value = CreateGroup.class) ProjectDTO projectDTO) {
         return ResponseResult.success(projectService.createProject(projectDTO));

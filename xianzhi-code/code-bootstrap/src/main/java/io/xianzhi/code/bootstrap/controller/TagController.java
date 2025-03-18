@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.TagService;
 import io.xianzhi.code.model.dto.TagDTO;
 import io.xianzhi.code.model.page.TagPage;
 import io.xianzhi.code.model.vo.TagVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,7 @@ public class TagController {
      * @param tagDTO tag入参
      * @return 响应信息
      */
+    @Idempotent
     @PostMapping(value = "/createTag")
     public ResponseResult<String> createTag(@RequestBody @Validated TagDTO tagDTO) {
         return ResponseResult.success();

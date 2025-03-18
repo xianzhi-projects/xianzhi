@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.WebHooksService;
 import io.xianzhi.code.model.dto.WebHooksDTO;
 import io.xianzhi.code.model.page.WebHooksPage;
 import io.xianzhi.code.model.vo.WebHooksVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
@@ -67,6 +68,7 @@ public class WebHooksController {
      * @param webHooksDTO webHooks信息入参
      * @return 创建结果
      */
+    @Idempotent
     @PostMapping(value = "/createWebHooks")
     public ResponseResult<String> createWebHooks(@RequestBody @Validated(value = CreateGroup.class) WebHooksDTO webHooksDTO) {
         return ResponseResult.success();

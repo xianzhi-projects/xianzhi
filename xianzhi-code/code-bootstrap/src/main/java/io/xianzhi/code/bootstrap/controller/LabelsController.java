@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.LabelService;
 import io.xianzhi.code.model.dto.LabelDTO;
 import io.xianzhi.code.model.page.LabelPage;
 import io.xianzhi.code.model.vo.LabelVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,7 @@ public class LabelsController {
      * @param labelDTO 标签信息入参
      * @return 标签ID
      */
+    @Idempotent
     @PostMapping(value = "/createLabel")
     public ResponseResult<String> createLabel(LabelDTO labelDTO) {
         return ResponseResult.success();

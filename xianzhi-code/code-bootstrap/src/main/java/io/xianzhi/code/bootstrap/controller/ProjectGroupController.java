@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.service.ProjectGroupService;
 import io.xianzhi.code.model.dto.ProjectGroupDTO;
 import io.xianzhi.code.model.page.ProjectGroupPage;
 import io.xianzhi.code.model.vo.ProjectGroupVO;
+import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,7 @@ public class ProjectGroupController {
      * @param projectGroupDTO 项目分组信息入参
      * @return 项目分组ID
      */
+    @Idempotent
     @PostMapping(value = "/createProjectGroup")
     public ResponseResult<String> createProjectGroup(ProjectGroupDTO projectGroupDTO) {
         return ResponseResult.success();
