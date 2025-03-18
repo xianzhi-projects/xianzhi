@@ -20,4 +20,8 @@
     <!--    根据id查询主机凭证-->
     <select id="selectHostCertificateById" resultType="io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO">
     </select>
+
+    <select id="existsHostCertificateByCertNameAndIdNot" resultType="boolean">
+
+    </select>
 </mapper>

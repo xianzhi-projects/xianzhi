@@ -31,4 +31,5 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "c_agent_group")
 @EqualsAndHashCode(callSuper = true)
 public class AgentGroupDO extends BaseDO {
+
 }

@@ -31,4 +31,6 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "c_project_group")
 @EqualsAndHashCode(callSuper = true)
 public class ProjectGroupDO extends BaseDO {
+
+
 }

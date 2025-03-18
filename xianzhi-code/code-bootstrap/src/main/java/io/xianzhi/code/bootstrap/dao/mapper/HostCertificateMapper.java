@@ -38,4 +38,13 @@ public interface HostCertificateMapper extends BaseMapper<HostCertificateDO> {
      * @return 凭证信息
      */
     Optional<HostCertificateDO> selectHostCertificateById(@Param("id") String id);
+
+    /**
+     * 判断凭证名称是否存在
+     *
+     * @param certName 凭证名称
+     * @param id       凭证ID
+     * @return 是否存在
+     */
+    boolean existsHostCertificateByCertNameAndIdNot(@Param("certName") String certName, @Param("id") String id);
 }

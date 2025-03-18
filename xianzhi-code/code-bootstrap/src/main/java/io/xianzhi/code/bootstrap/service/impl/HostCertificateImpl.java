@@ -16,15 +16,19 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
 import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
 import io.xianzhi.code.bootstrap.service.HostCertificateService;
 import io.xianzhi.code.model.dto.HostCertificateDTO;
 import io.xianzhi.code.model.page.HostCertificatePage;
 import io.xianzhi.code.model.vo.HostCertificateVO;
+import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 /**
  * 主机凭证接口实现
@@ -60,8 +64,11 @@ public class HostCertificateImpl implements HostCertificateService {
      * @return 主机凭证ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createHostCertificate(HostCertificateDTO hostCertificateDTO) {
-        return "";
+        HostCertificateDO hostCertificateDO = checkedHostCertificateDTO(hostCertificateDTO);
+        hostCertificateMapper.insert(hostCertificateDO);
+        return hostCertificateDO.getId();
     }
 
     /**
@@ -70,7 +77,9 @@ public class HostCertificateImpl implements HostCertificateService {
      * @param hostCertificateDTO 主机凭证入参
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateHostCertificate(HostCertificateDTO hostCertificateDTO) {
+        HostCertificateDO hostCertificateDO = checkedHostCertificateDTO(hostCertificateDTO);
 
     }
 
@@ -91,7 +100,19 @@ public class HostCertificateImpl implements HostCertificateService {
      * @param id 主机凭证ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteHostCertificateById(String id) {
 
+    }
+
+
+    private HostCertificateDO checkedHostCertificateDTO(HostCertificateDTO hostCertificateDTO) {
+        HostCertificateDO hostCertificateDO;
+        if (StringUtils.hasText(hostCertificateDTO.getId())) {
+            hostCertificateDO = hostCertificateMapper.selectHostCertificateById(hostCertificateDTO.getId()).orElseThrow(() -> new BusinessException("主机凭证不存在"));
+        } else {
+            hostCertificateDO = new HostCertificateDO();
+        }
+        return hostCertificateDO;
     }
 }

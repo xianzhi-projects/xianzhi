@@ -32,6 +32,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AgentDO extends BaseDO {
 
+
     /**
      * agent名称
      */

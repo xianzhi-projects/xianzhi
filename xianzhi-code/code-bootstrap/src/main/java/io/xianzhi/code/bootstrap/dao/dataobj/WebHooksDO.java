@@ -31,4 +31,6 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "c_web_hooks")
 @EqualsAndHashCode(callSuper = true)
 public class WebHooksDO extends BaseDO {
+
+
 }
