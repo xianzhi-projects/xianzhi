@@ -18,6 +18,10 @@ package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
 import io.xianzhi.code.bootstrap.service.HostCertificateService;
+import io.xianzhi.code.model.dto.HostCertificateDTO;
+import io.xianzhi.code.model.page.HostCertificatePage;
+import io.xianzhi.code.model.vo.HostCertificateVO;
+import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,5 +42,56 @@ public class HostCertificateImpl implements HostCertificateService {
     private final HostCertificateMapper hostCertificateMapper;
 
 
+    /**
+     * 分页查询主机凭证
+     *
+     * @param hostCertificatePage 主机凭证接口
+     * @return 主机凭证
+     */
+    @Override
+    public ListResult<HostCertificateVO> pageHostCertificate(HostCertificatePage hostCertificatePage) {
+        return null;
+    }
 
+    /**
+     * 创建主机凭证
+     *
+     * @param hostCertificateDTO 主机凭证入参
+     * @return 主机凭证ID
+     */
+    @Override
+    public String createHostCertificate(HostCertificateDTO hostCertificateDTO) {
+        return "";
+    }
+
+    /**
+     * 更新主机凭证
+     *
+     * @param hostCertificateDTO 主机凭证入参
+     */
+    @Override
+    public void updateHostCertificate(HostCertificateDTO hostCertificateDTO) {
+
+    }
+
+    /**
+     * 查询主机凭证详情
+     *
+     * @param id 主机凭证ID
+     * @return 主机凭证详情
+     */
+    @Override
+    public HostCertificateVO getHostCertificateById(String id) {
+        return null;
+    }
+
+    /**
+     * 删除主机凭证
+     *
+     * @param id 主机凭证ID
+     */
+    @Override
+    public void deleteHostCertificateById(String id) {
+
+    }
 }
