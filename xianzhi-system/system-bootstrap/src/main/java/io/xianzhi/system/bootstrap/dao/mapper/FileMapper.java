@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.FileDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 文件持久层
@@ -28,4 +31,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface FileMapper extends BaseMapper<FileDO> {
+
+
+    /**
+     * 根据文件ID查询文件信息
+     *
+     * @param id 文件ID
+     * @return 文件信息
+     */
+    Optional<FileDO> selectFileById(@Param("id") String id);
 }

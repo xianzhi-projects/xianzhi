@@ -16,7 +16,12 @@
 
 package io.xianzhi.system.model.dto;
 
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 
@@ -28,4 +33,41 @@ import java.io.Serializable;
  */
 @Data
 public class TenantDTO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    @Length(max = 20, message = "租户ID长度不能超过20")
+    @NotBlank(message = "租户ID不能为空", groups = UpdateGroup.class)
+    private String id;
+
+    /**
+     * 租户名称
+     */
+    @Length(max = 64, message = "租户名称长度不能超过63")
+    @NotBlank(message = "租户名称不能为空", groups = {CreateGroup.class, UpdateGroup.class})
+    private String tenantName;
+    /**
+     * 租户编码
+     */
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_-]{2,63}$", message = "租户编码格式不正确")
+    @NotBlank(message = "租户编码不能为空", groups = {CreateGroup.class})
+    private String tenantCode;
+    /**
+     * 租户描述
+     */
+    @Length(max = 255, message = "租户描述长度不能超过255")
+    private String tenantDesc;
+
+    /**
+     * 租户logoId
+     */
+    @Length(max = 20, message = "租户logoId长度不能超过20")
+    private String tenantLogoId;
+    /**
+     * 租户负责人
+     */
+    @Length(max = 20, message = "租户负责人长度不能超过20")
+    @NotBlank(message = "租户负责人不能为空", groups = {CreateGroup.class, UpdateGroup.class})
+    private String tenantOwner;
 }

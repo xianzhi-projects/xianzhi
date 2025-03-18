@@ -16,8 +16,12 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.TenantDO;
+import io.xianzhi.system.bootstrap.dao.mapper.FileMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.TenantMapper;
+import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.TenantService;
 import io.xianzhi.system.model.dto.TenantDTO;
 import io.xianzhi.system.model.page.TenantPage;
@@ -26,6 +30,7 @@ import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -44,6 +49,17 @@ public class TenantServiceImpl implements TenantService {
      * 租户接口
      */
     private final TenantMapper tenantMapper;
+
+    /**
+     * 用户信息持久层
+     */
+    private final UserMapper userMapper;
+
+    /**
+     * 文件信息持久层
+     */
+    private final FileMapper fileMapper;
+
     /**
      * 查询用户租户信息
      *
@@ -84,6 +100,29 @@ public class TenantServiceImpl implements TenantService {
      */
     @Override
     public void updateTenant(TenantDTO tenantDTO) {
+
+    }
+
+
+    private TenantDO checkedTenantDTO(TenantDTO tenantDTO) {
+        TenantDO tenant;
+        if (StringUtils.hasText(tenantDTO.getId())) {
+            tenant = tenantMapper.selectTenantById(tenantDTO.getId()).orElseThrow(() -> new BusinessException("租户信息不存在"));
+        } else {
+            tenant = new TenantDO();
+            if (tenantMapper.existsTenantByTenantCode(tenantDTO.getTenantCode())) {
+                throw new BusinessException("租户编码已存在");
+            }
+            tenant.setTenantCode(tenantDTO.getTenantCode());
+        }
+        if (tenantMapper.existsTenantByTenantNanIdNot(tenantDTO.getTenantName(), tenantDTO.getId())) {
+            throw new BusinessException("租户名称已存在");
+        }
+        userMapper.selectUserById(tenantDTO.getId()).orElseThrow(() -> new BusinessException("租户负责人不存在"));
+        tenant.setTenantName(tenantDTO.getTenantName());
+        tenant.setTenantOwner(tenantDTO.getTenantOwner());
+        tenant.setTenantDesc(tenantDTO.getTenantDesc());
+        return tenant;
 
     }
 }

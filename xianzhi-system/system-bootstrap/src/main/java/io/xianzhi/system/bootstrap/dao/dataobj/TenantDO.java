@@ -37,6 +37,10 @@ public class TenantDO extends BaseDO {
      */
     private String tenantName;
     /**
+     * 租户编码
+     */
+    private String tenantCode;
+    /**
      * 租户描述
      */
     private String tenantDesc;
@@ -45,4 +49,8 @@ public class TenantDO extends BaseDO {
      * 租户logo
      */
     private String tenantLogo;
+    /**
+     * 租户负责人
+     */
+    private String tenantOwner;
 }

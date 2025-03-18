@@ -67,4 +67,7 @@ public interface UserMapper extends BaseMapper<UserDO> {
      */
     List<UserVO> selectSimpleUserList(@Param("userIds") List<String> userIds);
 
+
+
+
 }

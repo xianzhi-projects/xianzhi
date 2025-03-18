@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.TenantDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 租户持久层
@@ -28,4 +31,29 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TenantMapper extends BaseMapper<TenantDO> {
+
+    /**
+     * 根据ID查询租户信息
+     *
+     * @param id 租户ID
+     * @return 租户信息
+     */
+    Optional<TenantDO> selectTenantById(@Param("id") String id);
+
+    /**
+     * 判断租户名称是否存在
+     *
+     * @param tenantName 租户名称
+     * @param id         租户ID
+     * @return true: 存在，false: 不存在
+     */
+    boolean existsTenantByTenantNanIdNot(@Param("tenantName") String tenantName, @Param("id") String id);
+
+    /**
+     * 判断租户名称是否存在
+     *
+     * @param tenantCode 租户编码
+     * @return true: 存在，false: 不存在
+     */
+    boolean existsTenantByTenantCode(String tenantCode);
 }

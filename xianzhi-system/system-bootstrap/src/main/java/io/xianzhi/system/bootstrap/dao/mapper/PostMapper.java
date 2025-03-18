@@ -19,6 +19,9 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.PostDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 岗位持久层
@@ -28,4 +31,21 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PostMapper extends BaseMapper<PostDO> {
+
+    /**
+     * 根据ID查询岗位
+     *
+     * @param id 岗位ID
+     * @return 岗位信息
+     */
+    Optional<PostDO> selectPostById(@Param("id") String id);
+
+    /**
+     * 判断岗位名称是否存在
+     *
+     * @param postName 岗位名称
+     * @param id       岗位ID
+     * @return 是否存在
+     */
+    boolean existsPostByPostNameAnIdNot(@Param("postName") String postName, @Param("id") String id);
 }
