@@ -21,6 +21,7 @@ import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,4 +48,11 @@ public interface HostCertificateMapper extends BaseMapper<HostCertificateDO> {
      * @return 是否存在
      */
     boolean existsHostCertificateByCertNameAndIdNot(@Param("certName") String certName, @Param("id") String id);
+
+    /**
+     * 根据id删除主机凭证
+     *
+     * @param ids 凭证ID
+     */
+    void deletedHostCertificateById(@Param("ids") List<String> ids);
 }

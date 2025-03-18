@@ -21,6 +21,8 @@ import io.xianzhi.code.model.page.HostCertificatePage;
 import io.xianzhi.code.model.vo.HostCertificateVO;
 import io.xianzhi.core.result.ListResult;
 
+import java.util.List;
+
 /**
  * 主机凭证接口
  *
@@ -60,7 +62,7 @@ public interface HostCertificateService {
     /**
      * 删除主机凭证
      *
-     * @param id 主机凭证ID
+     * @param ids 主机凭证ID
      */
-    void deleteHostCertificateById(String id);
+    void deleteHostCertificateById(List<String> ids);
 }

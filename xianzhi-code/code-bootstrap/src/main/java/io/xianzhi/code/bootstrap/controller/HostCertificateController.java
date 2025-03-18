@@ -25,10 +25,13 @@ import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 主机凭证接口
@@ -99,13 +102,13 @@ public class HostCertificateController {
     /**
      * 删除主机凭证
      *
-     * @param id 主机凭证ID
+     * @param ids 主机凭证ID
      * @return 响应信息
      */
     @PreAuthorize("@xz.hasPermission('code:cert:deleted')")
     @PostMapping(value = "/deleteHostCertificateById")
-    public ResponseResult<Object> deleteHostCertificateById(@RequestParam(value = "id") String id) {
-        hostCertificateService.deleteHostCertificateById(id);
+    public ResponseResult<Object> deleteHostCertificateById(@RequestBody @NotEmpty(message = "凭证ID不能为空") List<String> ids) {
+        hostCertificateService.deleteHostCertificateById(ids);
         return ResponseResult.success();
     }
 }

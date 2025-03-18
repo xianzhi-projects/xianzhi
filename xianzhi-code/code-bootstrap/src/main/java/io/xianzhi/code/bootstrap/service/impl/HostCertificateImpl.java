@@ -20,6 +20,7 @@ import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
 import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
 import io.xianzhi.code.bootstrap.service.HostCertificateService;
 import io.xianzhi.code.model.dto.HostCertificateDTO;
+import io.xianzhi.code.model.enums.CertTypeEnum;
 import io.xianzhi.code.model.page.HostCertificatePage;
 import io.xianzhi.code.model.vo.HostCertificateVO;
 import io.xianzhi.core.exception.BusinessException;
@@ -29,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * 主机凭证接口实现
@@ -80,6 +83,7 @@ public class HostCertificateImpl implements HostCertificateService {
     @Transactional(rollbackFor = Exception.class)
     public void updateHostCertificate(HostCertificateDTO hostCertificateDTO) {
         HostCertificateDO hostCertificateDO = checkedHostCertificateDTO(hostCertificateDTO);
+        hostCertificateMapper.updateById(hostCertificateDO);
 
     }
 
@@ -91,21 +95,36 @@ public class HostCertificateImpl implements HostCertificateService {
      */
     @Override
     public HostCertificateVO getHostCertificateById(String id) {
-        return null;
+        HostCertificateDO hostCertificateDO = hostCertificateMapper.selectHostCertificateById(id).orElseThrow(() -> new BusinessException("主机凭证不存在"));
+        HostCertificateVO hostCertificateVO = new HostCertificateVO();
+        hostCertificateVO.setId(hostCertificateDO.getId());
+        hostCertificateVO.setCertName(hostCertificateDO.getCertName());
+        hostCertificateVO.setCertDesc(hostCertificateDO.getCertDesc());
+        hostCertificateVO.setCertType(hostCertificateDO.getCertType());
+        hostCertificateVO.setUsername(hostCertificateDO.getUsername());
+        hostCertificateVO.setPassword(hostCertificateDO.getPassword());
+        hostCertificateVO.setPrivateKey(hostCertificateDO.getPrivateKey());
+        return hostCertificateVO;
     }
 
     /**
      * 删除主机凭证
      *
-     * @param id 主机凭证ID
+     * @param ids 主机凭证ID
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteHostCertificateById(String id) {
+    public void deleteHostCertificateById(List<String> ids) {
+        hostCertificateMapper.deletedHostCertificateById(ids);
 
     }
 
-
+    /**
+     * 检查凭证信息是否合法
+     *
+     * @param hostCertificateDTO 凭证信息入参
+     * @return 凭证信息
+     */
     private HostCertificateDO checkedHostCertificateDTO(HostCertificateDTO hostCertificateDTO) {
         HostCertificateDO hostCertificateDO;
         if (StringUtils.hasText(hostCertificateDTO.getId())) {
@@ -113,6 +132,21 @@ public class HostCertificateImpl implements HostCertificateService {
         } else {
             hostCertificateDO = new HostCertificateDO();
         }
+        if (hostCertificateDTO.getCertType().getCode().equals(CertTypeEnum.PASSWORD.getCode())) {
+            if (!StringUtils.hasText(hostCertificateDTO.getUsername()) || !StringUtils.hasText(hostCertificateDTO.getPassword())) {
+                throw new BusinessException("用户名或密码不能为空");
+            }
+        } else {
+            if (!StringUtils.hasText(hostCertificateDTO.getPrivateKey())) {
+                throw new BusinessException("私钥不能为空");
+            }
+        }
+        hostCertificateDO.setUsername(hostCertificateDTO.getUsername());
+        hostCertificateDO.setPassword(hostCertificateDTO.getPassword());
+        hostCertificateDO.setPrivateKey(hostCertificateDTO.getPrivateKey());
+        hostCertificateDO.setCertDesc(hostCertificateDTO.getCertDesc());
+        hostCertificateDO.setCertType(hostCertificateDTO.getCertType().getCode());
+        hostCertificateDO.setCertName(hostCertificateDTO.getCertName());
         return hostCertificateDO;
     }
 }
