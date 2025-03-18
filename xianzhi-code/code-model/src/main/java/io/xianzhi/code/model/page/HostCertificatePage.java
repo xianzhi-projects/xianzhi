@@ -14,21 +14,36 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.code.model.page;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
+import io.xianzhi.core.base.Page;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
 /**
- * 用户角色实体
+ * 主机凭证查询条件
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@TableName(value = "sys_user_role")
 @EqualsAndHashCode(callSuper = true)
-public class UserRoleDO extends BaseDO {
+public class HostCertificatePage extends Page implements Serializable {
+
+    /**
+     * 证书类型
+     */
+    private String certType;
+
+    /**
+     * 证书名称
+     */
+    private String certName;
+
+    /**
+     * 用户名
+     */
+    private String username;
 }

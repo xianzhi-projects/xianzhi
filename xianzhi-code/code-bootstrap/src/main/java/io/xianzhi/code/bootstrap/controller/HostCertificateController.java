@@ -14,35 +14,13 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
-
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+package io.xianzhi.code.bootstrap.controller;
 
 /**
- * 租户实体
+ * 主机凭证接口
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_tenant")
-@EqualsAndHashCode(callSuper = true)
-public class TenantDO extends BaseDO {
-
-    /**
-     * 租户名称
-     */
-    private String tenantName;
-    /**
-     * 租户描述
-     */
-    private String tenantDesc;
-
-    /**
-     * 租户logo
-     */
-    private String tenantLogo;
+public class HostCertificateController {
 }

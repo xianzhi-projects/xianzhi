@@ -21,18 +21,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.xianzhi</groupId>
-        <artifactId>xianzhi</artifactId>
+        <artifactId>xianzhi-code</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <description>代码托管服务</description>
-    <packaging>pom</packaging>
-    <modules>
-        <module>code-agent</module>
-        <module>code-facade</module>
-        <module>code-bootstrap</module>
-        <module>code-model</module>
-    </modules>
-    <artifactId>xianzhi-code</artifactId>
+
+    <artifactId>code-agent</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

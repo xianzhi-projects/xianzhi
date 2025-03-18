@@ -14,35 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.code.bootstrap.dao.mapper;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.code.bootstrap.dao.dataobj.AgentDetailsDO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 租户实体
+ * agent详情持久层
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_tenant")
-@EqualsAndHashCode(callSuper = true)
-public class TenantDO extends BaseDO {
-
-    /**
-     * 租户名称
-     */
-    private String tenantName;
-    /**
-     * 租户描述
-     */
-    private String tenantDesc;
-
-    /**
-     * 租户logo
-     */
-    private String tenantLogo;
+@Mapper
+public interface AgentDetailsMapper extends BaseMapper<AgentDetailsDO> {
 }

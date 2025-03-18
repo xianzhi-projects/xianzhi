@@ -19,6 +19,9 @@ package io.xianzhi.code.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.code.bootstrap.dao.dataobj.AgentDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * agent持久层
@@ -28,4 +31,32 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AgentMapper extends BaseMapper<AgentDO> {
+
+
+    /**
+     * 根据agentName和id查询是否存在
+     *
+     * @param agentName agent名称
+     * @param id        agentId
+     * @return 是否存在
+     */
+    boolean existsAgentByAgentNameAndIdNot(@Param("agentName") String agentName, @Param("id") String id);
+
+    /**
+     * 判断agentIp是否存在
+     *
+     * @param hostIp agentIp
+     * @param id     agentId
+     * @return 是否存在
+     */
+    boolean existsAgentByHostIpAndIdNot(@Param("hostIp") String hostIp, @Param("id") String id);
+
+    /**
+     * 根据agentId查询agent信息
+     *
+     * @param id agentId
+     * @return agent信息
+     */
+    Optional<AgentDO> selectAgentById(@Param("id") String id);
+
 }

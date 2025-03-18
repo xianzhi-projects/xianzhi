@@ -31,4 +31,13 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_user_post")
 @EqualsAndHashCode(callSuper = true)
 public class UserPostDO extends BaseDO {
+
+    /**
+     * 用户ID
+     */
+    private String userId;
+    /**
+     * 岗位ID
+     */
+    private String postId;
 }

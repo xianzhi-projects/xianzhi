@@ -14,35 +14,34 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.code.model.enums;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * 租户实体
+ * 凭证类型
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_tenant")
-@EqualsAndHashCode(callSuper = true)
-public class TenantDO extends BaseDO {
+@Getter
+@AllArgsConstructor
+public enum CertTypeEnum {
 
     /**
-     * 租户名称
+     * 密码
      */
-    private String tenantName;
-    /**
-     * 租户描述
-     */
-    private String tenantDesc;
+    PASSWORD("password", "密码"),
 
     /**
-     * 租户logo
+     * 私钥
      */
-    private String tenantLogo;
+    PRIVATE_KEY("privateKey", "私钥"),
+    ;
+
+
+    private final String code;
+
+    private final String desc;
 }

@@ -57,4 +57,10 @@ public interface AgentService {
      * @param id agentID
      */
     void deletedAgent(String id);
+    /**
+     * 安装agent
+     *
+     * @param id agentId
+     */
+    void installAgent(String id);
 }

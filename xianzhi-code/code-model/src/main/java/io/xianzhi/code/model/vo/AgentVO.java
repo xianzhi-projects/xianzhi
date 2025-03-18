@@ -16,9 +16,12 @@
 
 package io.xianzhi.code.model.vo;
 
+import io.xianzhi.core.vo.UserVO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * agent出参
@@ -28,4 +31,51 @@ import java.io.Serializable;
  */
 @Data
 public class AgentVO implements Serializable {
+
+    /**
+     * agentId
+     */
+    private String id;
+    /**
+     * agent名称
+     */
+    private String agentName;
+    /**
+     * agent描述
+     */
+    private String agentDesc;
+    /**
+     * agent标签
+     */
+    private String agentTag;
+    /**
+     * agent详情
+     */
+    private List<AgentDetailsVO> agentDetails;
+    /**
+     * 主机IP
+     */
+    private String hostIp;
+    /**
+     * 主机名称
+     */
+    private String agentStatus;
+    /**
+     * 新增时间
+     */
+    private LocalDateTime createAt;
+    /**
+     * 修改时间
+     */
+    private LocalDateTime updateAt;
+
+    /**
+     * 创建人
+     */
+    private UserVO createBy;
+    /**
+     * 修改人
+     */
+    private UserVO updateBy;
+
 }

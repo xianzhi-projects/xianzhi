@@ -14,35 +14,27 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.code.model.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
- * 租户实体
+ * agent详情入参
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@TableName(value = "sys_tenant")
-@EqualsAndHashCode(callSuper = true)
-public class TenantDO extends BaseDO {
+public class AgentDetailsDTO implements Serializable {
 
     /**
-     * 租户名称
+     * agent类型
      */
-    private String tenantName;
+    private String agentType;
     /**
-     * 租户描述
+     * agent执行类型
      */
-    private String tenantDesc;
-
-    /**
-     * 租户logo
-     */
-    private String tenantLogo;
+    private String agentExecuteType;
 }

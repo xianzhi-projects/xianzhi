@@ -96,5 +96,18 @@ public class AgentController {
         agentService.deletedAgent(id);
         return ResponseResult.success();
     }
+
+    /**
+     * 安装agent
+     *
+     * @param id agentId
+     * @return 响应信息
+     */
+    @PreAuthorize("@xz.hasPermission('code:agent:install')")
+    @PostMapping(value = "/installAgent")
+    public ResponseResult<Object> installAgent(@RequestParam(value = "id") String id) {
+        agentService.installAgent(id);
+        return ResponseResult.success();
+    }
 }
 

@@ -14,18 +14,29 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.mapper;
+package io.xianzhi.code.bootstrap.service.impl;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.system.bootstrap.dao.dataobj.UserRoleDO;
-import org.apache.ibatis.annotations.Mapper;
+import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
+import io.xianzhi.code.bootstrap.service.HostCertificateService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 用户角色持久基层
+ * 主机凭证接口实现
  *
  * @author Max
  * @since 1.0.0
  */
-@Mapper
-public interface UserRoleMapper extends BaseMapper<UserRoleDO> {
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class HostCertificateImpl implements HostCertificateService {
+    /**
+     * 主机凭证持久层
+     */
+    private final HostCertificateMapper hostCertificateMapper;
+
+
+
 }

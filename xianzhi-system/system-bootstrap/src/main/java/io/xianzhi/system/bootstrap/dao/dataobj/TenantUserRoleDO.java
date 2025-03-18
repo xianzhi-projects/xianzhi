@@ -31,4 +31,17 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_tenant_user_role")
 @EqualsAndHashCode(callSuper = true)
 public class TenantUserRoleDO extends BaseDO {
+
+    /**
+     * 租户id
+     */
+    private String tenantId;
+    /**
+     * 用户ID
+     */
+    private String userId;
+    /**
+     * 角色ID
+     */
+    private String roleId;
 }

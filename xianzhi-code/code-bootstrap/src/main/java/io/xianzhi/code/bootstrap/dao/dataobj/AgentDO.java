@@ -31,4 +31,58 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "c_agent")
 @EqualsAndHashCode(callSuper = true)
 public class AgentDO extends BaseDO {
+
+    /**
+     * agent名称
+     */
+    private String agentName;
+    /**
+     * agent描述
+     */
+    private String agentDesc;
+    /**
+     * agent标签
+     */
+    private String agentTag;
+
+    /**
+     * 主机ip
+     */
+    private String hostIp;
+    /**
+     * 主机端口
+     */
+    private Integer hostPort;
+    /**
+     * 工作目录
+     */
+    private String workDir;
+    /**
+     * 认证类型,如果是
+     * 密码认证: 用户名密码不能为空
+     * 私钥认证: 用户名和私钥不能为空
+     * 凭证认证: 凭证ID不能为空
+     */
+    private String authType;
+    /**
+     * 主机用户名
+     */
+    private String hostUsername;
+    /**
+     * 主机密码
+     */
+    private String hostPassword;
+    /**
+     * 主机私钥
+     */
+    private String hostPrivateKey;
+    /**
+     * 主机凭证ID
+     */
+    private String certificateId;
+
+    /**
+     * AGENT状态
+     */
+    private String agentStatus;
 }

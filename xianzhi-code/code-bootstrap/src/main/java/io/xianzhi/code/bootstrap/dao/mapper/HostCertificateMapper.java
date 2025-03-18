@@ -14,35 +14,28 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.code.bootstrap.dao.mapper;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
- * 租户实体
+ * 主机凭证持久层
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_tenant")
-@EqualsAndHashCode(callSuper = true)
-public class TenantDO extends BaseDO {
-
+@Mapper
+public interface HostCertificateMapper extends BaseMapper<HostCertificateDO> {
     /**
-     * 租户名称
+     * 根据id查询主机凭证
+     *
+     * @param id 凭证ID
+     * @return 凭证信息
      */
-    private String tenantName;
-    /**
-     * 租户描述
-     */
-    private String tenantDesc;
-
-    /**
-     * 租户logo
-     */
-    private String tenantLogo;
+    Optional<HostCertificateDO> selectHostCertificateById(@Param("id") String id);
 }
