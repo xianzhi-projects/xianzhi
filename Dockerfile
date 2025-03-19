@@ -1,6 +1,6 @@
 # 使用 Eclipse Temurin 提供的 OpenJDK 17 作为基础镜像
 # 第一阶段用于构建，包含完整的 JDK
-FROM docker.xianzhi.cyou/eclipse-temurin:17-jdk AS builder
+FROM registry-hub.xianzhi.io/eclipse-temurin:17-jdk AS builder
 
 # 设置工作目录为 /app
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY xianzhi-system/system-bootstrap/target/system-bootstrap-1.0.0-SNAPSHOT.jar 
 
 # 运行阶段：使用多阶段构建，仅保留运行时所需的内容
 # 使用 JRE 镜像以减少镜像体积
-FROM docker.xianzhi.cyou/eclipse-temurin:17-jre
+FROM registry-hub.xianzhi.io/eclipse-temurin:17-jre
 
 # 设置工作目录为 /app
 WORKDIR /app

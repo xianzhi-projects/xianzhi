@@ -16,28 +16,11 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
-import io.xianzhi.core.result.ListResult;
-import io.xianzhi.core.result.ResponseResult;
-import io.xianzhi.linke.bootstrap.service.PipelineComponentService;
-import io.xianzhi.linke.model.vo.PipelineComponentVO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 /**
- * 流水线组件接口
+ * 发布单接口
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/pipeline/component")
-public class PipelineComponentController {
-
-
-    private final PipelineComponentService pipelineComponentService;
-
-
-    public ResponseResult<ListResult<PipelineComponentVO>>
+public class ReleaseOrderController {
 }

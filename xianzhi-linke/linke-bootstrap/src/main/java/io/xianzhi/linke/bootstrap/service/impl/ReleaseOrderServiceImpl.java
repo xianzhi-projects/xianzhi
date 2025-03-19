@@ -14,30 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.linke.bootstrap.controller;
+package io.xianzhi.linke.bootstrap.service.impl;
 
-import io.xianzhi.core.result.ListResult;
-import io.xianzhi.core.result.ResponseResult;
-import io.xianzhi.linke.bootstrap.service.PipelineComponentService;
-import io.xianzhi.linke.model.vo.PipelineComponentVO;
+import io.xianzhi.linke.bootstrap.service.ReleaseOrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 流水线组件接口
+ * 发布单接口实现
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
+@Slf4j
+@Service
 @RequiredArgsConstructor
-@RequestMapping(value = "/pipeline/component")
-public class PipelineComponentController {
-
-
-    private final PipelineComponentService pipelineComponentService;
-
-
-    public ResponseResult<ListResult<PipelineComponentVO>>
+public class ReleaseOrderServiceImpl implements ReleaseOrderService {
 }
