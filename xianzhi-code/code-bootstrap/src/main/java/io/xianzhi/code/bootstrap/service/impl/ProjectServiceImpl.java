@@ -18,6 +18,7 @@ package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.ProjectService;
 import io.xianzhi.code.model.dto.ProjectDTO;
+import io.xianzhi.code.model.vo.ProjectVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,16 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deletedProject(String id) {
 
+    }
+
+    /**
+     * 查询项目详情
+     *
+     * @param id 项目ID
+     * @return 项目详情
+     */
+    @Override
+    public ProjectVO getProjectDetails(String id) {
+        return null;
     }
 }

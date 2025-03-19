@@ -81,6 +81,10 @@
             <groupId>io.xianzhi</groupId>
             <artifactId>common-websocket</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.xianzhi</groupId>
+            <artifactId>common-excel</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
