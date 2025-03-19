@@ -16,10 +16,7 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
-import io.xianzhi.core.result.ListResult;
-import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.linke.bootstrap.service.PipelineComponentService;
-import io.xianzhi.linke.model.vo.PipelineComponentVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +36,4 @@ public class PipelineComponentController {
     private final PipelineComponentService pipelineComponentService;
 
 
-    public ResponseResult<ListResult<PipelineComponentVO>>
 }

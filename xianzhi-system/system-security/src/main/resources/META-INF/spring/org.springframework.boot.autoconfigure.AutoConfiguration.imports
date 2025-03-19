@@ -1,0 +1,2 @@
+io.xianzhi.system.security.handler.XianZhiAccessDeniedHandler
+io.xianzhi.system.security.handler.XianZhiAuthenticationEntryPoint
