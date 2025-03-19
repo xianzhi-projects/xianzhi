@@ -14,41 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.linke.model.enums;
+package io.xianzhi.linke.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * 流水线分类枚举
+ * 迭代入参
  *
  * @author Max
  * @since 1.0.0
  */
-@Getter
-@AllArgsConstructor
-public enum PipeliineComponetCategoryEnum {
-
-    /**
-     * 编译
-     */
-    BUILD("build", "编译"),
-    /**
-     * 测试
-     */
-    TEST("test", "测试"),
-    /**
-     * 部署
-     */
-    DEPLOY("deploy", "部署"),
-    ;
-
-    /**
-     * 流水线分类编码
-     */
-    private final String code;
-    /**
-     * 流水线分类描述
-     */
-    private final String desc;
+@Data
+public class IterationDTO implements Serializable {
 }
