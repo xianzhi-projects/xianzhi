@@ -19,6 +19,10 @@ package io.xianzhi.system.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.system.bootstrap.dao.dataobj.SystemParamDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 系统参数持久层
@@ -28,4 +32,44 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SystemParamMapper extends BaseMapper<SystemParamDO> {
+
+
+    /**
+     * 根据ID查询系统参数
+     *
+     * @param id 系统参数ID
+     * @return 系统参数
+     */
+    Optional<SystemParamDO> selectSystemParamById(@Param("id") String id);
+
+    /**
+     * 根据参数编码查询系统参数
+     *
+     * @param paramCode 参数编码
+     * @return 系统参数
+     */
+    Optional<SystemParamDO> selectSystemParamByParamCode(@Param("paramCode") String paramCode);
+
+    /**
+     * 判断参数编码是否存在
+     * @param paramCode 参数编码
+     * @return 是否存在
+     */
+    boolean existParamByCode(@Param("paramCode") String paramCode);
+
+    /**
+     * 判断参数名称是否存在
+     * @param paramName 参数名称
+     * @param id 系统参数ID
+     * @return 是否存在
+     */
+    boolean existParamByNameAndIdNot(@Param("paramName") String paramName, @Param("id") String id);
+
+
+    /**
+     * 根据ID列表查询系统参数
+     *
+     * @param ids 系统参数ID列表
+     */
+    void deletedSystemByIds(@Param("ids") List<String> ids);
 }

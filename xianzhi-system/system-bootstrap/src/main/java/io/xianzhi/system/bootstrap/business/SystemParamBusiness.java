@@ -14,45 +14,25 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.model.dto;
+package io.xianzhi.system.bootstrap.business;
 
-import lombok.Data;
-
-import java.io.Serializable;
+import io.xianzhi.system.bootstrap.dao.mapper.SystemParamMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
- * 系统参数入参
+ * 系统参数业务类
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-public class SystemParamDTO implements Serializable {
-
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class SystemParamBusiness {
     /**
-     * 主键
+     * 系统参数持久层
      */
-    private String id;
-    /**
-     * 参数名称
-     */
-    private String paramName;
-    /**
-     * 参数编码
-     */
-    private String paramCode;
-    /**
-     * 参数值
-     */
-    private String paramValue;
-    /**
-     * 参数描述
-     */
-    private String paramDesc;
-    /**
-     * 参数类型
-     */
-    private String paramType;
-
-
+    private final SystemParamMapper systemParamMapper;
 }

@@ -31,4 +31,26 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_system_param")
 @EqualsAndHashCode(callSuper = true)
 public class SystemParamDO extends BaseDO {
+
+
+    /**
+     * 参数名称
+     */
+    private String paramName;
+    /**
+     * 参数编码
+     */
+    private String paramCode;
+    /**
+     * 参数值
+     */
+    private String paramValue;
+    /**
+     * 参数描述
+     */
+    private String paramDesc;
+    /**
+     * 参数类型
+     */
+    private String paramType;
 }

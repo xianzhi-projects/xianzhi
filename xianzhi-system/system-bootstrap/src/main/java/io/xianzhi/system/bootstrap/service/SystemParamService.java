@@ -16,6 +16,13 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.SystemParamDTO;
+import io.xianzhi.system.model.page.SystemParamPage;
+import io.xianzhi.system.model.vo.SystemParamVO;
+
+import java.util.List;
+
 /**
  * 系统参数接口
  *
@@ -23,4 +30,32 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface SystemParamService {
+
+    /**
+     * 分页查询系统参数
+     *
+     * @param systemParamPage 系统参数查询条件
+     * @return 系统参数列表
+     */
+    ListResult<SystemParamVO> pageSystemParamList(SystemParamPage systemParamPage);
+    /**
+     * 创建系统参数
+     *
+     * @param systemParamDTO 系统参数入参
+     * @return 系统参数ID
+     */
+    String createSystemParam(SystemParamDTO systemParamDTO);
+    /**
+     * 更新系统参数
+     *
+     * @param systemParamDTO 系统参数入参
+     */
+    void updateSystemParam(SystemParamDTO systemParamDTO);
+    /**
+     * 删除系统参数
+     *
+     * @param ids 系统参数ID列表
+     */
+    void deleteSystemParam( List<String> ids);
+
 }
