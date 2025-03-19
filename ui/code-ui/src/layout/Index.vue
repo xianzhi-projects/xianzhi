@@ -16,10 +16,17 @@
 
 <script setup lang="ts">
 
+import Header from "@/layout/components/Header.vue";
+import Content from "@/layout/components/Content.vue";
+import Footer from "@/layout/components/Footer.vue";
 </script>
 
 <template>
-
+  <a-layout>
+    <Header/>
+    <Content/>
+    <Footer/>
+  </a-layout>
 </template>
 
 <style scoped>
