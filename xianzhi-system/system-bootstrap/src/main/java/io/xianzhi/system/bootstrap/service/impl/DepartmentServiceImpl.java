@@ -187,7 +187,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentVO convert(DepartmentDO item, List<UserVO> owners, List<DepartmentDO> departments) {
         DepartmentVO vo = convert(item);
         if (!ObjectUtils.isEmpty(owners)) {
-            owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
+//            owners.stream().filter(user -> user.getId().equals(item.getDepartmentOwner())).findFirst().ifPresent(vo::setDepartmentOwner);
         }
         vo.setChildren(getChildren(item.getId(), departments, owners));
         return vo;

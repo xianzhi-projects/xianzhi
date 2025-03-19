@@ -86,7 +86,7 @@ public class DictServiceImpl implements DictService {
             dictVO.setDictCode(item.getDictCode());
             dictVO.setDictName(item.getDictName());
             dictVO.setDictDesc(item.getDictDesc());
-            dictVO.setCreateBy(users.stream().filter(user -> user.getId().equals(item.getCreateBy())).findFirst().orElse(null));
+//            dictVO.setCreateBy(users.stream().filter(user -> user.getId().equals(item.getCreateBy())).findFirst().orElse(null));
             dictVO.setCreateAt(item.getCreateAt());
             return dictVO;
         }).toList();
