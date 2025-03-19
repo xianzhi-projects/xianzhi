@@ -16,8 +16,10 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
+import io.xianzhi.system.bootstrap.dao.dataobj.UserDetailsDO;
 import io.xianzhi.system.bootstrap.dao.mapper.DepartmentMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.bootstrap.service.UserService;
@@ -28,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -71,6 +74,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createUser(UserDTO userDTO) {
+        UserDO user = checkedUserDTO(userDTO);
+        userMapper.insert(user);
+        UserDetailsDO userDetailsDO = new UserDetailsDO();
+        userDetailsDO.setUserId(user.getId());
+
         return "";
     }
 
@@ -113,7 +121,26 @@ public class UserServiceImpl implements UserService {
      * @return 用户信息实体
      */
     private UserDO checkedUserDTO(UserDTO userDTO) {
-        return null;
+        UserDO user;
+        if (StringUtils.hasText(userDTO.getId())){
+            user = userMapper.selectUserById(userDTO.getId()).orElseThrow(()->new BusinessException("用户信息不存在"));
+        }else{
+            user = new UserDO();
+            if (userMapper.existsUserByUsername(userDTO.getUsername())){
+                throw new BusinessException("用户名已存在");
+            }
+            user.setUsername(userDTO.getUsername());
+        }
+        if (userMapper.existsUserByEmailAndIdNot(userDTO.getEmail(),user.getId())){
+            throw new BusinessException("邮箱已存在");
+        }
+        if (userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(),user.getId())){
+            throw new BusinessException("手机号码已存在");
+        }
+
+        return user;
     }
+
+
 
 }

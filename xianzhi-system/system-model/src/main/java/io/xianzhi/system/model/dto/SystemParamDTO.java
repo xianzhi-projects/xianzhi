@@ -14,26 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.system.model.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
- * 用户详情实体
+ * 系统参数入参
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@TableName(value = "sys_user_details")
-@EqualsAndHashCode(callSuper = true)
-public class UserDetailsDO extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    private String userId;
+public class SystemParamDTO implements Serializable {
 }

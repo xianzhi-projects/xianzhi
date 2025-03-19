@@ -14,26 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.system.bootstrap.dao.mapper;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.system.bootstrap.dao.dataobj.SystemParamDO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 用户详情实体
+ * 系统参数持久层
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_user_details")
-@EqualsAndHashCode(callSuper = true)
-public class UserDetailsDO extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    private String userId;
+@Mapper
+public interface SystemParamMapper extends BaseMapper<SystemParamDO> {
 }

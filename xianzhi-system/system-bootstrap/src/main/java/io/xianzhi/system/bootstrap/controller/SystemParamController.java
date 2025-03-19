@@ -14,26 +14,20 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.dao.dataobj;
+package io.xianzhi.system.bootstrap.controller;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.xianzhi.common.mybatis.plus.base.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用户详情实体
+ * 系统参数接口
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@TableName(value = "sys_user_details")
-@EqualsAndHashCode(callSuper = true)
-public class UserDetailsDO extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    private String userId;
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = "/s/system_param")
+public class SystemParamController {
 }

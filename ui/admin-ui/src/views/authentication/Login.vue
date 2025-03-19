@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login-container">
     <a-form
       :label-col="{ span: 8 }"
       :model="formState"
@@ -46,11 +46,11 @@ const onFinishFailed = errorInfo => {
 };
 </script>
 <style lang="less" scoped>
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.login-container {
+  width: 500px;
+  height: 400px;
+  //background-color: #191a23;
+  margin: 0 auto;
   .input {
     width: 300px;
   }

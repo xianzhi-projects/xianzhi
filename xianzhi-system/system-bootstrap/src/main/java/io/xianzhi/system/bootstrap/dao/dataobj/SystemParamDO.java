@@ -22,18 +22,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 用户详情实体
+ * 系统参数实体
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@TableName(value = "sys_user_details")
+@TableName(value = "sys_system_param")
 @EqualsAndHashCode(callSuper = true)
-public class UserDetailsDO extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    private String userId;
+public class SystemParamDO extends BaseDO {
 }

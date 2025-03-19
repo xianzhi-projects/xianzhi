@@ -44,4 +44,16 @@
             #{id,jdbcType=VARCHAR}
         </foreach>
     </select>
+
+    <select id="existsUserByUsername" resultType="boolean">
+
+    </select>
+
+    <select id="existsUserByEmailAndIdNot" resultType="boolean">
+
+    </select>
+
+    <select id="existsUserByPhoneAndIdNot" resultType="boolean">
+
+    </select>
 </mapper>

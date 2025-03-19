@@ -50,6 +50,32 @@ public interface UserMapper extends BaseMapper<UserDO> {
      */
     boolean existsByDepartmentId(@Param("departmentId") String departmentId);
 
+    /**
+     * 判断用户名是否存在
+     *
+     * @param username 用户名
+     * @return 是否存在
+     */
+    boolean existsUserByUsername(@Param("username") String username);
+
+    /**
+     * 判断邮箱是否存在
+     * @param email 邮箱
+     * @param id 用户ID
+     * @return 是否存在
+     */
+    boolean existsUserByEmailAndIdNot(String email,String id);
+
+    /**
+     * 判断手机号码是否存在
+     * @param phone 手机号码
+     * @param id 用户ID
+     * @return 是否存在
+     */
+    boolean existsUserByPhoneAndIdNot(String phone,String id);
+
+
+
 
     /**
      * 根据用户名/邮箱/手机号码查询用户信息

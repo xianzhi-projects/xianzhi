@@ -28,4 +28,46 @@ import java.io.Serializable;
  */
 @Data
 public class UserDTO implements Serializable {
+
+    /**
+     * 用户ID
+     */
+    private String id;
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 昵称
+     */
+    private String nickName;
+    /**
+     * 真实姓名
+     */
+    private String realName;
+    /**
+     * 部门ID
+     */
+    private String departmentId;
+    /**
+     * 领导ID
+     */
+    private String leaderId;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 手机号码
+     */
+    private String phone;
+    /**
+     * 头像
+     */
+    private String avatar;
+
 }
