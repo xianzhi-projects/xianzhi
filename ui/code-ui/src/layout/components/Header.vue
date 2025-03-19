@@ -26,7 +26,6 @@ import {selectedKeys} from "@/layout/index.ts";
       v-model:selectedKeys="selectedKeys"
       :style="{ lineHeight: '64px' }"
       mode="horizontal"
-      theme="dark"
     >
       <a-menu-item key="1">nav 222</a-menu-item>
       <a-menu-item key="2">nav 2</a-menu-item>
@@ -35,6 +34,8 @@ import {selectedKeys} from "@/layout/index.ts";
   </a-layout-header>
 </template>
 
-<style scoped>
-
+<style lang="less" scoped>
+.ant-layout-header {
+  background-color: transparent !important;
+}
 </style>

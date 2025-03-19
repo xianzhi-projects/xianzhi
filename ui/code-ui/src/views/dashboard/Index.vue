@@ -15,11 +15,16 @@
   -->
 
 <script setup lang="ts">
+import {useAppStore} from "@/stores/app.ts"
 
+const app = useAppStore()
 </script>
 
 <template>
-
+  1111
+  <a-button-group>
+    <a-button @click="app.toggleDarkMode">切换模式{{ app.darkModeComp }}</a-button>
+  </a-button-group>
 </template>
 
 <style scoped>

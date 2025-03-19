@@ -15,10 +15,16 @@
   -->
 
 <script lang="ts" setup>
+import {useAppStore} from "@/stores/app.js"
+
+const app = useAppStore()
+
 </script>
 
 <template>
-  <RouterView />
+  <a-config-provider :theme="app.themeConfig">
+    <RouterView/>
+  </a-config-provider>
 </template>
 
 <style scoped>

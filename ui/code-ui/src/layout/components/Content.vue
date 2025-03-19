@@ -25,7 +25,9 @@
       <a-breadcrumb-item>List</a-breadcrumb-item>
       <a-breadcrumb-item>App</a-breadcrumb-item>
     </a-breadcrumb>
-    <div :style="{ background: '#fff', padding: '24px', minHeight: '280px' }">Content</div>
+    <div :style="{ padding: '24px', minHeight: '380px' }">
+      <RouterView/>
+    </div>
   </a-layout-content>
 </template>
 
