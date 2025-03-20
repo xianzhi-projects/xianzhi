@@ -55,6 +55,7 @@
         <module>xianzhi-code</module>
         <module>xianzhi-linke</module>
         <module>xianzhi-system</module>
+        <module>xianzhi-gateway</module>
     </modules>
 
     <properties>
