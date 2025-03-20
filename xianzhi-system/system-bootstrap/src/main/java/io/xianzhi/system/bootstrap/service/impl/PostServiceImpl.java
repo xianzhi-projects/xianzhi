@@ -17,6 +17,7 @@
 package io.xianzhi.system.bootstrap.service.impl;
 
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.PostDO;
 import io.xianzhi.system.bootstrap.dao.mapper.PostMapper;
 import io.xianzhi.system.bootstrap.service.PostService;
 import io.xianzhi.system.model.dto.PostDTO;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -66,7 +68,9 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createPost(PostDTO postDTO) {
-        return "";
+        PostDO post = checkedPostDTO(postDTO);
+        postMapper.insert(post);
+        return post.getId();
     }
 
     /**
@@ -77,7 +81,8 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updatePost(PostDTO postDTO) {
-
+        PostDO post = checkedPostDTO(postDTO);
+        postMapper.updateById(post);
     }
 
     /**
@@ -89,5 +94,21 @@ public class PostServiceImpl implements PostService {
     @Transactional(rollbackFor = Exception.class)
     public void deletedPost(List<String> ids) {
 
+    }
+
+    /**
+     * 检查岗位信息入参
+     *
+     * @param postDTO 岗位信息入参
+     * @return 岗位信息
+     */
+    private PostDO checkedPostDTO(PostDTO postDTO) {
+        PostDO post;
+        if (StringUtils.hasText(postDTO.getId())) {
+            post = postMapper.selectPostById(postDTO.getId()).orElseThrow(() -> new RuntimeException("岗位不存在"));
+        } else {
+            post = new PostDO();
+        }
+        return post;
     }
 }

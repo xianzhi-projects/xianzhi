@@ -130,7 +130,6 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
 
-
     /**
      * 转换资源信息出参
      *

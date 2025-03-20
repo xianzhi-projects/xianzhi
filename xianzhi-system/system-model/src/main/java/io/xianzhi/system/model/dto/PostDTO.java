@@ -28,4 +28,19 @@ import java.io.Serializable;
  */
 @Data
 public class PostDTO implements Serializable {
+
+
+    /**
+     * 岗位ID
+     */
+    private String id;
+    /**
+     * 岗位名称
+     */
+    private String postName;
+
+    /**
+     * 岗位职级
+     */
+    private Integer postLevel;
 }

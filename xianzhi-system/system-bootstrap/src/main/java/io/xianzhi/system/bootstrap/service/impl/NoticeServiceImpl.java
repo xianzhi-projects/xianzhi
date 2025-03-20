@@ -93,7 +93,12 @@ public class NoticeServiceImpl implements NoticeService {
 
     }
 
-
+    /**
+     * 检查公告信息入参
+     *
+     * @param noticeDTO 公告信息入参
+     * @return 公告信息
+     */
     private NoticeDO checkedNoticeDTO(NoticeDTO noticeDTO) {
         NoticeDO noticeDO;
         if (StringUtils.hasText(noticeDTO.getId())) {

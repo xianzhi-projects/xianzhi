@@ -28,6 +28,7 @@ import io.xianzhi.system.model.page.UserPage;
 import io.xianzhi.system.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -53,6 +54,10 @@ public class UserServiceImpl implements UserService {
      * 部门信息持久层
      */
     private final DepartmentMapper departmentMapper;
+    /**
+     * 密码加密
+     */
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 分页查询用户列表
@@ -131,14 +136,21 @@ public class UserServiceImpl implements UserService {
             }
             user.setUsername(userDTO.getUsername());
         }
+        // 检查部门是否存在
         departmentMapper.selectDepartmentById(userDTO.getDepartmentId()).orElseThrow(() -> new BusinessException("部门信息不存在"));
+        // 检查邮箱是否存在
         if (userMapper.existsUserByEmailAndIdNot(userDTO.getEmail(), user.getId())) {
             throw new BusinessException("邮箱已存在");
         }
-        if (userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(), user.getId())) {
+        // 检查手机号码是否存在
+        if (StringUtils.hasText(userDTO.getPhone()) && userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(), user.getId())) {
             throw new BusinessException("手机号码已存在");
         }
-
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        user.setEmail(userDTO.getEmail());
+        user.setPhone(userDTO.getPhone());
+        user.setDepartmentId(userDTO.getDepartmentId());
         return user;
     }
 
