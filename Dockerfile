@@ -44,5 +44,5 @@ USER temurin
 
 # 添加元数据标签
 LABEL maintainer="Max  max@xianzhi.io" \
-      version="1.0" \
-      description="研发效能平台 | 先知  Spring Boot 3 running  JDK 17"
+      version="1.0.0" \
+      description="研发效能平台 | 先知  Spring Boot 3 &  JDK 17"
