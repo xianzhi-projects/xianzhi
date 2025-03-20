@@ -21,12 +21,12 @@ COPY --from=builder /app/app.jar /app/app.jar
 # 设置容器内的环境变量
 # JAVA_OPTS 用于传递 JVM 参数，例如内存设置
 # SPRING_PROFILES_ACTIVE 指定 Spring Boot 的运行环境
-# PORT 定义应用监听的端口，固定为 8002
+# PORT 定义应用监听的端口，固定为 9512
 ENV JAVA_OPTS="" \
     SPRING_PROFILES_ACTIVE="prod" \
     PORT=9512
 
-# 暴露容器端口 8002
+# 暴露容器端口 9512
 EXPOSE 9512
 
 # 指定容器启动时的默认命令
@@ -36,7 +36,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
 # 添加健康检查，确保容器运行正常
 # 假设您的 Spring Boot 项目启用了 Actuator，并提供了 /actuator/health 端点
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8002/actuator/health || exit 1
+  CMD curl -f http://localhost:9512/actuator/health || exit 1
 
 # 设置容器运行时的用户（安全性考虑）
 # 默认使用 temurin 用户
