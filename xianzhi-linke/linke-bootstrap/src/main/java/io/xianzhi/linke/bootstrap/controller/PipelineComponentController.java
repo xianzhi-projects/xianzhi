@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/pipeline/component")
+@RequestMapping(value = "/l/pipeline/component")
 public class PipelineComponentController {
 
 

@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/iteration")
+@RequestMapping(value = "/l/iteration")
 public class IterationController {
     /**
      * 迭代接口
