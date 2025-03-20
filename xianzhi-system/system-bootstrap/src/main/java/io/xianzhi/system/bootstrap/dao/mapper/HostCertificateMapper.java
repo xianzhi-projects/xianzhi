@@ -17,7 +17,7 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
+import io.xianzhi.system.bootstrap.dao.dataobj.HostCertificateDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
