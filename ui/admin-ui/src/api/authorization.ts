@@ -36,17 +36,13 @@ export interface TokenVO {
  */
 export interface PasswordLoginDTO {
   /**
-   * 登录账号  手机号码/邮箱/工号/域账号
+   * 登录账号 用户名/邮箱
    */
   username: string
   /**
    * 密码
    */
   password: string
-  /**
-   * 记住我
-   */
-  remember: boolean
   /**
    * 验证码输入的值
    */
