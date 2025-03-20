@@ -16,9 +16,9 @@
 
 package io.xianzhi.system.model.dto;
 
-import io.xianzhi.code.model.enums.CertTypeEnum;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
+import io.xianzhi.system.model.enums.CertTypeEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
