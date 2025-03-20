@@ -68,9 +68,15 @@
         <jsch.version>0.2.23</jsch.version>
         <disruptor.version>3.4.2</disruptor.version>
         <aws.s3.version>2.30.37</aws.s3.version>
+        <dubbo.version>3.3.3</dubbo.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
             <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>bom</artifactId>
