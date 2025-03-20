@@ -22,6 +22,11 @@ cache:
     - mvn clean package -DskipTests
   tags:
     - app
+xianzhi-system
+  system-bootstrap
+    target
+      system-bootstrap-1.0.0-SNAPSHOT.jar
+Dockerfile
 
 代码测试:
   stage: 测试
