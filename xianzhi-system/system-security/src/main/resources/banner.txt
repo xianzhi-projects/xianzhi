@@ -8,5 +8,5 @@ ${AnsiColor.BRIGHT_CYAN}${AnsiStyle.BOLD}
         \/   \/ |_|  \__,_| |_| |_|         \_____/ |_| |_| |_|
 =====================================================================================
 ${AnsiColor.BRIGHT_CYAN}${AnsiStyle.BOLD}
-::  XianZhi ::  先知、先觉
+::  先知研发效能平台 ::  先知、先觉                                     Version: 1.0.0
 ${AnsiStyle.NORMAL}
