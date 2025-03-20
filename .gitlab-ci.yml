@@ -1,0 +1,73 @@
+stages:
+  - 编译
+  - 测试
+  - 构建
+  - deploy
+
+variables:
+  APP_NAME: xianzhi-base
+  DOCKER_IMAGE: $APP_NAME:latest
+  DEPLOY_SERVERS: "192.168.50.70 192.168.50.71 192.168.50.72"
+
+# 定义缓存配置
+cache:
+  key: "base-bootstrap"
+  paths:
+    - base-bootstrap/target # 缓存构建输出
+
+代码编译:
+  stage: 编译
+  script:
+    - cd base-bootstrap
+    - mvn clean package -DskipTests
+  tags:
+    - app
+
+代码测试:
+  stage: 测试
+  script:
+    - cd base-bootstrap
+    - mvn test
+  tags:
+    - app
+
+构建镜像:
+  stage: 构建
+  script:
+    - echo "Restoring cached target directory..."
+    - ls base-bootstrap/target || echo "No cached target directory found" # 检查缓存是否存在
+    - echo "Logging in to Docker registry..."
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $DOCKER_REGISTRY
+    - echo "Building Docker image..."
+    - docker build -t $DOCKER_REGISTRY/xianzhi-group/$DOCKER_IMAGE -f Dockerfile .
+    - echo "Pushing Docker image to registry..."
+    - docker push $DOCKER_REGISTRY/xianzhi-group/$DOCKER_IMAGE
+
+  tags:
+    - app
+
+deploy:
+  stage: deploy
+  before_script:
+    # 安装 SSH 工具
+    - apt-get update && apt-get install -y openssh-client
+    # 配置 SSH
+    - mkdir -p /root/.ssh
+    - echo "$DEPLOY_PRIVATE_KEY" > /root/.ssh/id_rsa
+    - chmod 600 /root/.ssh/id_rsa
+    - eval $(ssh-agent -s)
+    - ssh-add /root/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" > /root/.ssh/config
+  script:
+    - echo "Deploying application to servers..."
+    - for server in $DEPLOY_SERVERS; do
+      echo "Deploying to $server...";
+      ssh root@$server "
+      docker stop $APP_NAME || true &&
+      docker rm $APP_NAME || true &&
+      docker pull $DOCKER_REGISTRY/xianzhi-group/$DOCKER_IMAGE &&
+      docker run -d --name $APP_NAME -p 9001:8080 $DOCKER_REGISTRY/xianzhi-group/$DOCKER_IMAGE
+      ";
+      done
+  tags:
+    - app
