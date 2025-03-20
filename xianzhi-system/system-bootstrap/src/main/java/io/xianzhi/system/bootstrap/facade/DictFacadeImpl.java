@@ -19,6 +19,7 @@ package io.xianzhi.system.bootstrap.facade;
 import io.xianzhi.system.facade.DictFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,6 +30,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
+@DubboService
 @RequiredArgsConstructor
 public class DictFacadeImpl implements DictFacade {
 }
