@@ -28,4 +28,17 @@ import java.io.Serializable;
  */
 @Data
 public class RoleDTO implements Serializable {
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
+    /**
+     * 角色描述
+     */
+    private String roleDesc;
+    /**
+     * 角色编码
+     */
+    private String roleCode;
 }

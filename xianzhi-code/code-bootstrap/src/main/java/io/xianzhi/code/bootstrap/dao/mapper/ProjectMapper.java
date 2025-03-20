@@ -19,6 +19,9 @@ package io.xianzhi.code.bootstrap.dao.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Optional;
 
 /**
  * 项目信息持久层
@@ -28,4 +31,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProjectMapper extends BaseMapper<ProjectDO> {
+
+    /**
+     * 根据项目ID查询项目信息
+     *
+     * @param id 项目ID
+     * @return 项目信息
+     */
+    Optional<ProjectDO> selectProjectById(@Param("id") String id);
 }

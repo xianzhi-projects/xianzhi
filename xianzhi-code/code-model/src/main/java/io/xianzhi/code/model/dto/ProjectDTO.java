@@ -28,4 +28,21 @@ import java.io.Serializable;
  */
 @Data
 public class ProjectDTO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    private String id;
+    /**
+     * 项目名称
+     */
+    private String projectName;
+    /**
+     * 项目路径
+     */
+    private String projectPath;
+    /**
+     * 分组ID
+     */
+    private String groupId;
 }

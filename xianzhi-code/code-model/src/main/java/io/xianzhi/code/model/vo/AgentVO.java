@@ -16,7 +16,7 @@
 
 package io.xianzhi.code.model.vo;
 
-import io.xianzhi.core.vo.UserVO;
+import io.xianzhi.system.model.vo.UserVO;
 import lombok.Data;
 
 import java.io.Serializable;

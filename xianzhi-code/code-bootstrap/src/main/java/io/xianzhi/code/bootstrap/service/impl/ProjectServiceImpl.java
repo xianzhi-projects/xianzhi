@@ -16,12 +16,17 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO;
+import io.xianzhi.code.bootstrap.dao.mapper.ProjectMapper;
 import io.xianzhi.code.bootstrap.service.ProjectService;
 import io.xianzhi.code.model.dto.ProjectDTO;
 import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 /**
  * 项目接口实现
@@ -33,6 +38,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
+
+    /**
+     * 项目持久层
+     */
+    private final ProjectMapper projectMapper;
+
     /**
      * 新增项目
      *
@@ -40,8 +51,11 @@ public class ProjectServiceImpl implements ProjectService {
      * @return 项目ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createProject(ProjectDTO projectDTO) {
-        return "";
+        ProjectDO projectDO = checkedProjectDTO(projectDTO);
+        projectMapper.insert(projectDO);
+        return projectDO.getId();
     }
 
     /**
@@ -73,5 +87,16 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectVO getProjectDetails(String id) {
         return null;
+    }
+
+
+    private ProjectDO checkedProjectDTO(ProjectDTO projectDTO) {
+        ProjectDO project;
+        if (StringUtils.hasText(projectDTO.getId())) {
+            project = projectMapper.selectProjectById(projectDTO.getId()).orElseThrow(() -> new BusinessException("项目不存在"));
+        } else {
+            project = new ProjectDO();
+        }
+        return project;
     }
 }
