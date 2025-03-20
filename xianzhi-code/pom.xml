@@ -27,7 +27,6 @@
     <description>代码托管服务</description>
     <packaging>pom</packaging>
     <modules>
-        <module>code-agent</module>
         <module>code-facade</module>
         <module>code-bootstrap</module>
         <module>code-model</module>
