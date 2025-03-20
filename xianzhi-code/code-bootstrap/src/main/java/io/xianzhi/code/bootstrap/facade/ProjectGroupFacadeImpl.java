@@ -19,7 +19,6 @@ package io.xianzhi.code.bootstrap.facade;
 import io.xianzhi.code.facade.ProjectGroupFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,7 +29,6 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@DubboService
 @RequiredArgsConstructor
 public class ProjectGroupFacadeImpl implements ProjectGroupFacade {
 }
