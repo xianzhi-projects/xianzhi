@@ -122,25 +122,25 @@ public class UserServiceImpl implements UserService {
      */
     private UserDO checkedUserDTO(UserDTO userDTO) {
         UserDO user;
-        if (StringUtils.hasText(userDTO.getId())){
-            user = userMapper.selectUserById(userDTO.getId()).orElseThrow(()->new BusinessException("用户信息不存在"));
-        }else{
+        if (StringUtils.hasText(userDTO.getId())) {
+            user = userMapper.selectUserById(userDTO.getId()).orElseThrow(() -> new BusinessException("用户信息不存在"));
+        } else {
             user = new UserDO();
-            if (userMapper.existsUserByUsername(userDTO.getUsername())){
+            if (userMapper.existsUserByUsername(userDTO.getUsername())) {
                 throw new BusinessException("用户名已存在");
             }
             user.setUsername(userDTO.getUsername());
         }
-        if (userMapper.existsUserByEmailAndIdNot(userDTO.getEmail(),user.getId())){
+        departmentMapper.selectDepartmentById(userDTO.getDepartmentId()).orElseThrow(() -> new BusinessException("部门信息不存在"));
+        if (userMapper.existsUserByEmailAndIdNot(userDTO.getEmail(), user.getId())) {
             throw new BusinessException("邮箱已存在");
         }
-        if (userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(),user.getId())){
+        if (userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(), user.getId())) {
             throw new BusinessException("手机号码已存在");
         }
 
         return user;
     }
-
 
 
 }

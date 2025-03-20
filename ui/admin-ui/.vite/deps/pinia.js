@@ -2137,7 +2137,7 @@ init_esm_shims2();
 function getComponentTypeName(options) {
   var _a25;
   const name = options.name || options._componentTag || options.__VUE_DEVTOOLS_COMPONENT_GUSSED_NAME__ || options.__name;
-  if (name === "index" && ((_a25 = options.__file) == null ? void 0 : _a25.endsWith("index.vue"))) {
+  if (name === "index" && ((_a25 = options.__file) == null ? void 0 : _a25.endsWith("Index.vue"))) {
     return "";
   }
   return name;

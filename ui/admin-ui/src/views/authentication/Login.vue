@@ -14,7 +14,7 @@
         label="用户名"
         name="username"
       >
-        <a-input v-model:value="formState.username" class="input" />
+        <a-input v-model:value="formState.username" class="input"/>
       </a-form-item>
 
       <a-form-item
@@ -22,7 +22,7 @@
         label="密码"
         name="password"
       >
-        <a-input-password v-model:value="formState.password" class="input" />
+        <a-input-password v-model:value="formState.password" class="input"/>
       </a-form-item>
       <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
         <a-button html-type="submit" type="primary">点击登录</a-button>
@@ -51,6 +51,7 @@ const onFinishFailed = errorInfo => {
   height: 400px;
   //background-color: #191a23;
   margin: 0 auto;
+
   .input {
     width: 300px;
   }
