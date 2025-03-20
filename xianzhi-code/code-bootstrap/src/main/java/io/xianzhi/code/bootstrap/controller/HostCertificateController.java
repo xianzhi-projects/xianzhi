@@ -62,7 +62,7 @@ public class HostCertificateController {
     }
 
     /**
-     * 创建主机凭证
+     * 创建主机凭证  (幂等)
      *
      * @param hostCertificateDTO 主机凭证入参
      * @return 主机凭证ID

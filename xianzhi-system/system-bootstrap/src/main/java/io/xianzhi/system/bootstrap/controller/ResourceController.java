@@ -69,7 +69,7 @@ public class ResourceController {
     }
 
     /**
-     * 新增资源信息
+     * 新增资源信息  (幂等)
      *
      * @param resourceDTO 资源信息入参
      * @return 资源ID

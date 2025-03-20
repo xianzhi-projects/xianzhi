@@ -56,7 +56,7 @@ public class LabelsController {
     }
 
     /**
-     * 创建标签
+     * 创建标签  (幂等)
      *
      * @param labelDTO 标签信息入参
      * @return 标签ID

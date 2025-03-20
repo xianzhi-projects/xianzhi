@@ -55,7 +55,7 @@ public class ProjectGroupController {
     }
 
     /**
-     * 创建项目分组
+     * 创建项目分组  (幂等)
      *
      * @param projectGroupDTO 项目分组信息入参
      * @return 项目分组ID

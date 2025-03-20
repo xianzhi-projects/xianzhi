@@ -56,7 +56,7 @@ public class TagController {
     }
 
     /**
-     * 新增tag
+     * 新增tag  (幂等)
      *
      * @param tagDTO tag入参
      * @return 响应信息

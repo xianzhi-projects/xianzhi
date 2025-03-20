@@ -64,7 +64,7 @@ public class PostController {
     }
 
     /**
-     * 新增岗位
+     * 新增岗位  (幂等)
      *
      * @param postDTO 岗位信息入参
      * @return 岗位ID

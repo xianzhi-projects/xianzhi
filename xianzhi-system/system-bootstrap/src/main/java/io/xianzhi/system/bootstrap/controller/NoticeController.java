@@ -66,7 +66,7 @@ public class NoticeController {
     }
 
     /**
-     * 创建公告
+     * 创建公告  (幂等)
      *
      * @param noticeDTO 公告信息
      * @return 创建结果

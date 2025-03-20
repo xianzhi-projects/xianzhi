@@ -43,7 +43,7 @@ public class ProjectController {
     private final ProjectService projectService;
 
     /**
-     * 新增项目
+     * 新增项目  (幂等)
      *
      * @param projectDTO 项目信息入参
      * @return 项目ID

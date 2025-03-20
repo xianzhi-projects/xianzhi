@@ -64,7 +64,7 @@ public class UserController {
     }
 
     /**
-     * 新增用户
+     * 新增用户  (幂等)
      *
      * @param userDTO 用户信息入参
      * @return 用户ID

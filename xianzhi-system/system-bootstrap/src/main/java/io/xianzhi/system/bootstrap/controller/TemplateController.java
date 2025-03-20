@@ -63,7 +63,7 @@ public class TemplateController {
     }
 
     /**
-     * 新增模板
+     * 新增模板  (幂等)
      *
      * @param templateDTO 模板信息入参
      * @return 模板ID

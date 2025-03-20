@@ -58,7 +58,7 @@ public class AgentGroupController {
     }
 
     /**
-     * 创建agent分组
+     * 创建agent分组  (幂等)
      *
      * @param agentGroupDTO agent分组参数
      * @return agent分组id

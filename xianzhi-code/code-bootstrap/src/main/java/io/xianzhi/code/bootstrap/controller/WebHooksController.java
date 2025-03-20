@@ -63,7 +63,7 @@ public class WebHooksController {
     }
 
     /**
-     * 创建webHooks
+     * 创建webHooks  (幂等)
      *
      * @param webHooksDTO webHooks信息入参
      * @return 创建结果

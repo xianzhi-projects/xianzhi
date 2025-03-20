@@ -59,7 +59,7 @@ public class DepartmentController {
     }
 
     /**
-     * 新增部门信息
+     * 新增部门信息  (幂等)
      *
      * @param departmentDTO 部门信息入参
      * @return 部门ID

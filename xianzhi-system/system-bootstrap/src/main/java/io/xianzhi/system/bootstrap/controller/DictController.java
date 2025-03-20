@@ -65,7 +65,7 @@ public class DictController {
     }
 
     /**
-     * 新增字典信息
+     * 新增字典信息  (幂等)
      *
      * @param dictDTO 字典信息入参
      * @return 字典ID
@@ -116,7 +116,7 @@ public class DictController {
     }
 
     /**
-     * 新增字典项
+     * 新增字典项  (幂等)
      *
      * @param dictItemDTO 字典项信息入参
      * @return 字典项ID

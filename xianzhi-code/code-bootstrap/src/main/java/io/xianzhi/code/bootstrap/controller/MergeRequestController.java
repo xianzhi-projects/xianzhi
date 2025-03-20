@@ -57,7 +57,7 @@ public class MergeRequestController {
     }
 
     /**
-     * 创建合并请求
+     * 创建合并请求  (幂等)
      *
      * @param mergeRequestDTO 合并请求入参
      * @return 合并请求ID

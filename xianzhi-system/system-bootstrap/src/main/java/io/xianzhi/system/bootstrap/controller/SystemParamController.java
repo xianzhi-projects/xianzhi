@@ -65,7 +65,7 @@ public class SystemParamController {
     }
 
     /**
-     * 创建系统参数
+     * 创建系统参数  (幂等)
      *
      * @param systemParamDTO 系统参数入参
      * @return 系统参数ID

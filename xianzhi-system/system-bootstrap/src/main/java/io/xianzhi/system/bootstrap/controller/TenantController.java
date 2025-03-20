@@ -71,7 +71,7 @@ public class TenantController {
     }
 
     /**
-     * 创建租户
+     * 创建租户  (幂等)
      *
      * @param tenantDTO 租户信息入参
      * @return 租户ID

@@ -56,7 +56,7 @@ public class IssuesController {
     }
 
     /**
-     * 创建Issues
+     * 创建Issues  (幂等)
      *
      * @param issuesDTO Issues信息入参
      * @return Issues ID

@@ -63,7 +63,7 @@ public class RoleController {
     }
 
     /**
-     * 新增角色
+     * 新增角色  (幂等)
      *
      * @param roleDTO 角色信息
      * @return 角色ID
