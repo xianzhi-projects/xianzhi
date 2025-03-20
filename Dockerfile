@@ -24,10 +24,10 @@ COPY --from=builder /app/app.jar /app/app.jar
 # PORT 定义应用监听的端口，固定为 8002
 ENV JAVA_OPTS="" \
     SPRING_PROFILES_ACTIVE="prod" \
-    PORT=8002
+    PORT=9512
 
 # 暴露容器端口 8002
-EXPOSE 8002
+EXPOSE 9512
 
 # 指定容器启动时的默认命令
 # 使用 exec 形式运行 Java 命令，支持通过 JAVA_OPTS 传递 JVM 参数
