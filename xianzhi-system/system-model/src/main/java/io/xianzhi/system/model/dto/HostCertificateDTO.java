@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.dto;
+package io.xianzhi.system.model.dto;
 
 import io.xianzhi.code.model.enums.CertTypeEnum;
 import io.xianzhi.core.validated.CreateGroup;

@@ -14,17 +14,17 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.controller;
+package io.xianzhi.system.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.HostCertificateService;
-import io.xianzhi.code.model.dto.HostCertificateDTO;
-import io.xianzhi.code.model.page.HostCertificatePage;
-import io.xianzhi.code.model.vo.HostCertificateVO;
 import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.validated.CreateGroup;
 import io.xianzhi.core.validated.UpdateGroup;
+import io.xianzhi.system.model.dto.HostCertificateDTO;
+import io.xianzhi.system.model.page.HostCertificatePage;
+import io.xianzhi.system.model.vo.HostCertificateVO;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

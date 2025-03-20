@@ -14,36 +14,34 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.page;
+package io.xianzhi.system.model.enums;
 
-import io.xianzhi.core.base.Page;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * 主机凭证查询条件
+ * 凭证类型
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class HostCertificatePage extends Page implements Serializable {
+@Getter
+@AllArgsConstructor
+public enum CertTypeEnum {
 
     /**
-     * 证书类型
+     * 密码
      */
-    private String certType;
+    PASSWORD("password", "密码"),
 
     /**
-     * 证书名称
+     * 私钥
      */
-    private String certName;
+    PRIVATE_KEY("privateKey", "私钥"),
+    ;
 
-    /**
-     * 用户名
-     */
-    private String username;
+
+    private final String code;
+
+    private final String desc;
 }

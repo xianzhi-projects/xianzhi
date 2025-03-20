@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.dataobj;
+package io.xianzhi.system.bootstrap.dao.dataobj;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.xianzhi.common.mybatis.plus.base.BaseDO;
@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
  * @since 1.0.0
  */
 @Data
-@TableName(value = "c_host_certificate")
+@TableName(value = "sys_host_certificate")
 @EqualsAndHashCode(callSuper = true)
 public class HostCertificateDO extends BaseDO {
 

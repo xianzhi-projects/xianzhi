@@ -16,7 +16,7 @@
 
 package io.xianzhi.code.model.dto;
 
-import io.xianzhi.code.model.enums.HostAuthTypeEnum;
+import io.xianzhi.system.model.enums.HostAuthTypeEnum;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

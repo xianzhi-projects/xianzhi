@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.vo;
+package io.xianzhi.system.model.vo;
 
 import lombok.Data;
 

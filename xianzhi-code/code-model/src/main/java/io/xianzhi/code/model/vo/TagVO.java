@@ -28,4 +28,14 @@ import java.io.Serializable;
  */
 @Data
 public class TagVO implements Serializable {
+
+
+
+    private String id;
+
+
+    private String tagName;
+
+
+    private String lastCommitId;
 }

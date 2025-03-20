@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.enums;
+package io.xianzhi.system.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

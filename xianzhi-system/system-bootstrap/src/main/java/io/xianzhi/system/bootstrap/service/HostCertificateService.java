@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.service;
+package io.xianzhi.system.bootstrap.service;
 
-import io.xianzhi.code.model.dto.HostCertificateDTO;
-import io.xianzhi.code.model.page.HostCertificatePage;
-import io.xianzhi.code.model.vo.HostCertificateVO;
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.dto.HostCertificateDTO;
+import io.xianzhi.system.model.page.HostCertificatePage;
+import io.xianzhi.system.model.vo.HostCertificateVO;
 
 import java.util.List;
 

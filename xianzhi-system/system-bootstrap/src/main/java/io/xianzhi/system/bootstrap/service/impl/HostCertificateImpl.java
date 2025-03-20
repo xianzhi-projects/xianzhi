@@ -14,17 +14,17 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.service.impl;
+package io.xianzhi.system.bootstrap.service.impl;
 
-import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
-import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
-import io.xianzhi.code.bootstrap.service.HostCertificateService;
-import io.xianzhi.code.model.dto.HostCertificateDTO;
-import io.xianzhi.code.model.enums.CertTypeEnum;
-import io.xianzhi.code.model.page.HostCertificatePage;
-import io.xianzhi.code.model.vo.HostCertificateVO;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.dataobj.HostCertificateDO;
+import io.xianzhi.system.bootstrap.dao.mapper.HostCertificateMapper;
+import io.xianzhi.system.bootstrap.service.HostCertificateService;
+import io.xianzhi.system.model.dto.HostCertificateDTO;
+import io.xianzhi.system.model.enums.CertTypeEnum;
+import io.xianzhi.system.model.page.HostCertificatePage;
+import io.xianzhi.system.model.vo.HostCertificateVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

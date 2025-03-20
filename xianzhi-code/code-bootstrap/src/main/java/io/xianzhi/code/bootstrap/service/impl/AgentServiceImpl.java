@@ -19,22 +19,19 @@ package io.xianzhi.code.bootstrap.service.impl;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import io.xianzhi.code.bootstrap.dao.dataobj.AgentDO;
-import io.xianzhi.code.bootstrap.dao.dataobj.HostCertificateDO;
 import io.xianzhi.code.bootstrap.dao.mapper.AgentDetailsMapper;
 import io.xianzhi.code.bootstrap.dao.mapper.AgentGroupMapper;
 import io.xianzhi.code.bootstrap.dao.mapper.AgentMapper;
-import io.xianzhi.code.bootstrap.dao.mapper.HostCertificateMapper;
 import io.xianzhi.code.bootstrap.service.AgentService;
 import io.xianzhi.code.model.dto.AgentDTO;
 import io.xianzhi.code.model.enums.AgentStatusEnum;
-import io.xianzhi.code.model.enums.CertTypeEnum;
-import io.xianzhi.code.model.enums.HostAuthTypeEnum;
 import io.xianzhi.code.model.page.AgentPage;
 import io.xianzhi.code.model.vo.AgentVO;
 import io.xianzhi.common.jsch.JschUtils;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.thread.XianZhiCallable;
+import io.xianzhi.system.model.enums.HostAuthTypeEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -66,10 +63,6 @@ public class AgentServiceImpl implements AgentService {
      * agent 分组持久层
      */
     private final AgentGroupMapper agentGroupMapper;
-    /**
-     * 主机凭证
-     */
-    private final HostCertificateMapper hostCertificateMapper;
 
     /**
      * Agent相关线程池
@@ -151,14 +144,7 @@ public class AgentServiceImpl implements AgentService {
                     session = JschUtils.getSessionByPrivateKey(agent.getHostIp(), agent.getHostPort(), agent.getHostUsername(), agent.getHostPrivateKey());
                     log.debug("私钥认证获取Session成功...");
                 } else {
-                    HostCertificateDO hostCertificate = hostCertificateMapper.selectHostCertificateById(agent.getCertificateId()).orElseThrow(() -> new BusinessException("凭证信息不存在"));
-                    log.debug("获取凭证信息成功....");
-                    String certType = hostCertificate.getCertType();
-                    if (CertTypeEnum.PASSWORD.getCode().equals(certType)) {
-                        session = JschUtils.getSessionByPassword(agent.getHostIp(), agent.getHostPort(), hostCertificate.getUsername(), hostCertificate.getPassword());
-                    } else {
-                        session = JschUtils.getSessionByPrivateKey(agent.getHostIp(), agent.getHostPort(), hostCertificate.getUsername(), hostCertificate.getPrivateKey());
-                    }
+
                     log.debug("凭证获取Session成功...");
                 }
             } catch (JSchException exception) {
@@ -175,7 +161,6 @@ public class AgentServiceImpl implements AgentService {
             log.debug("主机:{},获取Session成功", agent.getHostIp());
             log.debug("开始创建工作目录:{}", agent.getWorkDir());
             String command = "mkdir -p " + agent.getWorkDir();
-            JschUtils.executeCommand(session, command);
 
 
             log.debug("agent:{},安装成功", id);
