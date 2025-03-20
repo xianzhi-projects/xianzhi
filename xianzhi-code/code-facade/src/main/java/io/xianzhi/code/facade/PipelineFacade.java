@@ -16,21 +16,11 @@
 
 package io.xianzhi.code.facade;
 
-import io.xianzhi.code.model.dto.ProjectDTO;
-import io.xianzhi.core.result.ResponseResult;
-
 /**
- * 项目接口
+ * 流水线接口
  *
  * @author Max
  * @since 1.0.0
  */
-public interface ProjectFacade {
-
-    /**
-     * 新增项目
-     * @param projectDTO 项目入参
-     * @return 响应信息
-     */
-    ResponseResult<String> createProject(ProjectDTO projectDTO);
+public interface PipelineFacade {
 }

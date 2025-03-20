@@ -17,9 +17,14 @@
 package io.xianzhi.code.bootstrap.facade;
 
 import io.xianzhi.code.facade.ProjectGroupFacade;
+import io.xianzhi.code.model.dto.ProjectGroupDTO;
+import io.xianzhi.code.model.vo.ProjectGroupVO;
+import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 项目分组接口实现
@@ -31,4 +36,24 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ProjectGroupFacadeImpl implements ProjectGroupFacade {
+    /**
+     * 新增项目分组
+     *
+     * @param projectGroupDTO 项目分组入参
+     * @return 响应信息
+     */
+    @Override
+    public ResponseResult<String> createProjectGroup(ProjectGroupDTO projectGroupDTO) {
+        return null;
+    }
+
+    /**
+     * 获取当前用户所具有权限的分组
+     *
+     * @return 当前用户所具有权限的分组
+     */
+    @Override
+    public ResponseResult<List<ProjectGroupVO>> getCurrentUserProjectGroupList() {
+        return null;
+    }
 }

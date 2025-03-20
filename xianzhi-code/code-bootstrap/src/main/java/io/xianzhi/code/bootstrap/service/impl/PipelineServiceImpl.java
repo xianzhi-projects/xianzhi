@@ -14,23 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.facade;
+package io.xianzhi.code.bootstrap.service.impl;
 
-import io.xianzhi.code.model.dto.ProjectDTO;
-import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.code.bootstrap.service.PipelineService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 项目接口
+ * 项目接口实现
  *
  * @author Max
  * @since 1.0.0
  */
-public interface ProjectFacade {
-
-    /**
-     * 新增项目
-     * @param projectDTO 项目入参
-     * @return 响应信息
-     */
-    ResponseResult<String> createProject(ProjectDTO projectDTO);
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class PipelineServiceImpl implements PipelineService {
 }

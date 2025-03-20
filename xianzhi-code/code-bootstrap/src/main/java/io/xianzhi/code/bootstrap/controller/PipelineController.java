@@ -14,23 +14,31 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.facade;
+package io.xianzhi.code.bootstrap.controller;
 
-import io.xianzhi.code.model.dto.ProjectDTO;
-import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.code.bootstrap.service.PipelineService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 项目接口
+ * 流水线接口
  *
  * @author Max
  * @since 1.0.0
  */
-public interface ProjectFacade {
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/pipeline")
+public class PipelineController {
+
 
     /**
-     * 新增项目
-     * @param projectDTO 项目入参
-     * @return 响应信息
+     * 流水线接口
      */
-    ResponseResult<String> createProject(ProjectDTO projectDTO);
+    private final PipelineService pipelineService;
+
+
+
+
 }

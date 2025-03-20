@@ -17,6 +17,8 @@
 package io.xianzhi.code.bootstrap.facade;
 
 import io.xianzhi.code.facade.ProjectFacade;
+import io.xianzhi.code.model.dto.ProjectDTO;
+import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +33,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ProjectFacadeImpl implements ProjectFacade {
+    /**
+     * 新增项目
+     *
+     * @param projectDTO 项目入参
+     * @return 响应信息
+     */
+    @Override
+    public ResponseResult<String> createProject(ProjectDTO projectDTO) {
+        return null;
+    }
 }

@@ -16,6 +16,12 @@
 
 package io.xianzhi.code.facade;
 
+import io.xianzhi.code.model.dto.ProjectGroupDTO;
+import io.xianzhi.code.model.vo.ProjectGroupVO;
+import io.xianzhi.core.result.ResponseResult;
+
+import java.util.List;
+
 /**
  * 项目分组接口
  *
@@ -23,4 +29,20 @@ package io.xianzhi.code.facade;
  * @since 1.0.0
  */
 public interface ProjectGroupFacade {
+
+
+    /**
+     * 新增项目分组
+     *
+     * @param projectGroupDTO 项目分组入参
+     * @return 响应信息
+     */
+    ResponseResult<String> createProjectGroup(ProjectGroupDTO projectGroupDTO);
+
+
+    /**
+     * 获取当前用户所具有权限的分组
+     * @return 当前用户所具有权限的分组
+     */
+    ResponseResult<List<ProjectGroupVO>> getCurrentUserProjectGroupList();
 }
