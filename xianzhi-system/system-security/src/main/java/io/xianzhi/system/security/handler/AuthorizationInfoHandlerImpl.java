@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.bootstrap.security;
+package io.xianzhi.system.security.handler;
 
 import io.xianzhi.common.oauth2.OAuth2UserDetails;
 import io.xianzhi.common.oauth2.resource.AuthorizationInfoHandler;
