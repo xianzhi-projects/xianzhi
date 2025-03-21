@@ -16,6 +16,9 @@
 
 package io.xianzhi.system.facade;
 
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.system.model.vo.SystemParamVO;
+
 /**
  * 系统参数接口
  *
@@ -23,4 +26,11 @@ package io.xianzhi.system.facade;
  * @since 1.0.0
  */
 public interface SystemParamFacade {
+
+    /**
+     * 根据参数编码获取系统参数
+     * @param paramCode 参数编码
+     * @return 系统参数
+     */
+    ResponseResult<SystemParamVO> getSystemParamByParamCode(String paramCode);
 }

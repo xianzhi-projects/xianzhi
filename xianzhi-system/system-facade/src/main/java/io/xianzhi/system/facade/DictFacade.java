@@ -16,6 +16,9 @@
 
 package io.xianzhi.system.facade;
 
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.system.model.vo.DictItemVO;
+
 /**
  * 字典接口
  *
@@ -23,4 +26,12 @@ package io.xianzhi.system.facade;
  * @since 1.0.0
  */
 public interface DictFacade {
+
+
+    /**
+     * 根据字典编码获取字典项
+     * @param dictCode 字典编码
+     * @return 字典项
+     */
+    ResponseResult<DictItemVO> getDictItemByDictCode(String dictCode);
 }

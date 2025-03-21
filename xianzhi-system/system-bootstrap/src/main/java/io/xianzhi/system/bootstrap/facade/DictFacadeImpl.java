@@ -16,7 +16,9 @@
 
 package io.xianzhi.system.bootstrap.facade;
 
+import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.system.facade.DictFacade;
+import io.xianzhi.system.model.vo.DictItemVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,4 +33,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DictFacadeImpl implements DictFacade {
+    /**
+     * 根据字典编码获取字典项
+     *
+     * @param dictCode 字典编码
+     * @return 字典项
+     */
+    @Override
+    public ResponseResult<DictItemVO> getDictItemByDictCode(String dictCode) {
+        return null;
+    }
 }

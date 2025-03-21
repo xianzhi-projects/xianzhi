@@ -16,7 +16,9 @@
 
 package io.xianzhi.system.bootstrap.facade;
 
+import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.system.facade.SystemParamFacade;
+import io.xianzhi.system.model.vo.SystemParamVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,4 +33,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class SystemParamFacadeImpl implements SystemParamFacade {
+    /**
+     * 根据参数编码获取系统参数
+     *
+     * @param paramCode 参数编码
+     * @return 系统参数
+     */
+    @Override
+    public ResponseResult<SystemParamVO> getSystemParamByParamCode(String paramCode) {
+        return null;
+    }
 }
