@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.SystemParamDO;
+import io.xianzhi.system.model.page.SystemParamPage;
+import io.xianzhi.system.model.vo.SystemParamVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,6 +56,7 @@ public interface SystemParamMapper extends BaseMapper<SystemParamDO> {
 
     /**
      * 判断参数编码是否存在
+     *
      * @param paramCode 参数编码
      * @return 是否存在
      */
@@ -59,8 +64,9 @@ public interface SystemParamMapper extends BaseMapper<SystemParamDO> {
 
     /**
      * 判断参数名称是否存在
+     *
      * @param paramName 参数名称
-     * @param id 系统参数ID
+     * @param id        系统参数ID
      * @return 是否存在
      */
     boolean existParamByNameAndIdNot(@Param("paramName") String paramName, @Param("id") String id);
@@ -72,4 +78,13 @@ public interface SystemParamMapper extends BaseMapper<SystemParamDO> {
      * @param ids 系统参数ID列表
      */
     void deletedSystemByIds(@Param("ids") List<String> ids);
+
+    /**
+     * 分页查询系统参数
+     *
+     * @param page            分页条件
+     * @param systemParamPage 系统参数查询条件
+     * @return 系统参数列表
+     */
+    IPage<SystemParamVO> pageSystemParamList(Page<SystemParamVO> page, @Param("systemParamPage") SystemParamPage systemParamPage);
 }

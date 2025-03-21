@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.business.SystemParamBusiness;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -62,6 +65,11 @@ public class SystemParamServiceImpl implements SystemParamService {
      */
     @Override
     public ListResult<SystemParamVO> pageSystemParamList(SystemParamPage systemParamPage) {
+        IPage<SystemParamVO> pageResult = systemParamMapper.pageSystemParamList(new Page<>(systemParamPage.getPageNo(), systemParamPage.getPageSize()), systemParamPage);
+        List<SystemParamVO> records = pageResult.getRecords();
+        if (ObjectUtils.isEmpty(records)){
+            return ListResult.empty();
+        }
         return null;
     }
 

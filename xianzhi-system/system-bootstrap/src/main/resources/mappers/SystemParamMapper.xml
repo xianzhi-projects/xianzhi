@@ -38,4 +38,8 @@
     <update id="deletedSystemByIds">
 
     </update>
+
+    <select id="pageSystemParamList" resultType="io.xianzhi.system.model.vo.SystemParamVO">
+
+    </select>
 </mapper>
