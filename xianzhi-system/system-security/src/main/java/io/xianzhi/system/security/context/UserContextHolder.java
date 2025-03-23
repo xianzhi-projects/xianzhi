@@ -11,6 +11,15 @@ import io.xianzhi.core.content.ContextHolder;
 public class UserContextHolder extends ContextHolder {
 
     /**
+     * 管理员标识
+     */
+    public static final String ADMIN_FLAG = "admin";
+    /**
+     * 系统用户
+     */
+    public static final String SYSTEM_USER = "system";
+
+    /**
      * 获取当前用户ID
      *
      * @return 当前用户ID
@@ -25,7 +34,7 @@ public class UserContextHolder extends ContextHolder {
      * @return 是否超级管理员
      */
     public static boolean admin() {
-        return getCurrentUserOrThrow().getUsername().equals("admin");
+        return getCurrentUserOrThrow().getUsername().equals(ADMIN_FLAG);
     }
 
 
@@ -42,6 +51,6 @@ public class UserContextHolder extends ContextHolder {
      * 设置系统用户，用于定时任务，或者其他无法获取用户信息
      */
     public static void setAnonymousUser() {
-        set(() -> "system");
+        set(() -> SYSTEM_USER);
     }
 }
