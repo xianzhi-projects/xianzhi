@@ -33,4 +33,28 @@ import lombok.EqualsAndHashCode;
 public class ProjectGroupDO extends BaseDO {
 
 
+    /**
+     * 分组名称
+     */
+    private String groupName;
+    /**
+     * 分组描述
+     */
+    private String groupDesc;
+    /**
+     * 分组路径
+     */
+    private String groupPath;
+    /**
+     * 父级ID
+     */
+    private String parentId;
+    /**
+     * 分组logo
+     */
+    private String groupLogo;
+    /**
+     * 分组可见性
+     */
+    private String visibility;
 }

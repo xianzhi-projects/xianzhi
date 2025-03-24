@@ -16,11 +16,36 @@
 
 package io.xianzhi.code.model.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 可见性枚举
  *
  * @author Max
  * @since 1.0.0
  */
+@Getter
+@AllArgsConstructor
 public enum VisibilityEnum {
+
+    /**
+     * 私有
+     */
+    PRIVATE("PRIVATE", "私有"),
+    /**
+     * 内部
+     */
+    INNER("INNER", "内部"),
+
+    /**
+     * 公开
+     */
+    PUBLIC("PUBLIC", "公开"),
+    ;
+
+
+    private final String code;
+
+    private final String desc;
 }
