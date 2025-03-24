@@ -21,6 +21,8 @@ import io.xianzhi.common.mybatis.plus.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * 项目组成员实体
  *
@@ -31,4 +33,21 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "c_project_group_member")
 @EqualsAndHashCode(callSuper = true)
 public class ProjectGroupMemberDO extends BaseDO {
+
+    /**
+     * 分组ID
+     */
+    private String groupId;
+    /**
+     * 用户ID
+     */
+    private String userId;
+    /**
+     * 角色编码
+     */
+    private String roleCode;
+    /**
+     * 过期时间
+     */
+    private Date expiredTime;
 }

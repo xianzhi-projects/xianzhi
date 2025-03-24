@@ -16,6 +16,7 @@
 
 package io.xianzhi.code.model.vo;
 
+import io.xianzhi.code.model.enums.VisibilityEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,4 +29,35 @@ import java.io.Serializable;
  */
 @Data
 public class ProjectGroupVO implements Serializable {
+
+
+
+    /**
+     * 分组ID
+     */
+    private String id;
+    /**
+     * 分组名称
+     */
+    private String groupName;
+    /**
+     * 分组描述
+     */
+    private String groupDesc;
+    /**
+     * 分组路径
+     */
+    private String groupPath;
+    /**
+     * 父级ID
+     */
+    private String parentId;
+    /**
+     * 分组logo
+     */
+    private String groupLogo;
+    /**
+     * 分组可见性
+     */
+    private VisibilityEnum visibility;
 }

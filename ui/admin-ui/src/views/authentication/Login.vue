@@ -8,6 +8,7 @@
       name="basic"
       @finish="onFinish"
       @finishFailed="onFinishFailed"
+      class="login-form"
     >
       <a-form-item
         :rules="[{ required: true, message: 'Please input your username!' }]"
@@ -48,10 +49,14 @@ const onFinishFailed = errorInfo => {
 <style lang="less" scoped>
 .login-container {
   width: 500px;
-  height: 400px;
-  //background-color: #191a23;
-  margin: 0 auto;
-
+  height: 320px;
+  background-color: #76767c;
+  margin: 15% auto;
+  padding-top: 100px;
+  .login-form{
+    background-color: #1890ff;
+    padding: 10px;
+  }
   .input {
     width: 300px;
   }
