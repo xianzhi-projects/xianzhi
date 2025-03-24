@@ -16,11 +16,34 @@
 
 package io.xianzhi.system.model.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 用户状态枚举
  *
  * @author Max
  * @since 1.0.0
  */
+@Getter
+@AllArgsConstructor
 public enum UserStatusEnum {
+
+
+    /**
+     * 正常
+     */
+    NORMAL("NORMAL", "正常"),
+
+    /**
+     * 禁用
+     */
+    DISABLE("DISABLE", "禁用")
+
+
+    ;
+
+    private final String code;
+
+    private final String desc;
 }

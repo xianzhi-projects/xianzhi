@@ -26,13 +26,15 @@ import java.util.Map;
 public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
 
 
-    @JsonIgnore
-    Collection<? extends GrantedAuthority> authorities;
     /**
      * 用户ID
      */
     private String id;
-    private String username;
+    /**
+     * 用户权限
+     */
+    @JsonIgnore
+    Collection<? extends GrantedAuthority> authorities;
     /**
      * 密码
      */
@@ -59,8 +61,10 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
      * 用户状态 字典值
      */
     private String userStatus;
-
-
+    /**
+     * 用户名
+     */
+    private String username;
 
     /**
      * 获取唯一标识
