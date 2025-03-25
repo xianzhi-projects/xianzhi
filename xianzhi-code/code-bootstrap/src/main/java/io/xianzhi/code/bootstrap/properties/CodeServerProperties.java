@@ -17,12 +17,28 @@
 package io.xianzhi.code.bootstrap.properties;
 
 import io.xianzhi.core.exception.BusinessException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.sshd.git.GitLocationResolver;
+import org.apache.sshd.server.session.ServerSession;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.ServiceMayNotContinueException;
+import org.eclipse.jgit.transport.resolver.RepositoryResolver;
+import org.eclipse.jgit.transport.resolver.ServiceNotAuthorizedException;
+import org.eclipse.jgit.transport.resolver.ServiceNotEnabledException;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.Path;
 
 /**
  * 代码托管服务配置类
@@ -71,6 +87,68 @@ public class CodeServerProperties implements InitializingBean {
         }
         if (sshServerPort <= 0 || sshServerPort >= 65535) {
             sshServerPort = 22;
+        }
+    }
+
+    /**
+     * Git仓库加载
+     *
+     * @author Max
+     * @since 1.0.0
+     */
+    @Slf4j
+    @Component
+    @RequiredArgsConstructor
+    public static class XianZhiGitLocationResolver implements GitLocationResolver {
+        /**
+         * @param command The complete received command
+         * @param args    The command split into arguments - {@code args[0]} is the &quot;pure&quot; command itself
+         *                without any other arguments. <B>Note:</B> changing the content of the arguments array may
+         *                affect command execution in undetermined ways, due to invocation code changes without prior
+         *                notice, so <U>highly recommended to avoid it</U>.
+         * @param session The {@link ServerSession} through which the command was received
+         * @param fs      The {@link FileSystem} associated with the server session
+         * @return The local GIT repository root path
+         * @throws IOException If failed to resolve
+         */
+        @Override
+        public Path resolveRootDirectory(String command, String[] args, ServerSession session, FileSystem fs) throws IOException {
+            return null;
+        }
+    }
+
+    /**
+     * 仓库加载
+     *
+     * @author Max
+     * @since 1.0.0
+     */
+    @Slf4j
+    @Component
+    public static class HttpRepositoryResolver implements RepositoryResolver<HttpServletRequest> {
+        /**
+         * Locate and open a reference to a {@link Repository}.
+         * <p>
+         * The caller is responsible for closing the returned Repository.
+         *
+         * @param req  the current request, may be used to inspect session state
+         *             including cookies or user authentication.
+         * @param name name of the repository, as parsed out of the URL.
+         * @return the opened repository instance, never null.
+         * @throws RepositoryNotFoundException    the repository does not exist or the name is incorrectly
+         *                                        formatted as a repository name.
+         * @throws ServiceNotAuthorizedException  the repository may exist, but HTTP access is not allowed
+         *                                        without authentication, i.e. this corresponds to an HTTP 401
+         *                                        Unauthorized.
+         * @throws ServiceNotEnabledException     the repository may exist, but HTTP access is not allowed on the
+         *                                        target repository, for the current user.
+         * @throws ServiceMayNotContinueException the repository may exist, but HTTP access is not allowed for
+         *                                        the current request. The exception message contains a detailed
+         *                                        message that should be shown to the user.
+         */
+        @Override
+        public Repository open(HttpServletRequest req, String name) throws RepositoryNotFoundException, ServiceNotAuthorizedException, ServiceNotEnabledException, ServiceMayNotContinueException {
+            return null;
         }
     }
 }
