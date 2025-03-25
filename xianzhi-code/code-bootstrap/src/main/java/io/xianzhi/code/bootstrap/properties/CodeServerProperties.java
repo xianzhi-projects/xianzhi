@@ -42,6 +42,11 @@ public class CodeServerProperties implements InitializingBean {
     private String externalUrl;
 
     /**
+     * SSH服务器端口
+     */
+    private Integer sshServerPort = 22;
+
+    /**
      * 仓库地址
      */
     private String repositoryDir = "/etc/xianzhi/code/repository";
@@ -63,6 +68,9 @@ public class CodeServerProperties implements InitializingBean {
         }
         if (!StringUtils.hasText(repositoryDir)) {
             repositoryDir = "/etc/xianzhi/code/repository";
+        }
+        if (sshServerPort <= 0 || sshServerPort >= 65535) {
+            sshServerPort = 22;
         }
     }
 }
