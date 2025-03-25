@@ -25,4 +25,11 @@
     <select id="existsTenantByTenantNanIdNot" resultType="boolean">
 
     </select>
+
+    <select id="existsTenantByTenantCode" resultType="boolean">
+
+    </select>
+
+    <select id="pageTenantList" resultType="io.xianzhi.system.model.vo.TenantVO">
+    </select>
 </mapper>

@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.TenantDO;
+import io.xianzhi.system.model.page.TenantPage;
+import io.xianzhi.system.model.vo.TenantVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -55,5 +59,14 @@ public interface TenantMapper extends BaseMapper<TenantDO> {
      * @param tenantCode 租户编码
      * @return true: 存在，false: 不存在
      */
-    boolean existsTenantByTenantCode(String tenantCode);
+    boolean existsTenantByTenantCode(@Param("tenantCode") String tenantCode);
+
+    /**
+     * 查询租户列表
+     *
+     * @param tenantVOPage 分页条件
+     * @param tenantPage   查询条件
+     * @return 租户列表
+     */
+    IPage<TenantVO> pageTenantList(Page<TenantVO> tenantVOPage, @Param("tenantPage") TenantPage tenantPage);
 }

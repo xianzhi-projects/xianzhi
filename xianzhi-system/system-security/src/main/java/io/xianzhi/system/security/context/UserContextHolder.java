@@ -48,7 +48,7 @@ public class UserContextHolder extends ContextHolder {
     }
 
     /**
-     * 设置系统用户，用于定时任务，或者其他无法获取用户信息
+     * 设置系统用户，用于定时任务，或者其他无法获取用户信息场景
      */
     public static void setAnonymousUser() {
         set(() -> SYSTEM_USER);

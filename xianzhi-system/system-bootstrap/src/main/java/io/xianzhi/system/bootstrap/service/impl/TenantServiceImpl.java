@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.TenantDO;
@@ -30,6 +32,7 @@ import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -79,6 +82,7 @@ public class TenantServiceImpl implements TenantService {
      */
     @Override
     public ListResult<TenantVO> pageTenantList(TenantPage tenantPage) {
+        IPage<TenantVO> result = tenantMapper.pageTenantList(new Page<TenantVO>(tenantPage.getPageNo(), tenantPage.getPageSize()), tenantPage);
         return null;
     }
 
@@ -89,8 +93,11 @@ public class TenantServiceImpl implements TenantService {
      * @return 租户ID
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String createTenant(TenantDTO tenantDTO) {
-        return "";
+        TenantDO tenantDO = checkedTenantDTO(tenantDTO);
+        tenantMapper.insert(tenantDO);
+        return tenantDO.getId();
     }
 
     /**

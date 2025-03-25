@@ -4,9 +4,12 @@
 
 <template>
   <a-layout-content style="padding: 16px; height: calc(100vh - 64px); overflow: auto;">
-    <div style="height: 100%;">
-      <router-view />
-    </div>
+    <a-watermark content="先知研发效能平台">
+      <div style="height: 100%;">
+        <router-view />
+      </div>
+    </a-watermark>
+
   </a-layout-content>
 </template>
 
