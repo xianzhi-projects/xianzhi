@@ -14,29 +14,27 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.mapper;
+package io.xianzhi.code.bootstrap.handler;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO;
 import io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
- * 项目分组持久层
+ * 仓库信息处理
  *
  * @author Max
  * @since 1.0.0
  */
-@Mapper
-public interface ProjectGroupMapper extends BaseMapper<ProjectGroupDO> {
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class RepositoryHandler {
 
-    /**
-     * 根据项目分组ID查询项目分组信息
-     *
-     * @param id 项目分组ID
-     * @return 项目分组信息
-     */
-    Optional<ProjectGroupDO> selectProjectGroupById(@Param("id") String id);
+
+    public String createRepository(ProjectDO projectDO, ProjectGroupDO groupDO) {
+        return null;
+    }
 }

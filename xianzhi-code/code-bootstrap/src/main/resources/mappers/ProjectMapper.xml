@@ -21,4 +21,11 @@
     <select id="selectProjectById" resultType="io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO">
 
     </select>
+
+    <select id="existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType" resultType="boolean">
+
+    </select>
+
+    <select id="existsProjectByProjectPathAndGroupIdAndProjectType" resultType="boolean">
+    </select>
 </mapper>

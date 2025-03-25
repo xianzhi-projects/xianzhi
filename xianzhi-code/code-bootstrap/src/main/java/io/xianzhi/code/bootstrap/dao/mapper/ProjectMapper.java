@@ -39,4 +39,25 @@ public interface ProjectMapper extends BaseMapper<ProjectDO> {
      * @return 项目信息
      */
     Optional<ProjectDO> selectProjectById(@Param("id") String id);
+
+    /**
+     * 判断项目名称是否存在
+     *
+     * @param projectName    项目名称
+     * @param id             项目ID
+     * @param projectGroupId 分组ID
+     * @param projectType    项目类型
+     * @return 是否存在
+     */
+    boolean existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType(@Param("projectName") String projectName, @Param("id") String id, @Param("projectGroupId") String projectGroupId, @Param("projectType") String projectType);
+
+    /**
+     * 判断项目路径是否存在
+     *
+     * @param projectPath    项目路径
+     * @param projectGroupId 项目分组ID
+     * @param projectType    项目类型
+     * @return 是否存在
+     */
+    boolean existsProjectByProjectPathAndGroupIdAndProjectType(@Param("projectPath") String projectPath, @Param("projectGroupId") String projectGroupId, @Param("projectType") String projectType);
 }
