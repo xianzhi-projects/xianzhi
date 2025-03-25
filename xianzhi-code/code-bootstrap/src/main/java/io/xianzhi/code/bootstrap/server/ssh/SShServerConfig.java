@@ -16,11 +16,24 @@
 
 package io.xianzhi.code.bootstrap.server.ssh;
 
+import io.xianzhi.code.bootstrap.properties.CodeServerProperties;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
+
 /**
  * SSH服务配置
  *
  * @author Max
  * @since 1.0.0
  */
+@Slf4j
+@Configuration
+@RequiredArgsConstructor
 public class SShServerConfig {
+
+    /**
+     * 服务配置类
+     */
+    private final CodeServerProperties codeServerProperties;
 }

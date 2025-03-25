@@ -73,10 +73,69 @@
         <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
         <rocketmq.version>2.3.2</rocketmq.version>
         <hutool.version>5.8.34</hutool.version>
+        <jgit.version>7.1.0.202411261347-r</jgit.version>
+
 
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.ssh.apache</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.http.server</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.archive</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.pgm</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.lfs</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.ssh.apache.agent</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sshd</groupId>
+                <artifactId>sshd-core</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sshd</groupId>
+                <artifactId>sshd-git</artifactId>
+                <version>2.14.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sshd</groupId>
+                <artifactId>sshd-scp</artifactId>
+                <version>2.14.0</version>
+            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-captcha</artifactId>
