@@ -9,24 +9,13 @@
 
 </template>
 <script setup>
-import {reactive} from 'vue';
 import LoginForm from "@/views/authentication/components/LoginForm.vue";
-
-const formState = reactive({
-  username: '',
-  password: '',
-  remember: true,
-});
-const onFinish = values => {
-  console.log('Success:', values);
-};
-const onFinishFailed = errorInfo => {
-  console.log('Failed:', errorInfo);
-};
 </script>
 <style lang="less" scoped>
 .login-left {
-  background-image: url("@/assets/images/back.webp");
+  background-image: url("@/assets/images/back.webp") ;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .login-right {
