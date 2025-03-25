@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.PostDO;
+import io.xianzhi.system.model.page.PostPage;
+import io.xianzhi.system.model.vo.PostVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,4 +52,12 @@ public interface PostMapper extends BaseMapper<PostDO> {
      * @return 是否存在
      */
     boolean existsPostByPostNameAnIdNot(@Param("postName") String postName, @Param("id") String id);
+
+    /**
+     * 分页查询岗位列表
+     * @param postVOPage 分页查询参数
+     * @param page 查询条件
+     * @return 岗位列表
+     */
+    IPage<PostVO> pagePostList(Page<PostVO> postVOPage, @Param("page") PostPage page);
 }

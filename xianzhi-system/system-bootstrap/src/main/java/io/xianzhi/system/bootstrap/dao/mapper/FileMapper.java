@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.FileDO;
+import io.xianzhi.system.model.page.FilePage;
+import io.xianzhi.system.model.vo.FileVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -40,4 +44,13 @@ public interface FileMapper extends BaseMapper<FileDO> {
      * @return 文件信息
      */
     Optional<FileDO> selectFileById(@Param("id") String id);
+
+    /**
+     * 查询文件列表
+     *
+     * @param fileVOPage 分页条件
+     * @param filePage   查询条件
+     * @return 文件列表
+     */
+    IPage<FileVO> pageFileList(Page<FileVO> fileVOPage, @Param("filePage") FilePage filePage);
 }

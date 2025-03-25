@@ -16,14 +16,18 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.common.oss.OSSHandler;
 import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.FileMapper;
 import io.xianzhi.system.bootstrap.service.FileService;
 import io.xianzhi.system.model.page.FilePage;
 import io.xianzhi.system.model.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.time.Duration;
 
@@ -44,6 +48,11 @@ public class FileServiceImpl implements FileService {
     private final OSSHandler ossHandler;
 
     /**
+     * 文件信息持久层
+     */
+    private final FileMapper fileMapper;
+
+    /**
      * 分页查询文件列表
      *
      * @param filePage 分页查询参数
@@ -51,6 +60,10 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public ListResult<FileVO> pageFileList(FilePage filePage) {
+        IPage<FileVO> result = fileMapper.pageFileList(new Page<FileVO>(filePage.getPageNo(), filePage.getPageSize()), filePage);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.PostDO;
 import io.xianzhi.system.bootstrap.dao.mapper.PostMapper;
@@ -27,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -56,6 +59,10 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     public ListResult<PostVO> pagePostList(PostPage page) {
+        IPage<PostVO> result = postMapper.pagePostList(new Page<PostVO>(page.getPageNo(),page.getPageSize()), page);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

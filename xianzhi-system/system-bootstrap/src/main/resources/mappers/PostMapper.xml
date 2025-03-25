@@ -24,4 +24,8 @@
     <select id="existsPostByPostNameAnIdNot" resultType="boolean">
 
     </select>
+
+    <select id="pagePostList" resultType="io.xianzhi.system.model.vo.PostVO">
+
+    </select>
 </mapper>

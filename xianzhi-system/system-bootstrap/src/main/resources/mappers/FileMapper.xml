@@ -17,4 +17,12 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.FileMapper">
+
+    <select id="pageFileList" resultType="io.xianzhi.system.model.vo.FileVO">
+
+    </select>
+
+    <select id="selectFileById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.FileDO">
+
+    </select>
 </mapper>
