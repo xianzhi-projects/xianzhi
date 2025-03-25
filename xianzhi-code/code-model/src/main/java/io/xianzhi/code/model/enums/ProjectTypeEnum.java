@@ -14,52 +14,33 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.vo;
+package io.xianzhi.code.model.enums;
 
-import lombok.Data;
-
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * 项目信息粗惨
+ * 项目类型枚举
  *
  * @author Max
  * @since 1.0.0
  */
-@Data
-public class ProjectVO implements Serializable {
+@Getter
+@AllArgsConstructor
+public enum ProjectTypeEnum {
+    /**
+     * 项目分组
+     */
+    GROUP("GROUP", "项目分组"),
+    /**
+     * 个人项目
+     */
+    PERSONAL("PERSONAL", "个人项目"),
+
+    ;
 
 
-    /**
-     * 项目ID
-     */
-    private String id;
-    /**
-     * 项目分组ID
-     */
-    private ProjectGroupVO projectGroup;
-    /**
-     * 项目名称
-     */
-    private String projectName;
-    /**
-     * 项目路径
-     */
-    private String projectPath;
-    /**
-     * 项目描述
-     */
-    private String projectDesc;
-    /**
-     * 项目logo
-     */
-    private String projectLogo;
-    /**
-     * 项目可见性
-     */
-    private String projectVisibility;
-    /**
-     * 项目类型
-     */
-    private String projectType;
+    private final String code;
+
+    private final String desc;
 }

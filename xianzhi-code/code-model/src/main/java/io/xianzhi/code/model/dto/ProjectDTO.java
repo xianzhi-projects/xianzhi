@@ -16,6 +16,8 @@
 
 package io.xianzhi.code.model.dto;
 
+import io.xianzhi.code.model.enums.AgentStatusEnum;
+import io.xianzhi.code.model.enums.ProjectTypeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -34,6 +36,10 @@ public class ProjectDTO implements Serializable {
      */
     private String id;
     /**
+     * 项目分组ID
+     */
+    private String projectGroupId;
+    /**
      * 项目名称
      */
     private String projectName;
@@ -42,7 +48,19 @@ public class ProjectDTO implements Serializable {
      */
     private String projectPath;
     /**
-     * 分组ID
+     * 项目描述
      */
-    private String groupId;
+    private String projectDesc;
+    /**
+     * 项目logo
+     */
+    private String projectLogo;
+    /**
+     * 项目可见性
+     */
+    private AgentStatusEnum projectVisibility;
+    /**
+     * 项目类型
+     */
+    private ProjectTypeEnum projectType;
 }

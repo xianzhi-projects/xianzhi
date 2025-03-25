@@ -33,4 +33,32 @@ import lombok.EqualsAndHashCode;
 public class ProjectDO extends BaseDO {
 
 
+    /**
+     * 项目分组ID
+     */
+    private String projectGroupId;
+    /**
+     * 项目名称
+     */
+    private String projectName;
+    /**
+     * 项目路径
+     */
+    private String projectPath;
+    /**
+     * 项目描述
+     */
+    private String projectDesc;
+    /**
+     * 项目logo
+     */
+    private String projectLogo;
+    /**
+     * 项目可见性
+     */
+    private String projectVisibility;
+    /**
+     * 项目类型
+     */
+    private String projectType;
 }
