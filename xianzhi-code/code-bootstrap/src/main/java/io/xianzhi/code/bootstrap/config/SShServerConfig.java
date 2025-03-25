@@ -43,9 +43,13 @@ public class SShServerConfig {
      * 服务配置类
      */
     private final CodeServerProperties codeServerProperties;
-
+    /**
+     * 公钥认证
+     */
     private final PublickeyAuthenticator xianZhiPublicKeyAuthenticator;
-
+    /**
+     * 本地仓库加载
+     */
     private final GitLocationResolver gitLocationResolver;
 
 
