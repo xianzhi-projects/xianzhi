@@ -37,7 +37,7 @@ public class DisableShellFactory implements ShellFactory {
      */
     @Override
     public Command createShell(ChannelSession channel) {
-        return new ErrorCommand("This server doesn't provide shell access.");
+        return new ErrorCommand("当前服务不支持shell命令,请使用git命令进行操作");
     }
 
 

@@ -16,6 +16,10 @@
 
 package io.xianzhi.code.bootstrap.factory;
 
+import io.xianzhi.code.bootstrap.command.GitUploadPackCommand;
+import lombok.Getter;
+import org.apache.sshd.common.util.threads.CloseableExecutorService;
+import org.apache.sshd.common.util.threads.ThreadUtils;
 import org.apache.sshd.git.AbstractGitCommand;
 import org.apache.sshd.git.AbstractGitCommandFactory;
 import org.apache.sshd.git.GitLocationResolver;
@@ -26,19 +30,42 @@ import org.apache.sshd.git.GitLocationResolver;
  * @author Max
  * @since 1.0.0
  */
+
 public class XianZhiGitCommandFactory extends AbstractGitCommandFactory {
 
-    public static final String GIT_FACTORY_NAME = "git-pgm";
-    public static final String GIT_COMMAND_PREFIX = "git ";
+    private static final String GIT_FACTORY_NAME = "git-pgm";
+    private static final String GIT_COMMAND_PREFIX = "git ";
+    @Getter
+    private final GitLocationResolver gitLocationResolver;
+    CloseableExecutorService executorService = ThreadUtils.newFixedThreadPool("git-executor",2);
 
 
     public XianZhiGitCommandFactory(GitLocationResolver gitLocationResolver) {
         super(GIT_FACTORY_NAME, GIT_COMMAND_PREFIX);
+        if (gitLocationResolver == null) {
+            throw new IllegalArgumentException("GitLocationResolver cannot be null");
+        }
+        this.gitLocationResolver = gitLocationResolver;
         withGitLocationResolver(gitLocationResolver);
     }
 
     @Override
-    protected AbstractGitCommand createGitCommand(String s) {
-        return null;
+    protected AbstractGitCommand createGitCommand(String command) {
+        if (command == null || command.trim().isEmpty()) {
+            throw new IllegalArgumentException("Git command cannot be null or empty");
+        }
+
+        String trimmedCommand = command.trim().startsWith(GIT_COMMAND_PREFIX)
+                ? command.substring(GIT_COMMAND_PREFIX.length()).trim()
+                : command.trim();
+        String[] parts = trimmedCommand.split("\\s+", 2);
+        String commandType = parts[0].toLowerCase();
+        String arguments = parts.length > 1 ? parts[1] : "";
+
+        if ("git-upload-pack".equals(commandType)) {
+            return new GitUploadPackCommand(gitLocationResolver, arguments, executorService);
+        }
+
+        throw new IllegalArgumentException("Unsupported Git command: " + commandType);
     }
 }

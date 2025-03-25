@@ -1,17 +1,17 @@
 /*
- *  Copyright 2025 XianZhi Group .
+ * Copyright 2025 XianZhi Group.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package io.xianzhi.code.bootstrap.factory;
@@ -27,111 +27,141 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * 错误消息命令
+ * SSH 错误消息命令类，用于向客户端返回带有红色字体的错误信息。
+ * <p>
+ * 该类实现了 {@link Command} 接口，通过 SSH 通道向客户端发送错误消息。
+ * 支持使用 ANSI 颜色代码将错误消息显示为红色，适用于支持 ANSI 的终端。
+ * </p>
  *
  * @author Max
  * @since 1.0.0
  */
 public class ErrorCommand implements Command {
 
+    /** ANSI 红色字体代码 */
+    private static final String RED_COLOR = "\u001b[31m";
+    /** ANSI 重置颜色代码 */
+    private static final String RESET_COLOR = "\u001b[0m";
 
+    /** 错误消息内容 */
     @Getter
     private final String errorMessage;
-    /**
-     * 输入流
-     */
-    private InputStream in;
-    /**
-     * 输出流
-     */
-    private OutputStream out;
-    /**
-     * 错误流
-     */
-    private OutputStream err;
-    /**
-     * 退出回调
-     */
-    private ExitCallback callback;
 
+    /** 输入流，用于接收客户端输入 */
+    private InputStream inputStream;
 
+    /** 输出流，用于向客户端发送输出 */
+    private OutputStream outputStream;
+
+    /** 错误流，用于向客户端发送错误信息 */
+    private OutputStream errorStream;
+
+    /** 退出回调，用于通知命令执行完成 */
+    private ExitCallback exitCallback;
+
+    /**
+     * 构造方法，初始化错误消息。
+     *
+     * @param errorMessage 要发送给客户端的错误消息
+     */
     public ErrorCommand(String errorMessage) {
-        this.errorMessage = errorMessage;
+        this.errorMessage = errorMessage != null ? errorMessage.trim() : "";
     }
 
-
     /**
-     * Starts the command execution. All streams must have been set <U>before</U> calling this method. The command
-     * should implement {@link Runnable}, and this method should spawn a new thread like:
+     * 启动命令执行，将红色错误消息发送给客户端。
+     * <p>
+     * 在启动时，将错误消息以红色字体写入错误流，并触发退出回调。
+     * 所有流必须在此方法调用前设置完成。
+     * </p>
      *
-     * <pre>
-     * {@code Thread(this).start(); }
-     * </pre>
-     *
-     * @param channel The {@link ChannelSession} through which the command has been received
-     * @param env     The {@link Environment}
-     * @throws IOException If failed to start
+     * @param channel SSH 会话通道
+     * @param env     环境变量
+     * @throws IOException 如果写入错误流或关闭流时发生错误
      */
     @Override
     public void start(ChannelSession channel, Environment env) throws IOException {
-        err.write(errorMessage.getBytes());
-        err.flush();
-        callback.onExit(0);
-        in.close();
-        out.close();
-        err.close();
+        try {
+            // 规范化消息，确保换行清晰
+            String coloredMessage = RED_COLOR + errorMessage.trim() + RESET_COLOR + "\r\n";
+            errorStream.write(coloredMessage.getBytes());
+            errorStream.flush();
+            exitCallback.onExit(0);
+        } finally {
+            closeStreams();
+        }
     }
 
-
     /**
-     * Set the callback that the shell has to call when it is closed.
+     * 设置退出回调。
      *
-     * @param callback The {@link ExitCallback} to call when shell is closed
+     * @param callback 当命令结束时调用的退出回调
      */
     @Override
     public void setExitCallback(ExitCallback callback) {
-        this.callback = callback;
+        this.exitCallback = callback;
     }
 
     /**
-     * Set the error stream that can be used by the shell to write its errors.
+     * 设置错误输出流。
      *
-     * @param err The {@link OutputStream} used by the shell to write its errors
+     * @param err 用于输出错误信息的流
      */
     @Override
     public void setErrorStream(OutputStream err) {
-        this.err = err;
+        this.errorStream = err;
     }
 
     /**
-     * Set the input stream that can be used by the shell to read input.
+     * 设置输入流。
      *
-     * @param in The {@link InputStream} used by the shell to read input.
+     * @param in 用于接收输入的流
      */
     @Override
     public void setInputStream(InputStream in) {
-        this.in = in;
+        this.inputStream = in;
     }
 
     /**
-     * Set the output stream that can be used by the shell to write its output.
+     * 设置输出流。
      *
-     * @param out The {@link OutputStream} used by the shell to write its output
+     * @param out 用于输出正常信息的流
      */
     @Override
     public void setOutputStream(OutputStream out) {
-        this.out = out;
+        this.outputStream = out;
     }
 
-
     /**
-     * This method is called by the SSH server to destroy the command because the client has disconnected somehow.
+     * 销毁命令，清理资源。
+     * <p>
+     * 当客户端断开连接时，由 SSH 服务器调用此方法以关闭通道。
+     * </p>
      *
-     * @param channel The {@link ChannelSession} through which the command has been received
-     * @throws Exception if failed to destroy
+     * @param channel SSH 会话通道
+     * @throws IOException 如果关闭通道时发生错误
      */
     @Override
-    public void destroy(ChannelSession channel) throws Exception {
+    public void destroy(ChannelSession channel) throws IOException {
         channel.close();
+    }
+
+    /**
+     * 关闭所有流资源。
+     * <p>
+     * 在命令执行完成后，确保输入流、输出流和错误流都被正确关闭。
+     * </p>
+     * @throws IOException 如果关闭流时发生错误
+     */
+    private void closeStreams() throws IOException {
+        if (inputStream != null) {
+            inputStream.close();
+        }
+        if (outputStream != null) {
+            outputStream.close();
+        }
+        if (errorStream != null) {
+            errorStream.close();
+        }
     }
 }
