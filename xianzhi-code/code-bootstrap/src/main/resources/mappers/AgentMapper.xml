@@ -26,4 +26,8 @@
     <!--    根据agentId查询agent信息-->
     <select id="selectAgentById" resultType="io.xianzhi.code.bootstrap.dao.dataobj.AgentDO">
     </select>
+
+    <select id="pageAgentList" resultType="io.xianzhi.code.model.vo.AgentVO">
+
+    </select>
 </mapper>

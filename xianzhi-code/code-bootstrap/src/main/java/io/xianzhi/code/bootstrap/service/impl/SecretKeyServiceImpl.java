@@ -17,6 +17,9 @@
 package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.SecretKeyService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
  * 秘钥接口实现
@@ -24,5 +27,8 @@ import io.xianzhi.code.bootstrap.service.SecretKeyService;
  * @author Max
  * @since 1.0.0
  */
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class SecretKeyServiceImpl implements SecretKeyService {
 }

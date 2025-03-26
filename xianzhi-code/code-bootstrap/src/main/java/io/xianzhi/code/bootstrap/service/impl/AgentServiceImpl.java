@@ -16,6 +16,8 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import io.xianzhi.code.bootstrap.dao.dataobj.AgentDO;
@@ -77,6 +79,7 @@ public class AgentServiceImpl implements AgentService {
      */
     @Override
     public ListResult<AgentVO> pageAgentList(AgentPage agentPage) {
+        IPage<AgentVO> result = agentMapper.pageAgentList(new Page<>(agentPage.getPageNo(),agentPage.getPageNo()),agentPage);
         return null;
     }
 

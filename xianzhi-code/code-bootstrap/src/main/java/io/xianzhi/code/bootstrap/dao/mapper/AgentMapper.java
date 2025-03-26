@@ -17,7 +17,11 @@
 package io.xianzhi.code.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.code.bootstrap.dao.dataobj.AgentDO;
+import io.xianzhi.code.model.page.AgentPage;
+import io.xianzhi.code.model.vo.AgentVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -59,4 +63,12 @@ public interface AgentMapper extends BaseMapper<AgentDO> {
      */
     Optional<AgentDO> selectAgentById(@Param("id") String id);
 
+    /**
+     * 分页查询agent列表
+     *
+     * @param page      分页参数
+     * @param agentPage 查询条件
+     * @return agent列表
+     */
+    IPage<AgentVO> pageAgentList(Page<AgentVO> page, @Param("agentPage") AgentPage agentPage);
 }

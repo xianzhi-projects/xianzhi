@@ -56,7 +56,7 @@ public class AppController {
     @PreAuthorize("@xz.hasPermission('linke:app:list')")
     @PostMapping(value = "/pageAppList")
     public ResponseResult<ListResult<AppVO>> pageAppList(@RequestBody AppPage appPage) {
-        return ResponseResult.success();
+        return ResponseResult.success(appService.pageAppList(appPage));
     }
 
     /**
@@ -68,7 +68,7 @@ public class AppController {
     @Idempotent
     @PostMapping(value = "/createApp")
     public ResponseResult<String> createApp(AppDTO appDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(appService.createApp(appDTO));
     }
 
     /**
@@ -79,6 +79,7 @@ public class AppController {
      */
     @PostMapping(value = "/updateApp")
     public ResponseResult<Object> updateApp(AppDTO appDTO) {
+        appService.updateApp(appDTO);
         return ResponseResult.success();
     }
 
@@ -90,6 +91,7 @@ public class AppController {
      */
     @PostMapping(value = "/deletedApp")
     public ResponseResult<Object> deletedApp(String id) {
+        appService.deletedApp(id);
         return ResponseResult.success();
     }
 
@@ -101,6 +103,7 @@ public class AppController {
      */
     @PostMapping(value = "/offlineApp")
     public ResponseResult<Object> offlineApp(String id) {
+        appService.offlineApp(id);
         return ResponseResult.success();
     }
 
