@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.mapper.TemplateMapper;
 import io.xianzhi.system.bootstrap.service.TemplateService;
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -53,6 +56,10 @@ public class TemplateServiceImpl implements TemplateService {
      */
     @Override
     public ListResult<TemplateVO> pageTemplateList(TemplatePage templatePage) {
+        IPage<TemplateVO> result = templateMapper.pageTemplateList(new Page<>(templatePage.getPageNo(),templatePage.getPageSize()),templatePage);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

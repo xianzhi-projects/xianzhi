@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.mapper.LoginLogMapper;
 import io.xianzhi.system.bootstrap.dao.mapper.OperationLogMapper;
@@ -27,6 +29,7 @@ import io.xianzhi.system.model.vo.OperationLogVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 日志接口实现
@@ -57,6 +60,10 @@ public class LogServiceImpl implements LogService {
      */
     @Override
     public ListResult<OperationLogVO> pageOperationLogList(OperationLogPage operationLogPage) {
+        IPage<OperationLogVO> result = operationLogMapper.pageOperationLogList(new Page<>(operationLogPage.getPageNo(),operationLogPage.getPageSize()),operationLogPage);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

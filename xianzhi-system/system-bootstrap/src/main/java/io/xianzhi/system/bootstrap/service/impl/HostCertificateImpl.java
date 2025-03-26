@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.HostCertificateDO;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -57,6 +60,10 @@ public class HostCertificateImpl implements HostCertificateService {
      */
     @Override
     public ListResult<HostCertificateVO> pageHostCertificate(HostCertificatePage hostCertificatePage) {
+        IPage<HostCertificateVO> result = hostCertificateMapper.selectHostCertificatePage(new Page<>(hostCertificatePage.getPageNo(), hostCertificatePage.getPageSize()), hostCertificatePage);
+        if (ObjectUtils.isEmpty(result.getRecords())) {
+            return ListResult.empty();
+        }
         return null;
     }
 

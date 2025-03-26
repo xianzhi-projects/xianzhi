@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO;
+import io.xianzhi.system.model.page.NoticePage;
+import io.xianzhi.system.model.vo.NoticeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -51,4 +55,13 @@ public interface NoticeMapper extends BaseMapper<NoticeDO> {
     boolean existsNoticeByTitleAndCategoryAndIdNot(@Param("title") String title,
                                                    @Param("category") String category,
                                                    @Param("id") String id);
+
+    /**
+     * 分页查询公告列表
+     *
+     * @param noticeVOPage 分页查询参数
+     * @param noticePage   公告查询条件
+     * @return 公告列表
+     */
+    IPage<NoticeVO> pageNoticeList(Page<NoticeVO> noticeVOPage, @Param("noticePage") NoticePage noticePage);
 }

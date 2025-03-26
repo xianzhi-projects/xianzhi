@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.mapper.RoleMapper;
 import io.xianzhi.system.bootstrap.service.RoleService;
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -53,6 +56,10 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public ListResult<RoleVO> pageRoleList(RolePage rolePage) {
+        IPage<RoleVO> result = roleMapper.pageRoleList(new Page<>(rolePage.getPageNo(),rolePage.getPageSize()),rolePage);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

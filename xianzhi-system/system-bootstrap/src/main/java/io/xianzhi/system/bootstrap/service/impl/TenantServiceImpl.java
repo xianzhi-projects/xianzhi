@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -82,7 +83,10 @@ public class TenantServiceImpl implements TenantService {
      */
     @Override
     public ListResult<TenantVO> pageTenantList(TenantPage tenantPage) {
-        IPage<TenantVO> result = tenantMapper.pageTenantList(new Page<TenantVO>(tenantPage.getPageNo(), tenantPage.getPageSize()), tenantPage);
+        IPage<TenantVO> result = tenantMapper.pageTenantList(new Page<>(tenantPage.getPageNo(), tenantPage.getPageSize()), tenantPage);
+        if (ObjectUtils.isEmpty(result.getRecords())){
+            return ListResult.empty();
+        }
         return null;
     }
 

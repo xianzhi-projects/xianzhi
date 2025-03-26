@@ -35,4 +35,8 @@
         and deleted_flag = 0
         ), 0)
     </select>
+
+    <select id="pageNoticeList" resultType="io.xianzhi.system.model.vo.NoticeVO">
+
+    </select>
 </mapper>

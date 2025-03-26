@@ -16,6 +16,8 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
@@ -67,6 +69,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ListResult<UserVO> pageUserList(UserPage userPage) {
+        IPage<UserVO> result = userMapper.pageUserList(new Page<UserVO>(userPage.getPageNo(), userPage.getPageSize()), userPage);
         return null;
     }
 

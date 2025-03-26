@@ -56,4 +56,9 @@
     <select id="existsUserByPhoneAndIdNot" resultType="boolean">
 
     </select>
+
+    <select id="pageUserList" resultType="io.xianzhi.system.model.vo.UserVO">
+
+
+    </select>
 </mapper>

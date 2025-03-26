@@ -17,7 +17,10 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
+import io.xianzhi.system.model.page.UserPage;
 import io.xianzhi.system.model.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -93,7 +96,12 @@ public interface UserMapper extends BaseMapper<UserDO> {
      */
     List<UserVO> selectSimpleUserList(@Param("userIds") List<String> userIds);
 
-
-
-
+    /**
+     * 分页查询用户列表
+     *
+     * @param userVOPage 分页信息
+     * @param userPage   查询条件
+     * @return 用户列表
+     */
+    IPage<UserVO> pageUserList(Page<UserVO> userVOPage, @Param("userPage") UserPage userPage);
 }

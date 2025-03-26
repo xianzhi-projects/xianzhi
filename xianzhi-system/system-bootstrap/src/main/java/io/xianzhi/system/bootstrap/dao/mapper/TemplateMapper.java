@@ -17,8 +17,13 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.TemplateDO;
+import io.xianzhi.system.model.page.TemplatePage;
+import io.xianzhi.system.model.vo.TemplateVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 模板持久层
@@ -28,4 +33,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TemplateMapper extends BaseMapper<TemplateDO> {
+    /**
+     * 分页查询模板列表
+     *
+     * @param templateVOPage 分页查询参数
+     * @param templatePage   模板查询条件
+     * @return 模板列表
+     */
+    IPage<TemplateVO> pageTemplateList(Page<TemplateVO> templateVOPage, @Param("templatePage") TemplatePage templatePage);
 }

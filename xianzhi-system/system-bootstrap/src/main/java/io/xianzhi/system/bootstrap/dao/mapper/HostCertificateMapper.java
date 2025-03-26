@@ -17,7 +17,11 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.HostCertificateDO;
+import io.xianzhi.system.model.page.HostCertificatePage;
+import io.xianzhi.system.model.vo.HostCertificateVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -55,4 +59,12 @@ public interface HostCertificateMapper extends BaseMapper<HostCertificateDO> {
      * @param ids 凭证ID
      */
     void deletedHostCertificateById(@Param("ids") List<String> ids);
+
+    /**
+     * 分页查询主机凭证
+     * @param hostCertificateVOPage 分页条件
+     * @param hostCertificatePage 查询条件
+     * @return 主机凭证
+     */
+    IPage<HostCertificateVO> selectHostCertificatePage(Page<HostCertificateVO> hostCertificateVOPage, @Param("hostCertificatePage") HostCertificatePage hostCertificatePage);
 }

@@ -31,4 +31,8 @@
             #{id,jdbcType=VARCHAR}
         </foreach>
     </update>
+
+    <select id="selectHostCertificatePage" resultType="io.xianzhi.system.model.vo.HostCertificateVO">
+
+    </select>
 </mapper>

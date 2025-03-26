@@ -17,8 +17,13 @@
 package io.xianzhi.system.bootstrap.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.system.bootstrap.dao.dataobj.OperationLogDO;
+import io.xianzhi.system.model.page.OperationLogPage;
+import io.xianzhi.system.model.vo.OperationLogVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 操作日志持久层
@@ -28,4 +33,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface OperationLogMapper extends BaseMapper<OperationLogDO> {
+    /**
+     * 分页查询操作日志列表
+     *
+     * @param page             分页查询参数
+     * @param operationLogPage 操作日志查询条件
+     * @return 操作日志列表
+     */
+    IPage<OperationLogVO> pageOperationLogList(Page<OperationLogVO> page, @Param("operationLogPage") OperationLogPage operationLogPage);
 }
