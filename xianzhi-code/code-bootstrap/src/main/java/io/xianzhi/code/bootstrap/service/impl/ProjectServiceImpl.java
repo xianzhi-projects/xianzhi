@@ -58,7 +58,9 @@ public class ProjectServiceImpl implements ProjectService {
      */
     private final ProjectGroupMapper projectGroupMapper;
 
-
+    /**
+     * 仓库处理
+     */
     private final RepositoryHandler repositoryHandler;
 
     /**

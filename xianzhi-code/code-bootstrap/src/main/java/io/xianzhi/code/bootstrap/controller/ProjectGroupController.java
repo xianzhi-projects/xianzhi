@@ -23,10 +23,11 @@ import io.xianzhi.code.model.vo.ProjectGroupVO;
 import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 项目分组接口
@@ -62,7 +63,7 @@ public class ProjectGroupController {
      */
     @Idempotent
     @PostMapping(value = "/createProjectGroup")
-    public ResponseResult<String> createProjectGroup(ProjectGroupDTO projectGroupDTO) {
+    public ResponseResult<String> createProjectGroup(@RequestBody @Validated(value = CreateGroup.class) ProjectGroupDTO projectGroupDTO) {
         return ResponseResult.success();
     }
 
@@ -73,7 +74,7 @@ public class ProjectGroupController {
      * @return 响应信息
      */
     @PostMapping(value = "/updateProjectGroup")
-    public ResponseResult<Object> updateProjectGroup(ProjectGroupDTO projectGroupDTO) {
+    public ResponseResult<Object> updateProjectGroup(@RequestBody @Validated(value = UpdateGroup.class) ProjectGroupDTO projectGroupDTO) {
         return ResponseResult.success();
     }
 
@@ -84,7 +85,7 @@ public class ProjectGroupController {
      * @return 响应信息
      */
     @PostMapping(value = "/deletedProjectGroup")
-    public ResponseResult<Object> deletedProjectGroup(String id) {
+    public ResponseResult<Object> deletedProjectGroup(@RequestParam(value = "id") String id) {
         return ResponseResult.success();
     }
 }

@@ -19,7 +19,6 @@ import LoginForm from "@/views/authentication/components/LoginForm.vue";
 }
 
 .login-right {
-  background-color: rgb(232,232,232);
   height: 100vh;
 }
 </style>

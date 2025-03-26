@@ -129,7 +129,6 @@ const refreshCaptcha = async () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
   .form_container {
     width: 500px;
     height: 800px;
@@ -139,6 +138,11 @@ const refreshCaptcha = async () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    :deep(.ant-form-item){
+      height: 70px;
+      margin-bottom: 1px;
+      padding-top: 10px;
+    }
     .title{
       font-size: 25px;
       font-weight: 900;
