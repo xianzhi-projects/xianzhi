@@ -22,7 +22,7 @@
       <div class="image-wrapper">
         <!--        <img src="@/assets/login-bg.jpg" alt="Login Background" />-->
         <div class="overlay">
-          <h2>Vben Admin</h2>
+          <h2>先知研发效能平台</h2>
           <p>一个高效、现代化的管理后台系统</p>
         </div>
       </div>
@@ -30,27 +30,31 @@
 
     <!-- 右侧登录表单 -->
     <div class="login-right">
-      <!--      <LoginForm/>-->
+      <LoginForm/>
       <div class="copyright">
-        Copyright © 2024 Vben
+        Copyright © 2025 XianZhi Group
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LoginForm from "@/views/authorization/components/LoginForm.vue";
+</script>
 
 <style lang="less" scoped>
 .login-page {
   display: flex;
   min-height: 100vh;
-  background-color: #f1f1f1;
-
   .login-left {
     display: flex;
     flex: 2;
     position: relative;
-    background-color: #1890ff;
+    background-image: url("@/assets/back.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 
     .image-wrapper {
       position: absolute;
@@ -66,6 +70,7 @@
         object-fit: cover;
         opacity: 0.8;
       }
+
       .overlay {
         position: absolute;
         top: 50%;
@@ -80,6 +85,10 @@
   }
 
   .login-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     flex: 1;
   }
 }

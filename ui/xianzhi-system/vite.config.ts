@@ -26,6 +26,7 @@ import path from 'path';
 export default defineConfig(({ mode }) => {
   // 加载环境变量
   const env = loadEnv(mode, process.cwd(), '');
+  console.log(env.VITE_API_URL)
 
   return {
     plugins: [

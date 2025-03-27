@@ -91,25 +91,15 @@
 import {ref} from 'vue';
 import {ElButton, ElCheckbox, ElForm, ElFormItem, ElInput, ElMessage} from 'element-plus';
 import {useRouter} from 'vue-router';
+import {passwordLogin, type PasswordLoginDTO} from "@/api/authorization.ts";
 
-// 定义表单数据接口
-interface LoginForm {
-  username: string;
-  password: string;
-  captcha?: boolean;
-}
 
 // 表单数据
-const form = ref<LoginForm>({
+const form = ref<PasswordLoginDTO>({
   username: '',
   password: '',
 });
 
-// 用户名选项
-const usernameOptions = [
-  { label: 'Super', value: 'Super' },
-  { label: 'vben', value: 'vben' },
-];
 
 // 表单引用
 const formRef = ref<InstanceType<typeof ElForm>>();
@@ -187,12 +177,10 @@ const handleLogin = async () => {
     loading.value = true;
     await formRef.value?.validate();
 
-    const response = await mockLogin(form.value);
-    if (response.success) {
+    const response = await passwordLogin(form.value);
+    console.log(response)
+    if (response.code == '200') {
       ElMessage.success('登录成功');
-      if (rememberMe.value) {
-        localStorage.setItem('username', form.value.username);
-      }
       router.push('/dashboard');
     } else {
       ElMessage.error('用户名或密码错误');
@@ -202,19 +190,6 @@ const handleLogin = async () => {
   } finally {
     loading.value = false;
   }
-};
-
-// 模拟登录请求
-const mockLogin = (form: LoginForm): Promise<{ success: boolean }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      if (form.username === 'vben' && form.password === '123456') {
-        resolve({ success: true });
-      } else {
-        resolve({ success: false });
-      }
-    }, 1000);
-  });
 };
 </script>
 
@@ -227,6 +202,10 @@ const mockLogin = (form: LoginForm): Promise<{ success: boolean }> => {
 @border-color: #d9d9d9;
 
 .login-form {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .title {
     font-size: 2.25rem;
     color: @text-color;
@@ -307,13 +286,11 @@ const mockLogin = (form: LoginForm): Promise<{ success: boolean }> => {
   }
 
   .login-options {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 16px;
-
     .forgot-password {
-      color: @primary-color;
       font-size: 14px;
     }
   }

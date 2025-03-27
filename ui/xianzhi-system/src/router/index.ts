@@ -15,28 +15,33 @@
  */
 // src/router/index.ts
 import {createRouter, createWebHistory} from 'vue-router';
-import Login from '@/views/authorization/Login.vue';
+import Layout from '@/layout/index.vue';
 
 const routes = [
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login,
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/Dashboard.vue'),
-    },
-    {
-        path: '/',
-        redirect: '/login',
-    },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/authorization/Login.vue')
+  }, // 登录页
+  {
+    path: '/',
+    name: 'admin',
+    component: Layout,
+    children: [{
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('@/views/Dashboard.vue'),
+    }]
+  }, // 管理布局页
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404', component: () => import('@/views/error/404.vue')
+  }, // 404 页面
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 });
 
 export default router;
