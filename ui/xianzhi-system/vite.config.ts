@@ -18,8 +18,9 @@ import {defineConfig, loadEnv} from 'vite';
 import vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import path from 'path';
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers';
+
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -47,28 +48,13 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true, // 确保 Host 头正确
           ws: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
-          // 添加日志以调试代理
-          configure: (proxy) => {
-            proxy.on('proxyReq', (proxyReq, req) => {
-              console.log(`Proxying ${req.method} ${req.url} to ${env.VITE_API_URL}`);
-              // 使用 proxyReq 修改请求头
-              proxyReq.setHeader('X-Custom-Header', 'Custom-Value');
-            });
-            proxy.on('error', (err, _req, res) => {
-              console.error('Proxy error:', err);
-              res.statusCode = 500; // 设置状态码
-              res.setHeader('Content-Type', 'text/plain'); // 设置响应头
-              res.end('Proxy error'); // 发送响应内容
-            });
-          },
         },
       },
     },
-
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'), // 修正路径解析
-      },
-    },
+        "@": path.resolve("./src") // 相对路径别名配置，使用 @ 代替 src
+      }
+    }
   };
 });
