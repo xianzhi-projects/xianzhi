@@ -22,7 +22,7 @@ public enum OAuth2Code implements Result {
     /**
      * 客户认证异常
      */
-    CLIENT_ERROR("91000002", "security:client.error"),
+    CLIENT_ERROR("91000002", "客户端认证异常"),
 
     /**
      * 授权类型不支持

@@ -13,10 +13,7 @@ import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.*;
@@ -180,7 +177,9 @@ public abstract class AbstractAuthenticationProvider implements AuthenticationPr
             return new OAuth2AccessTokenAuthenticationToken(registeredClient, abstractAuthenticationToken, accessToken,
                     refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
         } catch (Exception exception) {
-
+            if (exception instanceof DisabledException){
+                throw new OAuth2Exception(SecurityCode.ACCOUNT_DISABLED);
+            }
             if (exception instanceof OAuth2Exception) {
                 throw (OAuth2Exception) exception;
             }

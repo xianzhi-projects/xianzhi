@@ -26,6 +26,7 @@ import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
 import io.xianzhi.common.redis.RedisHandler;
 import io.xianzhi.common.security.properties.SecurityProperties;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.utils.JSONUtils;
@@ -133,19 +134,24 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
      */
     @Override
     public RegisteredClient findByClientId(String clientId) {
-        if (StringUtils.hasText(clientId)) {
-            OAuth2ClientDO clientDO = redisProcessor.hGet(AuthorizationInfoConstant.SYS_OAUTH2_CLIENT_ID, clientId, OAuth2ClientDO.class);
-            if (null == clientDO) {
-                clientDO = oAuth2ClientMapper.queryByClientId(clientId);
+        try {
+            if (StringUtils.hasText(clientId)) {
+                OAuth2ClientDO clientDO = redisProcessor.hGet(AuthorizationInfoConstant.SYS_OAUTH2_CLIENT_ID, clientId, OAuth2ClientDO.class);
                 if (null == clientDO) {
-                    log.error("客户端信息不存在，客户端ID:{}", clientId);
-                    throw new OAuth2Exception(new ResponseResult<>(OAuth2Code.CLIENT_ERROR, null));
+                    clientDO = oAuth2ClientMapper.queryByClientId(clientId);
+                    if (null == clientDO) {
+                        log.error("客户端信息不存在，客户端ID:{}", clientId);
+                        throw new OAuth2Exception(new ResponseResult<>(OAuth2Code.CLIENT_ERROR, null));
+                    }
+                    redisProcessor.hSet(AuthorizationInfoConstant.SYS_OAUTH2_CLIENT_ID, clientId, clientDO);
                 }
-                redisProcessor.hSet(AuthorizationInfoConstant.SYS_OAUTH2_CLIENT_ID, clientId, clientDO);
+                return clientDOToRegisterClient(clientDO);
             }
-            return clientDOToRegisterClient(clientDO);
+            return null;
+        } catch (Exception exception) {
+            log.error(exception.getMessage(),exception);
+            throw new OAuth2Exception(CommonCode.ERROR);
         }
-        return null;
     }
 
     /**

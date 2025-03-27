@@ -84,7 +84,7 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public ListResult<TenantVO> pageTenantList(TenantPage tenantPage) {
         IPage<TenantVO> result = tenantMapper.pageTenantList(new Page<>(tenantPage.getPageNo(), tenantPage.getPageSize()), tenantPage);
-        if (ObjectUtils.isEmpty(result.getRecords())){
+        if (ObjectUtils.isEmpty(result.getRecords())) {
             return ListResult.empty();
         }
         return null;
@@ -135,7 +135,12 @@ public class TenantServiceImpl implements TenantService {
 
     }
 
-
+    /**
+     * 检查租户信息入参
+     *
+     * @param tenantDTO 租户信息入参
+     * @return 租户信息
+     */
     private TenantDO checkedTenantDTO(TenantDTO tenantDTO) {
         TenantDO tenant;
         if (StringUtils.hasText(tenantDTO.getId())) {
@@ -155,6 +160,5 @@ public class TenantServiceImpl implements TenantService {
         tenant.setTenantOwner(tenantDTO.getTenantOwner());
         tenant.setTenantDesc(tenantDTO.getTenantDesc());
         return tenant;
-
     }
 }

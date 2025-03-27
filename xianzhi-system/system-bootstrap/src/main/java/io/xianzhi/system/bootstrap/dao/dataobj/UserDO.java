@@ -44,14 +44,6 @@ public class UserDO extends BaseDO {
      */
     private String password;
     /**
-     * 昵称
-     */
-    private String nickName;
-    /**
-     * 真实姓名
-     */
-    private String realName;
-    /**
      * 邮箱
      */
     private String email;
@@ -59,10 +51,27 @@ public class UserDO extends BaseDO {
      * 手机号码
      */
     private String phone;
+
+    /**
+     * 昵称
+     */
+    private String nickName;
+    /**
+     * 真实姓名
+     */
+    private String realName;
+
     /**
      * 头像
      */
     private String avatar;
+
+    /**
+     * 默认租户ID
+     */
+    private String defaultTenantId;
+
+
     /**
      * 用户状态
      */

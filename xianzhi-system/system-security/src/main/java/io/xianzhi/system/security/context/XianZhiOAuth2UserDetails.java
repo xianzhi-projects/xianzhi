@@ -4,6 +4,7 @@ package io.xianzhi.system.security.context;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.xianzhi.common.oauth2.OAuth2UserDetails;
+import io.xianzhi.system.model.enums.UserStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -135,7 +136,7 @@ public class XianZhiOAuth2UserDetails extends OAuth2UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return userStatus.equals("01");
+        return userStatus.equals(UserStatusEnum.NORMAL.getCode());
     }
 
     /**

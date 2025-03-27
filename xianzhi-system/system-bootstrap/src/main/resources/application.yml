@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 9512
 spring:
   application:
     name: xianzhi-system
@@ -108,4 +108,10 @@ xianzhi:
     access-secret: gO316AfvxcG2JIcgOIWdz2stOEXJdDRb
   code:
     external-url: https://code.xianzhi.io
-
+rocketmq:
+  name-server: 192.168.50.70:9876;192.168.50.71:9876
+  producer:
+    group: S_system
+    send-message-timeout: 30000
+  consumer:
+    group: C_system
