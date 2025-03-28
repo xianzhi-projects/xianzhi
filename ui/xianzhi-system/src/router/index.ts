@@ -16,6 +16,8 @@
 // src/router/index.ts
 import {createRouter, createWebHistory} from 'vue-router';
 import Layout from '@/layout/index.vue';
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const routes = [
   {
@@ -25,13 +27,15 @@ const routes = [
   }, // 登录页
   {
     path: '/',
-    name: 'admin',
+    name: 'index',
     component: Layout,
-    children: [{
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('@/views/Dashboard.vue'),
-    }]
+    children: [
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/Dashboard.vue'),
+      }
+    ]
   }, // 管理布局页
   {
     path: '/:pathMatch(.*)*',
@@ -41,8 +45,26 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-});
+  routes: routes,
+  scrollBehavior(to, from, savePosition) {
+    return savePosition ? savePosition : {top: 0}
+  },
+})
+
+// 获取所有模块路由（懒加载）
+const modulesRoutes = import.meta.glob('/src/views/**/*.vue')
+const modulesRoutesKeys = Object.keys(modulesRoutes)
+// 路由前置守卫
+router.beforeEach(async (to, from, next) => {
+  console.log(router.getRoutes())
+  NProgress.start()
+})
+
+// 路由后置守卫
+router.afterEach(() => {
+  NProgress.done()
+})
+
 
 export default router;
 
