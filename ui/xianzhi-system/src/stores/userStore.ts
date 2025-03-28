@@ -13,41 +13,68 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+import {defineStore} from 'pinia';
+import type {TokenVO} from "@/api/authorization.ts";
 import {computed, ref} from 'vue'
-import {defineStore} from 'pinia'
-import type {TokenVO} from '@/api/authorization.ts'
 
-const TOKEN = 'token';
+// 使用常量而非字符串直接引用，提高可维护性
+const TOKEN_KEY = 'user_token';
+
+// 工具函数：简化对 localStorage 的访问，并添加错误处理
+function getStoredToken(): TokenVO | null {
+  try {
+    const item = localStorage.getItem(TOKEN_KEY);
+    return item ? JSON.parse(item) : null;
+  } catch (error) {
+    console.error('Failed to parse stored token:', error);
+    return null;
+  }
+}
+
+function storeToken(token: TokenVO): void {
+  try {
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
+  } catch (error) {
+    console.error('Failed to store token:', error);
+  }
+}
+
+function clearStoredToken(): void {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch (error) {
+    console.error('Failed to remove token:', error);
+  }
+}
+
 export const useUserStore = defineStore('user', () => {
-  const tokenInfo = ref<TokenVO>()
-  const isLogin = computed(() => {
-    const token = JSON.parse(localStorage.getItem(TOKEN) || '{}')
-    return token && token.accessToken
-  })
+  // 使用 ref 来创建响应式的 tokenInfo
+  const tokenInfo = ref<TokenVO | null>(getStoredToken());
 
-  /**
-   * 设置token信息
-   */
+  // 计算属性，检查是否登录
+  const isLogin = computed(() => !!tokenInfo.value?.accessToken);
+
+  // 设置 Token 信息
   function setToken(token: TokenVO) {
-    tokenInfo.value = token
-    localStorage.setItem(TOKEN, JSON.stringify(token))
+    tokenInfo.value = token;
+    storeToken(token);
   }
 
-  /**
-   * 获取Token信息
-   */
-  function getToken() {
-    return JSON.parse(localStorage.getItem(TOKEN) || '{}')
+  // 获取 Token 信息
+  function getToken(): TokenVO | null {
+    if (tokenInfo.value){
+      return tokenInfo.value;
+    }
+    return getStoredToken();
   }
 
-  /**
-   * 删除token
-   */
+  // 删除 Token 信息
   function removeToken() {
-    return localStorage.removeItem(TOKEN)
+    tokenInfo.value = null;
+    clearStoredToken();
   }
 
-  return {setToken, getToken, removeToken, isLogin}
-})
+  return { setToken, getToken, removeToken, isLogin };
+});
 
 

@@ -24,6 +24,10 @@ import {refreshToken as refreshTokenAPI} from '@/api/authorization.ts';
 import {useUserStore} from '@/stores/userStore.ts';
 import {Message} from "@element-plus/icons-vue";
 
+
+export const BASE_SERVER = import.meta.env.VITE_BASE_SERVER;
+
+
 /**
  * 响应数据结构
  */

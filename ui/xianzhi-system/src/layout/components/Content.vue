@@ -14,32 +14,19 @@
   -  limitations under the License.
   -->
 
-<template>
-  <div class="common-layout">
-    <el-container>
-      <Aside/>
-      <el-container>
-        <el-header>
-          <Header/>
-        </el-header>
-        <Content/>
-      </el-container>
-    </el-container>
-  </div>
-</template>
 <script lang="ts" setup>
-import Aside from "@/layout/components/Aside.vue";
-import Header from "@/layout/components/Header.vue";
-import Content from "@/layout/components/Content.vue";
-</script>
-<style lang="less" scoped>
-.el-header{
-  background-color: white;
-  color: #333;
-  line-height: 60px;
-  text-align: right;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px #f0f1f2;
-}
 
+</script>
+
+<template>
+  <el-main>
+    <router-view/>
+  </el-main>
+</template>
+
+<style scoped>
+.el-main{
+  padding: 20px;
+  background-color: #f0f1f2;
+}
 </style>

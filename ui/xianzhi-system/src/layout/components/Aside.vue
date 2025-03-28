@@ -15,10 +15,23 @@
   -->
 
 <script lang="ts" setup>
-import {Document, Location, Menu as IconMenu, Setting,} from '@element-plus/icons-vue'
-import {ref} from "vue";
+import {onBeforeMount} from "vue";
+import {menus, refreshMenu} from "@/layout/index.ts";
+import {useRouterStore} from "@/stores/routerStore.ts";
+import router from "@/router";
+import MenuTree from "@/layout/components/MenuTree.vue";
 
-const url = ref('@/assets/images/logo.png')
+const routerStore = useRouterStore();
+// 页面加载的时候，将路由配置转换为菜单配置
+onBeforeMount(() => {
+  const routerList = routerStore.routerList;
+  if (routerList){
+    refreshMenu(routerList)
+  }else{
+    router.push("/login")
+  }
+})
+
 </script>
 
 <template>
@@ -27,50 +40,7 @@ const url = ref('@/assets/images/logo.png')
       <img alt="" height="28" src="@/assets/logo.png"  width="28"/>
       <span >先知后台管理系统</span>
     </div>
-    <el-menu
-      background-color="#333"
-      class="el-menu-vertical-demo"
-      default-active="2"
-      text-color="#fff"
-    >
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon>
-            <location/>
-          </el-icon>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">item three</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="1-4">
-          <template #title>item four</template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon>
-          <icon-menu/>
-        </el-icon>
-        <span>Navigator Two</span>
-      </el-menu-item>
-      <el-menu-item disabled index="3">
-        <el-icon>
-          <document/>
-        </el-icon>
-        <span>Navigator Three</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon>
-          <setting/>
-        </el-icon>
-        <span>Navigator Four</span>
-      </el-menu-item>
-    </el-menu>
+    <MenuTree :menuList="menus"/>
   </el-aside>
 </template>
 
