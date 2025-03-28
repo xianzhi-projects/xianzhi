@@ -19,7 +19,9 @@
     <el-container>
       <Aside/>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <Header/>
+        </el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -27,6 +29,7 @@
 </template>
 <script lang="ts" setup>
 import Aside from "@/layout/components/Aside.vue";
+import Header from "@/layout/components/Header.vue";
 </script>
 <style lang="less" scoped>
 .el-header{
