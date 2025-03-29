@@ -16,10 +16,15 @@
 
 <script lang="ts" setup>
 
+import ResourceTree from "@/views/system/resource/components/ResourceTree.vue";
 </script>
 
 <template>
-resource
+  <el-row>
+    <el-col :span="8">
+     <ResourceTree/>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
