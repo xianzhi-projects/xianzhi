@@ -119,7 +119,7 @@ const handleLogin = async () => {
     if (response.code == '200') {
       ElMessage.success('登录成功');
       userStore.setToken(response.data);
-      await router.push('/dashboard');
+      await router.push('/');
     } else {
       ElMessage.error(response.message);
     }

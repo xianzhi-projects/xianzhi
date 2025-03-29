@@ -39,6 +39,7 @@ import {Setting} from '@element-plus/icons-vue'
 <style lang="less" scoped>
 
 .toolbar {
+  user-select: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;

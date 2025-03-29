@@ -14,29 +14,40 @@
   -  limitations under the License.
   -->
 
-<script setup >
+<script setup>
+import {ResourceType} from "@/types/resource.js";
+
 const menuList = defineModel( 'menuList')
+function setMenu(menu) {
+  console.log(11)
+  console.log(menu)
+}
 </script>
 
 
 <template>
+
+
   <div>
     <template v-for="item in menuList" :key="item.path">
-      <!-- {{ item }} -->
       <!--      分为两种方式渲染：有子菜单和没有子菜单-->
-      <el-sub-menu v-if="item.children" :index="item.path">
+      <el-sub-menu v-if="item.children && item.meta.resourceType === ResourceType.CATALOG" :index="item.path">
         <template #title>
-          <span>{{ item.title }}</span>
+          <i :class="item.meta.icon"></i>
+          <span>{{ item.name }}</span>
         </template>
         <!--        有子菜单的继续遍历（递归）-->
         <MenuTree :menuList="item.children"></MenuTree>
       </el-sub-menu>
       <!--      没有子菜单-->
-      <el-menu-item v-if="!item.children" :index="item.path">
-        <span>{{ item.title }}</span>
+      <el-menu-item v-if="item.meta.resourceType === ResourceType.MENU" :index="item.path">
+        <i :class="item.meta.icon"></i>
+        <span>{{ item.name }}</span>
       </el-menu-item>
     </template>
   </div>
+
+
 </template>
 
 

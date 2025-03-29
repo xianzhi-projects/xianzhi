@@ -24,6 +24,8 @@ import io.xianzhi.system.model.vo.ResourceVO;
 import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -42,7 +44,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ResourceServiceImpl implements ResourceService {
+public class ResourceServiceImpl implements ResourceService, InitializingBean {
 
     /**
      * 资源持久层
@@ -181,5 +183,40 @@ public class ResourceServiceImpl implements ResourceService {
             resourceVO.setChildren(getChildren(item.getId(), resources));
         }
         return resourceVO;
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+//        UserContextHolder.setAnonymousUser();
+//        ResourceDO resourceDO = new ResourceDO();
+//        resourceDO.setResourceName("概览");
+//        resourceDO.setResourceType(ResourceTypeEnum.CATALOG.getCode());
+//        resourceDO.setResourceDesc("概览");
+//        resourceDO.setResourceKey("/");
+//        resourceDO.setResourceSorted(1);
+//        resourceDO.setParentId("-1");
+//        resourceDO.setMenuIcon("el-icon-s-home");
+//        resourceDO.setShowFlag(true);
+//        resourceMapper.insert(resourceDO);
+//        ResourceDO resourceDO1 = new ResourceDO();
+//        resourceDO1.setResourceName("分析页");
+//        resourceDO1.setResourceType(ResourceTypeEnum.CATALOG.getCode());
+//        resourceDO1.setResourceDesc("分析页");
+//        resourceDO1.setResourceKey("/analytics");
+//        resourceDO1.setResourceSorted(1);
+//        resourceDO1.setParentId(resourceDO.getId());
+//        resourceDO1.setMenuIcon("el-icon-s-data");
+//        resourceDO1.setMenuComponent("@/analytics/Index.vue");
+//        resourceDO1.setShowFlag(true);
+//        resourceMapper.insert(resourceDO1);
     }
 }

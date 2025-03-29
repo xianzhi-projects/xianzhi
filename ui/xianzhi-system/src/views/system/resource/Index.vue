@@ -14,12 +14,12 @@
   -  limitations under the License.
   -->
 
-<script setup lang="ts">
+<script lang="ts" setup>
 
 </script>
 
 <template>
-  Dashboard
+resource
 </template>
 
 <style scoped>

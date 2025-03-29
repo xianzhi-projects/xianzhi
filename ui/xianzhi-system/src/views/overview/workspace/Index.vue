@@ -19,14 +19,9 @@
 </script>
 
 <template>
-  <el-main>
-    <router-view/>
-  </el-main>
+
 </template>
 
 <style scoped>
-.el-main{
-  padding: 20px;
-  background-color: #f0f1f2;
-}
+
 </style>

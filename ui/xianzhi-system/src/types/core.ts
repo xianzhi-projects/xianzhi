@@ -14,10 +14,40 @@
  *  limitations under the License.
  */
 
-import {ref} from "vue";
 
+/**
+ * 响应信息
+ */
+export interface ResponseResult<T> {
+  /**
+   * 提示信息
+   */
+  message: string
+  /**
+   * 状态码
+   */
+  code: string
+  /**
+   * 数据
+   */
+  data: T | null
+  /**
+   * traceId
+   */
+  traceId: string
+}
 
-export const menus = ref([])
-
-
+/**
+ * 查询列表返回的数据
+ */
+export interface ListResult<T> {
+  /**
+   * 总数
+   */
+  total: number
+  /**
+   * 查询的数据
+   */
+  list: T[]
+}
 

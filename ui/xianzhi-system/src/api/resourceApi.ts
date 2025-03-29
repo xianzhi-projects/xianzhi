@@ -1,62 +1,8 @@
-import http, {type ResponseResult} from '@/api/index'
+import http from '@/api/index'
 import {BASE_SERVER} from "@/constants/ServerConstant.ts";
+import type {ResponseResult} from "@/types/core.ts";
+import type {ResourceDTO, ResourceVO} from "@/types/resource.ts";
 
-/**
- * 资源类型枚举
- */
-export enum ResourceType {
-  /**
-   * 菜单
-   */
-  MENU = 'MENU',
-  /**
-   * 目录
-   */
-  CATEGORY = 'CATEGORY',
-  /**
-   * 按钮
-   */
-  BUTTON = 'BUTTON',
-  /**
-   * 链接
-   */
-  LINK = 'LINK',
-}
-
-/**
- * 资源信息入参
- */
-export interface ResourceDTO {
-  id: string
-  resourceName: string
-  resourceType: string
-  resourceDesc: string
-  resourceKey: string
-  resourceSort: number
-  parentId: string
-  menuIcon: string
-  menuComponent: string
-  showFlag: boolean
-  enableFlag: boolean
-}
-
-/**
- * 资源信息出参
- */
-export interface ResourceVO {
-  id: string
-  resourceName: string
-  resourceType: string
-  resourceDesc: string
-  resourceKey: string
-  resourceSort: number
-  parentId: string
-  menuIcon: string
-  menuComponent: string
-  showFlag: boolean
-  enableFlag: boolean
-  children: ResourceVO[]
-}
 
 /**
  * 获取当前用户资源信息

@@ -18,43 +18,8 @@ import axios, {AxiosError} from 'axios'
 import {refreshToken} from '@/api/authorization.ts'
 import {useUserStore} from '@/stores/userStore.ts'
 import {ElMessage} from "element-plus";
+import type {ResponseResult} from "@/types/core.ts";
 
-
-/**
- * 响应信息
- */
-export interface ResponseResult<T> {
-  /**
-   * 提示信息
-   */
-  message: string
-  /**
-   * 状态码
-   */
-  code: string
-  /**
-   * 数据
-   */
-  data: T | null
-  /**
-   * traceId
-   */
-  traceId: string
-}
-
-/**
- * 查询列表返回的数据
- */
-export interface ListResult<T> {
-  /**
-   * 总数
-   */
-  total: number
-  /**
-   * 查询的数据
-   */
-  list: T[]
-}
 
 // 自定义错误类
 class ApiError extends Error {

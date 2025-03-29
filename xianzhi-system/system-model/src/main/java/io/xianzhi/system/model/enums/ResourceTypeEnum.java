@@ -14,10 +14,38 @@
  *  limitations under the License.
  */
 
-import {ref} from "vue";
+package io.xianzhi.system.model.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * 菜单类型枚举
+ *
+ * @author Max
+ * @since 1.0.0
+ */
+@Getter
+@AllArgsConstructor
+public enum ResourceTypeEnum {
+    /**
+     * 菜单
+     */
+    MENU("MENU", "菜单"),
+    /**
+     * 按钮
+     */
+    BUTTON("BUTTON", "按钮"),
+    /**
+     * 目录
+     */
+    CATALOG("CATALOG", "目录"),
 
 
-export const menus = ref([])
+    ;
 
 
+    private final String code;
 
+    private final String desc;
+}

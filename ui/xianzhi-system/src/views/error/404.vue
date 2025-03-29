@@ -19,7 +19,7 @@
 </script>
 
 <template>
-
+  this is 404 page
 </template>
 
 <style scoped>

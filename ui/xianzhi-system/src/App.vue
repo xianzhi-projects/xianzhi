@@ -1,11 +1,10 @@
 <!-- src/App.vue -->
 <template>
-  <!-- 主内容区域 -->
-  <router-view />
+
+  <RouterView />
 </template>
 
 <script lang="ts" setup>
 </script>
 <style lang="less">
-
 </style>

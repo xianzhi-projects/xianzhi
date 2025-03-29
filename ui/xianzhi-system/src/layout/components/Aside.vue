@@ -15,22 +15,11 @@
   -->
 
 <script lang="ts" setup>
-import {onBeforeMount} from "vue";
-import {menus, refreshMenu} from "@/layout/index.ts";
 import {useRouterStore} from "@/stores/routerStore.ts";
-import router from "@/router";
 import MenuTree from "@/layout/components/MenuTree.vue";
 
 const routerStore = useRouterStore();
 // 页面加载的时候，将路由配置转换为菜单配置
-onBeforeMount(() => {
-  const routerList = routerStore.routerList;
-  if (routerList){
-    refreshMenu(routerList)
-  }else{
-    router.push("/login")
-  }
-})
 
 </script>
 
@@ -40,15 +29,24 @@ onBeforeMount(() => {
       <img alt="" height="28" src="@/assets/logo.png"  width="28"/>
       <span >先知后台管理系统</span>
     </div>
-    <MenuTree v-model:menu-list="menus"/>
+    <el-menu
+      :router="true"
+      background-color="#333"
+      class="el-menu-vertical-demo"
+      text-color="#fff"
+    >
+      <MenuTree v-model:menu-list="routerStore.routerList"/>
+    </el-menu>
   </el-aside>
 </template>
 
 <style lang="less" scoped>
 .el-aside {
+  user-select: none;
   width: 250px;
   min-height: 100vh;
   background-color: #333;
+  color: #fff;
 }
 // 侧边栏 Logo 样式
 .layout-sider-logo {
