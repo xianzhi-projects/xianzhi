@@ -13,202 +13,214 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import axios, {
-  AxiosError,
-  type AxiosRequestConfig,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig
-} from 'axios';
-import type {TokenVO} from '@/api/authorization.ts';
-import {refreshToken as refreshTokenAPI} from '@/api/authorization.ts';
-import {useUserStore} from '@/stores/userStore.ts';
-import {Message} from "@element-plus/icons-vue";
-
-
-export const BASE_SERVER = import.meta.env.VITE_BASE_SERVER;
+import type {AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from 'axios'
+import axios, {AxiosError} from 'axios'
+import {refreshToken} from '@/api/authorization.ts'
+import {useUserStore} from '@/stores/userStore.ts'
+import {ElMessage} from "element-plus";
 
 
 /**
- * 响应数据结构
+ * 响应信息
  */
 export interface ResponseResult<T> {
-  message: string;
-  code: string;
-  data: T | null;
-  traceId: string;
+  /**
+   * 提示信息
+   */
+  message: string
+  /**
+   * 状态码
+   */
+  code: string
+  /**
+   * 数据
+   */
+  data: T | null
+  /**
+   * traceId
+   */
+  traceId: string
 }
 
 /**
- * 分页查询返回数据结构
+ * 查询列表返回的数据
  */
 export interface ListResult<T> {
-  total: number;
-  list: T[];
+  /**
+   * 总数
+   */
+  total: number
+  /**
+   * 查询的数据
+   */
+  list: T[]
 }
 
-/**
- * 自定义 API 错误类
- */
+// 自定义错误类
 class ApiError extends Error {
-  constructor(public code: string, message: string) {
-    super(message);
-    this.name = 'ApiError';
+  constructor(
+    public code: string,
+    message: string,
+  ) {
+    super(message)
   }
 }
 
+// 创建 Axios 实例
+const instance = axios.create({
+  baseURL: '/api',
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+})
+
+let isRefreshing = false
+let refreshSubscribers: ((accessToken: string) => void)[] = []
+
 /**
- * 创建并配置 Axios 实例
+ * 刷新 token 并重新发送原始请求
+ * @param error AxiosError 对象
  */
-const createAxiosInstance = (userStore: ReturnType<typeof useUserStore>) => {
-  const instance = axios.create({
-    baseURL: '/api',
-    timeout: 5000,
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  });
+const refreshTokenAndRetryRequest = async (error: AxiosError): Promise<AxiosResponse> => {
+  // 检查 error.config 是否存在
+  if (!error.config) {
+    return Promise.reject(new Error('Request configuration is undefined'))
+  }
 
-  const publicPaths = ['/oauth2/token'];
+  // 如果正在刷新 token，等待刷新完成后再重试
+  if (isRefreshing) {
+    return new Promise((resolve) => {
+      // 将重试请求的回调存储起来
+      refreshSubscribers.push((accessToken) => {
+        // 更新原始请求的 Authorization header，并重试请求
+        error.config!.headers.Authorization = `Bearer ${accessToken}`
+        resolve(axios.request(error.config!))
+      })
+    })
+  }
 
-  const tokenRefreshManager = {
-    isRefreshing: false,
-    subscribers: [] as ((accessToken: string) => void)[],
+  // 如果没有正在刷新 token，则设置为正在刷新
+  isRefreshing = true
 
-    async refresh(currentRefreshToken: string): Promise<TokenVO> {
-      const response = await refreshTokenAPI(currentRefreshToken);
-      const newTokens = response.data;
-      if (!newTokens?.accessToken) {
-        throw new ApiError('TOKEN_REFRESH_FAILED', 'Failed to refresh access token');
-      }
-      return {
-        accessToken: newTokens.accessToken,
-        refreshToken: newTokens.refreshToken || currentRefreshToken,
-      };
-    },
+  try {
+    const token = useUserStore().getToken();
+    if (token) {
+      // 刷新 token
+      const response = await refreshToken(token.refreshToken)
+      const newAccessToken = response.data?.accessToken
 
-    async refreshAndRetry(error: AxiosError): Promise<AxiosResponse> {
-      const config = error.config;
-      if (!config) {
-        throw new ApiError('CONFIG_ERROR', 'Request configuration is missing');
-      }
+      if (newAccessToken) {
+        // 更新原始请求的 Authorization header
+        error.config.headers.Authorization = `Bearer ${newAccessToken}`
 
-      if (this.isRefreshing) {
-        return new Promise((resolve) => {
-          this.subscribers.push((newToken) => {
-            config.headers!.Authorization = `Bearer ${newToken}`;
-            resolve(instance.request(config));
-          });
-        });
+        // 通知所有等待的请求重试
+        refreshSubscribers.forEach((cb) => cb(newAccessToken))
+        refreshSubscribers = []
+        // 重新发送原始请求
+        return axios.request(error.config)
       }
 
-      this.isRefreshing = true;
-      try {
-        const currentRefreshToken = userStore.getToken().refreshToken;
-        const newTokens = await this.refresh(currentRefreshToken);
-        userStore.setToken(newTokens);
-        config.headers!.Authorization = `Bearer ${newTokens.accessToken}`;
-        this.subscribers.forEach((callback) => callback(newTokens.accessToken));
-        this.subscribers = [];
-        return instance.request(config);
-      } catch (refreshError) {
-        redirectToLogin();
-        throw refreshError;
-      } finally {
-        this.isRefreshing = false;
-      }
-    },
-  };
+      // 如果刷新失败，跳转到登录页或进行其他处理
+      redirectToLogin()
+      return Promise.reject(error)
+    } else {
+      redirectToLogin()
+    }
 
-  instance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      const token = userStore.getToken().accessToken;
-      if (token && !publicPaths.includes(config.url || '')) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error: AxiosError) => {
-      console.error('Request Error:', error);
-      throw error;
-    },
-  );
-
-  instance.interceptors.response.use(
-    (response: AxiosResponse<ResponseResult<unknown>>) => {
-      const { code, message: msg } = response.data;
-      if (code === '200') {
-        return response;
-      }
-      if (['503', '-1'].includes(code)) {
-        Message.error(msg);
-      }
-      throw new ApiError(code, msg);
-    },
-    (error: AxiosError) => {
-      if (error.response?.status === 401) {
-        return tokenRefreshManager.refreshAndRetry(error);
-      }
-      throw error;
-    },
-  );
-
-  return instance;
-};
+  } catch (refreshError) {
+    // 如果刷新 token 失败，跳转到登录页
+    redirectToLogin()
+    return Promise.reject(refreshError)
+  } finally {
+    // 刷新完成，重置状态
+    isRefreshing = false
+  }
+}
 
 /**
  * 跳转到登录页面
  */
 const redirectToLogin = () => {
-  window.location.href = '/login';
-};
+  window.location.href = '/login'
+}
 
 /**
- * HTTP 请求类
+ * 处理请求错误
+ * @param error AxiosError 对象
  */
+const handleRequestError = (error: AxiosError) => {
+  console.error('Request Error:', error) // 打印请求错误
+  return Promise.reject(error)
+}
+
+/**
+ * 处理响应错误
+ * @param error AxiosError 对象
+ */
+const handleResponseError = (error: AxiosError) => {
+  if (error.response?.status === 401) {
+    return refreshTokenAndRetryRequest(error)
+  }
+  return Promise.reject(error)
+}
+
+/**
+ * 处理响应成功
+ * @param response AxiosResponse 对象
+ */
+const handleResponseSuccess = (response: AxiosResponse) => {
+  const result = response.data
+  const code = result.code
+  if (code === '200') {
+    return response
+  }
+
+  if (code === '401') {
+    // 处理 token 过期的情况，刷新 token 并重试原始请求
+    return refreshTokenAndRetryRequest(response.config)
+      .then((retryResponse) => {
+        return retryResponse // 返回重试后的响应
+      })
+      .catch((error) => {
+        // 如果刷新 token 失败，跳转到登录页面或其他处理逻辑
+        redirectToLogin()
+        return Promise.reject(error)
+      })
+  }
+  if (code == '503') {
+    ElMessage.error(result.message)
+    return response
+  }
+  return response
+}
+
+// 请求拦截器
+instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  // 在发送请求之前做些什么
+  // 比如在这里可以加上 token
+  const tokenInfo = useUserStore().getToken();
+  if (tokenInfo && tokenInfo.accessToken) {
+    config.headers.Authorization = `Bearer ${tokenInfo.accessToken}`
+  }
+  return config
+}, handleRequestError)
+
+// 响应拦截器
+instance.interceptors.response.use(handleResponseSuccess, handleResponseError)
+
 class HttpRequest {
-  private instance: ReturnType<typeof createAxiosInstance>;
-
-  constructor(userStore: ReturnType<typeof useUserStore>) {
-    this.instance = createAxiosInstance(userStore);
-  }
-
-  async request<T>(config: AxiosRequestConfig): Promise<ResponseResult<T>> {
-    const response = await this.instance.request<ResponseResult<T>>(config);
-    return response.data;
-  }
-
-  get<T>(url: string, config?: AxiosRequestConfig): Promise<ResponseResult<T>> {
-    return this.request<T>({ method: 'GET', url, ...config });
-  }
-
-  post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ResponseResult<T>> {
-    return this.request<T>({ method: 'POST', url, data, ...config });
+  public async request<T>(options: AxiosRequestConfig): Promise<ResponseResult<T>> {
+    return instance
+      .request<ResponseResult<T>>(options)
+      .then((response: AxiosResponse<ResponseResult<T>>) => {
+        return response.data
+      })
   }
 }
 
-// 延迟初始化的 HTTP 客户端
-let httpInstance: HttpRequest | null = null;
+const http = new HttpRequest()
+export default http
 
-const getHttpClient = () => {
-  if (!httpInstance) {
-    const userStore = useUserStore();
-    httpInstance = new HttpRequest(userStore);
-  }
-  return httpInstance;
-};
 
-// 导出单例实例（代理模式）
-export const http = {
-  request<T>(config: AxiosRequestConfig) {
-    return getHttpClient().request<T>(config);
-  },
-  get<T>(url: string, config?: AxiosRequestConfig) {
-    return getHttpClient().get<T>(url, config);
-  },
-  post<T>(url: string, data?: any, config?: AxiosRequestConfig) {
-    return getHttpClient().post<T>(url, data, config);
-  },
-};
-
-export default http;

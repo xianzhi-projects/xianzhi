@@ -20,14 +20,12 @@ package io.xianzhi.system.bootstrap.oauth2.service;
 
 
 import io.xianzhi.common.oauth2.authorization.enums.GrantTypeEnum;
-import io.xianzhi.common.redis.RedisHandler;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
 import io.xianzhi.system.bootstrap.dao.mapper.UserMapper;
 import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -43,12 +41,8 @@ import java.util.Collections;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PasswordUserDetailsServiceImpl implements XianZhiUserDetailsService {
+public class PasswordUserDetailsServiceImpl extends AbstractXianZhiUserDetailsService {
 
-    /**
-     * Redis处理器
-     */
-    private final RedisHandler redisHandler;
 
     /**
      * 用户信息持久层
@@ -85,20 +79,8 @@ public class PasswordUserDetailsServiceImpl implements XianZhiUserDetailsService
         return 0;
     }
 
-    /**
-     * Locates the user based on the username. In the actual implementation, the search
-     * may possibly be case sensitive, or case insensitive depending on how the
-     * implementation instance is configured. In this case, the <code>UserDetails</code>
-     * object that comes back may have a username that is of a different case than what
-     * was actually requested..
-     *
-     * @param username the username identifying the user whose data is required.
-     * @return a fully populated user record (never <code>null</code>)
-     * @throws UsernameNotFoundException if the user could not be found or the user has no
-     *                                   GrantedAuthority
-     */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    protected XianZhiOAuth2UserDetails doLoadUserByUsername(String username) throws UsernameNotFoundException {
         if (!StringUtils.hasText(username)) {
             throw new UsernameNotFoundException("用户名不能为空");
         }
@@ -110,6 +92,5 @@ public class PasswordUserDetailsServiceImpl implements XianZhiUserDetailsService
         userDetails.setId(user.getId());
         userDetails.setAuthorities(Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
         return userDetails;
-
     }
 }

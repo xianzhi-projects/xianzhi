@@ -1,4 +1,5 @@
-import http, {BASE_SERVER, type ResponseResult} from '@/api/index'
+import http, {type ResponseResult} from '@/api/index'
+import {BASE_SERVER} from "@/constants/ServerConstant.ts";
 
 /**
  * 资源类型枚举

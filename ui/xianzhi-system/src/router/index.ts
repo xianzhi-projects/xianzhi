@@ -13,7 +13,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-// src/router/index.ts
 import {createRouter, createWebHistory} from 'vue-router';
 import Layout from '@/layout/index.vue';
 import NProgress from 'nprogress'
@@ -21,6 +20,7 @@ import 'nprogress/nprogress.css'
 import {useUserStore} from "@/stores/userStore.ts";
 import {useRouterStore} from "@/stores/routerStore.ts";
 import {getCurrentUserResource} from "@/api/resourceApi.ts";
+import {ElMessage} from "element-plus";
 
 const routes = [
   {
@@ -62,108 +62,37 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
   const userStore = useUserStore()
   const routerStore = useRouterStore()
-  console.log(userStore.isLogin)
   // 未登录用户重定向到登录页
   if (!userStore.isLogin && to.path !== '/login') {
-    next({ path: '/login', query: { redirect: to.path } })
+
+    next({path: '/login', query: {redirect: to.path}})
     return
   }
-
-  // 已登录用户访问登录页，重定向到首页
-  if (userStore.isLogin && to.path === '/login') {
-    next({ path: '/' })
-    return
-  }
-
-  // 动态路由未加载时，加载动态路由
   if (userStore.isLogin && (!routerStore.routerList || routerStore.routerList.length === 0)) {
     try {
-
       const { data } = await getCurrentUserResource()
-      console.log(data)
       if (!data || data.length === 0) {
+        ElMessage.error('当前用户没有权限访问任何页面')
         userStore.removeToken()
         next({ path: '/login' })
         return
       }
-
-      // 生成动态路由
-      const asyncRouter = generateRoutes(data)
-      routerStore.setRouterList(asyncRouter.children)
-
-      // 添加动态路由
-      addRoutesSafely(asyncRouter)
-
       // 重新导航到当前路由
       next({ ...to, replace: true })
     } catch (error) {
-      console.error('动态路由加载失败:', error)
+      ElMessage.error('动态路由加载失败')
+      userStore.removeToken()
       next({ path: '/login' })
+      return
     }
-  } else {
-    next()
   }
+  // 已登录用户访问登录页，重定向到首页
+  if (userStore.isLogin && to.path === '/login') {
+    next({path: '/'})
+    return
+  }
+  next()
 })
-
-
-// 根据资源数据生成动态路由
-function generateRoutes(items: ResourceVO[]): RouteRecordRaw {
-  const adminRoute = routes.find((route) => route.path === '/admin')
-  if (!adminRoute) {
-    throw new Error('Admin route not found')
-  }
-
-  return {
-    ...adminRoute,
-    children: items.map(convertResourceToRoute),
-  }
-}
-
-// 将资源项转换为路由配置
-function convertResourceToRoute(item: ResourceVO): RouteRecordRaw {
-  const route: RouteRecordRaw = {
-    path: item.resourceKey,
-    name: item.resourceName,
-    meta: {
-      icon: item.menuIcon,
-      showFlag: item.showFlag,
-      resourceType: item.resourceType,
-    },
-    component: undefined,
-    children: [],
-  }
-
-  // 处理菜单类型资源
-  if (item.resourceType === ResourceType.MENU) {
-    const componentPath = item.menuComponent || item.resourceKey
-    const moduleKey = modulesRoutesKeys.find((key) => key.includes(componentPath))
-    if (moduleKey) {
-      route.component = modulesRoutes[moduleKey]
-    } else {
-      console.error(`组件未找到: ${componentPath}`)
-    }
-  }
-
-  // 处理目录类型资源
-  if (item.resourceType === ResourceType.DIRECTORY && item.children?.length) {
-    route.children = item.children.map((child) => convertResourceToRoute(child))
-  }
-
-  return route
-}
-
-// 安全地添加路由
-function addRoutesSafely(routes: RouteRecordRaw | RouteRecordRaw[]) {
-  const routesArray = Array.isArray(routes) ? routes : [routes]
-  routesArray.forEach((route) => {
-    try {
-      router.addRoute(route)
-    } catch (error) {
-      console.error('添加路由失败:', error)
-    }
-  })
-}
-
 // 路由后置守卫
 router.afterEach(() => {
   NProgress.done()

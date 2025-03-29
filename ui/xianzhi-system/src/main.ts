@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css'; // 引入 Element Plus 样式
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'; // 引入所有图标
 import App from './App.vue';
 import router from './router';
-
+import './assets/css/style.less'; // 引入全局样式
 const app = createApp(App);
 const pinia = createPinia();
 
@@ -14,7 +14,6 @@ const pinia = createPinia();
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
 }
-
 app.use(pinia);
 app.use(router);
 app.use(ElementPlus);

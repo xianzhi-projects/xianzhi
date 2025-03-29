@@ -13,22 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-import type {RouteRecordRaw} from "vue-router";
-import {ref} from "vue";
-
-
-export const menus = ref([])
-
-function resolveRouter(routerList: RouteRecordRaw[]) {
-  return undefined;
+*{
+  margin: 0;
+  padding: 0;
 }
-
-/**
- * 刷新菜单
- * @param routerList 菜单路由
- */
-export function refreshMenu(routerList: RouteRecordRaw[]) {
-  menus.value = resolveRouter(routerList)
+//去除表单元素自动填充背景色
+.el-input__inner:-webkit-autofill,
+.el-input__inner:-webkit-autofill:hover,
+.el-input__inner:-webkit-autofill:focus,
+.el-input__inner:-webkit-autofill:active{
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
 }
-

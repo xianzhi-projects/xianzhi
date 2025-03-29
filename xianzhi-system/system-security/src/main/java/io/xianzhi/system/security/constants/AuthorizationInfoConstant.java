@@ -14,21 +14,30 @@
  *  limitations under the License.
  */
 
-import type {RouteRecordRaw} from "vue-router";
-import {ref} from "vue";
-
-
-export const menus = ref([])
-
-function resolveRouter(routerList: RouteRecordRaw[]) {
-  return undefined;
-}
+package io.xianzhi.system.security.constants;
 
 /**
- * 刷新菜单
- * @param routerList 菜单路由
+ * 授权相关常量
+ *
+ * @author Max
+ * @since 1.0.0
  */
-export function refreshMenu(routerList: RouteRecordRaw[]) {
-  menus.value = resolveRouter(routerList)
+public interface AuthorizationInfoConstant {
+
+    /**
+     * 授权信息
+     */
+    String AUTHORIZATION_INFO_USER_ID = "base:authorization:%s";
+
+    String SYS_OAUTH2_CLIENT_ID = "base:oauth2:client:clientId";
+
+    String SYS_OAUTH2_ID = "base:oauth2:client:id";
+
+
+    /**
+     * 用户信息
+     */
+    String AUTH_USER_INFO__ID = "system:auth:user:%s";
 }
+
 

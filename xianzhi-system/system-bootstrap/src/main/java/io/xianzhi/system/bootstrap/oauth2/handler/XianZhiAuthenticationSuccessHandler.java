@@ -18,6 +18,7 @@
 
 package io.xianzhi.system.bootstrap.oauth2.handler;
 
+import io.xianzhi.common.redis.RedisHandler;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.utils.JSONUtils;
 import io.xianzhi.core.utils.ResponseUtils;
@@ -57,6 +58,10 @@ public class XianZhiAuthenticationSuccessHandler implements AuthenticationSucces
      * RocketMQTemplate
      */
     private final RocketMQTemplate rocketMQTemplate;
+    /**
+     * 缓存处理
+     */
+    private final RedisHandler redisHandler;
 
 
     private TokenVO getTokenVO(OAuth2AccessTokenAuthenticationToken auth2AccessTokenAuthenticationToken, OAuth2AccessToken accessToken, OAuth2RefreshToken refreshToken) {

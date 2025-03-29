@@ -40,7 +40,7 @@ onBeforeMount(() => {
       <img alt="" height="28" src="@/assets/logo.png"  width="28"/>
       <span >先知后台管理系统</span>
     </div>
-    <MenuTree :menuList="menus"/>
+    <MenuTree v-model:menu-list="menus"/>
   </el-aside>
 </template>
 

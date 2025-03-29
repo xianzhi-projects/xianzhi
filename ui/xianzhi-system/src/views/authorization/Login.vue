@@ -46,6 +46,7 @@ import LoginForm from "@/views/authorization/components/LoginForm.vue";
 .login-page {
   display: flex;
   min-height: 100vh;
+  user-select: none;
   .login-left {
     display: flex;
     flex: 2;
@@ -54,8 +55,6 @@ import LoginForm from "@/views/authorization/components/LoginForm.vue";
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-
     .image-wrapper {
       position: absolute;
       top: 0;
@@ -63,7 +62,6 @@ import LoginForm from "@/views/authorization/components/LoginForm.vue";
       width: 100%;
       height: 100%;
       overflow: hidden;
-
       img {
         width: 100%;
         height: 100%;

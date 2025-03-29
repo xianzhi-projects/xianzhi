@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author Max
  * @since 1.0.0
  */
-public interface XianZhiUserDetailsService extends UserDetailsService, Ordered {
+public abstract interface XianZhiUserDetailsService extends UserDetailsService, Ordered {
 
     /**
      * 判断是否支持

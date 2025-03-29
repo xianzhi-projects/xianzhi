@@ -51,6 +51,7 @@ public class ContextHolder {
      * @return 上下文内容
      */
     public static Context getContextOrThrow() {
+        Context context = CONTENT.get();
         return Optional.ofNullable(CONTENT.get()).orElseThrow(() -> new BusinessException(CommonCode.UNAUTHORIZED));
     }
 

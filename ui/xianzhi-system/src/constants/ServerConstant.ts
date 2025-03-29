@@ -14,21 +14,5 @@
  *  limitations under the License.
  */
 
-import type {RouteRecordRaw} from "vue-router";
-import {ref} from "vue";
-
-
-export const menus = ref([])
-
-function resolveRouter(routerList: RouteRecordRaw[]) {
-  return undefined;
-}
-
-/**
- * 刷新菜单
- * @param routerList 菜单路由
- */
-export function refreshMenu(routerList: RouteRecordRaw[]) {
-  menus.value = resolveRouter(routerList)
-}
+export const BASE_SERVER = 's';
 

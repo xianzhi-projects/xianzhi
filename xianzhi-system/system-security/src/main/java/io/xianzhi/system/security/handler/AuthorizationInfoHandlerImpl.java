@@ -18,6 +18,8 @@ package io.xianzhi.system.security.handler;
 
 import io.xianzhi.common.oauth2.OAuth2UserDetails;
 import io.xianzhi.common.oauth2.resource.AuthorizationInfoHandler;
+import io.xianzhi.common.redis.RedisHandler;
+import io.xianzhi.system.security.constants.AuthorizationInfoConstant;
 import io.xianzhi.system.security.context.XianZhiOAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +40,10 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class AuthorizationInfoHandlerImpl implements AuthorizationInfoHandler {
+
+
+    private final RedisHandler redisHandler;
+
     /**
      * 加载授权信息
      *
@@ -46,8 +52,8 @@ public class AuthorizationInfoHandlerImpl implements AuthorizationInfoHandler {
      */
     @Override
     public Optional<OAuth2UserDetails> loadAuthorizationInfo(Jwt jwt) {
-        XianZhiOAuth2UserDetails userDetails = new XianZhiOAuth2UserDetails();
-        userDetails.setId(jwt.getClaim("id"));
+        String id = jwt.getClaim("id");
+        XianZhiOAuth2UserDetails userDetails = redisHandler.vGet(String.format(AuthorizationInfoConstant.AUTH_USER_INFO__ID, id), XianZhiOAuth2UserDetails.class);
         userDetails.setAuthorities(Collections.singleton(new SimpleGrantedAuthority("**")));
         return Optional.of(userDetails);
     }
