@@ -12,6 +12,7 @@ const pinia = createPinia();
 
 // 注册 Element Plus 图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  console.log(key)
     app.component(key, component);
 }
 app.use(pinia);

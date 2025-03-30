@@ -33,6 +33,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
      */
     @Override
     public List<ResourceVO> tree() {
-        return List.of();
+        return convertResourceTree(resourceMapper.selectAllResource());
     }
 
     /**
@@ -70,7 +71,7 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
     public List<ResourceVO> getCurrentUserResource() {
         List<ResourceDO> resource;
         if (UserContextHolder.admin()) {
-            resource = resourceMapper.selectAllResource();
+            resource = resourceMapper.selectAllEnableResource();
         } else {
             resource = new ArrayList<>();
         }
@@ -143,7 +144,7 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
             return Collections.emptyList();
         }
         return resources.stream().filter(item -> !StringUtils.hasText(item.getParentId()) || "-1".equals(item.getParentId()))
-                .map(item -> convertResourceVO(item, resources)).toList();
+                .map(item -> convertResourceVO(item, resources)).sorted(Comparator.comparingInt(ResourceVO::getResourceSorted)).toList();
     }
 
     /**
@@ -155,7 +156,7 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
      */
     private List<ResourceVO> getChildren(String parentId, List<ResourceDO> resources) {
         return resources.stream().filter(item -> item.getParentId().equals(parentId))
-                .map(item -> convertResourceVO(item, resources)).toList();
+                .map(item -> convertResourceVO(item, resources)).sorted(Comparator.comparingInt(ResourceVO::getResourceSorted)).toList();
     }
 
     /**

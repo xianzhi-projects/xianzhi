@@ -16,132 +16,52 @@
 
 <script lang="ts" setup>
 import {ElButton} from "element-plus";
+import {append, dataSource, onSelect, refreshResourceTree} from "@/views/system/resource/index.ts";
+import {onBeforeMount} from "vue";
+import {remove} from "nprogress";
 
-interface Tree {
-  label: string
-  children?: Tree[]
-}
+onBeforeMount(() => {
+  refreshResourceTree()
+})
 
-const handleNodeClick = (data: Tree) => {
-  console.log(data)
-}
 
-const data: Tree[] = [
-  {
-    label: 'Level one 1',
-    children: [
-      {
-        label: 'Level two 1-1',
-        children: [
-          {
-            label: 'Level three 1-1-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 2',
-    children: [
-      {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
 
-const defaultProps = {
-  children: 'children',
-  label: 'label',
-}
-const renderContent = (
-  h,
-  {
-    node,
-    data,
-    store,
-  }: {
-    node: Node
-    data: Tree
-    store: Node['store']
-  }
-) => {
-  return h(
-    'div',
-    {
-      class: 'custom-tree-node',
-    },
-    h('span', null, node.label),
-    h(
-      'div',
-      null,
-      h(
-        ElButton,
-        {
-          type: 'primary',
-          link: true,
-        },
-        'Append '
-      ),
-      h(
-        ElButton,
-        {
-          type: 'danger',
-          link: true,
-          style: 'margin-left: 4px',
-        },
-        'Delete'
-      )
-    )
-  )
-}
+
+
 </script>
 
 <template>
   <el-card class="box-card" header="资源列表">
-    <div class="custom-tree-node">
+    <div class="">
       <el-tree
-        :data="data"
-        :expand-on-click-node="false"
-        :render-content="renderContent"
-        default-expand-all
+        :data="dataSource"
         node-key="id"
-        style="max-width: 600px"
-      />
+        :expand-on-click-node="false"
+        default-expand-all
+        @node-click="onSelect"
+      >
+        <template #default="{ node, data }">
+          <el-icon style="margin-right: 8px">
+            <component :is="data.menuIcon"></component>
+          </el-icon>
+          <div class="custom-tree-node">
+            <span>{{ data.resourceName }}</span>
+            <div>
+              <el-button link type="primary" @click="append(data)">
+                新增
+              </el-button>
+              <el-button
+                link
+                style="margin-left: 4px"
+                type="danger"
+                @click="remove(node, data)"
+              >
+                删除
+              </el-button>
+            </div>
+          </div>
+        </template>
+      </el-tree>
     </div>
 
   </el-card>
@@ -149,8 +69,11 @@ const renderContent = (
 </template>
 
 <style scoped>
+.box-card{
+  min-height: 800px;
+}
 .custom-tree-node {
-  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

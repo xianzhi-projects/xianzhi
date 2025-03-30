@@ -19,7 +19,7 @@ export function getCurrentUserResource(): Promise<ResponseResult<ResourceVO[]>> 
  */
 export function resourceTree(): Promise<ResponseResult<ResourceVO[]>> {
   return http.request({
-    url: BASE_SERVER + '/resource/resourceTree',
+    url: BASE_SERVER + '/resource/tree',
     method: 'GET',
   })
 }

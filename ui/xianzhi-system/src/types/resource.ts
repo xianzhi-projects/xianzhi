@@ -63,7 +63,7 @@ export interface ResourceDTO {
   /**
    * 资源排序
    */
-  resourceSort: number
+  resourceSorted: number
   /**
    * 父级ID
    */
@@ -113,7 +113,7 @@ export interface ResourceVO {
   /**
    * 资源排序
    */
-  resourceSort: number
+  resourceSorted: number
   /**
    * 父级ID
    */

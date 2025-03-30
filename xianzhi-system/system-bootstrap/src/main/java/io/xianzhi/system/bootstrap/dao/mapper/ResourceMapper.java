@@ -40,16 +40,19 @@ public interface ResourceMapper extends BaseMapper<ResourceDO> {
     List<ResourceDO> selectAllResource();
 
     /**
+     * 查询所有启用的资源信息
+     *
+     * @return 查询所有启用的资源信息
+     */
+    List<ResourceDO> selectAllEnableResource();
+
+    /**
      * 根据ID查询资源信息
      *
      * @param id 资源ID
      * @return 资源信息
      */
     Optional<ResourceDO> selectResourceById(@Param("id") String id);
-
-
-
-
 
 
 }

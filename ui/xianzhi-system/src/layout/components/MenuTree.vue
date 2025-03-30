@@ -17,11 +17,7 @@
 <script setup>
 import {ResourceType} from "@/types/resource.js";
 
-const menuList = defineModel( 'menuList')
-function setMenu(menu) {
-  console.log(11)
-  console.log(menu)
-}
+const menuList = defineModel('menuList')
 </script>
 
 
@@ -31,9 +27,13 @@ function setMenu(menu) {
   <div>
     <template v-for="item in menuList" :key="item.path">
       <!--      分为两种方式渲染：有子菜单和没有子菜单-->
-      <el-sub-menu v-if="item.children && item.meta.resourceType === ResourceType.CATALOG" :index="item.path">
+      <el-sub-menu v-if="item.children && item.meta.resourceType === ResourceType.CATALOG"
+                   :index="item.path">
         <template #title>
-          <i :class="item.meta.icon"></i>
+
+          <el-icon>
+            <component :is="item.meta.icon"></component>
+          </el-icon>
           <span>{{ item.name }}</span>
         </template>
         <!--        有子菜单的继续遍历（递归）-->
@@ -41,7 +41,9 @@ function setMenu(menu) {
       </el-sub-menu>
       <!--      没有子菜单-->
       <el-menu-item v-if="item.meta.resourceType === ResourceType.MENU" :index="item.path">
-        <i :class="item.meta.icon"></i>
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
         <span>{{ item.name }}</span>
       </el-menu-item>
     </template>

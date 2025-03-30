@@ -16,22 +16,10 @@
 
 <script lang="ts" setup>
 
-import ResourceTree from "@/views/system/resource/components/ResourceTree.vue";
-import ResourceEdit from "@/views/system/resource/components/ResourceEdit.vue";
 </script>
 
 <template>
-  <el-row :gutter="16" style="margin-left: 0; margin-right: 0">
-    <el-col :span="6">
-      <ResourceTree />
-    </el-col>
-    <el-col :span="10">
-      <ResourceEdit />
-    </el-col>
-    <el-col :span="8">
-      <ResourceTree />
-    </el-col>
-  </el-row>
+
 </template>
 
 <style scoped>
