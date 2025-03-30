@@ -96,6 +96,9 @@ onMounted(()=>{
 
 
 <style lang="less"  scoped>
+.el-tabs{
+  margin-left: 5px;
+}
 :deep(.el-tabs__header){
   margin: 0;
 }
