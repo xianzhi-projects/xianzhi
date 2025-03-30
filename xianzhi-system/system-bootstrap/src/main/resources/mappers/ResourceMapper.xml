@@ -33,4 +33,68 @@
         SELECT * FROM sys_resource WHERE deleted_flag =0 AND enable_flag =1 ORDER BY resource_sorted ASC
 
     </select>
+
+    <select id="existsResourceByResourceNameAndIdNot" resultType="boolean">
+        select ifnull((select 1 from sys_resource where resource_name = #{resourceName,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if>),0)
+
+    </select>
+
+    <select id="existsResourceByResourceKeyAndIdNot" resultType="boolean">
+        select ifnull((select 1 from sys_resource where resource_key = #{resourceKey,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+            and id != #{id,jdbcType=VARCHAR}
+        </if>),0)
+
+    </select>
+
+    <select id="selectResourceIdByParentId" resultType="java.lang.String">
+        WITH RECURSIVE sub_tree AS (
+        -- 初始查询：找到指定父级ID的直接子集
+        SELECT id
+        FROM sys_resource
+        WHERE parent_id = #{parentId,jdbcType=VARCHAR}
+        AND deleted_flag = 0
+
+        UNION ALL
+
+        -- 递归查询：找到子集的子集
+        SELECT r.id
+        FROM sys_resource r
+        INNER JOIN sub_tree st ON r.parent_id = st.id
+        WHERE r.deleted_flag = 0
+        )
+        SELECT id
+        FROM sub_tree;
+    </select>
+
+    <update id="deletedResourceById">
+        update sys_resource set deleted_flag = 1 where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="deletedResourceByParentId">
+        UPDATE sys_resource
+        SET deleted_flag = 1
+        WHERE id IN (
+        WITH RECURSIVE sub_tree AS (
+        SELECT id
+        FROM sys_resource
+        WHERE parent_id = #{parentId,jdbcType=VARCHAR}
+        AND deleted_flag = 0
+
+        UNION ALL
+
+
+        SELECT r.id
+        FROM sys_resource r
+        INNER JOIN sub_tree st ON r.parent_id = st.id
+        WHERE r.deleted_flag = 0
+        )
+        SELECT id
+        FROM sub_tree
+        );
+
+    </update>
 </mapper>

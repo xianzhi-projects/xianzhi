@@ -36,6 +36,11 @@ public enum ResourceTypeEnum {
      * 按钮
      */
     BUTTON("BUTTON", "按钮"),
+
+    /**
+     * 链接
+     */
+    LINK("LINK", "链接"),
     /**
      * 目录
      */
@@ -43,6 +48,16 @@ public enum ResourceTypeEnum {
 
 
     ;
+
+
+    public static ResourceTypeEnum getByCode(String code) {
+        for (ResourceTypeEnum value : ResourceTypeEnum.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        return null;
+    }
 
 
     private final String code;

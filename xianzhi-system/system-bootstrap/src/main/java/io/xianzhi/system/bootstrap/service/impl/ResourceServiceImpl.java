@@ -20,6 +20,7 @@ import io.xianzhi.system.bootstrap.dao.dataobj.ResourceDO;
 import io.xianzhi.system.bootstrap.dao.mapper.ResourceMapper;
 import io.xianzhi.system.bootstrap.service.ResourceService;
 import io.xianzhi.system.model.dto.ResourceDTO;
+import io.xianzhi.system.model.enums.ResourceTypeEnum;
 import io.xianzhi.system.model.vo.ResourceVO;
 import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
@@ -112,6 +113,12 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deletedResource(String id) {
+        if (StringUtils.hasText(id)){
+            resourceMapper.deletedResourceByParentId(id);
+            resourceMapper.deletedResourceById(id);
+        } else {
+            throw new RuntimeException("资源ID不能为空");
+        }
 
     }
 
@@ -124,11 +131,60 @@ public class ResourceServiceImpl implements ResourceService, InitializingBean {
      */
     private ResourceDO checkedResourceDTO(ResourceDTO resourceDTO) {
         ResourceDO resource;
+        String parentId = resourceDTO.getParentId();
+        ResourceDO parent = null;
+        if (StringUtils.hasText(parentId) && !"-1".equals(parentId)) {
+            parent = resourceMapper.selectResourceById(parentId).orElseThrow(() -> new RuntimeException("父级资源不存在"));
+        }
         if (StringUtils.hasText(resourceDTO.getId())) {
             resource = resourceMapper.selectResourceById(resourceDTO.getId()).orElseThrow(() -> new RuntimeException("资源不存在"));
         } else {
             resource = new ResourceDO();
+            resource.setResourceType(resourceDTO.getResourceType().getCode());
+            resource.setParentId(resourceDTO.getParentId());
+            if (null != parent) {
+                ResourceTypeEnum parentType = ResourceTypeEnum.getByCode(parent.getResourceType());
+                switch (resourceDTO.getResourceType()){
+                    case BUTTON -> {
+                        if (!ResourceTypeEnum.MENU.equals(parentType)) {
+                            throw new RuntimeException("按钮资源只能挂在目录或菜单下");
+                        }
+                    }
+                    case CATALOG -> {
+                        if (!ResourceTypeEnum.CATALOG.equals(parentType)) {
+                            throw new RuntimeException("目录资源只能挂在目录下");
+                        }
+                    }
+                    case MENU -> {
+                        if (!ResourceTypeEnum.CATALOG.equals(parentType)) {
+                            throw new RuntimeException("菜单资源只能挂在目录下");
+                        }
+                    }
+                    case LINK -> {
+                        if (!ResourceTypeEnum.CATALOG.equals(parentType)) {
+                            throw new RuntimeException("链接资源只能挂在目录下");
+                        }
+                    }
+                    default -> {
+                        throw new RuntimeException("资源类型不支持");
+                    }
+                }
+            }
         }
+        if (resourceMapper.existsResourceByResourceNameAndIdNot(resourceDTO.getResourceName(), resourceDTO.getId())) {
+            throw new RuntimeException("资源名称已存在");
+        }
+        if (resourceMapper.existsResourceByResourceKeyAndIdNot(resourceDTO.getResourceKey(), resourceDTO.getId())) {
+            throw new RuntimeException("资源标识已存在");
+        }
+        resource.setResourceName(resourceDTO.getResourceName());
+        resource.setResourceDesc(resourceDTO.getResourceDesc());
+        resource.setResourceKey(resourceDTO.getResourceKey());
+        resource.setMenuIcon(resourceDTO.getMenuIcon());
+        resource.setMenuComponent(resourceDTO.getMenuComponent());
+        resource.setShowFlag(resourceDTO.getShowFlag());
+        resource.setEnableFlag(resourceDTO.getEnableFlag());
+        resource.setResourceSorted(resourceDTO.getResourceSorted());
         return resource;
     }
 

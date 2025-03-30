@@ -31,7 +31,7 @@ const menuList = defineModel('menuList')
                    :index="item.path">
         <template #title>
 
-          <el-icon>
+          <el-icon v-if="item.meta.icon && typeof item.meta.icon === 'string'">
             <component :is="item.meta.icon"></component>
           </el-icon>
           <span>{{ item.name }}</span>
@@ -41,7 +41,7 @@ const menuList = defineModel('menuList')
       </el-sub-menu>
       <!--      没有子菜单-->
       <el-menu-item v-if="item.meta.resourceType === ResourceType.MENU" :index="item.path">
-        <el-icon>
+        <el-icon v-if="item.meta.icon && typeof item.meta.icon === 'string'">
           <component :is="item.meta.icon"></component>
         </el-icon>
         <span>{{ item.name }}</span>

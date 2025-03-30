@@ -16,9 +16,16 @@
 
 <script lang="ts" setup>
 import {ElButton} from "element-plus";
-import {append, dataSource, onSelect, refreshResourceTree} from "@/views/system/resource/index.ts";
+import {
+  append,
+  dataSource,
+  defaultNodeKey,
+  onSelect,
+  refreshResourceTree,
+  remove
+} from "@/views/system/resource/index.ts";
 import {onBeforeMount} from "vue";
-import {remove} from "nprogress";
+import {ResourceType} from "@/types/resource.ts";
 
 onBeforeMount(() => {
   refreshResourceTree()
@@ -32,32 +39,50 @@ onBeforeMount(() => {
 
 <template>
   <el-card class="box-card" header="资源列表">
+    <template #header>
+      <div class="card-header">
+        <span>资源列表</span>
+        <el-button size="small" type="primary" @click="append(null)">添加资源</el-button>
+      </div>
+    </template>
     <div class="">
       <el-tree
         :data="dataSource"
         node-key="id"
-        :expand-on-click-node="false"
         default-expand-all
+        :current-node-key="defaultNodeKey"
         @node-click="onSelect"
       >
         <template #default="{ node, data }">
-          <el-icon style="margin-right: 8px">
+          <el-icon  v-if="data.menuIcon && typeof data.menuIcon === 'string'" style="margin-right: 8px">
             <component :is="data.menuIcon"></component>
           </el-icon>
           <div class="custom-tree-node">
-            <span>{{ data.resourceName }}</span>
+            <span style="user-select: none">{{ data.resourceName }}</span>
             <div>
-              <el-button link type="primary" @click="append(data)">
+              <el-button v-if="data.resourceType == ResourceType.CATALOG" link  type="primary" @click.stop="append(data)">
                 新增
               </el-button>
-              <el-button
-                link
-                style="margin-left: 4px"
-                type="danger"
-                @click="remove(node, data)"
+              <el-popconfirm
+                :cancel-button-text="'取消'"
+                :confirm-button-text="'删除'"
+                :onConfirm="() => remove(data)"
+                class="box-item"
+                placement="bottom-end"
+                title="确认删除吗？"
               >
-                删除
-              </el-button>
+                <template #reference>
+                  <el-button
+                    link
+                    style="margin-left: 4px"
+                    type="danger"
+                  >
+                    删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
+
+
             </div>
           </div>
         </template>
@@ -71,6 +96,11 @@ onBeforeMount(() => {
 <style scoped>
 .box-card{
   min-height: 800px;
+  .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 .custom-tree-node {
   width: 100%;

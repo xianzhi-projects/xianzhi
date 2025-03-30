@@ -54,7 +54,7 @@ export function updateResource(resourceDTO: ResourceDTO): Promise<ResponseResult
  */
 export function deleteResource(id: string): Promise<ResponseResult<null>> {
   return http.request({
-    url: BASE_SERVER + '/resource/deleteResource',
+    url: BASE_SERVER + '/resource/deletedResource',
     method: 'POST',
     params: { id },
   })

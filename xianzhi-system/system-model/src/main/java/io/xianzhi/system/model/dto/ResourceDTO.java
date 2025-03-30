@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.model.dto;
 
+import io.xianzhi.system.model.enums.ResourceTypeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -40,7 +41,7 @@ public class ResourceDTO implements Serializable {
     /**
      * 资源类型
      */
-    private String resourceType;
+    private ResourceTypeEnum resourceType;
     /**
      * 资源标识
      */

@@ -55,4 +55,45 @@ public interface ResourceMapper extends BaseMapper<ResourceDO> {
     Optional<ResourceDO> selectResourceById(@Param("id") String id);
 
 
+    /**
+     * 根据父级ID查询左右子集ID并且包含子集的子集
+     */
+    List<String> selectResourceIdByParentId(@Param("parentId") String parentId);
+
+
+    /**
+     * 判断资源名称是否存在
+     *
+     * @param resourceName 资源名称
+     * @param id           资源ID
+     * @return true: 存在，false: 不存在
+     */
+    boolean existsResourceByResourceNameAndIdNot(@Param("resourceName") String resourceName, @Param("id") String id);
+
+
+    /**
+     * 判断资源标识是否存在
+     *
+     * @param resourceKey 资源标识
+     * @param id          资源ID
+     * @return true: 存在，false: 不存在
+     */
+    boolean existsResourceByResourceKeyAndIdNot(@Param("resourceKey") String resourceKey, @Param("id") String id);
+
+
+    /**
+     * 根据资源ID删除资源信息
+     *
+     * @param id 资源ID
+     */
+    void deletedResourceById(@Param("id") String id);
+
+    /**
+     * 根据父级ID删除资源信息
+     *
+     * @param parentId 父级ID
+     */
+    void deletedResourceByParentId(@Param("parentId") String parentId);
+
+
 }

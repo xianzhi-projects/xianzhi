@@ -121,7 +121,7 @@ function convertResourceToRoute(item: ResourceVO): RouteRecordRaw {
 
   // 处理菜单类型资源
   if (item.resourceType === ResourceType.MENU) {
-    const componentPath = item.menuComponent || item.resourceKey
+    const componentPath = '/src/views' + item.menuComponent + '/Index.vue'
     const moduleKey = modulesRoutesKeys.find((key) => key.includes(componentPath))
     if (moduleKey) {
       route.component = modulesRoutes[moduleKey]

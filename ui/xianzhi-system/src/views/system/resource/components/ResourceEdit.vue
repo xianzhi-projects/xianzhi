@@ -82,6 +82,7 @@ import {ref, watch} from 'vue'
 import {createResource, updateResource,} from '@/api/resourceApi.ts'
 import {type ResourceDTO, ResourceType} from "@/types/resource.ts";
 import {refreshResourceTree, selectedNode} from "@/views/system/resource/index.ts";
+import {ElMessage} from "element-plus";
 
 const loading = ref(false)
 const parentName = ref('')
@@ -114,7 +115,10 @@ watch(() => selectedNode.value, (newVal) => {
       enableFlag: newVal.enableFlag || true,
       parentId: newVal?.parentId || '', // 上级菜单
     }
-    parentName.value = newVal?.parentName || ''
+    if (newVal?.parent) {
+      parentName.value = newVal?.parent.resourceName || ''
+    }
+
   },
 )
 
@@ -129,9 +133,11 @@ const submitForm = async () => {
       // 提交表单逻辑
       result = await createResource(resource.value)
     }
-    if (result.success && result.code === '200') {
+    if (result.code === '200') {
+      ElMessage.success('操作成功')
       // 新增修改后刷新树
       await refreshResourceTree()
+
       return
     }
   } finally {

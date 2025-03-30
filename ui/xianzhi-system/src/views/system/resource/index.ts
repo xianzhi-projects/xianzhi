@@ -13,12 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import {ref} from 'vue'
+import {ref} from 'vue';
 import type {ResourceVO} from "@/types/resource.ts";
 import {ResourceType} from "@/types/resource.ts";
-import {resourceTree} from "@/api/resourceApi.ts";
+import {deleteResource, resourceTree} from "@/api/resourceApi.ts";
 import {ElMessage} from "element-plus";
-import type Node from "element-plus/es/components/tree/src/model/node";
 
 
 export const dataSource = ref<ResourceVO[] | null>();
@@ -38,20 +37,12 @@ export const selectedNode = ref<ResourceVO>({
   children: [],
 });
 
-export const onSelect = (data: ResourceVO,t1: any) => {
+export const onSelect = (data: ResourceVO, t1: any) => {
   selectedNode.value = data
   selectedNode.value.parentId = t1.parent.data.id
-  selectedNode.value.parentName = t1.parent.data.resourceName
-
+  selectedNode.value.parent = t1.parent.data
 }
-
-export const append = (data: ResourceVO) => {
-  console.log('append', data)
-
-}
-
-export const remove = (node: Node, data: ResourceVO) => {
-}
+export const defaultNodeKey = ref('')
 
 /**
  * 刷新资源树
@@ -59,10 +50,48 @@ export const remove = (node: Node, data: ResourceVO) => {
 export async function refreshResourceTree() {
   const rep = await resourceTree();
   if (rep.code === '200') {
-    dataSource.value =  rep.data
+    dataSource.value = rep.data
+    if (dataSource.value && dataSource.value.length > 0) {
+      defaultNodeKey.value = dataSource.value[0].id;
+      console.log('defaultNodeKey', defaultNodeKey.value);
+    }
   } else {
     ElMessage.error(rep.message)
     dataSource.value = []
+  }
+}
+
+
+export const append = (data: ResourceVO) => {
+  if (data == null) {
+    selectedNode.value = {}
+  } else {
+    selectedNode.value = {
+      id: '',
+      resourceName: '', // 菜单名称
+      resourceType: ResourceType.MENU, // 类型
+      resourceKey: '', // 路径
+      menuComponent: '', // 组件
+      menuIcon: '', // 图标
+      parentId: data.id, // 上级菜单
+      resourceSorted: 0, // 排序
+      resourceDesc: '', // 描述
+      showFlag: true,
+      enableFlag: true,
+      children: [],
+      parent: data
+    }
+  }
+
+}
+
+export const remove = async (data: ResourceVO) => {
+  const rep = await deleteResource(data.id)
+  if (rep.code === '200') {
+    ElMessage.success('删除成功')
+    await refreshResourceTree()
+  }else{
+    ElMessage.error(rep.message)
   }
 }
 
