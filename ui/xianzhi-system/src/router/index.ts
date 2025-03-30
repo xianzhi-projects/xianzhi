@@ -149,5 +149,4 @@ function addRoutesSafely(routes: RouteRecordRaw | RouteRecordRaw[]) {
     }
   })
 }
-
 export default router

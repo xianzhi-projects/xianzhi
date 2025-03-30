@@ -53,4 +53,11 @@ const menuList = defineModel('menuList')
 </template>
 
 
-<style></style>
+<style lang="less" scoped>
+.el-menu-item.is-active{
+  background-color: #5356e0;
+  color: #fff;
+  border-radius: 15px;
+}
+
+</style>

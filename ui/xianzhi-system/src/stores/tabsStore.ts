@@ -15,40 +15,36 @@
  */
 
 
-import type {Page} from "@/types/core.ts";
+import {defineStore} from "pinia";
+import {computed, ref} from "vue";
 
-export interface UserVO{
-  id: string
-  username: string
-  password: string
-  email: string
-  phone: string
-  status: number
-  createTime: string
-  updateTime: string
+export type Tab = {
+  title: string;
+  path: string;
 }
-
-
-export interface UserDTO{
-  id: string
-  username: string
-  password: string
-  email: string
-  phone: string
-  status: number
-  createTime: string
-  updateTime: string
+export type TabState = {
+  tabList: Tab[]
 }
+export const useTablesStore = defineStore('tables', () => {
+  const tabList = ref<Tab[]>([])
+  const tabsList = computed(()=>{
+    return tabList.value
+  })
 
 
-export interface UserPage extends Page{
-  username: string
-  nickName: string
-  realName: string
-  email: string
-  phone: string
-  userStatus: number
-  department: string
+  function addTab(tab: Tab) {
+    //判断数据是否在选项卡里面
+    if (tabList.value.some(item => item.path === tab.path)) return;
+    tabList.value.push(tab)
+  }
 
-}
+
+  return {
+    tabList,
+    tabsList,
+    addTab
+  }
+
+})
+
 

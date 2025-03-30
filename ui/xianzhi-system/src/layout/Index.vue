@@ -22,6 +22,7 @@
         <el-header>
           <Header/>
         </el-header>
+        <Tables/>
         <el-main>
           <RouterView/>
         </el-main>
@@ -32,6 +33,7 @@
 <script lang="ts" setup>
 import Aside from "@/layout/components/Aside.vue";
 import Header from "@/layout/components/Header.vue";
+import Tables from "@/layout/components/Tables.vue";
 </script>
 <style lang="less" scoped>
 .el-header{
@@ -41,7 +43,7 @@ import Header from "@/layout/components/Header.vue";
   text-align: right;
   padding: 0 20px;
   box-shadow: 0 2px 5px #f0f1f2;
-  margin-bottom: 40px;
+  margin-bottom: 5px;
 }
 
 </style>

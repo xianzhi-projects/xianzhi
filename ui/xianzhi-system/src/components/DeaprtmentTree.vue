@@ -19,7 +19,8 @@
 </script>
 
 <template>
-
+  <el-card header="部门信息">
+  </el-card>
 </template>
 
 <style scoped>

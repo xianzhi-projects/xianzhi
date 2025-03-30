@@ -51,3 +51,9 @@ export interface ListResult<T> {
   list: T[]
 }
 
+
+export interface Page {
+  pageNo: number,
+  pageSize: number,
+}
+
