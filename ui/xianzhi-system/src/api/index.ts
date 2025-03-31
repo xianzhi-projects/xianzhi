@@ -15,7 +15,7 @@
  */
 import type {AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from 'axios'
 import axios, {AxiosError} from 'axios'
-import {refreshToken} from '@/api/authorization.ts'
+import {refreshToken} from '@/api/authorizationApi.ts'
 import {useUserStore} from '@/stores/userStore.ts'
 import {ElMessage} from "element-plus";
 import type {ResponseResult} from "@/types/core.ts";

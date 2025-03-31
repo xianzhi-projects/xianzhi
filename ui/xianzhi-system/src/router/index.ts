@@ -6,9 +6,9 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import {useUserStore} from '@/stores/userStore'
 import {useRouterStore} from '@/stores/routerStore.ts'
-import {getCurrentUserResource} from '@/api/resourceApi'
-import type {ResourceVO} from "@/types/resource.ts";
-import {ResourceType} from "@/types/resource.ts";
+import {getCurrentUserResource} from '@/api/system/resourceApi.ts'
+import type {ResourceVO} from "@/types/system/resource.ts";
+import {ResourceType} from "@/types/system/resource.ts";
 
 // 基础路由配置
 const baseRoutes: RouteRecordRaw[] = [
@@ -35,7 +35,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: baseRoutes,
   scrollBehavior(to, from, savePosition) {
-    return savePosition ? savePosition : { top: 0 }
+    return savePosition ? savePosition : {top: 0}
   },
 })
 
@@ -52,22 +52,22 @@ router.beforeEach(async (to, from, next) => {
 
   // 未登录用户重定向到登录页
   if (!userStore.isLogin && to.path !== '/login') {
-    next({ path: '/login', query: { redirect: to.path } })
+    next({path: '/login', query: {redirect: to.path}})
     return
   }
   // 已登录用户访问登录页，重定向到首页
   if (userStore.isLogin && to.path === '/login') {
-    next({ path: '/' })
+    next({path: '/'})
     return
   }
 
   // 动态路由未加载时，加载动态路由
   if (userStore.isLogin && (!routerStore.routerList || routerStore.routerList.length === 0)) {
     try {
-      const { data } = await getCurrentUserResource()
+      const {data} = await getCurrentUserResource()
       if (!data || data.length === 0) {
         userStore.removeToken()
-        next({ path: '/login' })
+        next({path: '/login'})
         return
       }
 
@@ -77,10 +77,10 @@ router.beforeEach(async (to, from, next) => {
       // 添加动态路由
       addRoutesSafely(asyncRouter)
       // 重新导航到当前路由
-      next({ ...to, replace: true })
+      next({...to, replace: true})
     } catch (error) {
       console.error('动态路由加载失败:', error)
-      next({ path: '/login' })
+      next({path: '/login'})
     }
   } else {
     next()
@@ -132,7 +132,7 @@ function convertResourceToRoute(item: ResourceVO): RouteRecordRaw {
 
   // 处理目录类型资源
   if (item.resourceType === ResourceType.CATALOG && item.children?.length) {
-    route.children = item.children.map((child) => convertResourceToRoute(child))
+    route.children = item.children.map((child: ResourceVO) => convertResourceToRoute(child))
   }
 
   return route
@@ -149,4 +149,5 @@ function addRoutesSafely(routes: RouteRecordRaw | RouteRecordRaw[]) {
     }
   })
 }
+
 export default router

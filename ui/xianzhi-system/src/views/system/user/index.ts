@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import type {UserVO} from "@/types/user.ts";
+import type {UserVO} from "@/types/userApi.ts";
 import {ref} from 'vue';
 import {resourceTree} from "@/api/resourceApi.ts";
 import {ElMessage} from "element-plus";

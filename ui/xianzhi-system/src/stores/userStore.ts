@@ -5,7 +5,7 @@
  */
 import {computed, ref} from 'vue'
 import {defineStore} from 'pinia'
-import type {TokenVO} from '@/api/authorization.ts'
+import type {TokenVO} from '@/api/authorizationApi.ts'
 
 const TOKEN_KEY = 'token'
 
