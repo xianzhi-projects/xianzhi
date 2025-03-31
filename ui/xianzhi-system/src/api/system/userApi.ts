@@ -14,3 +14,17 @@
  *  limitations under the License.
  */
 
+import type {UserVO} from "@/types/system/user.ts";
+import type {ResponseResult} from "@/types/core.ts";
+import http from "@/api";
+import {BASE_SERVER} from "@/constants/ServerConstant.ts";
+
+/**
+ * 获取当前用户资源信息
+ */
+export function getCurrentUserInfo(): Promise<ResponseResult<UserVO>> {
+  return http.request({
+    url: BASE_SERVER + '/user/getCurrentUserInfo',
+    method: 'GET',
+  })
+}

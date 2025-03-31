@@ -33,5 +33,4 @@ import Footer from "@/layout/components/Footer.vue";
 </template>
 
 <style scoped>
-/* 无需额外样式 */
 </style>

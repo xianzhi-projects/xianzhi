@@ -63,21 +63,21 @@ public interface UserMapper extends BaseMapper<UserDO> {
 
     /**
      * 判断邮箱是否存在
+     *
      * @param email 邮箱
-     * @param id 用户ID
+     * @param id    用户ID
      * @return 是否存在
      */
-    boolean existsUserByEmailAndIdNot(String email,String id);
+    boolean existsUserByEmailAndIdNot(String email, String id);
 
     /**
      * 判断手机号码是否存在
+     *
      * @param phone 手机号码
-     * @param id 用户ID
+     * @param id    用户ID
      * @return 是否存在
      */
-    boolean existsUserByPhoneAndIdNot(String phone,String id);
-
-
+    boolean existsUserByPhoneAndIdNot(String phone, String id);
 
 
     /**
@@ -104,4 +104,12 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return 用户列表
      */
     IPage<UserVO> pageUserList(Page<UserVO> userVOPage, @Param("userPage") UserPage userPage);
+
+    /**
+     * 根据用户ID查询用户信息
+     *
+     * @param userId 用户ID
+     * @return 用户信息
+     */
+    Optional<UserVO> selectUserInfoById(@Param("userId") String userId);
 }

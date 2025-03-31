@@ -13,6 +13,35 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+/**
+ * 部门信息出参
+ */
+export interface DepartmentVO {
+  /**
+   * 部门ID
+   */
+  id: string
+  /**
+   * 部门名称
+   */
+  departmentName: string
+  /**
+   * 部门描述
+   */
+  departmentDesc: string
+  /**
+   * 部门排序
+   */
+  departmentSort: number
+  /**
+   * 子集部门
+   */
+  children: DepartmentVO[]
 
-export const BASE_SERVER = '/s';
+
+}
+
+export interface DepartmentDTO {
+
+}
 

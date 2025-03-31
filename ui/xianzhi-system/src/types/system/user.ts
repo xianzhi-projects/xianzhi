@@ -16,8 +16,66 @@
 
 
 import type {Page} from "@/types/core.ts";
+import type {DepartmentVO} from "@/types/system/department.ts";
+import type {PostVO} from "@/types/system/post.ts";
 
-export interface UserVO{
+/**
+ * 用户信息
+ */
+export interface UserVO {
+  /**
+   * 用户ID
+   */
+  id: string
+  /**
+   * 用户名
+   */
+  username: string
+  /**
+   * 用户昵称
+   */
+  nickName: string
+  /**
+   * 用户真实姓名
+   */
+  realName: string
+  /**
+   * 邮箱地址
+   */
+  email: string
+  /**
+   * 手机号码
+   */
+  phone: string
+
+  /**
+   * 用户头像
+   */
+  avatar: string
+  /**
+   * 用户状态
+   */
+  userStatus: string
+  /**
+   * 用户工号
+   */
+  workNumber: string
+
+  /**
+   * 部门信息
+   */
+  department: DepartmentVO
+
+  /**
+   * 岗位信息
+   */
+  posts: PostVO[]
+
+
+}
+
+
+export interface UserDTO {
   id: string
   username: string
   password: string
@@ -29,19 +87,7 @@ export interface UserVO{
 }
 
 
-export interface UserDTO{
-  id: string
-  username: string
-  password: string
-  email: string
-  phone: string
-  status: number
-  createTime: string
-  updateTime: string
-}
-
-
-export interface UserPage extends Page{
+export interface UserPage extends Page {
   username: string
   nickName: string
   realName: string

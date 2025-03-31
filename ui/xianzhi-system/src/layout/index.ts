@@ -13,11 +13,36 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
+import {ElMessage} from "element-plus";
+import {getCurrentUserInfo} from "@/api/system/userApi.ts";
 import {ref} from "vue";
+import type {UserVO} from "@/types/system/user.ts";
+
+export const userInfo = ref<UserVO>(<UserVO>{
+  id: '',
+  username: '',
+  email: '',
+  phone: '',
+  userStatus: '',
+  nickName: '',
+  realName: '',
+  avatar: 'http://pic.imeitou.com/uploads/allimg/2020073010/qb5ekx2qajk.jpg',
+  workNumber: '',
+  department: {}
+
+})
 
 
-export const menus = ref([])
+
+export async function refreshUserInfo() {
+  const rep = await getCurrentUserInfo();
+  if (rep.code === '200' && rep.data) {
+    userInfo.value = rep.data
+    console.log(userInfo.value)
+  } else {
+    ElMessage.error(rep.message)
+  }
+}
 
 
 

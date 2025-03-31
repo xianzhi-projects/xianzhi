@@ -28,4 +28,13 @@ import java.io.Serializable;
  */
 @Data
 public class PostVO implements Serializable {
+
+    /**
+     * 岗位ID
+     */
+    private String id;
+    /**
+     * 岗位名称
+     */
+    private String postName;
 }

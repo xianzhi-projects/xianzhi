@@ -13,6 +13,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-export const BASE_SERVER = '/s';
-
+export interface PostVO {
+  /**
+   * 岗位ID
+   */
+  id: string
+  /**
+   * 岗位名称
+   */
+  postName: string
+  /**
+   * 岗位描述
+   */
+  postDesc: string
+}

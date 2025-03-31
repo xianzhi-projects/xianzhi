@@ -15,7 +15,7 @@
   -->
 
 <template>
-  <div class="common-layout">
+  <div class="">
     <el-container>
       <Aside/>
       <el-container>
@@ -34,16 +34,28 @@
 import Aside from "@/layout/components/Aside.vue";
 import Header from "@/layout/components/Header.vue";
 import Tables from "@/layout/components/Tables.vue";
+import {onBeforeMount} from "vue";
+import {refreshUserInfo} from "@/layout/index.ts";
+
+onBeforeMount(() => {
+  refreshUserInfo()
+})
 </script>
 <style lang="less" scoped>
-.el-header{
-  background-color: white;
-  color: #333;
-  line-height: 60px;
-  text-align: right;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px #f0f1f2;
-  margin-bottom: 5px;
+.el-container {
+  height: 100vh;
+  min-height: 100vh;
+
+  .el-header {
+    background-color: white;
+    color: #333;
+    line-height: 60px;
+    text-align: right;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px #f0f1f2;
+    margin-bottom: 5px;
+  }
 }
+
 
 </style>

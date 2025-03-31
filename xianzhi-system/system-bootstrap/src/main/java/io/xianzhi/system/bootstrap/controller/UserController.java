@@ -28,10 +28,7 @@ import io.xianzhi.system.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -108,7 +105,8 @@ public class UserController {
      *
      * @return 用户信息
      */
-    public ResponseResult<UserVO> getUserInfo() {
-        return ResponseResult.success(userService.getUserInfo());
+    @GetMapping(value = "/getCurrentUserInfo")
+    public ResponseResult<UserVO> getCurrentUserInfo() {
+        return ResponseResult.success(userService.getCurrentUserInfo());
     }
 }

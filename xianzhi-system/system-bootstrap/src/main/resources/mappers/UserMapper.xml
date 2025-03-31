@@ -62,4 +62,47 @@
 
 
     </select>
+    <resultMap id="selectUserInfoById" type="io.xianzhi.system.model.vo.UserVO">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="user_status" property="userStatus" jdbcType="TINYINT"/>
+        <result column="work_number" property="workNumber" jdbcType="VARCHAR"/>
+        <association property="department" javaType="io.xianzhi.system.model.vo.DepartmentVO">
+            <id column="departmentId" property="id" jdbcType="VARCHAR"/>
+            <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="posts" ofType="io.xianzhi.system.model.vo.PostVO">
+            <id column="postId" property="id" jdbcType="VARCHAR"/>
+            <result column="post_name" property="postName" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="selectUserInfoById" resultMap="selectUserInfoById">
+
+        SELECT u.id,
+               u.username,
+               u.nick_name,
+               u.real_name,
+               u.email,
+               u.phone,
+               u.avatar,
+               u.user_status,
+               u.work_number,
+               d.id AS departmentId,
+               d.department_name,
+               p.id AS postId,
+               P.post_name
+        FROM sys_user AS u
+                 LEFT JOIN sys_user_post AS up ON u.id = up.user_id
+            AND up.deleted_flag = 0
+                 LEFT JOIN sys_post AS p ON up.post_id = p.id
+            AND p.deleted_flag = 0
+                 LEFT JOIN sys_department AS d ON u.department_id = d.id
+            AND d.deleted_flag = 0
+        WHERE u.deleted_flag = 0
+    </select>
 </mapper>

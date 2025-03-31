@@ -16,13 +16,16 @@
 
 <script lang="ts" setup>
 import {Setting} from '@element-plus/icons-vue'
+
+const url = 'http://pic.imeitou.com/uploads/allimg/2020073010/qb5ekx2qajk.jpg'
 </script>
 
 <template>
   <div class="toolbar">
+    <el-avatar :size="40" :src="url"/>
     <el-dropdown>
-      <el-icon style="margin-right: 8px; margin-top: 1px">
-        <setting />
+      <el-icon>
+        <setting/>
       </el-icon>
       <template #dropdown>
         <el-dropdown-menu>
@@ -45,5 +48,12 @@ import {Setting} from '@element-plus/icons-vue'
   justify-content: center;
   height: 100%;
   right: 20px;
+
+  .el-dropdown {
+    .el-icon {
+      margin-right: 8px;
+      margin-top: 1px
+    }
+  }
 }
 </style>

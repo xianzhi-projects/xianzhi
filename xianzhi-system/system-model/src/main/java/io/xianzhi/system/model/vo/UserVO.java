@@ -19,6 +19,7 @@ package io.xianzhi.system.model.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户信息出参
@@ -30,9 +31,10 @@ import java.io.Serializable;
 public class UserVO implements Serializable {
 
     /**
-     * 部门
+     * 用户ID
      */
-    private DepartmentVO department;
+    private String id;
+
     /**
      * 用户名
      */
@@ -61,4 +63,19 @@ public class UserVO implements Serializable {
      * 用户状态
      */
     private String userStatus;
+    /**
+     * 用户工号
+     */
+    private String workNumber;
+
+    /**
+     * 部门
+     */
+    private DepartmentVO department;
+
+
+    /**
+     * 岗位
+     */
+    private List<PostVO> posts;
 }

@@ -65,6 +65,6 @@ public interface UserService {
      *
      * @return 用户信息
      */
-    UserVO getUserInfo();
+    UserVO getCurrentUserInfo();
 
 }

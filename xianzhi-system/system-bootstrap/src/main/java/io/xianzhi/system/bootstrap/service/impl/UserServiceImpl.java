@@ -28,6 +28,7 @@ import io.xianzhi.system.bootstrap.service.UserService;
 import io.xianzhi.system.model.dto.UserDTO;
 import io.xianzhi.system.model.page.UserPage;
 import io.xianzhi.system.model.vo.UserVO;
+import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -118,9 +119,9 @@ public class UserServiceImpl implements UserService {
      * @return 用户信息
      */
     @Override
-    public UserVO getUserInfo() {
-
-        return null;
+    public UserVO getCurrentUserInfo() {
+        String userId = UserContextHolder.getCurrentUserId();
+        return userMapper.selectUserInfoById(userId).orElseThrow(() -> new BusinessException("用户信息不存在"));
     }
 
     /**

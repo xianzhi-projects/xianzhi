@@ -5,12 +5,16 @@
  */
 import {computed, ref} from 'vue'
 import {defineStore} from 'pinia'
-import type {TokenVO} from '@/api/authorizationApi.ts'
+import type {TokenVO} from '@/api/system/authorizationApi.ts'
 
 const TOKEN_KEY = 'token'
 
 export const useUserStore = defineStore('user', () => {
   const tokenInfo = ref<TokenVO | null>(null)
+
+
+
+
 
   // 使用计算属性检查登录状态
   const isLogin = computed(() => !!tokenInfo.value?.accessToken)
