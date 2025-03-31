@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import {Setting} from '@element-plus/icons-vue'
 
-const url = 'http://pic.imeitou.com/uploads/allimg/2020073010/qb5ekx2qajk.jpg'
+const url = 'https://img2.baidu.com/it/u=886042428,4063273124&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400'
 </script>
 
 <template>
