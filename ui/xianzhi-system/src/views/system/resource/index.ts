@@ -14,9 +14,9 @@
  *  limitations under the License.
  */
 import {ref} from 'vue';
-import type {ResourceVO} from "@/types/resource.ts";
-import {ResourceType} from "@/types/resource.ts";
-import {deleteResource, resourceTree} from "@/api/resourceApi.ts";
+import type {ResourceVO} from "@/types/system/resource.ts";
+import {ResourceType} from "@/types/system/resource.ts";
+import {deleteResource, resourceTree} from "@/api/system/resourceApi.ts";
 import {ElMessage} from "element-plus";
 
 

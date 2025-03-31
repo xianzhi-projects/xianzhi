@@ -25,7 +25,7 @@ import {
   remove
 } from "@/views/system/resource/index.ts";
 import {onBeforeMount} from "vue";
-import {ResourceType} from "@/types/resource.ts";
+import {ResourceType} from "@/types/system/resource.ts";
 
 onBeforeMount(() => {
   refreshResourceTree()

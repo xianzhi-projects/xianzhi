@@ -79,8 +79,8 @@
 
 <script lang="ts" setup>
 import {ref, watch} from 'vue'
-import {createResource, updateResource,} from '@/api/resourceApi.ts'
-import {type ResourceDTO, ResourceType} from "@/types/resource.ts";
+import {createResource, updateResource,} from '@/api/system/resourceApi.ts'
+import {type ResourceDTO, ResourceType} from "@/types/system/resource.ts";
 import {refreshResourceTree, selectedNode} from "@/views/system/resource/index.ts";
 import {ElMessage} from "element-plus";
 

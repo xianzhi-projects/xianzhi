@@ -76,7 +76,7 @@
 import {ref} from 'vue';
 import {ElButton, ElCheckbox, ElForm, ElFormItem, ElInput, ElMessage} from 'element-plus';
 import {useRouter} from 'vue-router';
-import {passwordLogin, type PasswordLoginDTO} from "@/api/authorizationApi.ts";
+import {passwordLogin, type PasswordLoginDTO} from "@/api/system/authorizationApi.ts";
 import {useUserStore} from "@/stores/userStore.ts";
 
 

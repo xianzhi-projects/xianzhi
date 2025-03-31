@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import LoginForm from "@/views/authorization/components/LoginForm.vue";
+import LoginForm from "@/views/authorization/LoginForm.vue";
 </script>
 
 <style lang="less" scoped>

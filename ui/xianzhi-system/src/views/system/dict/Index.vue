@@ -16,10 +16,19 @@
 
 <script lang="ts" setup>
 
+import DictList from "@/views/system/dict/DictList.vue";
+import DictItemList from "@/views/system/dict/DictItemList.vue";
 </script>
 
 <template>
-
+  <el-row :gutter="16" style="margin-left: 0; margin-right: 0">
+    <el-col :span="12">
+      <DictList/>
+    </el-col>
+    <el-col :span="12">
+      <DictItemList/>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>

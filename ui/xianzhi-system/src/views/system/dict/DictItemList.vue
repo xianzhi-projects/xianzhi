@@ -19,7 +19,9 @@
 </script>
 
 <template>
-
+  <el-card header="字典项列表">
+    dict item list
+  </el-card>
 </template>
 
 <style scoped>

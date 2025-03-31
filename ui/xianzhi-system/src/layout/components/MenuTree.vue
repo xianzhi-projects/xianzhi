@@ -15,7 +15,7 @@
   -->
 
 <script setup>
-import {ResourceType} from "@/types/resource.js";
+import {ResourceType} from "@/types/system/resource.js";
 
 const menuList = defineModel('menuList')
 </script>
