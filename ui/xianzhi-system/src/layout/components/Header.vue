@@ -38,7 +38,7 @@ const url = 'https://img2.baidu.com/it/u=886042428,4063273124&fm=253&fmt=auto&ap
         <el-dropdown-menu>
           <el-dropdown-item>View</el-dropdown-item>
           <el-dropdown-item>Add</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

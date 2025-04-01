@@ -44,5 +44,15 @@ export async function refreshUserInfo() {
   }
 }
 
+export async function logout() {
+  const rep = await getCurrentUserInfo();
+  if (rep.code === '200' && rep.data) {
+    userInfo.value = rep.data
+    console.log(userInfo.value)
+  } else {
+    ElMessage.error(rep.message)
+  }
+}
+
 
 
