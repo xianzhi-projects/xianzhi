@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import {Setting} from '@element-plus/icons-vue'
-import {userInfo} from "../index.ts";
+import {logout, userInfo} from "../index.ts";
 
 const url = 'https://img2.baidu.com/it/u=886042428,4063273124&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400'
 </script>

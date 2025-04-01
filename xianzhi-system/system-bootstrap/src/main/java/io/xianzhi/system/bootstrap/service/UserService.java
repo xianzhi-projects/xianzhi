@@ -66,5 +66,12 @@ public interface UserService {
      * @return 用户信息
      */
     UserVO getCurrentUserInfo();
+    /**
+     * 查询用户详情
+     *
+     * @param userId 用户ID
+     * @return 用户详情
+     */
+    UserVO getUserDetails(String userId);
 
 }

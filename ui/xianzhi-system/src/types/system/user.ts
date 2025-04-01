@@ -15,7 +15,7 @@
  */
 
 
-import type {Page} from "@/types/core.ts";
+import {Page} from "@/types/core.ts";
 import type {DepartmentVO} from "@/types/system/department.ts";
 import type {PostVO} from "@/types/system/post.ts";
 
@@ -88,13 +88,13 @@ export interface UserDTO {
 
 
 export interface UserPage extends Page {
-  username: string
-  nickName: string
-  realName: string
-  email: string
-  phone: string
-  userStatus: number
-  department: string
 
+  username?: string
+  nickName?: string
+  realName?: string
+  email?: string
+  phone?: string
+  userStatus?: string
+  department?: string
 }
 

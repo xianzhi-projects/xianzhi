@@ -17,6 +17,7 @@
 <script lang="ts" setup>
 
 import {append, userList} from "@/views/system/user/index.ts";
+import Pagination from "@/components/pagination/Pagination.vue";
 </script>
 
 <template>
@@ -76,6 +77,7 @@ import {append, userList} from "@/views/system/user/index.ts";
             </el-table-column>
           </el-table>
         </el-card>
+        <Pagination/>
       </div>
     </div>
   </div>

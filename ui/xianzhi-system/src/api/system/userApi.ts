@@ -14,8 +14,8 @@
  *  limitations under the License.
  */
 
-import type {UserVO} from "@/types/system/user.ts";
-import type {ResponseResult} from "@/types/core.ts";
+import type {UserDTO, UserPage, UserVO} from "@/types/system/user.ts";
+import type {ListResult, ResponseResult} from "@/types/core.ts";
 import http from "@/api";
 import {BASE_SERVER} from "@/constants/ServerConstant.ts";
 
@@ -26,5 +26,61 @@ export function getCurrentUserInfo(): Promise<ResponseResult<UserVO>> {
   return http.request({
     url: BASE_SERVER + '/user/getCurrentUserInfo',
     method: 'GET',
+  })
+}
+
+/**
+ * 分页查询用户信息
+ * @param page 用户查询条件
+ */
+export function pageUserList(page: UserPage): Promise<ResponseResult<ListResult<UserVO>>> {
+  return http.request({
+    url: BASE_SERVER + '/user/pageUserList',
+    method: 'POST',
+  })
+}
+
+/**
+ * 新增用户
+ * @param user 用户信息入参
+ */
+export function createUser(user: UserDTO): Promise<ResponseResult<any>> {
+  return http.request({
+    url: BASE_SERVER + '/user/createUser',
+    method: 'POST',
+    data: user,
+  })
+}
+
+/**
+ * 修改用户
+ * @param user 用户信息入参
+ */
+export function updateUser(user: UserDTO): Promise<ResponseResult<any>> {
+  return http.request({
+    url: BASE_SERVER + '/user/updateUser',
+    method: 'POST',
+    data: user,
+  })
+}
+
+/**
+ * 删除用户
+ * @param id 用户id
+ */
+export function deleteUser(id: string[]): Promise<ResponseResult<any>> {
+  return http.request({
+    url: BASE_SERVER + '/user/deleteUser',
+    method: 'POST',
+    data: id,
+  })
+}
+
+
+export function getUserDetails(userId: string): Promise<ResponseResult<UserVO>> {
+  return http.request({
+    url: BASE_SERVER + '/user/getUserDetails',
+    method: 'GET',
+    params: {'userId': userId}
   })
 }

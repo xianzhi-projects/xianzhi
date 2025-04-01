@@ -14,14 +14,29 @@
   -  limitations under the License.
   -->
 
-<script lang="ts" setup>
-import UserList from "@/views/system/user/UserList.vue";
-</script>
-
+// src/components/Pagination.vue
 <template>
-  <UserList/>
+  <el-pagination
+    v-model:current-page="page.pageNo"
+    v-model:page-size="page.pageSize"
+    :page-sizes="[10, 20, 50, 100]"
+    :total="page.totalItems"
+    layout="total, sizes, prev, pager, next, jumper"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+  />
 </template>
 
-<style scoped>
+<script lang="ts" setup>
+import {usePagination} from '@/components/pagination/index.ts';
 
-</style>
+const {page, setPageSize, setCurrentPageNo} = usePagination();
+
+const handleSizeChange = (size: number) => {
+  setPageSize(size);
+};
+
+const handleCurrentChange = (pageNo: number) => {
+  setCurrentPageNo(pageNo);
+};
+</script>

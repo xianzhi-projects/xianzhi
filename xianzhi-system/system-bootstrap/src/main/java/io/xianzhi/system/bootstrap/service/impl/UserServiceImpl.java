@@ -125,6 +125,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 查询用户详情
+     *
+     * @param userId 用户ID
+     * @return 用户详情
+     */
+    @Override
+    public UserVO getUserDetails(String userId) {
+        return userMapper.selectUserInfoById(userId).orElseThrow(() -> new BusinessException("用户信息不存在"));
+    }
+
+    /**
      * 检查用户信息入参
      *
      * @param userDTO 用户信息入参

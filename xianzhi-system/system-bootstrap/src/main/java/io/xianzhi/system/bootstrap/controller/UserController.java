@@ -109,4 +109,17 @@ public class UserController {
     public ResponseResult<UserVO> getCurrentUserInfo() {
         return ResponseResult.success(userService.getCurrentUserInfo());
     }
+
+    /**
+     * 查询用户详情
+     *
+     * @param userId 用户ID
+     * @return 用户详情
+     */
+    @GetMapping(value = "/getUserDetails")
+    public ResponseResult<UserVO> getUserDetails(@RequestParam(value = "id") String userId) {
+        return ResponseResult.success(userService.getUserDetails(userId));
+    }
 }
+
+

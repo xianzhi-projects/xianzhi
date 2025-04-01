@@ -52,8 +52,10 @@ export interface ListResult<T> {
 }
 
 
-export interface Page {
-  pageNo: number,
-  pageSize: number,
+export class Page {
+  pageNo: number = 1;
+  pageSize: number = 10;
+
+
 }
 

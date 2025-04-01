@@ -14,29 +14,16 @@
  *  limitations under the License.
  */
 
-import type {UserVO} from "@/types/userApi.ts";
 import {ref} from 'vue';
-import {resourceTree} from "@/api/resourceApi.ts";
-import {ElMessage} from "element-plus";
-import {dataSource, defaultNodeKey} from "@/views/system/resource/index.ts";
+import type {UserVO} from "@/types/system/user.ts";
 
 
-export const userList = ref<UserVO>()
+export const userList = ref<UserVO[]>()
+
 
 export async function refreshUserList() {
-  const rep = await resourceTree();
-  if (rep.code === '200') {
-    dataSource.value = rep.data
-    if (dataSource.value && dataSource.value.length > 0) {
-      defaultNodeKey.value = dataSource.value[0].id;
-      console.log('defaultNodeKey', defaultNodeKey.value);
-    }
-  } else {
-    ElMessage.error(rep.message)
-    dataSource.value = []
-  }
-}
 
+}
 
 
 export const append = (data: UserVO) => {
