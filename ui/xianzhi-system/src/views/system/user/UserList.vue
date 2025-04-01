@@ -14,72 +14,12 @@
   -  limitations under the License.
   -->
 
-<script lang="ts" setup>
-
-import {append, userList} from "@/views/system/user/index.ts";
-import Pagination from "@/components/pagination/Pagination.vue";
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="content">
-    <div class="department">
-      <el-card header="部门信息">
-      </el-card>
-    </div>
-    <div class="user">
-      <div class="user-search">
-        <el-card>
-          <el-form>
-            <el-form-item label="上级菜单">
-              <el-input />
-            </el-form-item>
-            <el-form-item label="上级菜单">
-              <el-input/>
-            </el-form-item>
-            <el-form-item label="上级菜单">
-              <el-input />
-            </el-form-item>
-            <el-form-item label="上级菜单">
-              <el-input />
-            </el-form-item>
-            <el-form-item label="上级菜单">
-              <el-input />
-            </el-form-item>
 
-          </el-form>
-        </el-card>
-      </div>
-      <div content="user-list">
-        <el-card header="用户管理">
-          <template #header>
-            <div class="card-header">
-              <span>用户列表</span>
-              <el-button size="small" type="primary" @click="append(null)">添加用户</el-button>
-            </div>
-          </template>
-          <el-table :data="userList" :empty-text="'暂无数据'" style="width: 100%">
-            <el-table-column label="头像" prop="date"/>
-            <el-table-column label="用户名" prop="name"/>
-            <el-table-column label="昵称" prop="state"/>
-            <el-table-column label="部门" prop="department"/>
-            <el-table-column label="真实姓名" prop="city"/>
-            <el-table-column label="邮箱地址" prop="address"/>
-            <el-table-column label="手机号码" prop="zip"/>
-            <el-table-column label="用户状态" prop="userStatus"/>
-            <el-table-column label="创建时间" prop="createAt"/>
-            <el-table-column fixed="right" label="操作">
-              <template #default>
-                <!--            <el-button link type="primary" size="small" @click="handleClick">-->
-                <!--              Detail-->
-                <!--            </el-button>-->
-                <el-button link size="small" type="primary">Edit</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card>
-        <Pagination/>
-      </div>
-    </div>
+
   </div>
 
 </template>
