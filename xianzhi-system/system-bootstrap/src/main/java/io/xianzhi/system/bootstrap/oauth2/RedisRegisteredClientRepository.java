@@ -22,9 +22,9 @@ package io.xianzhi.system.bootstrap.oauth2;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.xianzhi.common.oauth2.authorization.enums.GrantTypeEnum;
 import io.xianzhi.common.oauth2.authorization.properties.OAuth2Properties;
-import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
 import io.xianzhi.common.redis.RedisHandler;
+import io.xianzhi.common.security.code.SecurityCode;
 import io.xianzhi.common.security.properties.SecurityProperties;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
@@ -92,7 +92,7 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
     public void save(RegisteredClient registeredClient) {
         if (null == registeredClient) {
             log.error("保存客户端信息失败，客户端信息为空");
-            throw new BusinessException(OAuth2Code.CLIENT_ERROR);
+            throw new BusinessException(SecurityCode.CLIENT_ERROR);
         }
         if (StringUtils.hasText(registeredClient.getId()) && !registeredClient.getId().contains("-")) {
             update(registeredClient);
@@ -116,7 +116,7 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
                 clientDO = oAuth2ClientMapper.queryById(id);
                 if (null == clientDO) {
                     log.error("客户端信息不存在，客户端主键ID:{}", id);
-                    throw new BusinessException(OAuth2Code.CLIENT_ERROR);
+                    throw new BusinessException(SecurityCode.CLIENT_ERROR);
                 }
                 redisProcessor.hSet(AuthorizationInfoConstant.SYS_OAUTH2_ID, id, clientDO);
             }
@@ -141,7 +141,7 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
                     clientDO = oAuth2ClientMapper.queryByClientId(clientId);
                     if (null == clientDO) {
                         log.error("客户端信息不存在，客户端ID:{}", clientId);
-                        throw new OAuth2Exception(new ResponseResult<>(OAuth2Code.CLIENT_ERROR, null));
+                        throw new OAuth2Exception(new ResponseResult<>(SecurityCode.CLIENT_ERROR, null));
                     }
                     redisProcessor.hSet(AuthorizationInfoConstant.SYS_OAUTH2_CLIENT_ID, clientId, clientDO);
                 }

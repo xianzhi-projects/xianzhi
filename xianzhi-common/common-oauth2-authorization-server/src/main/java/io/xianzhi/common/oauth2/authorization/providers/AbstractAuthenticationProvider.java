@@ -6,7 +6,6 @@ package io.xianzhi.common.oauth2.authorization.providers;
 
 import io.xianzhi.common.oauth2.authorization.token.AbstractBaseAuthenticationToken;
 import io.xianzhi.common.oauth2.authorization.utils.OAuth2Assert;
-import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
 import io.xianzhi.common.security.code.SecurityCode;
 import io.xianzhi.core.code.CommonCode;
@@ -71,7 +70,7 @@ public abstract class AbstractAuthenticationProvider implements AuthenticationPr
         if (!CollectionUtils.isEmpty(token.getScopes())) {
             for (String requestedScope : token.getScopes()) {
                 if (!registeredClient.getScopes().contains(requestedScope)) {
-                    throw new OAuth2Exception(OAuth2Code.INVALID_SCOPE);
+                    throw new OAuth2Exception(SecurityCode.INVALID_SCOPE);
                 }
             }
             authorizedScopes = new LinkedHashSet<>(token.getScopes());
@@ -114,7 +113,7 @@ public abstract class AbstractAuthenticationProvider implements AuthenticationPr
         AbstractBaseAuthenticationToken token = (AbstractBaseAuthenticationToken) authentication;
         OAuth2ClientAuthenticationToken oAuth2ClientAuthenticationToken = getAuthenticatedClientElseThrowInvalidClient(authentication);
         RegisteredClient registeredClient = oAuth2ClientAuthenticationToken.getRegisteredClient();
-        OAuth2Assert.notNull(registeredClient, OAuth2Code.CLIENT_ERROR);
+        OAuth2Assert.notNull(registeredClient, SecurityCode.CLIENT_ERROR);
         List<String> grantTypes = registeredClient.getAuthorizationGrantTypes().stream().map(AuthorizationGrantType::getValue).collect(Collectors.toList());
         checkedGrantType(grantTypes);
         Set<String> authorizedScopes = getScopes(token, registeredClient);
@@ -142,7 +141,7 @@ public abstract class AbstractAuthenticationProvider implements AuthenticationPr
             OAuth2Token generateAccessToken = tokenGenerator.generate(tokenContext);
             if (generateAccessToken == null) {
                 log.error("accessToken 生成为空");
-                throw new OAuth2Exception(OAuth2Code.GENERATOR_ACCESS_TOKEN_ERROR);
+                throw new OAuth2Exception(SecurityCode.GENERATOR_ACCESS_TOKEN_ERROR);
             }
             OAuth2AccessToken accessToken = new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER,
                     generateAccessToken.getTokenValue(), generateAccessToken.getIssuedAt(),
@@ -225,6 +224,6 @@ public abstract class AbstractAuthenticationProvider implements AuthenticationPr
         if (clientPrincipal != null && clientPrincipal.isAuthenticated()) {
             return clientPrincipal;
         }
-        throw new OAuth2Exception(OAuth2Code.CLIENT_ERROR);
+        throw new OAuth2Exception(SecurityCode.CLIENT_ERROR);
     }
 }

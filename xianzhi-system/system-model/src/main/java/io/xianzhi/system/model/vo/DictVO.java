@@ -53,5 +53,5 @@ public class DictVO implements Serializable {
     /**
      * 新增用户
      */
-    private UserVO createBy;
+    private String createBy;
 }

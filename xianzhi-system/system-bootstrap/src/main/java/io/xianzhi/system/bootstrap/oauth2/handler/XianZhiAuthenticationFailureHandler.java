@@ -18,8 +18,8 @@
 package io.xianzhi.system.bootstrap.oauth2.handler;
 
 
-import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
+import io.xianzhi.common.security.code.SecurityCode;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.core.utils.ResponseUtils;
@@ -64,11 +64,11 @@ public class XianZhiAuthenticationFailureHandler implements AuthenticationFailur
             }
             String message = exception.getMessage();
             if (message.equals("OAuth 2.0 Parameter: grant_type")) {
-                ResponseUtils.responseUtf8(ResponseResult.fail(OAuth2Code.INVALID_GRANT_TYPE), response);
+                ResponseUtils.responseUtf8(ResponseResult.fail(SecurityCode.INVALID_GRANT_TYPE), response);
                 return;
             }
             if (message.equals("Client authentication failed: client_secret")) {
-                ResponseUtils.responseUtf8(ResponseResult.fail(OAuth2Code.INVALID_CLIENT_SECRET), response);
+                ResponseUtils.responseUtf8(ResponseResult.fail(SecurityCode.INVALID_CLIENT_SECRET), response);
                 return;
             }
         }

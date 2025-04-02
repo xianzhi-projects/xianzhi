@@ -60,30 +60,50 @@ public interface DepartmentMapper extends BaseMapper<DepartmentDO> {
 
     /**
      * 判断部门邮箱是否存在
+     *
      * @param departmentEmail 部门邮箱
-     * @param id 部门ID
+     * @param id              部门ID
      * @return 是否存在
      */
     boolean existsDepartmentByEmailAndIdNot(@Param("departmentEmail") String departmentEmail, @Param("id") String id);
 
     /**
      * 判断部门电话是否存在
+     *
      * @param departmentPhone 部门电话
-     * @param id 部门ID
+     * @param id              部门ID
      * @return 是否存在
      */
     boolean existsDepartmentByPhoneAndIdNot(@Param("departmentPhone") String departmentPhone, @Param("id") String id);
 
     /**
      * 判断是否存在子部门
+     *
      * @param parentId 父部门ID
-     * @return  是否存在
+     * @return 是否存在
      */
     boolean existsByParentId(@Param("parentId") String parentId);
 
     /**
      * 删除部门
+     *
      * @param id 部门ID
      */
     void deletedDepartmentById(@Param("id") String id);
+
+    /**
+     * 根据传递的父级ID查询子集ID
+     *
+     * @param parentId 父级ID
+     * @return 子集ID以及子集的子集的ID
+     */
+    List<String> selectSubDepartmentIdById(@Param("parentId") String parentId);
+
+    /**
+     * 根据部门ID查询部门信息
+     *
+     * @param ids 部门ID
+     * @return 部门信息
+     */
+    List<DepartmentDO> selectSimpleDepartmentByIds(@Param("ids") List<String> ids);
 }

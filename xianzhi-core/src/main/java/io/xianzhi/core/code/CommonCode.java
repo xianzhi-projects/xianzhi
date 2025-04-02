@@ -41,51 +41,58 @@ public enum CommonCode implements Result {
     /**
      * 系统错误
      */
-    ERROR("-1", "服务正忙,请稍后重试!"),
+    ERROR("XZ-01-00000001", "服务正忙,请稍后重试!"),
     /**
      * 未授权，或者身份过期
      */
-    UNAUTHORIZED("401", "未授权,或者身份过期,请重新登录!"),
+    UNAUTHORIZED("XZ-01-00000002", "未授权,或者身份过期,请重新登录!"),
     /**
      * 权限不足
      */
-    FORBIDDEN("403", "没有权限访问该资源!"),
+    FORBIDDEN("XZ-01-00000003", "没有权限访问该资源!"),
     /**
      * 访问资源不存在
      */
-    NO_RESOURCE_FOUND_EXCEPTION("404", "访问资源不可用!"),
+    NO_RESOURCE_FOUND_EXCEPTION("XZ-01-00000004", "访问资源不可用!"),
     /**
      * 服务不可用
      */
-    SERVICE_UNAVAILABLE("503", "服务不可用,请稍后重试"),
+    SERVICE_UNAVAILABLE("XZ-01-00000005", "服务不可用,请稍后重试"),
     /**
      * 请求方式不支持
      */
-    HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION("405", "请求方式不支持!"),
+    HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION("XZ-01-00000006", "请求方式不支持!"),
     /**
      * 无法获取请求体，或者请求体为空
      */
-    HTTP_MESSAGE_NOT_READABLE_EXCEPTION("400", "无法读取请求体!"),
+    HTTP_MESSAGE_NOT_READABLE_EXCEPTION("XZ-01-00000007", "无法读取请求体!"),
     /**
      * 请求不是上传文件
      */
-    REQUEST_NOT_MULTIPART("400", "请求不是上传文件!"),
+    REQUEST_NOT_MULTIPART("XZ-01-000000008.01", "请求不是上传文件!"),
     /**
      * HTTP媒体类型不支持异常
      */
-    HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION("400", "媒体类型不支持!"),
+    HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION("XZ-01-000000008.02", "媒体类型不支持!"),
     /**
      * 缺少请求参数异常
      */
-    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION("400", "缺少必要的请求参数,请检查!"),
+    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION("XZ-01-000000008.03", "缺少必要的请求参数,请检查!"),
     /**
      * 重复请求
      */
-    DUPLICATE_REQUEST("409", "请求频繁,请稍后重试!"),
+    DUPLICATE_REQUEST("XZ-01-000000009", "请求频繁,请稍后重试!"),
+
     /**
-     * 标识参数错误，缺少参数
+     * 请求重复,请稍后重试!
      */
-    PARAM_CHECK_ERROR("-2", "参数检查失败!"),
+    IDEMPOTENT_REQUEST("XZ-01-000000010", "请求重复,请稍后重试!"),
+    /**
+     * 参数错误，缺少参数
+     */
+    PARAM_CHECK_ERROR("XZ-01-000000011", "参数检查失败!"),
+
+
     ;
 
 

@@ -15,27 +15,65 @@ import lombok.Getter;
 public enum SecurityCode implements Result {
 
 
-    LOGIN_SUCCESS("200", "security:login.success"),
     /**
      * 用户名或密码错误
      */
-    USER_NAME_PASSWORD_ERROR("90000001", "用户名或密码错误"),
+    USER_NAME_PASSWORD_ERROR("XZ-02-00000010", "用户名或密码错误"),
     /**
      * 账号被禁用
      */
-    ACCOUNT_DISABLED("90000002", "账号被禁用"),
+    ACCOUNT_DISABLED("XZ-02-00000020", "账号被禁用"),
     /**
      * 账号被锁定
      */
-    ACCOUNT_LOCKED("90000003", "账号被锁定"),
+    ACCOUNT_LOCKED("XZ-02-00000030", "账号被锁定"),
     /**
      * 账号凭证过期
      */
-    ACCOUNT_CREDENTIALS_EXPIRED("90000004", "账号凭证过期"),
+    ACCOUNT_CREDENTIALS_EXPIRED("XZ-02-00000040", "账号凭证过期"),
     /**
      * 验证码错误
      */
-    CAPTCHA_ERROR("90000005", "验证码错误"),
+    CAPTCHA_ERROR("XZ-02-00000050", "验证码错误"),
+
+
+    /**
+     * scope 为空，或者scope传递了多个
+     */
+    SCOPE_ERROR("XZ-02-00000060", "security:scope.error"),
+
+    /**
+     * 客户认证异常
+     */
+    CLIENT_ERROR("XZ-02-00000070", "客户端认证异常"),
+
+    /**
+     * 授权类型不支持
+     */
+    GRANT_TYPE_NOT_SUPPORT("XZ-02-00000071", "security:grant.type.not.support"),
+    /**
+     * 授权类型不支持
+     */
+    INVALID_GRANT_TYPE("XZ-02-00000072", "授权类型不支持"),
+
+    /**
+     * 客户端无效
+     */
+    INVALID_SCOPE("XZ-02-00000073", "security:scope.invalid"),
+
+    /**
+     * 生成 accessToken错误
+     */
+    GENERATOR_ACCESS_TOKEN_ERROR("XZ-02-00000080", "security:generator.access.token.error"),
+
+    /**
+     * 生成 refreshToken错误
+     */
+    GENERATOR_REFRESH_TOKEN_ERROR("XZ-02-00000081", "security:generator.refresh.token.error"),
+    /**
+     * 客户端密钥无效
+     */
+    INVALID_CLIENT_SECRET("XZ-02-00000090", "security:invalid.client.secret"),
 
     ;
     /**

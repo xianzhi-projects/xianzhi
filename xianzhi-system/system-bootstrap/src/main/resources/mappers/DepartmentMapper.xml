@@ -64,7 +64,7 @@
                        FROM sys_department
                        where parent_id = #{parentId,jdbcType=VARCHAR}
                          and deleted_flag =
-                             0), 0)
+                             0 limit 1), 0)
     </select>
 
     <update id="deletedDepartmentById">
@@ -72,4 +72,27 @@
         SET deleted_flag = 1
         WHERE id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="selectSubDepartmentIdById" resultType="java.lang.String">
+        WITH RECURSIVE dept_hierarchy AS (SELECT id
+                                          FROM sys_department
+                                          WHERE id = #{parentId,jdbcType=VARCHAR}
+                                            and deleted_flag = 0
+                                          UNION ALL
+
+                                          SELECT d.id
+                                          FROM sys_department d
+                                                   INNER JOIN dept_hierarchy dh ON d.parent_id = dh.id)
+        SELECT id
+        FROM dept_hierarchy;
+    </select>
+
+    <select id="selectSimpleDepartmentByIds" resultType="io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO">
+        SELECT id, department_name, parent_id
+        from sys_department where deleted_flag = 0
+                              and id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

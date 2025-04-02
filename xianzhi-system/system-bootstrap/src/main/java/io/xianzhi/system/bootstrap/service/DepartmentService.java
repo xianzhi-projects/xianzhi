@@ -56,4 +56,12 @@ public interface DepartmentService {
      * @param id 部门ID
      */
     void deletedDepartment(String id);
+    /**
+     * 获取用户有权限的部门树结构信息
+     *
+     * @return 用户有权限的部门树结构信息
+     */
+    List<DepartmentVO> getDepartmentTree();
+
+
 }

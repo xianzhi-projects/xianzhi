@@ -25,6 +25,7 @@ import io.xianzhi.system.bootstrap.service.DepartmentService;
 import io.xianzhi.system.model.dto.DepartmentDTO;
 import io.xianzhi.system.model.vo.DepartmentVO;
 import io.xianzhi.system.model.vo.UserVO;
+import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -121,6 +124,33 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentMapper.deletedDepartmentById(id);
     }
 
+    /**
+     * 获取用户有权限的部门树结构信息
+     *
+     * @return 用户有权限的部门树结构信息
+     */
+    @Override
+    public List<DepartmentVO> getDepartmentTree() {
+        String userId = UserContextHolder.getCurrentUserId();
+        String departmentId = userMapper.selectUserById(userId).orElseThrow(() -> new BusinessException("用户信息不存在")).getDepartmentId();
+        DepartmentDO department = departmentMapper.selectDepartmentById(departmentId).orElseThrow(() -> new BusinessException("部门信息不存在"));
+        List<String> departmentIds = departmentMapper.selectSubDepartmentIdById(departmentId);
+        departmentIds.add(departmentId);
+        String departmentIdBreadCrumb = department.getDepartmentIdBreadCrumb();
+        if (StringUtils.hasText(departmentIdBreadCrumb)) {
+            List<String> parentIds = Arrays.stream(departmentIdBreadCrumb.split("/")).filter(StringUtils::hasText).toList();
+            if (!ObjectUtils.isEmpty(parentIds)) {
+                departmentIds.addAll(parentIds);
+            }
+        }
+        List<DepartmentDO> departments = departmentMapper.selectSimpleDepartmentByIds(departmentIds);
+        if (ObjectUtils.isEmpty(departments)) {
+            return new ArrayList<>();
+        }
+        return departments.stream().filter(item -> null == item.getParentId() || item.getParentId().equals("-1"))
+                .map(item -> convert(item, null, departments)).toList();
+    }
+
 
     /**
      * 检查部门信息入参
@@ -142,6 +172,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             }
             DepartmentDO parent = departmentMapper.selectDepartmentById(departmentDTO.getParentId()).orElseThrow(() -> new BusinessException("父级部门不存在"));
             department.setParentId(parent.getId());
+            department.setDepartmentIdBreadCrumb(parent.getDepartmentIdBreadCrumb() + "/" + parent.getId());
         }
         // 检查部门名称是否存在
         if (departmentMapper.existsDepartmentByNameAndIdNot(departmentDTO.getDepartmentName(), department.getId())) {
@@ -184,6 +215,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
+    /**
+     * 转换部门信息
+     *
+     * @param item        部门信息
+     * @param owners      负责人信息
+     * @param departments 部门信息
+     * @return 部门信息
+     */
     private DepartmentVO convert(DepartmentDO item, List<UserVO> owners, List<DepartmentDO> departments) {
         DepartmentVO vo = convert(item);
         if (!ObjectUtils.isEmpty(owners)) {

@@ -5,8 +5,8 @@ package io.xianzhi.common.oauth2.authorization.providers;
 import com.fasterxml.jackson.databind.node.TextNode;
 import io.xianzhi.common.oauth2.authorization.enums.GrantTypeEnum;
 import io.xianzhi.common.oauth2.authorization.token.PasswordAuthenticationToken;
-import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
+import io.xianzhi.common.security.code.SecurityCode;
 import io.xianzhi.core.utils.JSONUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -43,7 +43,7 @@ public class PasswordAuthenticationProvider extends AbstractAuthenticationProvid
     public void checkedGrantType(List<String> grantTypes) {
         if (!grantTypes.contains(GrantTypeEnum.PASSWORD.getCode())) {
             log.error("认证失败,当前客户端不支持验证码授权类型，当前支持的授权类型:{}", JSONUtils.toJSONString(grantTypes));
-            throw new OAuth2Exception(OAuth2Code.GRANT_TYPE_NOT_SUPPORT);
+            throw new OAuth2Exception(SecurityCode.GRANT_TYPE_NOT_SUPPORT);
         }
     }
 

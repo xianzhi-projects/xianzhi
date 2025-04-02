@@ -1,1 +1,2 @@
 io.xianzhi.common.web.handler.GlobeExceptionHandler
+io.xianzhi.common.web.config.JacksonConfig

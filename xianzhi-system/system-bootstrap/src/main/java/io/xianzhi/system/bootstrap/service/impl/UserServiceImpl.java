@@ -101,6 +101,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateUser(UserDTO userDTO) {
+        UserDO userDO = checkedUserDTO(userDTO);
+        userMapper.updateById(userDO);
 
     }
 
@@ -122,8 +124,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserVO getCurrentUserInfo() {
-        String userId = UserContextHolder.getCurrentUserId();
-        return userMapper.selectUserInfoById(userId).orElseThrow(() -> new BusinessException("用户信息不存在"));
+        return userMapper.selectUserInfoById(UserContextHolder.getCurrentUserId()).orElseThrow(() -> new BusinessException("用户信息不存在"));
     }
 
     /**

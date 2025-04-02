@@ -56,4 +56,10 @@ public class DepartmentDO extends BaseDO {
      * 父级部门ID
      */
     private String parentId;
+
+
+    /**
+     * 部门ID面包屑
+     */
+    private String departmentIdBreadCrumb;
 }

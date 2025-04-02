@@ -14,34 +14,53 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.core.result;
+package io.xianzhi.system.model.code;
+
+import io.xianzhi.core.result.Result;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * 响应结果顶级接口
+ * 部门相关状态码
  *
  * @author Max
  * @since 1.0.0
  */
-public interface Result {
+@Getter
+@AllArgsConstructor
+public enum DepartmentCode implements Result {
+    /**
+     * 部门名称已经存在
+     */
+    DEPARTMENT_NAME_EXISTS("10001", "部门名称已存在!"),
 
+    ;
+    /**
+     * 自定义状态码
+     */
+    private final String code;
+    /**
+     * 自定义提示信息
+     */
+    private final String message;
 
     /**
      * 获取自定义状态码
      *
      * @return 自定义状体码
      */
-    String code();
+    @Override
+    public String code() {
+        return this.code;
+    }
 
     /**
      * 获取自定义提示信息
      *
      * @return 自定义提示信息
      */
-    String message();
-
-
-    /**
-     * X-00-00000001 数据已经存在
-     */
-
+    @Override
+    public String message() {
+        return this.message;
+    }
 }

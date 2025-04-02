@@ -59,6 +59,16 @@ public class DepartmentController {
     }
 
     /**
+     * 获取用户有权限的部门树结构信息
+     *
+     * @return 用户有权限的部门树结构信息
+     */
+    @GetMapping(value = "/getDepartmentTree")
+    public ResponseResult<List<DepartmentVO>> getDepartmentTree() {
+        return ResponseResult.success(departmentService.getDepartmentTree());
+    }
+
+    /**
      * 新增部门信息  (幂等)
      *
      * @param departmentDTO 部门信息入参

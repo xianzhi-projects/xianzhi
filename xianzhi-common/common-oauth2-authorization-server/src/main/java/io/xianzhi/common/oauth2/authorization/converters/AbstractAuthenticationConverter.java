@@ -3,8 +3,8 @@ package io.xianzhi.common.oauth2.authorization.converters;
 
 import io.xianzhi.common.oauth2.authorization.token.AbstractBaseAuthenticationToken;
 import io.xianzhi.common.oauth2.authorization.utils.OAuth2EndpointUtils;
-import io.xianzhi.common.oauth2.code.OAuth2Code;
 import io.xianzhi.common.oauth2.exception.OAuth2Exception;
+import io.xianzhi.common.security.code.SecurityCode;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,7 +74,7 @@ public abstract class AbstractAuthenticationConverter implements AuthenticationC
         // 获取客户端认证信息
         Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
         if (clientPrincipal == null) {
-            throw new OAuth2Exception(OAuth2Code.CLIENT_ERROR);
+            throw new OAuth2Exception(SecurityCode.CLIENT_ERROR);
         }
 
 
@@ -84,7 +84,7 @@ public abstract class AbstractAuthenticationConverter implements AuthenticationC
         Set<String> scopes = null;
         if (StringUtils.hasText(scope) &&
                 parameters.get(OAuth2ParameterNames.SCOPE).size() != 1) {
-            throw new OAuth2Exception(OAuth2Code.SCOPE_ERROR);
+            throw new OAuth2Exception(SecurityCode.SCOPE_ERROR);
         }
         if (StringUtils.hasText(scope)) {
             scopes = new HashSet<>(
