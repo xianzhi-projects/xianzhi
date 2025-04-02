@@ -31,8 +31,54 @@ const props = defineProps<{
   showCreate: {
     type: Boolean,
     default: false
+  },
+  // 树数据
+  dataSource: {
+    type: Array<any>,
+    default: []
+  },
+  // node的唯一标识
+  nodeKey: {
+    type: string,
+    default: 'id'
+  },
+  // 是否显示复选框
+  showCheckbox: {
+    type: Boolean,
+    default: false
+  }
+  // 空数据的时候展示文字
+  emptyText: {
+    type: String,
+    default: '暂无数据'
+  }
+  // 默认选中节点
+  defaultNodeKey: {
+    type: String,
+    default: ''
+  }
+  // 是否默认展开所有节点
+  defaultExpandAll: {
+    type: Boolean,
+    default: false
   }
 }>();
+
+
+// 定义事件
+const emit = defineEmits([
+  'node-click',
+  'check-change',
+  'node-expand',
+  'node-collapse',
+  'current-change',
+  'node-drag-start',
+  'node-drag-end',
+  'node-drop',
+]);
+
+
+
 
 
 </script>
@@ -50,8 +96,9 @@ const props = defineProps<{
       <el-tree
         :current-node-key="defaultNodeKey"
         :data="dataSource"
-        default-expand-all
-        node-key="id"
+        :default-expand-all="defaultExpandAll"
+        :empty-text="emptyText"
+        :node-key="nodeKey"
         @node-click="onSelect"
       >
         <template #default="{ node, data }">
