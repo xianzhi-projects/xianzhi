@@ -28,4 +28,21 @@ import java.io.Serializable;
  */
 @Data
 public class TenantVO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    private String id;
+    /**
+     * 租户编码
+     */
+    private String tenantCode;
+    /**
+     * 租户名称
+     */
+    private String tenantName;
+    /**
+     * 是否默认租户
+     */
+    private Boolean defaultFlag;
 }

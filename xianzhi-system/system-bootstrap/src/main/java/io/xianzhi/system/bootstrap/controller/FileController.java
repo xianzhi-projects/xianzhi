@@ -66,6 +66,7 @@ public class FileController {
     @PreAuthorize("@xz.hasPermission('system:file:delete')")
     @PostMapping(value = "/deletedFile")
     public ResponseResult<Object> deletedFile(@RequestBody @NotEmpty(message = "文件ID不能为空") List<String> ids) {
+        fileService.deletedFile(ids);
         return ResponseResult.success();
     }
 

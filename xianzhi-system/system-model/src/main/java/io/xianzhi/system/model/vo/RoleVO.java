@@ -28,4 +28,9 @@ import java.io.Serializable;
  */
 @Data
 public class RoleVO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    private String id;
 }

@@ -72,6 +72,7 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public List<TenantVO> getUserTenantList() {
         String userId = UserContextHolder.getCurrentUserId();
+        List<TenantVO> tenantList = tenantMapper.getUserTenantList(userId);
         return List.of();
     }
 

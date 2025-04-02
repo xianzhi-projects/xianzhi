@@ -28,4 +28,8 @@ import java.io.Serializable;
  */
 @Data
 public class FileVO implements Serializable {
+    /**
+     * 主键ID
+     */
+    private String id;
 }

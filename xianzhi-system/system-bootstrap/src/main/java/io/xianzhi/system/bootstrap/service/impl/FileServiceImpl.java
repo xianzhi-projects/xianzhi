@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * 文件接口实现
@@ -60,7 +61,7 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public ListResult<FileVO> pageFileList(FilePage filePage) {
-        IPage<FileVO> result = fileMapper.pageFileList(new Page<FileVO>(filePage.getPageNo(), filePage.getPageSize()), filePage);
+        IPage<FileVO> result = fileMapper.pageFileList(new Page<>(filePage.getPageNo(), filePage.getPageSize()), filePage);
         if (ObjectUtils.isEmpty(result.getRecords())){
             return ListResult.empty();
         }
@@ -70,5 +71,15 @@ public class FileServiceImpl implements FileService {
     @Override
     public String getPreUploadUrl() {
         return ossHandler.generatePresignedUrlForUpload("xianzhi", "2025/03/11/1.jpg", Duration.ofMinutes(5L));
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param ids 文件ID列表
+     */
+    @Override
+    public void deletedFile(List<String> ids) {
+
     }
 }

@@ -20,6 +20,8 @@ import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.model.page.FilePage;
 import io.xianzhi.system.model.vo.FileVO;
 
+import java.util.List;
+
 /**
  * 文件接口
  *
@@ -36,5 +38,11 @@ public interface FileService {
     ListResult<FileVO> pageFileList(FilePage filePage);
 
     String getPreUploadUrl();
+
+    /**
+     * 删除文件
+     * @param ids 文件ID列表
+     */
+    void deletedFile(List<String> ids);
 
 }
