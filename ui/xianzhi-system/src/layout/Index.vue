@@ -45,15 +45,13 @@ onBeforeMount(() => {
 .el-container {
   height: 100vh;
   min-height: 100vh;
-
   .el-header {
     background-color: white;
     color: #333;
     line-height: 60px;
     text-align: right;
     padding: 0 20px;
-    box-shadow: 0 2px 5px #f0f1f2;
-    margin-bottom: 5px;
+    border-bottom: 1px solid #f1f1f1;
   }
 }
 

@@ -17,14 +17,39 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.UserMapper">
-
+    <resultMap id="userMap" type="io.xianzhi.system.model.vo.UserVO">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="user_status" property="userStatus" jdbcType="TINYINT"/>
+        <result column="work_number" property="workNumber" jdbcType="VARCHAR"/>
+        <result column="create_at" property="createAt" jdbcType="VARCHAR"/>
+        <association property="department" javaType="io.xianzhi.system.model.vo.DepartmentVO">
+            <id column="departmentId" property="id" jdbcType="VARCHAR"/>
+            <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="posts" ofType="io.xianzhi.system.model.vo.PostVO">
+            <id column="postId" property="id" jdbcType="VARCHAR"/>
+            <result column="post_name" property="postName" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
     <select id="selectUserById" resultType="io.xianzhi.system.bootstrap.dao.dataobj.UserDO">
-        SELECT * FROM sys_user WHERE id = #{id,jdbcType=VARCHAR} and deleted_flag = 0
+        SELECT *
+        FROM sys_user
+        WHERE id = #{id,jdbcType=VARCHAR}
+          and deleted_flag = 0
     </select>
 
     <select id="existsByDepartmentId" resultType="boolean">
-        SELECT IFNULL((SELECT 1 FROM sys_user where department_id = #{departmentId,jdbcType=VARCHAR} and deleted_flag =
-        0),0)
+        SELECT IFNULL((SELECT 1
+                       FROM sys_user
+                       where department_id = #{departmentId,jdbcType=VARCHAR}
+                         and deleted_flag =
+                             0), 0)
     </select>
 
     <select id="selectUserByUsername" resultType="io.xianzhi.system.bootstrap.dao.dataobj.UserDO">
@@ -47,42 +72,50 @@
     </select>
 
     <select id="existsUserByUsername" resultType="boolean">
-
     </select>
 
     <select id="existsUserByEmailAndIdNot" resultType="boolean">
-
     </select>
 
     <select id="existsUserByPhoneAndIdNot" resultType="boolean">
-
     </select>
 
-    <select id="pageUserList" resultType="io.xianzhi.system.model.vo.UserVO">
-
-
+    <select id="pageUserList" resultMap="userMap">
+        SELECT u.id,
+               u.username,
+               u.nick_name,
+               u.real_name,
+               u.avatar,
+               u.email,
+               u.phone,
+               u.work_number,
+               u.user_status,
+               u.create_at,
+               p.id AS postId,
+               p.post_name
+        FROM sys_user AS u
+                 LEFT JOIN sys_user_post AS up ON u.id = up.user_id
+            AND up.deleted_flag = 0
+                 LEFT JOIN sys_post AS p ON up.post_id = p.id
+        WHERE u.deleted_flag = 0
+        <if test="userPage.departmentId != null and userPage.departmentId != ''">
+            and department_id = #{userPage.departmentId}
+        </if>
+        <if test="userPage.nickName != null and userPage.nickName != ''">
+            and u.nick_name like CONCAT('%', #{userPage.nickName}, '%')
+        </if>
+        <if test="userPage.realName != null and userPage.realName != ''">
+            and u.real_name like CONCAT('%', #{userPage.realName}, '%')
+        </if>
+        <if test="userPage.workNumber != null and userPage.workNumber != ''">
+            and u.work_number = #{userPage.workNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="userPage.username != null and userPage.username != ''">
+            and u.username = #{userPage.username,jdbcType=VARCHAR}
+        </if>
     </select>
-    <resultMap id="selectUserInfoById" type="io.xianzhi.system.model.vo.UserVO">
-        <id column="id" property="id" jdbcType="VARCHAR"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="user_status" property="userStatus" jdbcType="TINYINT"/>
-        <result column="work_number" property="workNumber" jdbcType="VARCHAR"/>
-        <association property="department" javaType="io.xianzhi.system.model.vo.DepartmentVO">
-            <id column="departmentId" property="id" jdbcType="VARCHAR"/>
-            <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
-        </association>
-        <collection property="posts" ofType="io.xianzhi.system.model.vo.PostVO">
-            <id column="postId" property="id" jdbcType="VARCHAR"/>
-            <result column="post_name" property="postName" jdbcType="VARCHAR"/>
-        </collection>
-    </resultMap>
-    <select id="selectUserInfoById" resultMap="selectUserInfoById">
 
+    <select id="selectUserInfoById" resultMap="userMap">
         SELECT u.id,
                u.username,
                u.nick_name,

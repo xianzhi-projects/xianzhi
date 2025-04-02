@@ -31,4 +31,27 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserPage extends Page implements Serializable {
+
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 昵称
+     */
+    private String nickName;
+    /**
+     * 工号
+     */
+    private String workNumber;
+    /**
+     * 真实姓名
+     */
+    private String realName;
+    /**
+     * 部门ID
+     */
+    private String departmentId;
+
+
 }

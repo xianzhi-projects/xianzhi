@@ -38,13 +38,13 @@ import {append, userList} from "@/views/system/user/index.ts";
           <div class="user-search">
             <el-card>
               <el-form>
-                <el-form-item label="上级菜单">
+                <el-form-item label="用户名">
                   <el-input />
                 </el-form-item>
-                <el-form-item label="上级菜单">
+                <el-form-item label="昵称">
                   <el-input />
                 </el-form-item>
-                <el-form-item label="上级菜单">
+                <el-form-item label="真实姓名">
                   <el-input />
                 </el-form-item>
                 <el-form-item label="上级菜单">

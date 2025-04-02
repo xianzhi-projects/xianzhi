@@ -16,9 +16,11 @@
 
 package io.xianzhi.system.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -72,6 +74,12 @@ public class UserVO implements Serializable {
      * 部门
      */
     private DepartmentVO department;
+
+    /**
+     * 新增时间
+     */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime createAt;
 
 
     /**

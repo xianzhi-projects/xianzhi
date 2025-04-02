@@ -70,8 +70,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ListResult<UserVO> pageUserList(UserPage userPage) {
-        IPage<UserVO> result = userMapper.pageUserList(new Page<UserVO>(userPage.getPageNo(), userPage.getPageSize()), userPage);
-        return null;
+        IPage<UserVO> result = userMapper.pageUserList(new Page<>(userPage.getPageNo(), userPage.getPageSize()), userPage);
+        if (result.getRecords().isEmpty()) {
+            return ListResult.empty();
+        }
+        return ListResult.of(result.getRecords(), result.getTotal());
     }
 
     /**
@@ -87,8 +90,7 @@ public class UserServiceImpl implements UserService {
         userMapper.insert(user);
         UserDetailsDO userDetailsDO = new UserDetailsDO();
         userDetailsDO.setUserId(user.getId());
-
-        return "";
+        return user.getId();
     }
 
     /**

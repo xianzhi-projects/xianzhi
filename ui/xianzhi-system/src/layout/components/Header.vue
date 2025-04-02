@@ -24,7 +24,6 @@ const url = 'https://img2.baidu.com/it/u=886042428,4063273124&fm=253&fmt=auto&ap
 <template>
   <div class="toolbar">
     <span>{{ userInfo.nickName}}</span>
-
     <el-dropdown >
       <div class="avatar">
         <el-avatar :size="40" :src="url"/>

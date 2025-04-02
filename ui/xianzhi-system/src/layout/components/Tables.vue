@@ -115,7 +115,7 @@ onMounted(() => {
 <style lang="less" scoped>
 /* 标签页容器的样式 */
 .el-tabs {
-  margin-left: 5px; // 左边距调整
+  margin-left: 28px; // 左边距调整
 }
 
 /* 调整标签页头部样式 */
@@ -125,7 +125,7 @@ onMounted(() => {
 
 /* 单个标签页的样式 */
 :deep(.el-tabs__item) {
-  height: 26px;          // 标签页高度
+  height: 39px;          // 标签页高度
   line-height: 26px;     // 行高与高度一致，垂直居中
   text-align: center;    // 文字居中
   margin: 0 3px !important; // 左右间距
