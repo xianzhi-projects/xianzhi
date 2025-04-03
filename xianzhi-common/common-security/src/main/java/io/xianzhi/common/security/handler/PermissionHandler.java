@@ -1,3 +1,19 @@
+/*
+ *  Copyright 2025 XianZhi Group .
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package io.xianzhi.common.security.handler;
 
 import org.springframework.security.core.Authentication;
@@ -13,7 +29,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 权限处理
+ * Permission Handler
+ * This class provides functionality for checking whether the currently authenticated user has the
+ * necessary permissions to access a specific interface or resource. It integrates with Spring
+ * Security to retrieve the user’s authentication details and authorities, and it supports flexible
+ * permission matching using pattern-based checks. The class is registered as a Spring component
+ * with the name "xz" for dependency injection purposes.
  *
  * @author Max
  * @since 1.0.0
@@ -22,42 +43,51 @@ import java.util.stream.Collectors;
 public class PermissionHandler {
 
     /**
-     * 判断当前用户访问的接口是否具有权限
+     * Check if the Current User Has Required Permissions
+     * This method determines whether the currently authenticated user possesses the permissions
+     * required to access a specific interface or resource. It takes a variable number of required
+     * permissions as input, retrieves the user’s granted authorities from the Spring Security
+     * context, and checks if any of the user’s permissions match any of the required permissions
+     * using a pattern-matching approach. The method returns false if any preconditions (e.g.,
+     * null input, unauthenticated user) are not met.
      *
-     * @param requiredPermissions 访问接口所需的权限
-     * @return 是否可以访问
+     * @param requiredPermissions A variable-length array of permission strings required to access
+     *                            the interface or resource. Each string may represent a specific
+     *                            permission or a pattern (e.g., "user:read", "admin:*").
+     * @return true if the user has at least one matching permission; false otherwise (e.g., if
+     * the user is not authenticated, has no authorities, or lacks the required permissions).
      */
     public boolean hasPermission(String... requiredPermissions) {
-        // 提前检查空或无权限情况
+        // Early validation: return false if required permissions are null or empty
         if (requiredPermissions == null || requiredPermissions.length == 0) {
             return false;
         }
 
-        // 获取认证信息并验证
+        // Retrieve and validate authentication from the security context
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             return false;
         }
 
+        // Retrieve user’s granted authorities and validate
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         if (authorities == null || authorities.isEmpty()) {
             return false;
         }
 
-        // 转换为用户权限集合，只执行一次转换
+        // Convert authorities to a set of permission strings, filtering out null values
         Set<String> userPermissions = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .filter(Objects::nonNull)  // 使用更强的空检查
+                .filter(Objects::nonNull)  // Ensure no null permissions are included
                 .collect(Collectors.toSet());
 
-        // 检查所需权限
+        // Check if any required permission matches any user permission using pattern matching
         return Arrays.stream(requiredPermissions)
-                .filter(Objects::nonNull)  // 检查null而不是空字符串
+                .filter(Objects::nonNull)  // Filter out null required permissions
                 .anyMatch(required ->
                         userPermissions.stream()
-                                .filter(Objects::nonNull)
+                                .filter(Objects::nonNull)  // Redundant but kept for consistency
                                 .anyMatch(userPerm ->
-                                        PatternMatchUtils.simpleMatch(userPerm, required))
-                );
+                                        PatternMatchUtils.simpleMatch(userPerm, required)));
     }
 }
