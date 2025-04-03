@@ -123,7 +123,18 @@ public enum CommonCode implements Result {
      * Parameter Check Error, Missing Parameter
      * Represents an error due to invalid or missing parameters in the request.
      */
-    PARAM_CHECK_ERROR("XZ-01-000000011", "core.param.check.error");
+    PARAM_CHECK_ERROR("XZ-01-000000011", "core.param.check.error"),
+    /**
+     * Data Not Exists
+     */
+    DATA_NOT_EXISTS("XZ-01-000000012", "core.data.not.exists"),
+    /**
+     * Data Exists
+     */
+    DATA_EXISTS("XZ-01-000000013", "core.data.exists"),
+
+
+    ;
 
     /**
      * Custom Status Code

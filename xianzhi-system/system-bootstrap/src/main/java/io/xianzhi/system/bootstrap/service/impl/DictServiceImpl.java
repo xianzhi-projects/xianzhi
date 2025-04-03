@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.DictDO;
@@ -226,7 +227,7 @@ public class DictServiceImpl implements DictService {
             dictItem.setDictCode(dict.getDictCode());
         }
         if (dictItemMapper.existsDictItemByDictIdAndItemNameAndIdNot(dictItemDTO.getDictId(), dictItemDTO.getItemName(), dictItem.getId())) {
-            throw new BusinessException("字典项值已存在");
+            throw new BusinessException(CommonCode.ERROR);
         }
         dictItem.setDictId(dictItemDTO.getDictId());
         dictItem.setItemValue(dictItemDTO.getItemValue());
