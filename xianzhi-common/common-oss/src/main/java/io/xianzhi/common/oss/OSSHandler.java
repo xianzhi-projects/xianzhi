@@ -206,7 +206,7 @@ public class OSSHandler {
      * @param duration   预签名 URL 的有效时长，例如 Duration.ofMinutes(10) 表示 10 分钟。
      * @return 返回预签名 URL 字符串。
      */
-    public String generatePresignedUrlForUpload(String bucketName, String key, Duration duration) {
+    public PreUploadUrlVO generatePresignedUrlForUpload(String bucketName, String key, Duration duration) {
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(bucketName) // 指定目标桶
                 .key(key) // 指定文件键
@@ -215,8 +215,26 @@ public class OSSHandler {
                 .signatureDuration(duration) // 设置 URL 有效时长
                 .putObjectRequest(request)
                 .build();
-        return s3Presigner.presignPutObject(presignRequest).url().toString();
+        return new PreUploadUrlVO(bucketName, key, s3Presigner.presignPutObject(presignRequest).url().toString());
     }
+
+
+    /**
+     * 获取文件元数据
+     *
+     * @param bucketName 桶名称
+     * @param objectKey  文件在 MinIO 中的路径
+     * @return 文件元数据（大小和类型）
+     * @throws NoSuchKeyException 如果文件不存在
+     */
+    public HeadObjectResponse getFileMetadata(String bucketName, String objectKey) throws NoSuchKeyException {
+        HeadObjectRequest headObjectRequest = HeadObjectRequest.builder()
+                .bucket(bucketName)
+                .key(objectKey)
+                .build();
+        return s3Client.headObject(headObjectRequest);
+    }
+
 
     /**
      * 生成用于下载对象的预签名 URL。

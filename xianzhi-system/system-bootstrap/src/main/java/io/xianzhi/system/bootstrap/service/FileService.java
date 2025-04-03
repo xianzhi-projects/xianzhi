@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.common.oss.PreUploadUrlVO;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.model.page.FilePage;
 import io.xianzhi.system.model.vo.FileVO;
@@ -43,7 +44,7 @@ public interface FileService {
      * @param fileName 文件名称
      * @return 预上传请求地址
      */
-    String getPreUploadUrl(String fileName);
+    PreUploadUrlVO getPreUploadUrl(String fileName);
 
     /**
      * 删除文件
@@ -52,4 +53,11 @@ public interface FileService {
      */
     void deletedFile(List<String> ids);
 
+    /**
+     * 上传文件回调
+     *
+     * @param objectKey 对象的唯一标识
+     * @return 文件信息
+     */
+    FileVO uploadCallback(String objectKey);
 }

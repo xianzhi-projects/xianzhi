@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.common.oss.PreUploadUrlVO;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.system.bootstrap.service.FileService;
@@ -77,7 +78,18 @@ public class FileController {
      * @return 预上传URL
      */
     @GetMapping(value = "/getPreUploadUrl")
-    public ResponseResult<String> getPreUploadUrl(@RequestParam(name = "fileName") String fileName) {
+    public ResponseResult<PreUploadUrlVO> getPreUploadUrl(@RequestParam(name = "fileName") String fileName) {
         return ResponseResult.success(fileService.getPreUploadUrl(fileName));
+    }
+
+    /**
+     * 上传文件回调
+     *
+     * @param objectKey 对象的唯一标识
+     * @return 文件信息
+     */
+    @GetMapping(value = "/uploadCallback")
+    public ResponseResult<FileVO> uploadCallback(@RequestParam(name = "objectKey") String objectKey) {
+        return ResponseResult.success(fileService.uploadCallback(objectKey));
     }
 }

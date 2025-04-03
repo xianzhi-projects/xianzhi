@@ -19,6 +19,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.common.oss.OSSHandler;
+import io.xianzhi.common.oss.PreUploadUrlVO;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
@@ -86,10 +87,10 @@ public class FileServiceImpl implements FileService {
      * @return 预上传请求地址
      */
     @Override
-    public String getPreUploadUrl(String fileName) {
+    public PreUploadUrlVO getPreUploadUrl(String fileName) {
         fileName = checkedFileName(fileName);
-        String currentDatePath = DateUtils.getCurrentDatePath();
-        return ossHandler.generatePresignedUrlForUpload(fileProperties.getBucketName(), currentDatePath + fileName, Duration.ofHours(1));
+        String filePath = DateUtils.getCurrentDatePath() + fileName;
+        return ossHandler.generatePresignedUrlForUpload(fileProperties.getBucketName(), filePath, Duration.ofHours(1));
     }
 
 
@@ -101,6 +102,17 @@ public class FileServiceImpl implements FileService {
     @Override
     public void deletedFile(List<String> ids) {
 
+    }
+
+    /**
+     * 上传文件回调
+     *
+     * @param objectKey 对象的唯一标识
+     * @return 文件信息
+     */
+    @Override
+    public FileVO uploadCallback(String objectKey) {
+        return null;
     }
 
 
