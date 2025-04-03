@@ -24,16 +24,16 @@ const routerStore = useRouterStore();
 </script>
 
 <template>
-  <el-aside width="200px">
-    <div class="layout-sider-logo">
-      <img alt="" height="28" src="@/assets/logo.png"  width="28"/>
-      <span >先知后台管理系统</span>
-    </div>
+  <el-aside>
+    <a href="javascript:void(0)">
+      <div class="layout-sider-logo">
+        <img alt="XianZhi Admin" src="@/assets/logo.png"  />
+        <span >XianZhi Admin</span>
+      </div>
+    </a>
     <el-menu
       :router="true"
-      background-color="#333"
       class="el-menu-vertical-demo"
-      text-color="#fff"
     >
       <MenuTree v-model:menu-list="routerStore.routerList"/>
     </el-menu>
@@ -43,29 +43,36 @@ const routerStore = useRouterStore();
 <style lang="less" scoped>
 .el-aside {
   user-select: none;
-  width: 250px;
+  width: 220px;
   min-height: 100vh;
-  background-color: #333;
-  color: #fff;
-}
-// 侧边栏 Logo 样式
-.layout-sider-logo {
-  height: 32px;
-  margin: 16px;
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  line-height: 32px;
-  padding: 5px;
+  border-right: 1px solid #e4e7ed;
+  a{
+    text-decoration: none;
+  }
+  .layout-sider-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 38px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    line-height: 38px;
+    padding: 5px;
+    img {
+      margin-left: 10px;
+      width: 28px;
+      height: 28px;
+    }
 
-  img {
-    vertical-align: middle; // 图片垂直居中
+    span {
+      color: #1a1a1a;
+      font-weight: 600;
+      margin-left: 8px;      // 与图片间距
+      vertical-align: middle; // 文字垂直居中
+    }
   }
 
-  span {
-    margin-left: 8px;      // 与图片间距
-    vertical-align: middle; // 文字垂直居中
-  }
 }
 
 </style>

@@ -41,7 +41,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthorizationInfoHandlerImpl implements AuthorizationInfoHandler {
 
-
+    /**
+     * 缓存处理器
+     */
     private final RedisHandler redisHandler;
 
     /**

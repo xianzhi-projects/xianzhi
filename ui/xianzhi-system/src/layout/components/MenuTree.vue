@@ -59,5 +59,11 @@ const menuList = defineModel('menuList')
   color: #fff;
   border-radius: 15px;
 }
+.el-menu-item:hover{
+  background-color: #5356e0;
+  color: #fff;
+  border-radius: 15px;
+}
+
 
 </style>
