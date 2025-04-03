@@ -195,16 +195,16 @@ public class DictServiceImpl implements DictService {
     private DictDO checkedDictDTO(DictDTO dictDTO) {
         DictDO dict;
         if (StringUtils.hasText(dictDTO.getId())) {
-            dict = dictMapper.selectDictById(dictDTO.getId()).orElseThrow(() -> new BusinessException("字典不存在"));
+            dict = dictMapper.selectDictById(dictDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.dict.not.exists"));
         } else {
             dict = new DictDO();
             if (dictMapper.existsDictByDictCode(dictDTO.getDictCode())) {
-                throw new BusinessException("字典编码已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.dict.dictCode.exists");
             }
             dict.setDictCode(dictDTO.getDictCode());
         }
         if (dictMapper.existsDictByDictNameAndIdNot(dictDTO.getDictName(), dict.getId())) {
-            throw new BusinessException("字典名称已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.dict.dictName.exists");
         }
         dict.setDictName(dictDTO.getDictName());
         dict.setDictDesc(dictDTO.getDictDesc());
@@ -218,16 +218,16 @@ public class DictServiceImpl implements DictService {
      * @return 字典项信息
      */
     private DictItemDO checkedDictItemDTO(DictItemDTO dictItemDTO) {
-        DictDO dict = dictMapper.selectDictById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException("字典不存在"));
+        DictDO dict = dictMapper.selectDictById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.dict.not.exists"));
         DictItemDO dictItem;
         if (StringUtils.hasText(dictItemDTO.getId())) {
-            dictItem = dictItemMapper.selectDictItemById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException("字典项不存在"));
+            dictItem = dictItemMapper.selectDictItemById(dictItemDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.dict.item.not.exists"));
         } else {
             dictItem = new DictItemDO();
             dictItem.setDictCode(dict.getDictCode());
         }
         if (dictItemMapper.existsDictItemByDictIdAndItemNameAndIdNot(dictItemDTO.getDictId(), dictItemDTO.getItemName(), dictItem.getId())) {
-            throw new BusinessException(CommonCode.ERROR);
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.dict.itemName.exists");
         }
         dictItem.setDictId(dictItemDTO.getDictId());
         dictItem.setItemValue(dictItemDTO.getItemValue());
