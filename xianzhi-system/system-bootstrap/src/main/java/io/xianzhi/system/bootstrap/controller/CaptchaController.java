@@ -46,9 +46,9 @@ public class CaptchaController {
      *
      * @return 登录验证码
      */
-    @GetMapping(value = "/login")
-    public ResponseResult<CaptchaVO> getLoginCaptcha() {
-        return ResponseResult.success(captchaService.getLoginCaptcha());
+    @GetMapping(value = "/password")
+    public ResponseResult<CaptchaVO> getPasswordLoginCaptcha() {
+        return ResponseResult.success(captchaService.getPasswordLoginCaptcha());
     }
 
 

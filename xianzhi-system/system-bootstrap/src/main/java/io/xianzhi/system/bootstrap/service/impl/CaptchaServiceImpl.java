@@ -19,6 +19,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
 import io.xianzhi.common.redis.RedisHandler;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.system.bootstrap.service.CaptchaService;
 import io.xianzhi.system.model.vo.CaptchaVO;
@@ -56,7 +57,7 @@ public class CaptchaServiceImpl implements CaptchaService {
      * @return 登录验证码
      */
     @Override
-    public CaptchaVO getLoginCaptcha() {
+    public CaptchaVO getPasswordLoginCaptcha() {
         String key = UUID.randomUUID().toString().replace("-", "");
         GifCaptcha gifCaptcha = CaptchaUtil.createGifCaptcha(300, 100, 6);
         String code = gifCaptcha.getCode();
@@ -79,7 +80,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         String code = redisHandler.vGet(key, String.class);
         if (!StringUtils.hasText(code) || !captcha.equalsIgnoreCase(code)) {
             redisHandler.delete(key);
-            throw new BusinessException("验证码错误");
+            throw new BusinessException(CommonCode.ERROR);
         }
         redisHandler.delete(key);
     }

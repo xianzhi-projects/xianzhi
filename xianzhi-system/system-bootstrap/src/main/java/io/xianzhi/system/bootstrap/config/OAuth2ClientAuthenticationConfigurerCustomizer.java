@@ -25,7 +25,13 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 /**
- * 客户端认证配置
+ * OAuth2 Client Authentication Configurer Customizer
+ * This class provides a customizer for configuring the OAuth2ClientAuthenticationConfigurer,
+ * which is part of Spring Security’s OAuth 2.0 Authorization Server setup. It allows customization
+ * of client authentication behavior, specifically by setting a custom failure handler for
+ * authentication errors. The class is registered as a Spring component, uses SLF4J for logging,
+ * and employs constructor-based dependency injection for required dependencies, with field-based
+ * injection for the failure handler.
  *
  * @author Max
  * @since 1.0.0
@@ -36,20 +42,32 @@ import org.springframework.stereotype.Component;
 public class OAuth2ClientAuthenticationConfigurerCustomizer implements Customizer<OAuth2ClientAuthenticationConfigurer> {
 
     /**
-     * 客户端认证失败处理
+     * Client Authentication Failure Handler
+     * This field holds an AuthenticationFailureHandler instance responsible for handling client
+     * authentication failures (e.g., invalid client credentials). It is injected via Spring’s
+     *
+     * &#064;Resource  annotation, allowing the customizer to delegate error responses to this handler.
+     * The specific implementation (xianZhiClientAuthenticationFailureHandler) is assumed to be
+     * defined elsewhere in the application.
      */
     @Resource
     private AuthenticationFailureHandler xianZhiClientAuthenticationFailureHandler;
 
     /**
-     * Performs the customizations on the input argument.
+     * Customize OAuth2 Client Authentication Configurer
+     * This method implements the Customizer interface to apply customizations to the provided
+     * OAuth2ClientAuthenticationConfigurer. It configures the configurer to use a custom error
+     * response handler (xianZhiClientAuthenticationFailureHandler) for client authentication
+     * failures, enabling tailored error handling (e.g., custom error messages or HTTP responses)
+     * when client authentication does not succeed.
      *
-     * @param oAuth2ClientAuthenticationConfigurer the input argument
+     * @param oAuth2ClientAuthenticationConfigurer The OAuth2ClientAuthenticationConfigurer instance
+     *                                             to be customized.
      */
     @Override
     public void customize(OAuth2ClientAuthenticationConfigurer oAuth2ClientAuthenticationConfigurer) {
         oAuth2ClientAuthenticationConfigurer
-                // 客户端认证失败处理
+                // Set the custom failure handler for client authentication errors
                 .errorResponseHandler(xianZhiClientAuthenticationFailureHandler);
     }
 }

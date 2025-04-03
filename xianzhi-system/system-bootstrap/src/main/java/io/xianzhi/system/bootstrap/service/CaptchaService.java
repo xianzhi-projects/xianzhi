@@ -30,7 +30,7 @@ public interface CaptchaService {
      *
      * @return 登录验证码
      */
-    CaptchaVO getLoginCaptcha();
+    CaptchaVO getPasswordLoginCaptcha();
 
     /**
      * 检查验证码
