@@ -26,6 +26,7 @@ import io.xianzhi.code.model.dto.ProjectDTO;
 import io.xianzhi.code.model.enums.ProjectTypeEnum;
 import io.xianzhi.code.model.enums.VisibilityEnum;
 import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
@@ -117,16 +118,16 @@ public class ProjectServiceImpl implements ProjectService {
         ProjectTypeEnum projectType = projectDTO.getProjectType();
         ProjectGroupDO projectGroup;
         if (projectType.getCode().equals(ProjectTypeEnum.GROUP.getCode())) {
-            projectGroup = projectGroupMapper.selectProjectGroupById(projectDTO.getProjectGroupId()).orElseThrow(() -> new BusinessException("项目分组不存在"));
+            projectGroup = projectGroupMapper.selectProjectGroupById(projectDTO.getProjectGroupId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         } else {
             projectGroup = null;
         }
         if (StringUtils.hasText(projectDTO.getId())) {
-            project = projectMapper.selectProjectById(projectDTO.getId()).orElseThrow(() -> new BusinessException("项目不存在"));
+            project = projectMapper.selectProjectById(projectDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         } else {
             project = new ProjectDO();
             if (projectMapper.existsProjectByProjectPathAndGroupIdAndProjectType(projectDTO.getProjectPath(), projectDTO.getProjectGroupId(), projectDTO.getProjectType().getCode())) {
-                throw new BusinessException("项目路径已经存在");
+                throw new BusinessException(CommonCode.ERROR);
             }
             if (null == projectGroup) {
                 project.setProjectGroupId(UserContextHolder.getCurrentUserId());
@@ -137,7 +138,7 @@ public class ProjectServiceImpl implements ProjectService {
             project.setProjectPath(projectDTO.getProjectPath());
         }
         if (projectMapper.existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType(projectDTO.getProjectName(), projectDTO.getId(), projectDTO.getProjectGroupId(), projectDTO.getProjectType().getCode())) {
-            throw new BusinessException("项目名称已经存在");
+            throw new BusinessException(CommonCode.ERROR);
         }
         project.setProjectName(projectDTO.getProjectName());
         project.setProjectDesc(projectDTO.getProjectDesc());
@@ -154,7 +155,7 @@ public class ProjectServiceImpl implements ProjectService {
                 if (projectDTO.getProjectVisibility().equals(VisibilityEnum.PRIVATE) || projectDTO.getProjectVisibility().equals(VisibilityEnum.INNER)) {
                     project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());
                 } else {
-                    throw new BusinessException("项目可见性错误");
+                    throw new BusinessException(CommonCode.ERROR);
                 }
             } else {
                 project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());

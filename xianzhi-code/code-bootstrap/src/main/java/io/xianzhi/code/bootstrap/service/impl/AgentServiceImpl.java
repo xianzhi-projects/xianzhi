@@ -30,6 +30,7 @@ import io.xianzhi.code.model.enums.AgentStatusEnum;
 import io.xianzhi.code.model.page.AgentPage;
 import io.xianzhi.code.model.vo.AgentVO;
 import io.xianzhi.common.jsch.JschUtils;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.thread.XianZhiCallable;
@@ -79,7 +80,7 @@ public class AgentServiceImpl implements AgentService {
      */
     @Override
     public ListResult<AgentVO> pageAgentList(AgentPage agentPage) {
-        IPage<AgentVO> result = agentMapper.pageAgentList(new Page<>(agentPage.getPageNo(),agentPage.getPageNo()),agentPage);
+        IPage<AgentVO> result = agentMapper.pageAgentList(new Page<>(agentPage.getPageNo(), agentPage.getPageNo()), agentPage);
         return null;
     }
 
@@ -128,12 +129,12 @@ public class AgentServiceImpl implements AgentService {
      */
     @Override
     public void installAgent(String id) {
-        AgentDO agent = agentMapper.selectAgentById(id).orElseThrow(() -> new BusinessException("agent不存在"));
+        AgentDO agent = agentMapper.selectAgentById(id).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         AgentStatusEnum agentStatus = AgentStatusEnum.getAgentStatusByCode(agent.getAgentStatus());
         assert null != agentStatus;
         if (!AgentStatusEnum.WAIT_FOR_INSTALL.getCode().equals(agent.getAgentStatus()) && !AgentStatusEnum.INSTALL_FAILED.getCode().equals(agent.getAgentStatus())) {
             log.error("安装Agent:{}失败,原因:{},当前agent状态:{}", id, "agent状态不正确", agentStatus.getDesc());
-            throw new BusinessException("agent状态不正确");
+            throw new BusinessException(CommonCode.ERROR);
         }
         agentThreadPoolTaskExecutor.submit(new XianZhiCallable<>(() -> {
             log.debug("开始安装agent...");
@@ -190,7 +191,7 @@ public class AgentServiceImpl implements AgentService {
     private AgentDO checkedAgentDTO(AgentDTO agentDTO) {
         AgentDO agent;
         if (StringUtils.hasText(agentDTO.getId())) {
-            agent = agentMapper.selectAgentById(agentDTO.getId()).orElseThrow(() -> new BusinessException("agent不存在"));
+            agent = agentMapper.selectAgentById(agentDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
             AgentStatusEnum agentStatus = AgentStatusEnum.getAgentStatusByCode(agent.getAgentStatus());
             assert null != agentStatus;
         } else {

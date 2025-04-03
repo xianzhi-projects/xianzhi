@@ -19,6 +19,7 @@ package io.xianzhi.system.model.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 登录日志入参
@@ -28,4 +29,18 @@ import java.io.Serializable;
  */
 @Data
 public class LoginLogDTO implements Serializable {
+
+    /**
+     * 登录用户ID
+     */
+    private String userId;
+    /**
+     * 登录时间
+     */
+    private LocalDateTime loginTime;
+    /**
+     * 是否登录成功
+     */
+    private Boolean successFlag = false;
+
 }

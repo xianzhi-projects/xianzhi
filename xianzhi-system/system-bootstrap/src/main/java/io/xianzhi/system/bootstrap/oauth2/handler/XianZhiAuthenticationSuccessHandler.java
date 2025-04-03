@@ -32,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
@@ -42,6 +41,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -65,7 +65,6 @@ public class XianZhiAuthenticationSuccessHandler implements AuthenticationSucces
 
 
     private TokenVO getTokenVO(OAuth2AccessTokenAuthenticationToken auth2AccessTokenAuthenticationToken, OAuth2AccessToken accessToken, OAuth2RefreshToken refreshToken) {
-        Map<String, Object> additionalParameters = auth2AccessTokenAuthenticationToken.getAdditionalParameters();
         TokenVO tokenVO = new TokenVO();
         tokenVO.setAccessToken(accessToken.getTokenValue());
         if (null != refreshToken) {
@@ -90,10 +89,13 @@ public class XianZhiAuthenticationSuccessHandler implements AuthenticationSucces
         OAuth2RefreshToken refreshToken = auth2AccessTokenAuthenticationToken.getRefreshToken();
         TokenVO tokenVO = getTokenVO(auth2AccessTokenAuthenticationToken, accessToken, refreshToken);
         ResponseUtils.responseUtf8(ResponseResult.success(tokenVO), response);
+        Map<String, Object> additionalParameters = auth2AccessTokenAuthenticationToken.getAdditionalParameters();
+        String userId = (String) additionalParameters.get("id");
         LoginLogDTO loginLogDTO = new LoginLogDTO();
-        Message<LoginLogDTO> build = MessageBuilder.withPayload(loginLogDTO)
-                .build();
-        rocketMQTemplate.asyncSend("SYS_USER", build, new SendCallback() {
+        loginLogDTO.setLoginTime(LocalDateTime.now());
+        loginLogDTO.setSuccessFlag(true);
+        loginLogDTO.setUserId(userId);
+        rocketMQTemplate.asyncSend("SYS_USER", MessageBuilder.withPayload(loginLogDTO).build(), new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
                 log.info("发送成功:{}", JSONUtils.toJSONString(sendResult));

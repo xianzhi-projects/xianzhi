@@ -16,6 +16,7 @@
 
 package io.xianzhi.code.bootstrap.properties;
 
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import lombok.Data;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -64,7 +65,7 @@ public class CodeServerProperties implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         if (!StringUtils.hasText(externalUrl)) {
-            throw new BusinessException("请配置托管地址");
+            throw new BusinessException(CommonCode.ERROR);
         }
         if (!StringUtils.hasText(repositoryDir)) {
             repositoryDir = "/etc/xianzhi/code/repository";

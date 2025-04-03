@@ -149,7 +149,7 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
             }
             return null;
         } catch (Exception exception) {
-            log.error(exception.getMessage(),exception);
+            log.error(exception.getMessage(), exception);
             throw new OAuth2Exception(CommonCode.ERROR);
         }
     }
@@ -190,16 +190,12 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
 
         List<AuthorizationGrantType> authorizationGrantTypeList = jsonNodes.stream().map(item -> {
             String value = item.get("value").asText();
-            switch (value) {
-                case "refresh_token":
-                    return AuthorizationGrantType.REFRESH_TOKEN;
-                case "password":
-                    return AuthorizationGrantType.PASSWORD;
-                case "client_credentials":
-                    return AuthorizationGrantType.CLIENT_CREDENTIALS;
-                default:
-                    throw new IllegalArgumentException("Unknown authorization grant type: " + value);
-            }
+            return switch (value) {
+                case "refresh_token" -> AuthorizationGrantType.REFRESH_TOKEN;
+                case "password" -> AuthorizationGrantType.PASSWORD;
+                case "client_credentials" -> AuthorizationGrantType.CLIENT_CREDENTIALS;
+                default -> throw new IllegalArgumentException("Unknown authorization grant type: " + value);
+            };
         }).toList();
         for (AuthorizationGrantType authorizedGrantType : authorizationGrantTypeList) {
             builder.authorizationGrantType(authorizedGrantType);
@@ -238,9 +234,9 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
 
         return builder
                 .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofHours((long) text))
+                        .accessTokenTimeToLive(Duration.ofSeconds((long) text))
                         .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-                        .refreshTokenTimeToLive(Duration.ofHours((long) tokenSettings.get("refreshTokenTimeToLive").asDouble()))
+                        .refreshTokenTimeToLive(Duration.ofSeconds((long) tokenSettings.get("refreshTokenTimeToLive").asDouble()))
                         .idTokenSignatureAlgorithm(SignatureAlgorithm.RS256)
                         .reuseRefreshTokens(true).build())
                 .clientSettings(ClientSettings.builder()
@@ -296,8 +292,8 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
                     .tokenSettings(TokenSettings
                             .builder()
                             .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-                            .accessTokenTimeToLive(Duration.ofDays(2000))
-                            .refreshTokenTimeToLive(Duration.ofDays(2000))
+                            .accessTokenTimeToLive(Duration.ofHours(securityProperties.getTokenExpire()))
+                            .refreshTokenTimeToLive(Duration.ofHours(securityProperties.getRefreshTokenExpire()))
                             .build())
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(new AuthorizationGrantType(GrantTypeEnum.PASSWORD.getCode()))
