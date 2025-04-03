@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.NoticeDO;
@@ -109,12 +110,12 @@ public class NoticeServiceImpl implements NoticeService {
     private NoticeDO checkedNoticeDTO(NoticeDTO noticeDTO) {
         NoticeDO noticeDO;
         if (StringUtils.hasText(noticeDTO.getId())) {
-            noticeDO = noticeMapper.selectNoticeById(noticeDTO.getId()).orElseThrow(() -> new BusinessException("公告ID不能为空"));
+            noticeDO = noticeMapper.selectNoticeById(noticeDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.notice.not.exists"));
         } else {
             noticeDO = new NoticeDO();
         }
         if (noticeMapper.existsNoticeByTitleAndCategoryAndIdNot(noticeDTO.getNoticeTitle(), noticeDTO.getNoticeCategory(), noticeDTO.getId())) {
-            throw new BusinessException("已经存在相同公告标题");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.notice.title.exists");
         }
         return noticeDO;
     }

@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.HostCertificateDO;
@@ -102,7 +103,7 @@ public class HostCertificateImpl implements HostCertificateService {
      */
     @Override
     public HostCertificateVO getHostCertificateById(String id) {
-        HostCertificateDO hostCertificateDO = hostCertificateMapper.selectHostCertificateById(id).orElseThrow(() -> new BusinessException("主机凭证不存在"));
+        HostCertificateDO hostCertificateDO = hostCertificateMapper.selectHostCertificateById(id).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         HostCertificateVO hostCertificateVO = new HostCertificateVO();
         hostCertificateVO.setId(hostCertificateDO.getId());
         hostCertificateVO.setCertName(hostCertificateDO.getCertName());
@@ -135,17 +136,17 @@ public class HostCertificateImpl implements HostCertificateService {
     private HostCertificateDO checkedHostCertificateDTO(HostCertificateDTO hostCertificateDTO) {
         HostCertificateDO hostCertificateDO;
         if (StringUtils.hasText(hostCertificateDTO.getId())) {
-            hostCertificateDO = hostCertificateMapper.selectHostCertificateById(hostCertificateDTO.getId()).orElseThrow(() -> new BusinessException("主机凭证不存在"));
+            hostCertificateDO = hostCertificateMapper.selectHostCertificateById(hostCertificateDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         } else {
             hostCertificateDO = new HostCertificateDO();
         }
         if (hostCertificateDTO.getCertType().getCode().equals(CertTypeEnum.PASSWORD.getCode())) {
             if (!StringUtils.hasText(hostCertificateDTO.getUsername()) || !StringUtils.hasText(hostCertificateDTO.getPassword())) {
-                throw new BusinessException("用户名或密码不能为空");
+                throw new BusinessException(CommonCode.ERROR);
             }
         } else {
             if (!StringUtils.hasText(hostCertificateDTO.getPrivateKey())) {
-                throw new BusinessException("私钥不能为空");
+                throw new BusinessException(CommonCode.ERROR);
             }
         }
         hostCertificateDO.setUsername(hostCertificateDTO.getUsername());

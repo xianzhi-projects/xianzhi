@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.system.bootstrap.business.UserBusiness;
 import io.xianzhi.system.bootstrap.dao.dataobj.DepartmentDO;
@@ -116,10 +117,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional(rollbackFor = Exception.class)
     public void deletedDepartment(String id) {
         if (userMapper.existsByDepartmentId(id)) {
-            throw new BusinessException("部门下存在用户，无法删除");
+            throw new BusinessException(CommonCode.ERROR);
         }
         if (departmentMapper.existsByParentId(id)) {
-            throw new BusinessException("部门下存在子部门，无法删除");
+            throw new BusinessException(CommonCode.ERROR);
         }
         departmentMapper.deletedDepartmentById(id);
     }
@@ -132,8 +133,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<DepartmentVO> getDepartmentTree() {
         String userId = UserContextHolder.getCurrentUserId();
-        String departmentId = userMapper.selectUserById(userId).orElseThrow(() -> new BusinessException("用户信息不存在")).getDepartmentId();
-        DepartmentDO department = departmentMapper.selectDepartmentById(departmentId).orElseThrow(() -> new BusinessException("部门信息不存在"));
+        String departmentId = userMapper.selectUserById(userId).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.user.not.exists")).getDepartmentId();
+        DepartmentDO department = departmentMapper.selectDepartmentById(departmentId).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.not.exists"));
         List<String> departmentIds = departmentMapper.selectSubDepartmentIdById(departmentId);
         departmentIds.add(departmentId);
         String departmentIdBreadCrumb = department.getDepartmentIdBreadCrumb();
@@ -161,37 +162,37 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDO checkedDepartmentDTO(DepartmentDTO departmentDTO) {
         DepartmentDO department;
         if (StringUtils.hasText(departmentDTO.getId())) {
-            department = departmentMapper.selectDepartmentById(departmentDTO.getId()).orElseThrow(() -> new BusinessException("部门不存在"));
+            department = departmentMapper.selectDepartmentById(departmentDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.not.exists"));
         } else {
             department = new DepartmentDO();
         }
         // 检查父级部门信息
         if (StringUtils.hasText(departmentDTO.getParentId())) {
             if (StringUtils.hasText(departmentDTO.getId()) && departmentDTO.getId().equals(departmentDTO.getParentId())) {
-                throw new BusinessException("父级部门不能为自己");
+                throw new BusinessException(CommonCode.ERROR);
             }
-            DepartmentDO parent = departmentMapper.selectDepartmentById(departmentDTO.getParentId()).orElseThrow(() -> new BusinessException("父级部门不存在"));
+            DepartmentDO parent = departmentMapper.selectDepartmentById(departmentDTO.getParentId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.parent.not.exists"));
             department.setParentId(parent.getId());
             department.setDepartmentIdBreadCrumb(parent.getDepartmentIdBreadCrumb() + "/" + parent.getId());
         }
         // 检查部门名称是否存在
         if (departmentMapper.existsDepartmentByNameAndIdNot(departmentDTO.getDepartmentName(), department.getId())) {
-            throw new BusinessException("部门名称已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.department.name.exists");
         }
         // 检查部门邮箱是否存在
         if (StringUtils.hasText(departmentDTO.getDepartmentEmail())) {
             if (departmentMapper.existsDepartmentByEmailAndIdNot(departmentDTO.getDepartmentEmail(), department.getId())) {
-                throw new BusinessException("部门邮箱已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.department.email.exists");
             }
         }
         // 检查部门电话是否存在
         if (StringUtils.hasText(departmentDTO.getDepartmentPhone())) {
             if (departmentMapper.existsDepartmentByPhoneAndIdNot(departmentDTO.getDepartmentPhone(), department.getId())) {
-                throw new BusinessException("部门电话已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.department.phone.exists");
             }
         }
         // 检查部门负责人
-        userMapper.selectUserById(departmentDTO.getDepartmentOwner()).orElseThrow(() -> new BusinessException("部门负责人不存在"));
+        userMapper.selectUserById(departmentDTO.getDepartmentOwner()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.owner.not.exists"));
         department.setDepartmentName(departmentDTO.getDepartmentName());
         department.setDepartmentDesc(departmentDTO.getDepartmentDesc());
         department.setDepartmentOwner(departmentDTO.getDepartmentOwner());

@@ -16,6 +16,7 @@
 
 package io.xianzhi.common.oss;
 
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +78,7 @@ public class OSSHandler {
             if (e.statusCode() == 404) {
                 return false;
             }
-            throw new BusinessException(e.getMessage());
+            throw new BusinessException(CommonCode.ERROR);
         }
     }
 

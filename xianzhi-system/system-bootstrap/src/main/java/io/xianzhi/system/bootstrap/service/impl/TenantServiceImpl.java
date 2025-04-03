@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.TenantDO;
@@ -72,7 +73,6 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public List<TenantVO> getUserTenantList() {
         String userId = UserContextHolder.getCurrentUserId();
-        List<TenantVO> tenantList = tenantMapper.getUserTenantList(userId);
         return List.of();
     }
 
@@ -145,18 +145,18 @@ public class TenantServiceImpl implements TenantService {
     private TenantDO checkedTenantDTO(TenantDTO tenantDTO) {
         TenantDO tenant;
         if (StringUtils.hasText(tenantDTO.getId())) {
-            tenant = tenantMapper.selectTenantById(tenantDTO.getId()).orElseThrow(() -> new BusinessException("租户信息不存在"));
+            tenant = tenantMapper.selectTenantById(tenantDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.tenant.not.exists"));
         } else {
             tenant = new TenantDO();
             if (tenantMapper.existsTenantByTenantCode(tenantDTO.getTenantCode())) {
-                throw new BusinessException("租户编码已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.tenant.code.exists");
             }
             tenant.setTenantCode(tenantDTO.getTenantCode());
         }
         if (tenantMapper.existsTenantByTenantNanIdNot(tenantDTO.getTenantName(), tenantDTO.getId())) {
-            throw new BusinessException("租户名称已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.tenant.name.exists");
         }
-        userMapper.selectUserById(tenantDTO.getId()).orElseThrow(() -> new BusinessException("租户负责人不存在"));
+        userMapper.selectUserById(tenantDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.tenant.owner.not.exists"));
         tenant.setTenantName(tenantDTO.getTenantName());
         tenant.setTenantOwner(tenantDTO.getTenantOwner());
         tenant.setTenantDesc(tenantDTO.getTenantDesc());

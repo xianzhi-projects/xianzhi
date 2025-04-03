@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.business.SystemParamBusiness;
@@ -67,7 +68,7 @@ public class SystemParamServiceImpl implements SystemParamService {
     public ListResult<SystemParamVO> pageSystemParamList(SystemParamPage systemParamPage) {
         IPage<SystemParamVO> pageResult = systemParamMapper.pageSystemParamList(new Page<>(systemParamPage.getPageNo(), systemParamPage.getPageSize()), systemParamPage);
         List<SystemParamVO> records = pageResult.getRecords();
-        if (ObjectUtils.isEmpty(records)){
+        if (ObjectUtils.isEmpty(records)) {
             return ListResult.empty();
         }
         return null;
@@ -120,15 +121,15 @@ public class SystemParamServiceImpl implements SystemParamService {
     private SystemParamDO checkedSystemParam(SystemParamDTO systemParamDTO) {
         SystemParamDO systemParam;
         if (StringUtils.hasText(systemParamDTO.getId())) {
-            systemParam = systemParamMapper.selectSystemParamById(systemParamDTO.getId()).orElseThrow(() -> new BusinessException("系统参数不存在"));
+            systemParam = systemParamMapper.selectSystemParamById(systemParamDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.system.param.not.exists"));
         } else {
             systemParam = new SystemParamDO();
             if (systemParamMapper.existParamByCode(systemParamDTO.getParamCode())) {
-                throw new BusinessException("参数编码已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.system.param.code.exists");
             }
         }
         if (systemParamMapper.existParamByNameAndIdNot(systemParamDTO.getParamName(), systemParamDTO.getId())) {
-            throw new BusinessException("参数名称已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.system.param.name.exists");
         }
         systemParam.setParamCode(systemParamDTO.getParamCode());
         systemParam.setParamName(systemParamDTO.getParamName());

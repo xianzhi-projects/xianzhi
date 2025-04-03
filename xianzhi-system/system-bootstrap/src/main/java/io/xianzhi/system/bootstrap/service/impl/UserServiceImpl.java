@@ -18,6 +18,7 @@ package io.xianzhi.system.bootstrap.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.dataobj.UserDO;
@@ -124,7 +125,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserVO getCurrentUserInfo() {
-        return userMapper.selectUserInfoById(UserContextHolder.getCurrentUserId()).orElseThrow(() -> new BusinessException("用户信息不存在"));
+        return userMapper.selectUserInfoById(UserContextHolder.getCurrentUserId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.user.not.exists"));
     }
 
     /**
@@ -135,7 +136,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserVO getUserDetails(String userId) {
-        return userMapper.selectUserInfoById(userId).orElseThrow(() -> new BusinessException("用户信息不存在"));
+        return userMapper.selectUserInfoById(userId).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.user.not.exists"));
     }
 
     /**
@@ -147,23 +148,23 @@ public class UserServiceImpl implements UserService {
     private UserDO checkedUserDTO(UserDTO userDTO) {
         UserDO user;
         if (StringUtils.hasText(userDTO.getId())) {
-            user = userMapper.selectUserById(userDTO.getId()).orElseThrow(() -> new BusinessException("用户信息不存在"));
+            user = userMapper.selectUserById(userDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.user.not.exists"));
         } else {
             user = new UserDO();
             if (userMapper.existsUserByUsername(userDTO.getUsername())) {
-                throw new BusinessException("用户名已存在");
+                throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.user.username.exists");
             }
             user.setUsername(userDTO.getUsername());
         }
         // 检查部门是否存在
-        departmentMapper.selectDepartmentById(userDTO.getDepartmentId()).orElseThrow(() -> new BusinessException("部门信息不存在"));
+        departmentMapper.selectDepartmentById(userDTO.getDepartmentId()).orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.not.exists"));
         // 检查邮箱是否存在
         if (userMapper.existsUserByEmailAndIdNot(userDTO.getEmail(), user.getId())) {
-            throw new BusinessException("邮箱已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.user.email.exists");
         }
         // 检查手机号码是否存在
         if (StringUtils.hasText(userDTO.getPhone()) && userMapper.existsUserByPhoneAndIdNot(userDTO.getPhone(), user.getId())) {
-            throw new BusinessException("手机号码已存在");
+            throw new BusinessException(CommonCode.DATA_EXISTS.code(), "sys.user.phone.exists");
         }
         user.setUsername(userDTO.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
