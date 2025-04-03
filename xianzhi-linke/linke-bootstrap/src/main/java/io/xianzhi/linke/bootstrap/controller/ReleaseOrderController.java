@@ -16,6 +16,8 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.linke.model.vo.ReleaseOrderVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,4 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(value = "/l/releaseOrder")
 public class ReleaseOrderController {
+
+    /**
+     * 查询发布单详情
+     *
+     * @param id 发布单ID
+     * @return 响应信息
+     */
+    public ResponseResult<ReleaseOrderVO> getReleaseOrderById(Long id) {
+        return ResponseResult.success();
+    }
 }

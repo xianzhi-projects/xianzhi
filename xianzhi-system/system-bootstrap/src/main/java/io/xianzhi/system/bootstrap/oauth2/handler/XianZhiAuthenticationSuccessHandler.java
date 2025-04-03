@@ -29,10 +29,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.client.producer.SendCallback;
-import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
@@ -95,17 +92,6 @@ public class XianZhiAuthenticationSuccessHandler implements AuthenticationSucces
         loginLogDTO.setLoginTime(LocalDateTime.now());
         loginLogDTO.setSuccessFlag(true);
         loginLogDTO.setUserId(userId);
-        rocketMQTemplate.asyncSend("SYS_USER", MessageBuilder.withPayload(loginLogDTO).build(), new SendCallback() {
-            @Override
-            public void onSuccess(SendResult sendResult) {
-                log.info("发送成功:{}", JSONUtils.toJSONString(sendResult));
-            }
-
-            @Override
-            public void onException(Throwable e) {
-                log.error("发送失败:{}", e.getMessage());
-            }
-        });
     }
 
 

@@ -19,6 +19,7 @@ package io.xianzhi.linke.bootstrap.controller;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.linke.bootstrap.service.IterationService;
+import io.xianzhi.linke.model.dto.IterationDTO;
 import io.xianzhi.linke.model.page.IterationPage;
 import io.xianzhi.linke.model.vo.IterationVO;
 import lombok.RequiredArgsConstructor;
@@ -45,12 +46,38 @@ public class IterationController {
 
     /**
      * 分页查询迭代列表
+     *
      * @param iterationPage 查询条件
      * @return 迭代列表
      */
     @PreAuthorize("@xz.hasPermission('linke:iteration:list')")
     @PostMapping(value = "/pageIterationList")
-    public ResponseResult<ListResult<IterationVO>> pageIterationList(@RequestBody IterationPage iterationPage){
+    public ResponseResult<ListResult<IterationVO>> pageIterationList(@RequestBody IterationPage iterationPage) {
         return ResponseResult.success();
     }
+
+    /**
+     * 创建迭代
+     *
+     * @param iterationDTO 迭代信息
+     * @return 创建结果
+     */
+    @PostMapping(value = "/createIteration")
+    public ResponseResult<String> createIteration(@RequestBody IterationDTO iterationDTO) {
+        return ResponseResult.success(iterationService.createIteration(iterationDTO));
+    }
+
+    /**
+     * 更新迭代
+     *
+     * @param iterationDTO 迭代信息
+     * @return 更新结果
+     */
+    @PostMapping(value = "/updateIteration")
+    public ResponseResult<Object> updateIteration(@RequestBody IterationDTO iterationDTO) {
+        iterationService.updateIteration(iterationDTO);
+        return ResponseResult.success();
+    }
+
+
 }

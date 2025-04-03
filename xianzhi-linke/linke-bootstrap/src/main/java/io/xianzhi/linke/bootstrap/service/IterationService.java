@@ -16,6 +16,8 @@
 
 package io.xianzhi.linke.bootstrap.service;
 
+import io.xianzhi.linke.model.dto.IterationDTO;
+
 /**
  * 迭代接口
  *
@@ -23,4 +25,19 @@ package io.xianzhi.linke.bootstrap.service;
  * @since 1.0.0
  */
 public interface IterationService {
+    /**
+     * 创建迭代
+     *
+     * @param iterationDTO 迭代信息
+     * @return 创建结果
+     */
+    String createIteration(IterationDTO iterationDTO);
+
+    /**
+     * 更新迭代
+     *
+     * @param iterationDTO 迭代信息
+     */
+    void updateIteration(IterationDTO iterationDTO);
+
 }

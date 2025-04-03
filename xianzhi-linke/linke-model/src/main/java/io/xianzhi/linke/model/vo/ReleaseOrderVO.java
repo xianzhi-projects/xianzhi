@@ -14,26 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.linke.bootstrap.controller;
+package io.xianzhi.linke.model.vo;
 
-import io.xianzhi.linke.bootstrap.service.PipelineComponentService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * 流水线组件接口
+ * 发布单信息出参
  *
  * @author Max
  * @since 1.0.0
  */
-@RestController
-@RequiredArgsConstructor
-@RequestMapping(value = "/l/pipeline/component")
-public class PipelineComponentController {
-
-
-    private final PipelineComponentService pipelineComponentService;
-
-
+@Data
+public class ReleaseOrderVO implements Serializable {
 }
