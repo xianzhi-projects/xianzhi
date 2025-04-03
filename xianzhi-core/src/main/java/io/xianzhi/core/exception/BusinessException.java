@@ -55,4 +55,31 @@ public class BusinessException extends RuntimeException {
         super(result.message());
         this.result = result;
     }
+
+
+    /**
+     * Constructor with Code and Message
+     * This constructor initializes a BusinessException instance with a specific status code and
+     * error message. It creates an anonymous Result object that encapsulates the provided code
+     * and message, allowing the exception to carry structured response information. The message
+     * is passed to the superclass (RuntimeException) for standard exception handling, while the
+     * Result object provides additional context for error reporting.
+     *
+     * @param code    The custom status code representing the type of error.
+     * @param message The human-readable error message describing the exception.
+     */
+    public BusinessException(String code, String message) {
+        super(message); // Pass the message to RuntimeException's constructor
+        this.result = new Result() {
+            @Override
+            public String code() {
+                return code;
+            }
+
+            @Override
+            public String message() {
+                return message;
+            }
+        };
+    }
 }

@@ -26,62 +26,80 @@ import io.xianzhi.system.model.vo.DictVO;
 import java.util.List;
 
 /**
- * 字典接口
+ * Dictionary Service
+ * This interface defines the business logic for managing dictionary data within the application,
+ * providing methods for querying, creating, updating, and deleting dictionaries and their items.
  *
  * @author Max
  * @since 1.0.0
  */
 public interface DictService {
+
     /**
-     * 分页查询字典列表
+     * Query Dictionary List with Pagination
+     * Retrieves a paginated list of dictionaries based on the provided parameters.
      *
-     * @param dictPage 分页查询参数
-     * @return 字典列表
+     * @param dictPage The pagination query parameters.
+     * @return The paginated list of dictionaries.
      */
     ListResult<DictVO> pageDictList(DictPage dictPage);
+
     /**
-     * 新增字典信息
+     * Create Dictionary
+     * Creates a new dictionary with the provided information.
      *
-     * @param dictDTO 字典信息入参
-     * @return 字典ID
+     * @param dictDTO The dictionary information to be created.
+     * @return The ID of the newly created dictionary.
      */
     String createDict(DictDTO dictDTO);
+
     /**
-     * 更新字典信息
+     * Update Dictionary
+     * Updates the information of an existing dictionary.
      *
-     * @param dictDTO 字典信息入参
+     * @param dictDTO The updated dictionary information.
      */
     void updateDict(DictDTO dictDTO);
+
     /**
-     * 删除字典
+     * Delete Dictionary
+     * Deletes one or more dictionaries based on the provided IDs.
      *
-     * @param ids 字典ID
+     * @param ids The list of dictionary IDs to be deleted.
      */
     void deletedDict(List<String> ids);
+
     /**
-     * 根据字典ID查询字典项
+     * Query Dictionary Items by Dictionary ID
+     * Retrieves a list of dictionary items associated with the specified dictionary ID.
      *
-     * @param dictId 字典ID
-     * @return 字典项信息
+     * @param dictId The ID of the dictionary to query items for.
+     * @return The list of dictionary items.
      */
     List<DictItemVO> listItemByDictId(String dictId);
+
     /**
-     * 新增字典项
+     * Create Dictionary Item
+     * Creates a new dictionary item with the provided information.
      *
-     * @param dictItemDTO 字典项信息入参
-     * @return 字典项ID
+     * @param dictItemDTO The dictionary item information to be created.
+     * @return The ID of the newly created dictionary item.
      */
     String createDictItem(DictItemDTO dictItemDTO);
+
     /**
-     * 更新字典项
+     * Update Dictionary Item
+     * Updates the information of an existing dictionary item.
      *
-     * @param dictItemDTO 字典项信息入参
+     * @param dictItemDTO The updated dictionary item information.
      */
     void updateDictItem(DictItemDTO dictItemDTO);
+
     /**
-     * 删除字典项
+     * Delete Dictionary Item
+     * Deletes one or more dictionary items based on the provided IDs.
      *
-     * @param ids 字典项ID
+     * @param ids The list of dictionary item IDs to be deleted.
      */
     void deletedDictItem(List<String> ids);
 }
