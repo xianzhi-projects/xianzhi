@@ -31,4 +31,18 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_role")
 @EqualsAndHashCode(callSuper = true)
 public class RoleDO extends BaseDO {
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
+    /**
+     * 角色编码
+     */
+    private String roleCode;
+    /**
+     * 角色描述
+     */
+    private String roleDesc;
+
 }
