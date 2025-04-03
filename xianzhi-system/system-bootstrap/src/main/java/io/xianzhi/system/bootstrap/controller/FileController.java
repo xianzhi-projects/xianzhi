@@ -70,10 +70,14 @@ public class FileController {
         return ResponseResult.success();
     }
 
-
-
+    /**
+     * 获取预上传URL
+     *
+     * @param fileName 文件名称
+     * @return 预上传URL
+     */
     @GetMapping(value = "/getPreUploadUrl")
-    public ResponseResult<String> getPreUploadUrl() {
-        return ResponseResult.success(fileService.getPreUploadUrl());
+    public ResponseResult<String> getPreUploadUrl(@RequestParam(name = "fileName") String fileName) {
+        return ResponseResult.success(fileService.getPreUploadUrl(fileName));
     }
 }

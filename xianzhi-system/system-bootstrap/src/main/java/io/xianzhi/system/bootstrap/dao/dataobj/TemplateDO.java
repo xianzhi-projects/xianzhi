@@ -22,7 +22,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 模板实体
+ * 模板信息实体
  *
  * @author Max
  * @since 1.0.0

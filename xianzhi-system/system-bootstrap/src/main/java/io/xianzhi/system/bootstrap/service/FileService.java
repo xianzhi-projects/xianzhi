@@ -37,10 +37,17 @@ public interface FileService {
      */
     ListResult<FileVO> pageFileList(FilePage filePage);
 
-    String getPreUploadUrl();
+    /**
+     * 获取预上传请求
+     *
+     * @param fileName 文件名称
+     * @return 预上传请求地址
+     */
+    String getPreUploadUrl(String fileName);
 
     /**
      * 删除文件
+     *
      * @param ids 文件ID列表
      */
     void deletedFile(List<String> ids);

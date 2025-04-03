@@ -38,6 +38,22 @@ import java.util.Date;
  */
 public class DateUtils {
 
+
+    /**
+     * 获取当前日期的文件夹路径
+     * @return 格式为 "/yyyy/MM/dd/" 的路径，例如 "/2025/04/03/"
+     */
+    public static String getCurrentDatePath() {
+        // 获取当前日期
+        LocalDate now = LocalDate.now();
+
+        // 定义日期格式：yyyy/MM/dd
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        // 格式化日期并添加前后斜杠
+        return "/" + now.format(formatter) + "/";
+    }
+
     /**
      * Default Date Format
      * A constant defining the default format for dates as "yyyy-MM-dd" (e.g., 2025-04-02). This
