@@ -23,210 +23,288 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+
 /**
- * 日期工具类
+ * Date Utility Class
+ * This class provides a collection of static methods and constants for handling date and time
+ * operations in a consistent and reusable manner. It leverages the Java 8 Date and Time API
+ * (java.time package) to offer functionality such as parsing, formatting, and manipulating dates
+ * and times, as well as calculating differences and performing conversions between legacy and
+ * modern date-time representations. The class is designed as a utility with a private constructor
+ * to prevent instantiation.
  *
  * @author Max
  * @since 1.0.0
  */
 public class DateUtils {
 
-
     /**
-     * 默认日期格式
+     * Default Date Format
+     * A constant defining the default format for dates as "yyyy-MM-dd" (e.g., 2025-04-02). This
+     * format is used consistently across methods that handle date-only operations.
      */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+
     /**
-     * 默认日期时间格式
+     * Default Date-Time Format
+     * A constant defining the default format for date-time values as "yyyy-MM-dd HH:mm:ss"
+     * (e.g., 2025-04-02 14:30:45). This format includes both date and time components with
+     * seconds precision.
      */
     public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * Alternative Date-Time Format (YYYYMMDD)
+     * A constant defining an alternative compact date format as "yyyyMMdd" (e.g., 20250402).
+     * This format is useful for scenarios requiring a concise, machine-readable date representation.
+     */
     public static final String DEFAULT_DATETIME_FORMAT_YYYYMMDD = "yyyyMMdd";
+
+    /**
+     * Date Formatter
+     * A pre-configured DateTimeFormatter instance for parsing and formatting dates using the
+     * DEFAULT_DATE_FORMAT ("yyyy-MM-dd"). It ensures consistent date string handling.
+     */
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
+
+    /**
+     * Date-Time Formatter
+     * A pre-configured DateTimeFormatter instance for parsing and formatting date-time values
+     * using the DEFAULT_DATETIME_FORMAT ("yyyy-MM-dd HH:mm:ss"). It ensures consistent date-time
+     * string handling.
+     */
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+
+    /**
+     * Alternative Date-Time Formatter (YYYYMMDD)
+     * A pre-configured DateTimeFormatter instance for parsing and formatting dates using the
+     * DEFAULT_DATETIME_FORMAT_YYYYMMDD ("yyyyMMdd"). It supports compact date representations.
+     */
     public static final DateTimeFormatter DATETIME_FORMATTER_YYYYMMDD = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT_YYYYMMDD);
 
     /**
-     * 私有化构造器，防止被实例化
+     * Private Constructor
+     * This constructor is private to prevent instantiation of the utility class, as all methods
+     * are static and the class is intended solely for utility purposes.
      */
     private DateUtils() {
-
     }
 
     /**
-     * 将字符串解析为LocalDate对象
+     * Parse String to LocalDate
+     * This method converts a date string into a LocalDate object using the predefined DATE_FORMATTER.
+     * The input string must match the "yyyy-MM-dd" format, or a DateTimeParseException will be thrown.
      *
-     * @param dateString 日期字符串
-     * @return 解析后的LocalDate对象
+     * @param dateString The date string to parse (e.g., "2025-04-02").
+     * @return A LocalDate object representing the parsed date.
      */
     public static LocalDate parseDate(String dateString) {
         return LocalDate.parse(dateString, DATE_FORMATTER);
     }
 
     /**
-     * 将字符串解析为LocalDateTime对象
+     * Parse String to LocalDateTime
+     * This method converts a date-time string into a LocalDateTime object using the predefined
+     * DATETIME_FORMATTER. The input string must match the "yyyy-MM-dd HH:mm:ss" format, or a
+     * DateTimeParseException will be thrown.
      *
-     * @param dateTimeString 日期时间字符串
-     * @return 解析后的LocalDateTime对象
+     * @param dateTimeString The date-time string to parse (e.g., "2025-04-02 14:30:45").
+     * @return A LocalDateTime object representing the parsed date and time.
      */
     public static LocalDateTime parseDateTime(String dateTimeString) {
         return LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
     }
 
-
     /**
-     * 将LocalDate对象格式化为字符串
+     * Format LocalDate to String
+     * This method formats a LocalDate object into a string using the predefined DATE_FORMATTER,
+     * resulting in a "yyyy-MM-dd" formatted string.
      *
-     * @param date 要格式化的LocalDate对象
-     * @return 格式化后的日期字符串
+     * @param date The LocalDate object to format.
+     * @return A string representing the formatted date (e.g., "2025-04-02").
      */
     public static String formatDate(LocalDate date) {
         return DATE_FORMATTER.format(date);
     }
 
     /**
-     * 将LocalDateTime对象格式化为字符串
+     * Format LocalDateTime to String
+     * This method formats a LocalDateTime object into a string using the predefined DATETIME_FORMATTER,
+     * resulting in a "yyyy-MM-dd HH:mm:ss" formatted string.
      *
-     * @param dateTime 要格式化的LocalDateTime对象
-     * @return 格式化后的日期时间字符串
+     * @param dateTime The LocalDateTime object to format.
+     * @return A string representing the formatted date and time (e.g., "2025-04-02 14:30:45").
      */
     public static String formatDateTime(LocalDateTime dateTime) {
         return DATETIME_FORMATTER.format(dateTime);
     }
 
-
+    /**
+     * Format LocalDate to YYYYMMDD String
+     * This method formats a LocalDate object into a compact string using the predefined
+     * DATETIME_FORMATTER_YYYYMMDD, resulting in a "yyyyMMdd" formatted string.
+     *
+     * @param localDate The LocalDate object to format.
+     * @return A string representing the formatted date (e.g., "20250402").
+     */
     public static String formatDateTimeYYYYMMDD(LocalDate localDate) {
         return DATETIME_FORMATTER_YYYYMMDD.format(localDate);
     }
 
     /**
-     * 获取当前日期的字符串表示
+     * Get Current Date as String
+     * This method returns the current date as a string in the "yyyy-MM-dd" format by formatting
+     * the current LocalDate.
      *
-     * @return 当前日期字符串（格式：yyyy-MM-dd）
+     * @return A string representing the current date (e.g., "2025-04-02").
      */
     public static String date() {
         return formatDate(LocalDate.now());
     }
 
     /**
-     * 获取当前日期时间的字符串表示
+     * Get Current Date-Time as String
+     * This method returns the current date and time as a string in the "yyyy-MM-dd HH:mm:ss"
+     * format by formatting the current LocalDateTime.
      *
-     * @return 当前日期时间字符串（格式：yyyy-MM-dd HH:mm:ss）
+     * @return A string representing the current date and time (e.g., "2025-04-02 14:30:45").
      */
     public static String dateTime() {
         return formatDateTime(LocalDateTime.now());
     }
 
     /**
-     * 获取当前时间字符串
+     * Get Current Time as String
+     * This method returns the current time as a string in the "HH:mm:ss" format, excluding the date.
+     *
+     * @return A string representing the current time (e.g., "14:30:45").
      */
     public static String time() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
-
     /**
-     * 获取当前日期
+     * Get Current Date
+     * This method returns the current date as a LocalDate object, based on the system clock in
+     * the default time zone.
      *
-     * @return 当前日期的LocalDate对象
+     * @return A LocalDate object representing the current date.
      */
     public static LocalDate getCurrentDate() {
         return LocalDate.now();
     }
 
     /**
-     * 获取当前日期时间
+     * Get Current Date-Time
+     * This method returns the current date and time as a LocalDateTime object, based on the system
+     * clock in the default time zone.
      *
-     * @return 当前日期时间的LocalDateTime对象
+     * @return A LocalDateTime object representing the current date and time.
      */
     public static LocalDateTime getCurrentDateTime() {
         return LocalDateTime.now();
     }
 
     /**
-     * 计算两个日期之间的天数差异
+     * Calculate Days Between Two Dates
+     * This method computes the number of days between two LocalDate objects using ChronoUnit.DAYS.
+     * The result is positive if endDate is after startDate, negative if before, or zero if equal.
      *
-     * @param startDate 开始日期
-     * @param endDate   结束日期
-     * @return 两个日期之间的天数差异
+     * @param startDate The starting date.
+     * @param endDate   The ending date.
+     * @return The number of days between the two dates.
      */
     public static long daysBetween(LocalDate startDate, LocalDate endDate) {
         return ChronoUnit.DAYS.between(startDate, endDate);
     }
 
     /**
-     * 计算两个日期时间之间的秒数差异
+     * Calculate Seconds Between Two Date-Times
+     * This method computes the number of seconds between two LocalDateTime objects using
+     * ChronoUnit.SECONDS. The result is positive if endDateTime is after startDateTime, negative
+     * if before, or zero if equal.
      *
-     * @param startDateTime 开始日期时间
-     * @param endDateTime   结束日期时间
-     * @return 两个日期时间之间的秒数差异
+     * @param startDateTime The starting date-time.
+     * @param endDateTime   The ending date-time.
+     * @return The number of seconds between the two date-times.
      */
     public static long secondsBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         return ChronoUnit.SECONDS.between(startDateTime, endDateTime);
     }
 
     /**
-     * 将Date对象转换为LocalDateTime对象
+     * Convert Date to LocalDateTime
+     * This method converts a legacy java.util.Date object to a LocalDateTime object using the
+     * system default time zone.
      *
-     * @param date 要转换的Date对象
-     * @return 转换后的LocalDateTime对象
+     * @param date The Date object to convert.
+     * @return A LocalDateTime object representing the same instant as the input Date.
      */
     public static LocalDateTime convertToLocalDateTime(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     /**
-     * 将LocalDateTime对象转换为Date对象
+     * Convert LocalDateTime to Date
+     * This method converts a LocalDateTime object to a legacy java.util.Date object using the
+     * system default time zone.
      *
-     * @param localDateTime 要转换的LocalDateTime对象
-     * @return 转换后的Date对象
+     * @param localDateTime The LocalDateTime object to convert.
+     * @return A Date object representing the same instant as the input LocalDateTime.
      */
     public static Date convertToDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     /**
-     * 获取指定日期加上一定天数后的日期
+     * Add Days to a Date
+     * This method returns a new LocalDate by adding the specified number of days to the given date.
      *
-     * @param date 原始日期
-     * @param days 需要增加的天数
-     * @return 新的日期
+     * @param date The original date.
+     * @param days The number of days to add (can be negative to subtract).
+     * @return A new LocalDate object with the adjusted date.
      */
     public static LocalDate plusDays(LocalDate date, long days) {
         return date.plusDays(days);
     }
 
     /**
-     * 获取指定日期减去一定天数后的日期
+     * Subtract Days from a Date
+     * This method returns a new LocalDate by subtracting the specified number of days from the
+     * given date.
      *
-     * @param date 原始日期
-     * @param days 需要减少的天数
-     * @return 新的日期
+     * @param date The original date.
+     * @param days The number of days to subtract.
+     * @return A new LocalDate object with the adjusted date.
      */
     public static LocalDate minusDays(LocalDate date, long days) {
         return date.minusDays(days);
     }
 
     /**
-     * 获取指定日期时间加上一定小时数后的时间
+     * Add Hours to a Date-Time
+     * This method returns a new LocalDateTime by adding the specified number of hours to the
+     * given date-time.
      *
-     * @param dateTime 原始日期时间
-     * @param hours    需要增加的小时数
-     * @return 新的日期时间
+     * @param dateTime The original date-time.
+     * @param hours    The number of hours to add (can be negative to subtract).
+     * @return A new LocalDateTime object with the adjusted date-time.
      */
     public static LocalDateTime plusHours(LocalDateTime dateTime, long hours) {
         return dateTime.plusHours(hours);
     }
 
     /**
-     * 获取指定日期时间减去一定小时数后的时间
+     * Subtract Hours from a Date-Time
+     * This method returns a new LocalDateTime by subtracting the specified number of hours from
+     * the given date-time.
      *
-     * @param dateTime 原始日期时间
-     * @param hours    需要减少的小时数
-     * @return 新的日期时间
+     * @param dateTime The original date-time.
+     * @param hours    The number of hours to subtract.
+     * @return A new LocalDateTime object with the adjusted date-time.
      */
     public static LocalDateTime minusHours(LocalDateTime dateTime, long hours) {
         return dateTime.minusHours(hours);
     }
-
-
 }
+

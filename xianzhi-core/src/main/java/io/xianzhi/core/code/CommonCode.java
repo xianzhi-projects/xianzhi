@@ -21,10 +21,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 公共响应结果
  * Common Response Result
- * 该枚举类定义了一组通用的响应状态码和提示信息，用于标准化的 API 返回结果。
- * This enum class defines a set of common response status codes and messages for standardized API return results.
+ * This enumeration class provides a predefined collection of commonly used response status codes
+ * and their associated messages. It implements the Result interface to ensure consistency in
+ * API responses across the system. Each enum constant represents a specific response scenario,
+ * such as success, failure, or various error conditions, enabling standardized communication
+ * of operation outcomes.
  *
  * @author Max
  * @since 1.0.0
@@ -34,116 +36,113 @@ import lombok.Getter;
 public enum CommonCode implements Result {
 
     /**
-     * 操作成功
      * Operation Successful
+     * Represents a successful operation with a standard HTTP-like success status code.
      */
     SUCCESS("200", "core.success"),
 
     /**
-     * 操作失败
      * Operation Failed
+     * Indicates a general failure of the operation with a standard HTTP-like server error code.
      */
     FAIL("500", "core.fail"),
 
     /**
-     * 系统错误
      * System Error
+     * Denotes an unexpected system-level error, typically used for unhandled exceptions or critical failures.
      */
     ERROR("XZ-01-00000001", "core.error"),
 
     /**
-     * 未授权，或者身份过期
      * Unauthorized or Identity Expired
+     * Indicates that the request lacks valid authentication or the user's session has expired.
      */
     UNAUTHORIZED("XZ-01-00000002", "core.unauthorized"),
 
     /**
-     * 权限不足
      * Insufficient Permissions
+     * Signals that the user does not have the necessary permissions to perform the requested action.
      */
     FORBIDDEN("XZ-01-00000003", "core.forbidden"),
 
     /**
-     * 访问资源不存在
      * Resource Not Found
+     * Represents a situation where the requested resource could not be located on the server.
      */
     NO_RESOURCE_FOUND_EXCEPTION("XZ-01-00000004", "core.no.resource.found.exception"),
 
     /**
-     * 服务不可用
      * Service Unavailable
+     * Indicates that the service is temporarily unavailable, often due to maintenance or overloading.
      */
     SERVICE_UNAVAILABLE("XZ-01-00000005", "core.service.unavailable"),
 
     /**
-     * 请求方式不支持
      * HTTP Request Method Not Supported
+     * Occurs when the HTTP method used in the request (e.g., GET, POST) is not supported by the endpoint.
      */
     HTTP_REQUEST_METHOD_NOT_SUPPORTED_EXCEPTION("XZ-01-00000006", "core.http.request.method.not.supported.exception"),
 
     /**
-     * 无法获取请求体，或者请求体为空
      * HTTP Message Not Readable
+     * Signals that the request body could not be parsed or understood by the server.
      */
     HTTP_MESSAGE_NOT_READABLE_EXCEPTION("XZ-01-00000007", "core.http.message.not.readable.exception"),
 
     /**
-     * 请求不是上传文件
      * Request Not Multipart
+     * Indicates that the request was expected to be a multipart request (e.g., file upload) but was not.
      */
     REQUEST_NOT_MULTIPART("XZ-01-000000008.01", "core.request.not.multipart"),
 
     /**
-     * HTTP媒体类型不支持异常
      * HTTP Media Type Not Supported Exception
+     * Occurs when the media type (e.g., application/json) of the request is not supported by the server.
      */
     HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION("XZ-01-000000008.02", "core.http.media.type.not.supported.exception"),
 
     /**
-     * 缺少请求参数异常
      * Missing Servlet Request Parameter Exception
+     * Indicates that a required parameter is missing from the request.
      */
     MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION("XZ-01-000000008.03", "core.missing.servlet.request.parameter.exception"),
 
     /**
-     * 重复请求
      * Duplicate Request
+     * Signals that the request is a duplicate of a previous one, often used to prevent redundant processing.
      */
     DUPLICATE_REQUEST("XZ-01-000000009", "core.duplicate.request"),
 
     /**
-     * 请求重复，请稍后重试！
      * Idempotent Request, Please Retry Later!
+     * Indicates that the request is idempotent and currently being processed, suggesting a retry after a delay.
      */
     IDEMPOTENT_REQUEST("XZ-01-000000010", "core.idempotent.request"),
 
     /**
-     * 参数错误，缺少参数
      * Parameter Check Error, Missing Parameter
+     * Represents an error due to invalid or missing parameters in the request.
      */
-    PARAM_CHECK_ERROR("XZ-01-000000011", "core.param.check.error"),
-
-    ;
+    PARAM_CHECK_ERROR("XZ-01-000000011", "core.param.check.error");
 
     /**
-     * 自定义状态码
      * Custom Status Code
+     * Stores the unique status code for each enum constant, used to identify the specific response scenario.
      */
     private final String code;
 
     /**
-     * 自定义提示信息
      * Custom Message
+     * Holds the message associated with each enum constant, typically a key or identifier for a localized message.
      */
     private final String message;
 
     /**
-     * 获取自定义状态码
      * Get Custom Status Code
-     * 返回当前枚举实例的状态码，实现 Result 接口的方法。
-     * Returns the status code of the current enum instance, implementing the Result interface method.
+     * Implements the code() method from the Result interface. This method returns the status code
+     * associated with the current enum instance, providing a way to access the predefined code.
      *
-     * @return 自定义状态码 / Custom status code
+     * @return A string representing the custom status code of this enum instance.
      */
     @Override
     public String code() {
@@ -151,12 +150,11 @@ public enum CommonCode implements Result {
     }
 
     /**
-     * 获取自定义提示信息
      * Get Custom Message
-     * 返回当前枚举实例的提示信息，实现 Result 接口的方法。
-     * Returns the message of the current enum instance, implementing the Result interface method.
+     * Implements the message() method from the Result interface. This method returns the message
+     * associated with the current enum instance, offering a way to retrieve the predefined message.
      *
-     * @return 自定义提示信息 / Custom message
+     * @return A string containing the custom message of this enum instance.
      */
     @Override
     public String message() {

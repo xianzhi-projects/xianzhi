@@ -21,10 +21,11 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 基础分页
  * Basic Pagination
- * 该类用于定义分页查询的基础参数，包括当前页码和每页展示条数。
- * This class defines the basic parameters for paginated queries, including the current page number and page size.
+ * This class encapsulates the fundamental parameters required for implementing paginated queries in the system.
+ * It provides properties to specify the current page number and the number of records to display per page,
+ * facilitating efficient data retrieval and display in a paginated format. The class is designed to be
+ * serializable, allowing it to be easily transmitted or stored as needed.
  *
  * @author Max
  * @since 1.0.0
@@ -33,18 +34,19 @@ import java.io.Serializable;
 public class Page implements Serializable {
 
     /**
-     * 当前页码
      * Current Page Number
-     * 默认值为1，表示当前所在的页码。
-     * Default value is 1, representing the current page number.
+     * This field represents the page number currently being requested or viewed in a paginated query.
+     * It is initialized with a default value of 1, meaning that if no specific page number is provided,
+     * the first page will be assumed. This ensures a sensible starting point for pagination.
      */
     private Integer pageNo = 1;
 
     /**
-     * 每页展示条数
      * Page Size
-     * 默认值为20，表示每页显示的记录数量。
-     * Default value is 20, representing the number of records per page.
+     * This field specifies the number of records to be returned per page in a paginated query.
+     * It has a default value of 20, which means that, unless otherwise specified, each page will
+     * contain up to 20 records. This default value provides a balance between performance and usability,
+     * but it can be adjusted based on specific requirements.
      */
     private Integer pageSize = 20;
 }

@@ -4,17 +4,23 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.context.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
- * Spring 相关工具类
+ * Spring Utility Class
+ * This class provides static utility methods for interacting with the Spring framework, such as
+ * accessing the bean factory and application context, and retrieving beans by type. It implements
+ * BeanFactoryPostProcessor and ApplicationContextAware to inject the necessary Spring components
+ * during initialization, addressing scenarios where the ApplicationContext might not be available
+ * (e.g., in @PostConstruct methods). The class is annotated as a Spring component and uses SLF4J
+ * for logging.
  *
  * @author Max
  * @since 1.0.0
@@ -22,33 +28,50 @@ import java.util.Map;
 @Slf4j
 @Component
 public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
+
     /**
-     * "@PostConstruct"注解标记的类中，由于ApplicationContext还未加载，导致空指针<br>
-     * 因此实现BeanFactoryPostProcessor注入ConfigurableListableBeanFactory实现bean的操作
+     * ConfigurableListableBeanFactory Instance
+     * This static field holds a reference to the ConfigurableListableBeanFactory, injected via
+     * BeanFactoryPostProcessor. It is used to perform bean-related operations when the
+     * ApplicationContext is not yet available (e.g., in early lifecycle phases like @PostConstruct).
+     * The field is static to allow access from static utility methods.
      */
     private static ConfigurableListableBeanFactory beanFactory;
+
     /**
-     * Spring应用上下文环境
+     * Spring Application Context
+     * This static field holds a reference to the ApplicationContext, injected via ApplicationContextAware.
+     * It provides access to the Spring application context environment, enabling retrieval of beans
+     * and other context-related operations. The field is static for use in static utility methods
+     * and includes a getter for external access.
      */
     @Getter
     private static ApplicationContext applicationContext;
 
     /**
-     * 私有化构造器，防止被实例化
+     * Private Constructor
+     * This constructor is private to prevent instantiation of the utility class from outside,
+     * as all methods are static and intended for utility use only. The class is instantiated by
+     * Spring as a component.
      */
     private SpringUtils() {
     }
 
     /**
-     * 获取{@link ListableBeanFactory}，可能为{@link ConfigurableListableBeanFactory} 或
-     * {@link ApplicationContextAware}
+     * Get ListableBeanFactory
+     * This method retrieves the ListableBeanFactory, which could be either the injected
+     * ConfigurableListableBeanFactory or the ApplicationContext, depending on availability.
+     * It provides a fallback mechanism to ensure bean factory access even if one of the components
+     * is not yet initialized. If neither is available, it throws a RuntimeException to indicate
+     * that the method is likely being called outside a Spring environment.
      *
-     * @return {@link ListableBeanFactory}
+     * @return A ListableBeanFactory instance (either beanFactory or applicationContext).
+     * @throws RuntimeException If neither beanFactory nor applicationContext is available.
      * @since 5.7.0
      */
     public static ListableBeanFactory getBeanFactory() {
-        final ListableBeanFactory factory = null == beanFactory ? applicationContext : beanFactory;
-        if (null == factory) {
+        final ListableBeanFactory factory = beanFactory != null ? beanFactory : applicationContext;
+        if (factory == null) {
             throw new RuntimeException(
                     "No ConfigurableListableBeanFactory or ApplicationContext injected, maybe not in the Spring environment?");
         }
@@ -56,17 +79,32 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
     }
 
     /**
-     * 获取指定类型对应的所有Bean，包括子类
+     * Get All Beans of a Specific Type
+     * This method retrieves a map of all beans of the specified type, including subclasses, from
+     * the bean factory. The map’s keys are the bean names, and the values are the bean instances.
+     * If the type is null, it returns all beans in the context. This is useful for discovering
+     * and accessing beans dynamically based on their type.
      *
-     * @param <T>  Bean类型
-     * @param type 类、接口，null表示获取所有bean
-     * @return 类型对应的bean，key是bean注册的name，value是Bean
+     * @param <T>  The type of beans to retrieve.
+     * @param type The class or interface type of the beans to find; null to retrieve all beans.
+     * @return A Map where the key is the bean name and the value is the bean instance of type T.
      * @since 5.3.3
      */
     public static <T> Map<String, T> getBeansOfType(Class<T> type) {
         return getBeanFactory().getBeansOfType(type);
     }
 
+    /**
+     * Post-Process Bean Factory
+     * This method is part of the BeanFactoryPostProcessor interface implementation. It is called
+     * by Spring after the bean factory is created but before beans are instantiated, allowing
+     * this class to capture a reference to the ConfigurableListableBeanFactory. This is necessary
+     * for early access to the bean factory (e.g., in @PostConstruct methods) before the
+     * ApplicationContext is fully available.
+     *
+     * @param beanFactory The ConfigurableListableBeanFactory to be processed and stored.
+     * @throws BeansException If an error occurs during bean factory processing.
+     */
     @SuppressWarnings("NullableProblems")
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -74,24 +112,19 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
     }
 
     /**
-     * Set the ApplicationContext that this object runs in. Normally this call will be
-     * used to initialize the object.
-     * <p>
-     * Invoked after population of normal bean properties but before an init callback such
-     * as {@link InitializingBean#afterPropertiesSet()} or a custom init-method. Invoked
-     * after {@link ResourceLoaderAware#setResourceLoader},
-     * {@link ApplicationEventPublisherAware#setApplicationEventPublisher} and
-     * {@link MessageSourceAware}, if applicable.
+     * Set Application Context
+     * This method is part of the ApplicationContextAware interface implementation. It is called
+     * by Spring to inject the ApplicationContext into this object after bean properties are set
+     * but before initialization callbacks (e.g., afterPropertiesSet or custom init methods).
+     * It stores the ApplicationContext in a static field for later use in utility methods,
+     * enabling access to Spring’s context environment.
      *
-     * @param applicationContext the ApplicationContext object to be used by this object
-     * @throws ApplicationContextException in case of context initialization errors
-     * @throws BeansException              if thrown by application context methods
+     * @param applicationContext The ApplicationContext object to be used by this utility class.
+     * @throws BeansException If an error occurs while setting the application context.
      * @see BeanInitializationException
      */
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtils.applicationContext = applicationContext;
     }
-
 }

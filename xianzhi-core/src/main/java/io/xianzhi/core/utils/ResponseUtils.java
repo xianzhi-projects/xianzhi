@@ -24,7 +24,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- * 响应相关工具类
+ * Response Utility Class
+ * This class provides static utility methods for handling HTTP responses, particularly for sending
+ * JSON data to the client and retrieving the current HttpServletResponse object in a web context.
+ * It is designed to simplify response handling in a servlet-based application, ensuring consistent
+ * content type settings and error management. The class uses SLF4J logging for error tracking and
+ * is implemented as a utility with a private constructor to prevent instantiation.
  *
  * @author Max
  * @since 1.0.0
@@ -33,43 +38,56 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class ResponseUtils {
 
     /**
-     * 私有化构造器，防止被实例化
+     * Private Constructor
+     * This constructor is private to prevent instantiation of the utility class, as all methods
+     * are static and intended for utility use only.
      */
     private ResponseUtils() {
     }
 
     /**
-     * 响应JSON到前端
+     * Send JSON Response to Client
+     * This method sends a JSON-formatted response to the client using the provided HttpServletResponse
+     * object. It accepts a Result object, wraps it in a ResponseResult if necessary, sets the
+     * appropriate content type and UTF-8 encoding, and writes the JSON string to the response
+     * output. Exceptions during this process are logged and rethrown as a RuntimeException.
      *
-     * @param result   响应的数据
-     * @param response 响应对象
+     * @param result   The data to be sent in the response, typically a Result or ResponseResult object.
+     * @param response The HttpServletResponse object used to write the response to the client.
+     * @throws RuntimeException If an error occurs while writing the response (e.g., IOException).
      */
     public static void responseUtf8(Result result, HttpServletResponse response) {
         try {
+            // Ensure the result is a ResponseResult; wrap it if it isn’t
             if (!(result instanceof ResponseResult<?>)) {
                 result = new ResponseResult<>(result, null);
             }
-            // 设置响应头和字符编码
+            // Set the response headers for JSON content with UTF-8 encoding
             response.setContentType("application/json;charset=UTF-8");
-            // 将JSON字符串写入响应体中
+            // Write the JSON string to the response body
             response.getWriter().write(JSONUtils.toJSONString(result));
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Failed to write JSON response to client", e);
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * 获取响应对象
+     * Retrieve Current HttpServletResponse
+     * This method attempts to retrieve the current HttpServletResponse object from the Spring
+     * RequestContextHolder, which holds the request attributes for the current thread in a web
+     * application. If the response cannot be obtained (e.g., outside a web context), it logs an
+     * error and returns null. This method is useful for accessing the response object when it is
+     * not directly available (e.g., in a service layer).
      *
-     * @return 响应对象
+     * @return The current HttpServletResponse object, or null if it cannot be retrieved.
      */
     public static HttpServletResponse getResponse() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes != null) {
             return attributes.getResponse();
         }
-        log.error("无法获取HttpServletResponse对象");
+        log.error("Unable to retrieve HttpServletResponse object from request context");
         return null;
     }
 }

@@ -17,7 +17,13 @@
 package io.xianzhi.core.validated;
 
 /**
- * 修改分组
+ * Update Group Marker Interface
+ * This interface acts as a marker to categorize validation constraints associated with the
+ * modification or updating of entities or objects within the system. It is typically utilized
+ * in conjunction with validation frameworks (e.g., Jakarta Bean Validation) to indicate that
+ * specific validation rules should be enforced only during update operations, distinguishing
+ * them from other scenarios like object creation. The interface contains no methods and is
+ * designed purely for grouping validation logic.
  *
  * @author Max
  * @since 1.0.0

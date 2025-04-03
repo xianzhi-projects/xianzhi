@@ -17,7 +17,12 @@
 package io.xianzhi.core.validated;
 
 /**
- * 新增分组
+ * Create Group Marker Interface
+ * This interface serves as a marker to identify and group validation constraints related to the
+ * creation of entities or objects in the system. It is typically used with validation frameworks
+ * (e.g., Jakarta Bean Validation) to specify that certain validation rules should only apply
+ * when an object is being created, as opposed to other operations like updates. The interface
+ * itself defines no methods and is intended solely for grouping purposes.
  *
  * @author Max
  * @since 1.0.0

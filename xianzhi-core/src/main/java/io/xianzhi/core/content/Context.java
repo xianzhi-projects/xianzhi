@@ -17,9 +17,7 @@
 package io.xianzhi.core.content;
 
 /**
- * 顶级上下文
  * Top-level Context
- * 该接口定义了上下文的基本行为，用于提供唯一的标识信息。
  * This interface defines the basic behavior of a context, used to provide unique identification information.
  *
  * @author Max
@@ -28,12 +26,10 @@ package io.xianzhi.core.content;
 public interface Context {
 
     /**
-     * 获取唯一标识
      * Get Unique Identifier
-     * 返回一个字符串，表示上下文的唯一标识。
      * Returns a string representing the unique identifier of the context.
      *
-     * @return 唯一标识 / Unique identifier
+     * @return Unique identifier
      */
     String getUniqueKey();
 }

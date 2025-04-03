@@ -20,10 +20,10 @@ import io.xianzhi.core.result.Result;
 import lombok.Getter;
 
 /**
- * 自定义业务异常
  * Custom Business Exception
- * 该类定义了一个业务相关的运行时异常，用于抛出带有响应结果的异常信息。
- * This class defines a business-related runtime exception for throwing exception information with a response result.
+ * This class represents a custom runtime exception specifically designed for business logic errors.
+ * It extends the standard RuntimeException class and is used to encapsulate and throw exceptions
+ * that include a detailed response result, providing a structured way to handle business-related errors.
  *
  * @author Max
  * @since 1.0.0
@@ -32,20 +32,24 @@ import lombok.Getter;
 public class BusinessException extends RuntimeException {
 
     /**
-     * 响应结果
      * Response Result
-     * 包含异常的状态码和提示信息。
-     * Contains the status code and message of the exception.
+     * This field holds the result object associated with the exception. The result object typically
+     * contains detailed information about the error, such as a status code (indicating the type
+     * of error) and a human-readable message (describing the error in detail). This allows the
+     * exception to provide meaningful feedback to the caller or end user.
      */
     private final Result result;
 
     /**
-     * 构造函数
      * Constructor
-     * 根据指定的响应结果构造一个业务异常，异常信息来源于结果的提示信息。
-     * Constructs a business exception based on the specified response result, with the exception message derived from the result's message.
+     * This constructor initializes a new instance of BusinessException with a specified response
+     * result. The exception's message, which is passed to the superclass (RuntimeException), is
+     * extracted from the provided result object using its message() method. This ensures that
+     * the exception carries both the detailed result and a concise error message.
      *
-     * @param result 响应结果 / Response result
+     * @param result The response result object that contains the status code and error message
+     *               to be associated with this exception. It must not be null, as it provides
+     *               the core information for the exception.
      */
     public BusinessException(Result result) {
         super(result.message());
