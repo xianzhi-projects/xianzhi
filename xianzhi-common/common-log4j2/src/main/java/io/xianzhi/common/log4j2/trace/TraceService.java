@@ -14,26 +14,38 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.core.content;
+package io.xianzhi.common.log4j2.trace;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * 顶级上下文
- * Top-level Context
- * 该接口定义了上下文的基本行为，用于提供唯一的标识信息。
- * This interface defines the basic behavior of a context, used to provide unique identification information.
+ * Trace适配器
  *
  * @author Max
  * @since 1.0.0
  */
-public interface Context {
+public interface TraceService {
+    /**
+     * 开始追踪。
+     * @param operationName 操作名称（如请求 URI 或方法名）
+     * @param request HTTP 请求对象
+     */
+    void startTrace(String operationName, HttpServletRequest request);
 
     /**
-     * 获取唯一标识
-     * Get Unique Identifier
-     * 返回一个字符串，表示上下文的唯一标识。
-     * Returns a string representing the unique identifier of the context.
-     *
-     * @return 唯一标识 / Unique identifier
+     * 结束追踪。
      */
-    String getUniqueKey();
+    void finishTrace();
+
+    /**
+     * 获取当前的 TraceID。
+     * @return TraceID 字符串
+     */
+    String getTraceId();
+
+    /**
+     * 生成新的 SpanID。
+     * @return SpanID 字符串
+     */
+    String generateSpanId();
 }

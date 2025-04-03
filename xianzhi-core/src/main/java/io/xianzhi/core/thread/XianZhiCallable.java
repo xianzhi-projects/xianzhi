@@ -26,6 +26,11 @@ public class XianZhiCallable<T> implements Callable<T> {
      */
     private final Context context;
 
+    /**
+     * trace
+     */
+    private final String traceId;
+
 
     /**
      * 构造方法

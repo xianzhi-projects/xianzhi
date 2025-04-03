@@ -14,26 +14,33 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.core.content;
+package io.xianzhi.common.log4j2.trace;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 顶级上下文
- * Top-level Context
- * 该接口定义了上下文的基本行为，用于提供唯一的标识信息。
- * This interface defines the basic behavior of a context, used to provide unique identification information.
+ * trace上下文
  *
  * @author Max
  * @since 1.0.0
  */
-public interface Context {
+@Getter
+@Setter
+@AllArgsConstructor
+public class TraceContext {
 
     /**
-     * 获取唯一标识
-     * Get Unique Identifier
-     * 返回一个字符串，表示上下文的唯一标识。
-     * Returns a string representing the unique identifier of the context.
-     *
-     * @return 唯一标识 / Unique identifier
+     * 全局唯一的追踪 ID，用于标识整个请求链路
      */
-    String getUniqueKey();
+    private String traceId;
+    /**
+     * 当前 Span 的 ID，表示当前请求的某一段操作
+     */
+    private String spanId;
+    /**
+     * 父 Span 的 ID，用于构建调用层级关系
+     */
+    private String parentSpanId;
 }

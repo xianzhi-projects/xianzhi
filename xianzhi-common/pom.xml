@@ -44,7 +44,6 @@
         <module>common-wecom</module>
         <module>common-websocket</module>
         <module>common-email</module>
-        <module>common-dubbo</module>
     </modules>
     <artifactId>xianzhi-common</artifactId>
 

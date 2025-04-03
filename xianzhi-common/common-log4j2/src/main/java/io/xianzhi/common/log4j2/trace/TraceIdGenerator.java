@@ -14,26 +14,17 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.core.content;
+package io.xianzhi.common.log4j2.trace;
 
 /**
- * 顶级上下文
- * Top-level Context
- * 该接口定义了上下文的基本行为，用于提供唯一的标识信息。
- * This interface defines the basic behavior of a context, used to provide unique identification information.
+ * TraceId生成接口
  *
  * @author Max
  * @since 1.0.0
  */
-public interface Context {
-
+public interface TraceIdGenerator {
     /**
-     * 获取唯一标识
-     * Get Unique Identifier
-     * 返回一个字符串，表示上下文的唯一标识。
-     * Returns a string representing the unique identifier of the context.
-     *
-     * @return 唯一标识 / Unique identifier
+     * 生成一个TraceId
      */
-    String getUniqueKey();
+    String generateTraceId();
 }

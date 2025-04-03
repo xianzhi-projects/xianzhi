@@ -21,6 +21,9 @@ import lombok.Getter;
 
 /**
  * 自定义业务异常
+ * Custom Business Exception
+ * 该类定义了一个业务相关的运行时异常，用于抛出带有响应结果的异常信息。
+ * This class defines a business-related runtime exception for throwing exception information with a response result.
  *
  * @author Max
  * @since 1.0.0
@@ -28,52 +31,24 @@ import lombok.Getter;
 @Getter
 public class BusinessException extends RuntimeException {
 
-
     /**
      * 响应结果
+     * Response Result
+     * 包含异常的状态码和提示信息。
+     * Contains the status code and message of the exception.
      */
     private final Result result;
 
-
     /**
-     * Constructs a new runtime exception with {@code null} as its detail message. The
-     * cause is not initialized, and may subsequently be initialized by a call to
-     * {@link #initCause}.
+     * 构造函数
+     * Constructor
+     * 根据指定的响应结果构造一个业务异常，异常信息来源于结果的提示信息。
+     * Constructs a business exception based on the specified response result, with the exception message derived from the result's message.
+     *
+     * @param result 响应结果 / Response result
      */
     public BusinessException(Result result) {
         super(result.message());
         this.result = result;
-    }
-
-
-    public BusinessException(String message) {
-        super(message);
-        this.result = new Result() {
-            @Override
-            public String code() {
-                return "500";
-            }
-
-            @Override
-            public String message() {
-                return message;
-            }
-        };
-    }
-
-
-    public BusinessException(String code, String message) {
-        super(message);
-        this.result = new Result() {
-            @Override
-            public String code() {
-                return code;
-            }
-
-            @Override
-            public String message() {
-                return message;
-            }
-        };
     }
 }
