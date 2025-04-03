@@ -19,6 +19,7 @@ package io.xianzhi.common.idempotent.aspects;
 
 import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.common.idempotent.properties.IdempotentProperties;
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 幂等切面
+ * Idempotent Aspect
+ * This class implements an Aspect-Oriented Programming (AOP) aspect to enforce idempotency for
+ * methods annotated with @Idempotent. It intercepts method calls, checks for duplicate requests
+ * using a Redis-based mechanism, and ensures that repeated invocations do not result in unintended
+ * side effects. The aspect leverages Redis for atomic key storage and expiration, and it integrates
+ * with Spring’s web context to extract idempotency keys from HTTP request headers. It is registered
+ * as a Spring component and uses SLF4J for logging.
  *
  * @author Max
  * @since 1.0.0
@@ -46,76 +53,91 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class IdempotentAspect {
 
-
     /**
-     * Redis 缓存操作模板，用于存储和检查幂等性标记。
+     * Redis Template
+     * This field provides a RedisTemplate instance for interacting with Redis, used to store and
+     * check idempotency markers. It enables atomic operations (e.g., setIfAbsent) to ensure thread-safe
+     * handling of idempotency keys. The template is injected via constructor-based dependency injection.
      */
     private final RedisTemplate<String, Object> redisTemplate;
 
     /**
-     * 幂等性配置属性，包含是否启用、存储前缀、过期时间等。
+     * Idempotent Properties
+     * This field holds configuration properties for idempotency enforcement, such as whether it is
+     * enabled, the storage prefix for Redis keys, expiration time, and the request header name for
+     * the idempotency key. It is injected via constructor-based dependency injection.
      */
     private final IdempotentProperties idempotentProperties;
 
     /**
-     * 处理接口幂等性逻辑。
-     * 在目标方法执行前检查幂等性标记，若重复请求则抛出异常；执行后存储标记。
+     * Handle Idempotency Logic
+     * This method defines the around advice for methods annotated with @Idempotent. It performs the
+     * following steps:
+     * 1. Checks if idempotency is enabled; if not, proceeds with the target method directly.
+     * 2. Retrieves the HTTP request and extracts the idempotency key from the specified header.
+     * 3. Constructs a Redis key and uses setIfAbsent to atomically check for duplicates.
+     * 4. If a duplicate is detected, throws an exception; otherwise, executes the target method.
+     * 5. Updates the Redis key on success or removes it on failure to allow retries.
      *
-     * @param joinPoint  切点对象，包含目标方法的上下文信息，用于执行原始方法。
-     * @param idempotent 幂等性注解，标注在目标方法上，定义了幂等性相关的配置（如过期时间）。
-     * @return 返回目标方法的执行结果。
-     * @throws Throwable 如果目标方法执行失败或幂等性校验失败，抛出异常。
+     * @param joinPoint  The ProceedingJoinPoint object providing access to the target method’s context
+     *                   and allowing its execution.
+     * @param idempotent The @Idempotent annotation instance from the target method, providing
+     *                   configuration details (though currently unused beyond marking the method).
+     * @return The result of the target method execution.
+     * @throws Throwable If the target method fails or idempotency validation fails, the exception
+     *                   is propagated to the caller.
      */
     @Around("@annotation(idempotent)")
     public Object handleIdempotency(ProceedingJoinPoint joinPoint, Idempotent idempotent) throws Throwable {
-        // 检查是否启用幂等性校验
+        // Check if idempotency validation is enabled
         if (!idempotentProperties.isEnable()) {
-            log.debug("幂等性校验未启用，直接执行目标方法");
+            log.debug("Idempotency validation is disabled; proceeding with target method execution");
             return joinPoint.proceed();
         }
 
-        // 获取 HTTP 请求对象
+        // Retrieve HTTP request object from the current web context
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes == null) {
-            log.error("无法获取请求上下文，可能不在 Web 环境中");
-            throw new BusinessException("500", "无法获取请求上下文");
+            log.error("Unable to retrieve request context; possibly not in a web environment");
+            throw new BusinessException(CommonCode.ERROR);
         }
         HttpServletRequest request = attributes.getRequest();
 
-        // 从请求头中获取幂等性 Key
+        // Extract idempotency key from the request header
         String idempotencyKey = request.getHeader(idempotentProperties.getRequestHeader());
         if (!StringUtils.hasText(idempotencyKey)) {
-            log.error("请求头中未传递幂等性 Key，header: {}", idempotentProperties.getRequestHeader());
-            throw new BusinessException("500", "幂等性 Key 未提供");
+            log.error("Idempotency key not provided in request header: {}", idempotentProperties.getRequestHeader());
+            throw new BusinessException(CommonCode.PARAM_CHECK_ERROR);
         }
 
-        // 构造 Redis Key
+        // Construct Redis key using the configured prefix and idempotency key
         String redisKey = String.format(idempotentProperties.getStorePrefix(), idempotencyKey);
-        log.debug("构造 Redis Key: {}", redisKey);
+        log.debug("Constructed Redis key: {}", redisKey);
 
-        // 使用 Redis 的 setIfAbsent 实现原子性检查和设置
+        // Atomically check and set the idempotency marker in Redis
         Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(redisKey, "PROCESSING",
                 idempotentProperties.getStoreExpire(), TimeUnit.SECONDS);
         if (Boolean.FALSE.equals(setIfAbsent)) {
-            log.warn("检测到重复请求，幂等 Key: {}", idempotencyKey);
-            throw new BusinessException("500", "重复请求");
+            log.warn("Duplicate request detected for idempotency key: {}", idempotencyKey);
+            throw new BusinessException(CommonCode.IDEMPOTENT_REQUEST);
         }
 
         try {
-            // 执行目标方法
-            log.debug("开始执行目标方法，幂等 Key: {}", idempotencyKey);
+            // Execute the target method
+            log.debug("Starting execution of target method with idempotency key: {}", idempotencyKey);
             Object result = joinPoint.proceed();
-            log.debug("目标方法执行成功，幂等 Key: {}", idempotencyKey);
-            // 更新缓存为成功状态（可选：存储实际结果）
+            log.debug("Target method executed successfully with idempotency key: {}", idempotencyKey);
+
+            // Update Redis with success status (optional: could store result instead)
             redisTemplate.opsForValue().set(redisKey, "SUCCESS",
                     idempotentProperties.getStoreExpire(), TimeUnit.SECONDS);
             return result;
         } catch (Throwable ex) {
-            // 如果业务方法执行失败，删除 Redis Key 以允许重试
+            // Remove Redis key on failure to allow retries
             redisTemplate.delete(redisKey);
-            log.error("目标方法执行失败，幂等 Key: {}, 错误信息: {}", idempotencyKey, ex.getMessage(), ex);
+            log.error("Target method execution failed for idempotency key: {}, error message: {}",
+                    idempotencyKey, ex.getMessage(), ex);
             throw ex;
         }
     }
-
 }

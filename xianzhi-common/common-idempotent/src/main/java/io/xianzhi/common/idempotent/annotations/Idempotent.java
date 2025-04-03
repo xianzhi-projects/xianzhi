@@ -18,8 +18,15 @@ package io.xianzhi.common.idempotent.annotations;
 
 import java.lang.annotation.*;
 
+
 /**
- * 幂等注解
+ * Idempotent Annotation
+ * This annotation marks a method as idempotent, indicating that it can be safely invoked multiple
+ * times with the same input without producing different results or unintended side effects beyond
+ * the first invocation. It is commonly used in scenarios such as REST ful APIs, distributed systems,
+ * or retry mechanisms to ensure that duplicate requests do not alter the system state unexpectedly.
+ * The annotation serves as a marker, and its enforcement typically relies on external logic, such
+ * as an interceptor, framework, or custom implementation, to detect and handle repeated invocations.
  *
  * @author Max
  * @since 1.0.0
@@ -28,6 +35,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Idempotent {
-
-    String key() default "";
 }
