@@ -36,7 +36,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 字典接口
+ * Dictionary Controller
+ * This class serves as a controller for handling HTTP requests related to dictionary management
+ * within the application. It provides endpoints for querying, creating, updating, and deleting
+ * dictionary and dictionary item information, interacting with the dictionary service layer to
+ * perform these operations.
  *
  * @author Max
  * @since 1.0.0
@@ -47,16 +51,18 @@ import java.util.List;
 public class DictController {
 
     /**
-     * 字典接口
+     * Dictionary Service
+     * This field provides access to the dictionary service layer, which encapsulates the business
+     * logic for managing dictionary data.
      */
     private final DictService dictService;
 
-
     /**
-     * 分页查询字典列表
+     * Query Dictionary List with Pagination
+     * This method retrieves a paginated list of dictionaries based on the provided parameters.
      *
-     * @param dictPage 分页查询参数
-     * @return 字典列表
+     * @param dictPage The pagination query parameters.
+     * @return A response containing the paginated list of dictionaries.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:page')")
     @PostMapping(value = "/pageDictList")
@@ -65,10 +71,12 @@ public class DictController {
     }
 
     /**
-     * 新增字典信息  (幂等)
+     * Create Dictionary (Idempotent)
+     * This method creates a new dictionary with the provided information, ensuring idempotency
+     * to prevent duplicate submissions.
      *
-     * @param dictDTO 字典信息入参
-     * @return 字典ID
+     * @param dictDTO The dictionary information to be created.
+     * @return A response containing the ID of the newly created dictionary.
      */
     @Idempotent
     @PreAuthorize("@xz.hasPermission('system:dict:create')")
@@ -78,10 +86,11 @@ public class DictController {
     }
 
     /**
-     * 更新字典信息
+     * Update Dictionary
+     * This method updates the information of an existing dictionary.
      *
-     * @param dictDTO 字典信息入参
-     * @return 字典ID
+     * @param dictDTO The updated dictionary information.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:update')")
     @PostMapping(value = "/updateDict")
@@ -91,23 +100,25 @@ public class DictController {
     }
 
     /**
-     * 删除字典
+     * Delete Dictionary
+     * This method deletes one or more dictionaries based on the provided IDs.
      *
-     * @param ids 字典ID
-     * @return 响应信息
+     * @param ids The list of dictionary IDs to be deleted.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:delete')")
     @PostMapping(value = "/deletedDict")
-    public ResponseResult<Object> deletedDict(@RequestBody @NotEmpty(message = "字典ID不能为空") List<String> ids) {
+    public ResponseResult<Object> deletedDict(@RequestBody @NotEmpty(message = "Dictionary IDs cannot be empty") List<String> ids) {
         dictService.deletedDict(ids);
         return ResponseResult.success();
     }
 
     /**
-     * 根据字典ID查询字典项
+     * Query Dictionary Items by Dictionary ID
+     * This method retrieves a list of dictionary items associated with the specified dictionary ID.
      *
-     * @param dictId 字典ID
-     * @return 字典项信息
+     * @param dictId The ID of the dictionary to query items for.
+     * @return A response containing the list of dictionary items.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:item:list')")
     @GetMapping(value = "/listItemByDictId")
@@ -116,10 +127,12 @@ public class DictController {
     }
 
     /**
-     * 新增字典项  (幂等)
+     * Create Dictionary Item (Idempotent)
+     * This method creates a new dictionary item with the provided information, ensuring idempotency
+     * to prevent duplicate submissions.
      *
-     * @param dictItemDTO 字典项信息入参
-     * @return 字典项ID
+     * @param dictItemDTO The dictionary item information to be created.
+     * @return A response containing the ID of the newly created dictionary item.
      */
     @Idempotent
     @PreAuthorize("@xz.hasPermission('system:dict:item:create')")
@@ -129,10 +142,11 @@ public class DictController {
     }
 
     /**
-     * 更新字典项
+     * Update Dictionary Item
+     * This method updates the information of an existing dictionary item.
      *
-     * @param dictItemDTO 字典项信息入参
-     * @return 字典项ID
+     * @param dictItemDTO The updated dictionary item information.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:item:update')")
     @PostMapping(value = "/updateDictItem")
@@ -142,17 +156,16 @@ public class DictController {
     }
 
     /**
-     * 删除字典项
+     * Delete Dictionary Item
+     * This method deletes one or more dictionary items based on the provided IDs.
      *
-     * @param ids 字典项ID
-     * @return 响应信息
+     * @param ids The list of dictionary item IDs to be deleted.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:dict:item:delete')")
     @PostMapping(value = "/deletedDictItem")
-    public ResponseResult<Object> deletedDictItem(@RequestBody @NotEmpty(message = "字典项ID不能为空") List<String> ids) {
+    public ResponseResult<Object> deletedDictItem(@RequestBody @NotEmpty(message = "Dictionary item IDs cannot be empty") List<String> ids) {
         dictService.deletedDictItem(ids);
         return ResponseResult.success();
     }
-
-
 }

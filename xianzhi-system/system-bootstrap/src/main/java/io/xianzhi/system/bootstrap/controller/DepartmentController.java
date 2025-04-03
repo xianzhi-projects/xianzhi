@@ -31,7 +31,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 部门接口
+ * Department Controller
+ * This class serves as a controller for handling HTTP requests related to department management
+ * within the application. It provides endpoints for querying, creating, updating, and deleting
+ * department information, interacting with the department service layer to perform these operations.
  *
  * @author Max
  * @since 1.0.0
@@ -42,15 +45,17 @@ import java.util.List;
 public class DepartmentController {
 
     /**
-     * 部门接口
+     * Department Service
+     * This field provides access to the department service layer, which encapsulates the business
+     * logic for managing department data.
      */
     private final DepartmentService departmentService;
 
-
     /**
-     * 查询部门树结构信息
+     * Query Department Tree Structure
+     * This method retrieves the hierarchical tree structure of departments.
      *
-     * @return 树信息
+     * @return A response containing the list of department tree nodes.
      */
     @PreAuthorize("@xz.hasPermission('system:department:tree')")
     @GetMapping(value = "/tree")
@@ -59,9 +64,11 @@ public class DepartmentController {
     }
 
     /**
-     * 获取用户有权限的部门树结构信息
+     * Get User-Authorized Department Tree Structure
+     * This method retrieves the hierarchical tree structure of departments that the current user
+     * has permission to access.
      *
-     * @return 用户有权限的部门树结构信息
+     * @return A response containing the list of department tree nodes accessible to the user.
      */
     @GetMapping(value = "/getDepartmentTree")
     public ResponseResult<List<DepartmentVO>> getDepartmentTree() {
@@ -69,10 +76,12 @@ public class DepartmentController {
     }
 
     /**
-     * 新增部门信息  (幂等)
+     * Create Department (Idempotent)
+     * This method creates a new department with the provided information, ensuring idempotency
+     * to prevent duplicate submissions.
      *
-     * @param departmentDTO 部门信息入参
-     * @return 部门ID
+     * @param departmentDTO The department information to be created.
+     * @return A response containing the ID of the newly created department.
      */
     @Idempotent
     @PreAuthorize("@xz.hasPermission('system:department:create')")
@@ -82,10 +91,11 @@ public class DepartmentController {
     }
 
     /**
-     * 更新部门信息
+     * Update Department
+     * This method updates the information of an existing department.
      *
-     * @param departmentDTO 部门信息入参
-     * @return 响应信息
+     * @param departmentDTO The updated department information.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:department:update')")
     @PostMapping(value = "/updateDepartment")
@@ -95,10 +105,11 @@ public class DepartmentController {
     }
 
     /**
-     * 删除部门
+     * Delete Department
+     * This method deletes a department based on the provided ID.
      *
-     * @param id 部门ID
-     * @return 响应信息
+     * @param id The ID of the department to be deleted.
+     * @return A success response indicating the operation was completed.
      */
     @PreAuthorize("@xz.hasPermission('system:department:deleted')")
     @PostMapping(value = "/deletedDepartment")
@@ -106,6 +117,4 @@ public class DepartmentController {
         departmentService.deletedDepartment(id);
         return ResponseResult.success();
     }
-
-
 }
