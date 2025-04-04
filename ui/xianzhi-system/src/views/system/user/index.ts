@@ -25,7 +25,7 @@ export const userList = ref<UserVO[]>()
 export const loading = ref(false)
 
 export const departmentList = ref<DepartmentVO[]>()
-
+export const total = ref(0);
 export const selectedNode = ref<DepartmentVO>({
   id: '',
   departmentName: '',
@@ -45,6 +45,7 @@ export async function refreshUserList(userPage: UserPage) {
     const  rep = await pageUserList(userPage);
     if (rep.code === '200' && rep.data) {
       userList.value = rep.data.list;
+      total.value = rep.data.total;
     }else{
       userList.value = [];
     }

@@ -57,7 +57,8 @@ onBeforeMount(() => {
   height: 100vh;
   min-height: 100vh;
   .el-header {
-    line-height: 60px;
+    height: 48px;
+    line-height: 48px;
     text-align: right;
     padding: 0 20px;
   }

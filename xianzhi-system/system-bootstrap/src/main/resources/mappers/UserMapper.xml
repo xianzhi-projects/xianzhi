@@ -126,6 +126,7 @@
         <if test="userPage.username != null and userPage.username != ''">
             AND u.username = #{userPage.username,jdbcType=VARCHAR}
         </if>
+        order by u.create_at desc
     </select>
 
     <select id="selectUserInfoById" resultMap="userMap">

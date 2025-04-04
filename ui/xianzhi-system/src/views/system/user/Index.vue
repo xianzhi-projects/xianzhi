@@ -1,30 +1,15 @@
-<!--
-  -  Copyright 2025 XianZhi Group .
-  -
-  -  Licensed under the Apache License, Version 2.0 (the "License");
-  -  you may not use this file except in compliance with the License.
-  -  You may obtain a copy of the License at
-  -
-  -      http://www.apache.org/licenses/LICENSE-2.0
-  -
-  -  Unless required by applicable law or agreed to in writing, software
-  -  distributed under the License is distributed on an "AS IS" BASIS,
-  -  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  -  See the License for the specific language governing permissions and
-  -  limitations under the License.
-  -->
-
+<!-- 父组件 -->
 <script lang="ts" setup>
-import {departmentList, onSelect, selectedNode,} from "@/views/system/user/index.ts";
+import {departmentList, onSelect, selectedNode} from "@/views/system/user/index.ts";
 import UserSearch from "@/views/system/user/UserSearch.vue";
 import UserList from "@/views/system/user/UserList.vue";
 </script>
 
 <template>
-  <div class="container">
-    <el-row :gutter="16" style="margin-left: 0; margin-right: 0">
+  <div class="container cw">
+    <el-row :gutter="16" class="h-100">
       <el-col :span="3">
-        <el-card class="department" header="部门信息">
+        <el-card class="h-100" header="部门信息">
           <el-tree
             :data="departmentList"
             :default-expand-all="true"
@@ -38,20 +23,30 @@ import UserList from "@/views/system/user/UserList.vue";
           />
         </el-card>
       </el-col>
-      <el-col :span="21" class="content">
-        <UserSearch class="search mb-10"/>
-        <UserList class="user-list"/>
+      <el-col :span="21">
+        <div class="right-panel">
+          <UserSearch />
+          <UserList />
+        </div>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <style lang="less" scoped>
-.container {
-  height: calc(-88px + 90vh);
-  .content{
-    height: 100%;
-  }
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 占满父容器高度 */
 }
 
+.right-panel > .user-search {
+  flex-shrink: 0; /* 搜索表单不压缩 */
+}
+
+.right-panel > .user-list {
+  flex: 1; /* 表格占满剩余空间 */
+  overflow: auto; /* 如果内容溢出，显示滚动条 */
+}
 </style>
