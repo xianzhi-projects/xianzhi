@@ -18,11 +18,13 @@
 import {createApp} from 'vue';
 import {createPinia} from 'pinia';
 import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css'; // 引入 Element Plus 样式
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'; // 引入所有图标
+import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
 import App from './App.vue';
 import router from './router';
-import './assets/css/style.less'; // 引入全局样式
+import './assets/css/index.scss'; // 引入全局样式
 const app = createApp(App);
 const pinia = createPinia();
 

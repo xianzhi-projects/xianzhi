@@ -1,4 +1,4 @@
-/*
+/*!
  *  Copyright 2025 XianZhi Group .
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,27 +13,4 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-* {
-  margin: 0;
-  padding: 0;
-}
 
-//去除表单元素自动填充背景色
-.el-input__inner:-webkit-autofill,
-.el-input__inner:-webkit-autofill:hover,
-.el-input__inner:-webkit-autofill:focus,
-.el-input__inner:-webkit-autofill:active {
-  -webkit-transition-delay: 99999s;
-  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.w-1_2 {
-  width: 50%;
-}
-.flex {
-  display: flex;
-}

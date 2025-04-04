@@ -103,7 +103,7 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @param userPage   查询条件
      * @return 用户列表
      */
-    IPage<UserVO> pageUserList(Page<UserVO> userVOPage, @Param("userPage") UserPage userPage);
+    IPage<UserVO>  pageUserList(Page<UserVO> userVOPage, @Param("userPage") UserPage userPage);
 
     /**
      * 根据用户ID查询用户信息

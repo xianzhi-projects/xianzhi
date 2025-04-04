@@ -35,6 +35,7 @@ export const selectedNode = ref<ResourceVO>({
   showFlag: true,
   enableFlag: true,
   children: [],
+  parent: null
 });
 
 export const onSelect = (data: ResourceVO, t1: any) => {
@@ -63,9 +64,7 @@ export async function refreshResourceTree() {
 
 
 export const append = (data: ResourceVO) => {
-  if (data == null) {
-    selectedNode.value = {}
-  } else {
+  if (data != null) {
     selectedNode.value = {
       id: '',
       resourceName: '', // 菜单名称
@@ -82,7 +81,6 @@ export const append = (data: ResourceVO) => {
       parent: data
     }
   }
-
 }
 
 export const remove = async (data: ResourceVO) => {

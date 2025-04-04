@@ -22,7 +22,7 @@ import {pageUserList} from "@/api/system/userApi.ts";
 
 export const dialogFormVisible = ref(false)
 export const userList = ref<UserVO[]>()
-
+export const loading = ref(false)
 
 export const departmentList = ref<DepartmentVO[]>()
 
@@ -40,12 +40,18 @@ export const onSelect = (data: DepartmentVO) => {
 }
 
 export async function refreshUserList(userPage: UserPage) {
-  const  rep = await pageUserList(userPage);
-  if (rep.code === '200' && rep.data) {
-    userList.value = rep.data.list;
-  }else{
-    userList.value = [];
+  loading.value = true
+  try {
+    const  rep = await pageUserList(userPage);
+    if (rep.code === '200' && rep.data) {
+      userList.value = rep.data.list;
+    }else{
+      userList.value = [];
+    }
+  }finally {
+    loading.value = false
   }
+
 
 }
 

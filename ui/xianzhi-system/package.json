@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^13.0.0",
+    "@vueuse/shared": "^13.0.0",
     "axios": "^1.8.1",
     "element-plus": "^2.9.7",
     "nprogress": "^0.2.0",
@@ -20,11 +22,11 @@
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.4",
-    "@vitejs/plugin-vue": "^5.2.1",
     "@types/nprogress": "^0.2.3",
+    "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
-    "less": "^4.2.2",
-    "less-loader": "^12.2.0",
+    "sass": "^1.86.3",
+    "sass-loader": "^16.0.5",
     "typescript": "~5.7.2",
     "unplugin-auto-import": "^19.1.2",
     "unplugin-vue-components": "^28.4.1",

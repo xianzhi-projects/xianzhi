@@ -149,15 +149,4 @@ onMounted(() => {
   padding: 0 10px !important; // 左右内边距
 }
 
-/* 激活状态下的标签页样式 */
-:deep(.is-active) {
-  background-color: #5356e0 !important; // 激活时的背景色
-  border-radius: 5px !important;        // 圆角
-  color: #fff !important;               // 文字颜色
-}
-
-/* 激活状态下鼠标悬停的样式 */
-:deep(.is-active:hover) {
-  color: #fff !important; // 悬停时保持白色文字
-}
 </style>

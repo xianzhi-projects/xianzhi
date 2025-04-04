@@ -138,6 +138,9 @@ export interface ResourceVO {
    * 子资源
    */
   children: ResourceVO[]
+
+
+  parent?: ResourceVO | null
 }
 
 

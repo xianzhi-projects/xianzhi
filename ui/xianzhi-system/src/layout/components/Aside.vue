@@ -45,7 +45,6 @@ const routerStore = useRouterStore();
   user-select: none;
   width: 220px;
   min-height: 100vh;
-  border-right: 1px solid #e4e7ed;
   a{
     text-decoration: none;
   }
@@ -55,7 +54,6 @@ const routerStore = useRouterStore();
     align-items: center;
     height: 38px;
     text-align: center;
-    color: white;
     font-size: 15px;
     line-height: 38px;
     padding: 5px;
@@ -66,7 +64,6 @@ const routerStore = useRouterStore();
     }
 
     span {
-      color: #1a1a1a;
       font-weight: 600;
       margin-left: 8px;      // 与图片间距
       vertical-align: middle; // 文字垂直居中

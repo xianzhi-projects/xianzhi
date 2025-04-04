@@ -81,37 +81,50 @@
     </select>
 
     <select id="pageUserList" resultMap="userMap">
+        WITH RECURSIVE dept_tree AS (
+        -- 锚定成员：选择指定的部门
+        SELECT id
+        FROM sys_department
+        WHERE id = #{userPage.departmentId}
+        AND deleted_flag = 0
+        UNION ALL
+        -- 递归成员：选择子部门
+        SELECT d.id
+        FROM sys_department d
+        INNER JOIN dept_tree dt ON d.parent_id = dt.id
+        WHERE d.deleted_flag = 0
+        )
         SELECT u.id,
-               u.username,
-               u.nick_name,
-               u.real_name,
-               u.avatar,
-               u.email,
-               u.phone,
-               u.work_number,
-               u.user_status,
-               u.create_at,
-               p.id AS postId,
-               p.post_name
+        u.username,
+        u.nick_name,
+        u.real_name,
+        u.avatar,
+        u.email,
+        u.phone,
+        u.work_number,
+        u.user_status,
+        u.create_at,
+        d.id AS departmentId,
+        d.department_name,
+        p.id AS postId,
+        p.post_name
         FROM sys_user AS u
-                 LEFT JOIN sys_user_post AS up ON u.id = up.user_id
-            AND up.deleted_flag = 0
-                 LEFT JOIN sys_post AS p ON up.post_id = p.id
+        LEFT JOIN sys_user_post AS up ON u.id = up.user_id AND up.deleted_flag = 0
+        LEFT JOIN sys_post AS p ON up.post_id = p.id
+        LEFT JOIN sys_department AS d ON u.department_id = d.id AND d.deleted_flag = 0
         WHERE u.deleted_flag = 0
-        <if test="userPage.departmentId != null and userPage.departmentId != ''">
-            and department_id = #{userPage.departmentId}
-        </if>
+        AND u.department_id IN (SELECT id FROM dept_tree)
         <if test="userPage.nickName != null and userPage.nickName != ''">
-            and u.nick_name like CONCAT('%', #{userPage.nickName}, '%')
+            AND u.nick_name LIKE CONCAT('%', #{userPage.nickName}, '%')
         </if>
         <if test="userPage.realName != null and userPage.realName != ''">
-            and u.real_name like CONCAT('%', #{userPage.realName}, '%')
+            AND u.real_name LIKE CONCAT('%', #{userPage.realName}, '%')
         </if>
         <if test="userPage.workNumber != null and userPage.workNumber != ''">
-            and u.work_number = #{userPage.workNumber,jdbcType=VARCHAR}
+            AND u.work_number = #{userPage.workNumber,jdbcType=VARCHAR}
         </if>
         <if test="userPage.username != null and userPage.username != ''">
-            and u.username = #{userPage.username,jdbcType=VARCHAR}
+            AND u.username = #{userPage.username,jdbcType=VARCHAR}
         </if>
     </select>
 

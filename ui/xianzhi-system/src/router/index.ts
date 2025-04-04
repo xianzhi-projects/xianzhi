@@ -32,6 +32,7 @@ const baseRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'index',
+    redirect: '/analytics',
     component: Layout,
     children: [],
   },

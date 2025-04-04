@@ -111,6 +111,7 @@ export interface UserDTO {
    * 部门ID
    */
   departmentId: string
+  gender: string
 }
 
 /**

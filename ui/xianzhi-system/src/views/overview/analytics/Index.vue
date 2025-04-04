@@ -87,19 +87,17 @@
   </div>
 </template>
 
-<style lang="less" scoped>
-.analytics {
+<style lang="scss" scoped>
+.analytics{
   .el-col {
     .box-card {
       height: 200px;
       border-radius: 10px;
-      box-shadow: 0 2px 5px #f0f1f2;
       text-align: left;
       .item {
         font-size: 20px;
         line-height: 20px;
         font-weight: bold;
-        color: #111;
       }
       .view{
         display: flex;

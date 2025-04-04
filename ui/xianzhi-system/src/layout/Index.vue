@@ -20,22 +20,33 @@
       <Aside/>
       <el-container>
         <el-header>
+          <button @click="toggleDark()">
+            <span class="ml-2">{{ isDark ? 'Dark' : 'Light' }}</span>
+          </button>
           <Header/>
         </el-header>
         <Tables/>
         <el-main>
-          <RouterView/>
+          <transition name="el-zoom-in-left">
+            <RouterView/>
+          </transition>
+
         </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 <script lang="ts" setup>
+import {useToggle} from '@vueuse/shared'
+import {useDark} from '@vueuse/core'
 import Aside from "@/layout/components/Aside.vue";
 import Header from "@/layout/components/Header.vue";
 import Tables from "@/layout/components/Tables.vue";
 import {onBeforeMount} from "vue";
 import {refreshUserInfo} from "@/layout/index.ts";
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
 onBeforeMount(() => {
   refreshUserInfo()
@@ -46,15 +57,11 @@ onBeforeMount(() => {
   height: 100vh;
   min-height: 100vh;
   .el-header {
-    background-color: white;
-    color: #333;
     line-height: 60px;
     text-align: right;
     padding: 0 20px;
-    border-bottom: 1px solid #f1f1f1;
   }
   .el-main{
-    background-color: #eff1f4;
     padding: 10px;
   }
 }

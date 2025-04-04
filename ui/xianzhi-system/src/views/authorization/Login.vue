@@ -42,7 +42,7 @@
 import LoginForm from "@/views/authorization/LoginForm.vue";
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .login-page {
   display: flex;
   min-height: 100vh;

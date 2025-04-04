@@ -131,7 +131,7 @@ const handleLogin = async () => {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .login-form {
   padding: 50px;
   display: flex;

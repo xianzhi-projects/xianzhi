@@ -91,5 +91,6 @@ public class UserDTO implements Serializable {
      * 头像
      */
     private String avatar;
+    private String gender;
 
 }
