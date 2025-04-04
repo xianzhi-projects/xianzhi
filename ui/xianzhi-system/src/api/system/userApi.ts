@@ -37,6 +37,7 @@ export function pageUserList(page: UserPage): Promise<ResponseResult<ListResult<
   return http.request({
     url: BASE_SERVER + '/user/pageUserList',
     method: 'POST',
+    data: page,
   })
 }
 

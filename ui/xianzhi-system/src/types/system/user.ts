@@ -95,6 +95,6 @@ export interface UserPage extends Page {
   email?: string
   phone?: string
   userStatus?: string
-  department?: string
+  departmentId?: string
 }
 

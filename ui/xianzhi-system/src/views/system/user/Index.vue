@@ -15,7 +15,38 @@
   -->
 
 <script lang="ts" setup>
-import {append, userList} from "@/views/system/user/index.ts";
+import {
+  append,
+  departmentList,
+  onSelect,
+  refreshDepartmentList,
+  refreshUserList,
+  selectedNode,
+  userList
+} from "@/views/system/user/index.ts";
+import {onBeforeMount, ref, watch} from "vue";
+
+import type {UserPage} from "@/types/system/user.ts";
+
+const userPage = ref<UserPage>({
+  pageNo: 1,
+  pageSize: 10,
+  departmentId:''
+
+})
+onBeforeMount(() => {
+  refreshDepartmentList()
+  refreshUserList(userPage.value)
+})
+
+// 监听选中的节点
+watch(() => selectedNode.value, (newVal) => {
+  console.log('选中的节点', newVal)
+  userPage.value.departmentId = newVal?.id
+  refreshUserList(userPage.value)
+  },
+)
+
 </script>
 
 <template>
@@ -24,12 +55,13 @@ import {append, userList} from "@/views/system/user/index.ts";
       <el-col :span="5">
         <el-card class="department" header="部门信息">
           <el-tree
-            :data="userList"
+            :data="departmentList"
             :default-expand-all="true"
             :empty-text="'部门信息为空'"
-            :props="{ label: 'name', children: 'children' }"
+            :props="{ label: 'departmentName', children: 'children' }"
             highlight-current
             node-key="id"
+            @node-click="onSelect"
           />
         </el-card>
       </el-col>
@@ -39,19 +71,19 @@ import {append, userList} from "@/views/system/user/index.ts";
             <el-card>
               <el-form>
                 <el-form-item label="用户名">
-                  <el-input />
+                  <el-input/>
                 </el-form-item>
                 <el-form-item label="昵称">
-                  <el-input />
+                  <el-input/>
                 </el-form-item>
                 <el-form-item label="真实姓名">
-                  <el-input />
+                  <el-input/>
                 </el-form-item>
                 <el-form-item label="上级菜单">
-                  <el-input />
+                  <el-input/>
                 </el-form-item>
                 <el-form-item label="上级菜单">
-                  <el-input />
+                  <el-input/>
                 </el-form-item>
               </el-form>
             </el-card>
@@ -64,16 +96,10 @@ import {append, userList} from "@/views/system/user/index.ts";
                   <el-button size="small" type="primary" @click="append(null)">添加用户</el-button>
                 </div>
               </template>
-              <el-table :data="userList" :empty-text="'暂无数据'" style="width: 100%">
-                <el-table-column label="头像" prop="date" />
-                <el-table-column label="用户名" prop="name" />
-                <el-table-column label="昵称" prop="state" />
-                <el-table-column label="部门" prop="department" />
-                <el-table-column label="真实姓名" prop="city" />
-                <el-table-column label="邮箱地址" prop="address" />
-                <el-table-column label="手机号码" prop="zip" />
-                <el-table-column label="用户状态" prop="userStatus" />
-                <el-table-column label="创建时间" prop="createAt" />
+              <el-table :data="userList" :empty-text="'暂无数据'" style="width: 100%;height: 100%">
+                <el-table-column label="头像" prop="avatar"/>
+                <el-table-column label="用户名" prop="username"/>
+                <el-table-column label="昵称" prop="nickName"/>
                 <el-table-column fixed="right" label="操作">
                   <template #default>
                     <el-button link size="small" type="primary">Edit</el-button>
@@ -118,6 +144,7 @@ import {append, userList} from "@/views/system/user/index.ts";
 
     .user-list {
       flex: 1;
+
       .el-card {
         height: 100%;
         display: flex;

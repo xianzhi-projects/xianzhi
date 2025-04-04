@@ -15,14 +15,47 @@
  */
 
 import {ref} from 'vue';
-import type {UserVO} from "@/types/system/user.ts";
+import type {UserPage, UserVO} from "@/types/system/user.ts";
+import type {DepartmentVO} from "@/types/system/department.ts";
+import {getDepartmentTree} from "@/api/system/departmentApi.ts";
+import {pageUserList} from "@/api/system/userApi.ts";
 
 
 export const userList = ref<UserVO[]>()
 
 
-export async function refreshUserList() {
+export const departmentList = ref<DepartmentVO[]>()
 
+export const selectedNode = ref<DepartmentVO>({
+  id: '',
+  departmentName: '',
+  departmentDesc: '',
+  departmentSort: 0,
+  children: []
+})
+
+export const onSelect = (data: DepartmentVO) => {
+  selectedNode.value = data
+
+}
+
+export async function refreshUserList(userPage: UserPage) {
+  const  rep = await pageUserList(userPage);
+  if (rep.code === '200' && rep.data) {
+    userList.value = rep.data.list;
+  }else{
+    userList.value = [];
+  }
+
+}
+
+export async function refreshDepartmentList() {
+  const rep = await getDepartmentTree();
+  if (rep.code === '200' && rep.data) {
+    departmentList.value = rep.data;
+  } else {
+    departmentList.value = [];
+  }
 }
 
 

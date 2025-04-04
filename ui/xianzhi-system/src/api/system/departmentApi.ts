@@ -14,3 +14,17 @@
  *  limitations under the License.
  */
 
+import type {DepartmentVO} from "@/types/system/department.ts";
+import http from "@/api";
+import {BASE_SERVER} from "@/constants/ServerConstant.ts";
+import type {ResponseResult} from "@/types/core.ts";
+
+/**
+ * 获取部门树形结构
+ */
+export function getDepartmentTree(): Promise<ResponseResult<DepartmentVO[]>> {
+  return http.request({
+    url: BASE_SERVER + '/department/getDepartmentTree',
+    method: 'GET',
+  })
+}
