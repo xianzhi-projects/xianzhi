@@ -20,7 +20,7 @@ import type {DepartmentVO} from "@/types/system/department.ts";
 import {getDepartmentTree} from "@/api/system/departmentApi.ts";
 import {pageUserList} from "@/api/system/userApi.ts";
 
-
+export const dialogFormVisible = ref(false)
 export const userList = ref<UserVO[]>()
 
 
@@ -48,6 +48,8 @@ export async function refreshUserList(userPage: UserPage) {
   }
 
 }
+
+
 
 export async function refreshDepartmentList() {
   const rep = await getDepartmentTree();

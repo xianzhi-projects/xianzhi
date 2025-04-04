@@ -16,8 +16,8 @@
 
 <script lang="ts" setup>
 import {
-  append,
   departmentList,
+  dialogFormVisible,
   onSelect,
   refreshDepartmentList,
   refreshUserList,
@@ -27,6 +27,7 @@ import {
 import {onBeforeMount, ref, watch} from "vue";
 
 import type {UserPage} from "@/types/system/user.ts";
+import UserEdit from "@/views/system/user/UserEdit.vue";
 
 const userPage = ref<UserPage>({
   pageNo: 1,
@@ -57,9 +58,10 @@ watch(() => selectedNode.value, (newVal) => {
           <el-tree
             :data="departmentList"
             :default-expand-all="true"
+            :expand-on-click-node="false"
+            :highlight-current="true"
             :empty-text="'部门信息为空'"
             :props="{ label: 'departmentName', children: 'children' }"
-            highlight-current
             node-key="id"
             @node-click="onSelect"
           />
@@ -93,13 +95,22 @@ watch(() => selectedNode.value, (newVal) => {
               <template #header>
                 <div class="card-header">
                   <span>用户列表</span>
-                  <el-button size="small" type="primary" @click="append(null)">添加用户</el-button>
+                  <el-button size="small" type="primary" @click="dialogFormVisible = true">添加用户</el-button>
                 </div>
               </template>
               <el-table :data="userList" :empty-text="'暂无数据'" style="width: 100%;height: 100%">
-                <el-table-column label="头像" prop="avatar"/>
+                <el-table-column label="头像" prop="avatar">
+                  <template #default="scope">
+                    <div style="display: flex; align-items: center">
+                      <el-avatar :size="40" :src="scope.row.avatar" />
+                    </div>
+                  </template>
+                </el-table-column>
                 <el-table-column label="用户名" prop="username"/>
                 <el-table-column label="昵称" prop="nickName"/>
+                <el-table-column label="真实姓名" prop="realName"/>
+                <el-table-column label="邮箱地址" prop="email"/>
+                <el-table-column label="手机号码" prop="phone"/>
                 <el-table-column fixed="right" label="操作">
                   <template #default>
                     <el-button link size="small" type="primary">Edit</el-button>
@@ -111,6 +122,7 @@ watch(() => selectedNode.value, (newVal) => {
         </div>
       </el-col>
     </el-row>
+    <UserEdit/>
   </div>
 </template>
 
@@ -143,8 +155,14 @@ watch(() => selectedNode.value, (newVal) => {
     }
 
     .user-list {
-      flex: 1;
+      .card-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+        height: 50px;
 
+      }
       .el-card {
         height: 100%;
         display: flex;
@@ -170,6 +188,7 @@ watch(() => selectedNode.value, (newVal) => {
           }
         }
       }
+
     }
   }
 }

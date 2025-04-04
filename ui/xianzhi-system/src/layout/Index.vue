@@ -53,6 +53,10 @@ onBeforeMount(() => {
     padding: 0 20px;
     border-bottom: 1px solid #f1f1f1;
   }
+  .el-main{
+    background-color: #eff1f4;
+    padding: 10px;
+  }
 }
 
 

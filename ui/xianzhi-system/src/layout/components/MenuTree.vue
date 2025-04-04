@@ -54,15 +54,24 @@ const menuList = defineModel('menuList')
 
 
 <style lang="less" scoped>
-.el-menu-item.is-active{
-  background-color: #5356e0;
-  color: #fff;
-  border-radius: 15px;
+.el-menu-item{
+  padding: 0;
+  color: #333;
+  width: 95%;
+  margin: 0 auto;
+  height: 50px;
 }
-.el-menu-item:hover{
-  background-color: #5356e0;
-  color: #fff;
-  border-radius: 15px;
+.el-sub-menu{
+  padding: 0;
+  color: #333;
+  width: 95%;
+  margin: 0 auto;
+}
+.el-menu-item.is-active{
+  background-color: #d7e7f9;
+  color: #333;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 

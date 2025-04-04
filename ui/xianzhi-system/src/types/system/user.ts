@@ -74,21 +74,49 @@ export interface UserVO {
 
 }
 
-
+/**
+ * 用户信息入参
+ */
 export interface UserDTO {
+  /**
+   * 用户ID
+   */
   id: string
+  /**
+   * 用户名
+   */
   username: string
+  /**
+   * 密码
+   */
   password: string
+  /**
+   * 邮箱地址
+   */
   email: string
+  /**
+   * 手机号码
+   */
   phone: string
-  status: number
-  createTime: string
-  updateTime: string
+  /**
+   * 用户昵称
+   */
+  nickName: string,
+  /**
+   * 用户真实姓名
+   */
+  realName: string
+
+  /**
+   * 部门ID
+   */
+  departmentId: string
 }
 
-
+/**
+ * 用户查询条件
+ */
 export interface UserPage extends Page {
-
   username?: string
   nickName?: string
   realName?: string
