@@ -15,7 +15,7 @@
   -->
 
 <script lang="ts" setup>
-import {departmentList, onSelect,} from "@/views/system/user/index.ts";
+import {departmentList, onSelect, selectedNode,} from "@/views/system/user/index.ts";
 import UserSearch from "@/views/system/user/UserSearch.vue";
 import UserList from "@/views/system/user/UserList.vue";
 </script>
@@ -30,6 +30,7 @@ import UserList from "@/views/system/user/UserList.vue";
             :default-expand-all="true"
             :expand-on-click-node="false"
             :highlight-current="true"
+            :current-node-key="selectedNode?.id"
             :empty-text="'部门信息为空'"
             :props="{ label: 'departmentName', children: 'children' }"
             node-key="id"
@@ -37,9 +38,9 @@ import UserList from "@/views/system/user/UserList.vue";
           />
         </el-card>
       </el-col>
-      <el-col :span="21">
-        <UserSearch/>
-        <UserList/>
+      <el-col :span="21" class="content">
+        <UserSearch class="search mb-10"/>
+        <UserList class="user-list"/>
       </el-col>
     </el-row>
   </div>
@@ -48,11 +49,8 @@ import UserList from "@/views/system/user/UserList.vue";
 <style lang="less" scoped>
 .container {
   height: calc(-88px + 90vh);
-  .el-row {
+  .content{
     height: 100%;
-    .department {
-      height: 100%;
-    }
   }
 }
 

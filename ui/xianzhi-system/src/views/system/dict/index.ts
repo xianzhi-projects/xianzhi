@@ -13,12 +13,4 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-$--colors: (
-        'primary': (
-                'base': #589ef8,
-        ),
-);
 
-@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
-  $colors: $--colors
-);

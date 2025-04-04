@@ -84,10 +84,15 @@ watch(() => selectedNode.value, (newVal) => {
 
 <style lang="scss" scoped>
 .user-list{
-  .card-header{
-    display: flex;
-    justify-content: space-between;
+  height: 100%;
+  .el-card{
+    height: 100%;
+    .card-header{
+      display: flex;
+      justify-content: space-between;
+    }
   }
+
 }
 
 </style>

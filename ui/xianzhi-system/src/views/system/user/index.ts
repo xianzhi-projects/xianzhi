@@ -59,8 +59,14 @@ export async function refreshUserList(userPage: UserPage) {
 
 export async function refreshDepartmentList() {
   const rep = await getDepartmentTree();
+
   if (rep.code === '200' && rep.data) {
     departmentList.value = rep.data;
+    if (selectedNode.value.id === '') {
+      selectedNode.value = rep.data[0];
+
+
+    }
   } else {
     departmentList.value = [];
   }
