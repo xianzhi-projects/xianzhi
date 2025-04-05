@@ -6,17 +6,11 @@ import {
   refreshUserList,
   selectedNode,
   total,
-  userList
+  userList,
+  userPage
 } from "@/views/system/user/index.ts";
-import {onBeforeMount, ref, watch} from "vue";
-import type {UserPage} from "@/types/system/user.ts";
+import {onBeforeMount, watch} from "vue";
 import UserEdit from "@/views/system/user/UserEdit.vue";
-
-const userPage = ref<UserPage>({
-  pageNo: 1,
-  pageSize: 10,
-  departmentId: ''
-});
 
 
 onBeforeMount(() => {
@@ -69,6 +63,7 @@ const handleSizeChange = (newSize: number) => {
           </el-table-column>
           <el-table-column label="用户名" prop="username" />
           <el-table-column label="昵称" prop="nickName" />
+          <el-table-column label="工号" prop="workNumber" />
           <el-table-column label="真实姓名" prop="realName" />
           <el-table-column label="邮箱地址" prop="email" />
           <el-table-column label="手机号码" prop="phone" />
