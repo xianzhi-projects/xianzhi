@@ -16,6 +16,7 @@
 
 package io.xianzhi.system.model.code;
 
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.result.Result;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +33,15 @@ public enum DepartmentCode implements Result {
     /**
      * 部门名称已经存在
      */
-    DEPARTMENT_NAME_EXISTS("10001", "部门名称已存在!"),
+    DEPARTMENT_NAME_EXISTS(CommonCode.DATA_EXISTS.code(), "sys.department.name.exists"),
+    /**
+     * 部门不存在
+     */
+    DEPARTMENT_NOT_EXISTS(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.not.exists"),
+    /**
+     * 父级部门不存在
+     */
+    PARENT_DEPARTMENT_NOT_EXISTS(CommonCode.DATA_NOT_EXISTS.code(), "sys.department.parent.not.exists"),
 
     ;
     /**

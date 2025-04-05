@@ -105,7 +105,7 @@ const onSubmit = () => {
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button @click="dialogFormVisible = false">取消</el-button>
         <el-button type="primary" @click="onSubmit">
           添加
         </el-button>

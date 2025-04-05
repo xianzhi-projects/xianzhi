@@ -76,4 +76,9 @@ public class UserDO extends BaseDO {
      * 用户状态
      */
     private String userStatus;
+
+    /**
+     * 备注
+     */
+    private String remark;
 }
