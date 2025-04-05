@@ -19,6 +19,7 @@
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="我创建的" name="first">User</el-tab-pane>
       <el-tab-pane label="待合并" name="second">Config</el-tab-pane>
+      <el-tab-pane label="已合并" name="aa">Config</el-tab-pane>
       <el-tab-pane label="待我评审" name="third">Role</el-tab-pane>
     </el-tabs>
   </div>
