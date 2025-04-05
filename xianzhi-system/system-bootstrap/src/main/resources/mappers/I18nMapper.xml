@@ -17,19 +17,35 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.xianzhi.system.bootstrap.dao.mapper.I18nMapper">
-
+    <resultMap id="i18nVOResult" type="io.xianzhi.system.model.vo.I18nVO">
+        <id column="id" property="id" javaType="java.lang.String"/>
+        <result column="message_title" property="messageTitle" javaType="java.lang.String"/>
+        <result column="message_key" property="messageKey" javaType="java.lang.String"/>
+        <result column="message_desc" property="messageDesc" javaType="java.lang.String"/>
+        <result column="create_at" property="createAt" javaType="java.util.Date"/>
+        <association property="createBY" javaType="io.xianzhi.system.model.vo.UserVO">
+            <id column="userId" property="id" javaType="java.lang.String"/>
+            <result column="nick_name" property="nickName" javaType="java.lang.String"/>
+            <result column="work_number" property="workNumber" javaType="java.lang.String"/>
+        </association>
+    </resultMap>
     <select id="pageI18nList" resultType="io.xianzhi.system.model.vo.I18nVO">
-        SELECT id,message_title,message_key,message_desc,create_at,create_by FROM sys_i18n where deleted_flag = 1
+        SELECT
+        i18n.id,i18n.message_title,i18n.message_key,i18n.message_desc,i18n.create_at,u.id as
+        userId,u.nick_name,u.work_number FROM
+        sys_i18n as i18n left join
+        xianzhi.sys_user as u on i18n.create_by = u.id and u.deleted_flag = 0 where
+        i18n.deleted_flag = 1
         <if test="i18nPage.messageTitle != null and i18nPage.messageTitle != ''">
-            AND message_title LIKE CONCAT('%', #{i18nPage.messageTitle}, '%')
+            AND i18n.message_title LIKE CONCAT('%', #{i18nPage.messageTitle}, '%')
         </if>
         <if test="i18nPage.messageKey != null and i18nPage.messageKey != ''">
-            AND message_key #{i18nPage.messageKey}
+            AND i18n.message_key #{i18nPage.messageKey}
         </if>
         <if test="i18nPage.messageDesc != null and i18nPage.messageDesc != ''">
-            AND message_desc LIKE CONCAT('%', #{i18nPage.messageDesc}, '%')
+            AND i18n.message_desc LIKE CONCAT('%', #{i18nPage.messageDesc}, '%')
         </if>
-        ORDER BY create_at DESC
+        ORDER BY i18n.create_at DESC
 
     </select>
 </mapper>

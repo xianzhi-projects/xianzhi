@@ -15,22 +15,34 @@
   -->
 
 <script lang="ts" setup>
-
-import I18nList from "@/views/system/i18n/I18nList.vue";
-import I18nItemList from "@/views/system/i18n/I18nItemList.vue";
+import {ElButton} from "element-plus";
+import {itemDialogFormVisible} from "@/views/system/i18n/index.ts";
 </script>
 
 <template>
-  <el-row :gutter="16" style="margin-left: 0; margin-right: 0">
-    <el-col :span="16">
-      <I18nList/>
-    </el-col>
-    <el-col :span="8">
-      <I18nItemList/>
-    </el-col>
-  </el-row>
+  <el-card class="box-card">
+    <template #header>
+      <div class="card-header">
+        <div>
+
+        </div>
+        <el-button size="small" type="primary" @click="itemDialogFormVisible = true">添加资源</el-button>
+      </div>
+    </template>
+    <div class="">
+    </div>
+    <div class="">
+    </div>
+
+  </el-card>
+
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 </style>

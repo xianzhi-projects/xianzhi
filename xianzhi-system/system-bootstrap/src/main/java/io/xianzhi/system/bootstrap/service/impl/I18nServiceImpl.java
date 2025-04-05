@@ -52,8 +52,9 @@ public class I18nServiceImpl implements I18nService {
     @Override
     public ListResult<I18nVO> pageI18nList(I18nPage i18nPage) {
         IPage<I18nVO> i18nPageResult = i18nMapper.pageI18nList(new Page<>(i18nPage.getPageNo(), i18nPage.getPageSize()), i18nPage);
-
-
-        return null;
+        if (i18nPageResult.getRecords().isEmpty()) {
+            return ListResult.empty();
+        }
+        return ListResult.of(i18nPageResult.getRecords(), i18nPageResult.getTotal());
     }
 }

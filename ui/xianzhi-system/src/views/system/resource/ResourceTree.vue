@@ -38,7 +38,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <el-card class="box-card" header="资源列表">
+  <el-card class="box-card">
     <template #header>
       <div class="card-header">
         <span>资源列表</span>
