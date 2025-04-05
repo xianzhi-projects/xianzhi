@@ -31,4 +31,19 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class I18nPage extends Page implements Serializable {
+
+    /**
+     * 国际化名称
+     */
+    private String messageTitle;
+    /**
+     * 国际化key
+     */
+    private String messageKey;
+    /**
+     * 国际描述
+     */
+    private String messageDesc;
+
+
 }

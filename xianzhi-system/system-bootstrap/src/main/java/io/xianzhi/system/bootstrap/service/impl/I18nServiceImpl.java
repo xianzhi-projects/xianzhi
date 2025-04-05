@@ -16,7 +16,13 @@
 
 package io.xianzhi.system.bootstrap.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.bootstrap.dao.mapper.I18nMapper;
 import io.xianzhi.system.bootstrap.service.I18nService;
+import io.xianzhi.system.model.page.I18nPage;
+import io.xianzhi.system.model.vo.I18nVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +37,23 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class I18nServiceImpl implements I18nService {
+
+    /**
+     * 国际化信息持久层
+     */
+    private final I18nMapper i18nMapper;
+
+    /**
+     * 分页查询国际化列表
+     *
+     * @param i18nPage 查询条件
+     * @return 国际化列表
+     */
+    @Override
+    public ListResult<I18nVO> pageI18nList(I18nPage i18nPage) {
+        IPage<I18nVO> i18nPageResult = i18nMapper.pageI18nList(new Page<>(i18nPage.getPageNo(), i18nPage.getPageSize()), i18nPage);
+
+
+        return null;
+    }
 }

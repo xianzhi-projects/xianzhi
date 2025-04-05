@@ -31,4 +31,17 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "sys_i18n")
 @EqualsAndHashCode(callSuper = true)
 public class I18nDO extends BaseDO {
+
+    /**
+     * 国际化消息名称
+     */
+    private String messageTitle;
+    /**
+     * 国际化消息key
+     */
+    private String messageKey;
+    /**
+     * 国际化消息描述
+     */
+    private String messageDesc;
 }

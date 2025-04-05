@@ -19,6 +19,7 @@ package io.xianzhi.system.model.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 国际化信息出参
@@ -28,4 +29,29 @@ import java.io.Serializable;
  */
 @Data
 public class I18nVO implements Serializable {
+
+    /**
+     * 主键ID
+     */
+    private String id;
+    /**
+     * 国际化名称
+     */
+    private String messageTitle;
+    /**
+     * 国际化key
+     */
+    private String messageKey;
+    /**
+     * 国际描述
+     */
+    private String messageDesc;
+    /**
+     * 创建人
+     */
+    private UserVO createBY;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createAt;
 }

@@ -16,6 +16,10 @@
 
 package io.xianzhi.system.bootstrap.service;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.system.model.page.I18nPage;
+import io.xianzhi.system.model.vo.I18nVO;
+
 /**
  * 国际化接口
  *
@@ -23,4 +27,12 @@ package io.xianzhi.system.bootstrap.service;
  * @since 1.0.0
  */
 public interface I18nService {
+    /**
+     * 分页查询国际化列表
+     *
+     * @param i18nPage 查询条件
+     * @return 国际化列表
+     */
+    ListResult<I18nVO> pageI18nList(I18nPage i18nPage);
+
 }

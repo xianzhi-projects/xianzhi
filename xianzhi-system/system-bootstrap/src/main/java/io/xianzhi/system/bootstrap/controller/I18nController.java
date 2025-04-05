@@ -16,8 +16,15 @@
 
 package io.xianzhi.system.bootstrap.controller;
 
+import io.xianzhi.core.result.ListResult;
+import io.xianzhi.core.result.ResponseResult;
 import io.xianzhi.system.bootstrap.service.I18nService;
+import io.xianzhi.system.model.page.I18nPage;
+import io.xianzhi.system.model.vo.I18nVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,4 +43,16 @@ public class I18nController {
      * 国际化接口
      */
     private final I18nService i18nService;
+
+    /**
+     * 分页查询国际化列表
+     *
+     * @param i18nPage 查询条件
+     * @return 国际化列表
+     */
+    @PreAuthorize("@xz.hasPermission('system:i18n:list')")
+    @PostMapping(value = "/pageI18nList")
+    public ResponseResult<ListResult<I18nVO>> pageI18nList(@RequestBody I18nPage i18nPage) {
+        return ResponseResult.success(i18nService.pageI18nList(i18nPage));
+    }
 }
