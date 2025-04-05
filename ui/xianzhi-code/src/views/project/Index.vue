@@ -15,14 +15,17 @@
   -->
 
 <template>
-  <div style="width: 100%; max-width: 1200px; margin: 0 auto;">
+  <div style="width: 100%; margin: 0 auto;display: flex;justify-content: space-between;">
+    <div style="display: flex;justify-content: space-between">
+      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+        <el-tab-pane label="我参与的项目" name="first">User</el-tab-pane>
+        <el-tab-pane label="我管理的项目" name="second">Config</el-tab-pane>
+      </el-tabs>
+    </div>
     <div>
       <el-button>新增项目</el-button>
     </div>
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-      <el-tab-pane label="我参与的项目" name="first">User</el-tab-pane>
-      <el-tab-pane label="我管理的项目" name="second">Config</el-tab-pane>
-    </el-tabs>
+
   </div>
 </template>
 
@@ -38,10 +41,5 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 
 <style>
-.demo-tabs > .el-tabs__content {
-  padding: 32px;
-  color: #6b778c;
-  font-size: 32px;
-  font-weight: 600;
-}
+
 </style>

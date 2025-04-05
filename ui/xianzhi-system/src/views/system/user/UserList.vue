@@ -49,7 +49,12 @@ const handleSizeChange = (newSize: number) => {
       <template #header>
         <div class="card-header">
           <span>用户列表</span>
-          <el-button size="small" type="primary" @click="dialogFormVisible = true">添加用户</el-button>
+          <div>
+            <el-button-group>
+              <el-button  type="primary" @click="dialogFormVisible = true">添加用户</el-button>
+              <el-button type="primary">批量删除</el-button>
+            </el-button-group>
+          </div>
         </div>
       </template>
       <div class="table-container">

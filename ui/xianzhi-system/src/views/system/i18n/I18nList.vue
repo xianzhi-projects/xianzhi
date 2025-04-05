@@ -86,6 +86,7 @@ import {loading, total, userList, userPage} from "@/views/system/user/index.ts";
   .el-form{
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     .el-form-item{
       margin-left: 10px;
     }

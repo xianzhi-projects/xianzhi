@@ -21,11 +21,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.bootstrap.dao.mapper.I18nMapper;
 import io.xianzhi.system.bootstrap.service.I18nService;
+import io.xianzhi.system.model.dto.I18nDTO;
+import io.xianzhi.system.model.dto.I18nItemDTO;
 import io.xianzhi.system.model.page.I18nPage;
+import io.xianzhi.system.model.vo.I18nItemVO;
 import io.xianzhi.system.model.vo.I18nVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 国际化接口实现
@@ -56,5 +61,78 @@ public class I18nServiceImpl implements I18nService {
             return ListResult.empty();
         }
         return ListResult.of(i18nPageResult.getRecords(), i18nPageResult.getTotal());
+    }
+
+    /**
+     * 新增国际化
+     *
+     * @param i18nDTO 国际化对象
+     * @return 国际化ID
+     */
+    @Override
+    public String createI18n(I18nDTO i18nDTO) {
+        return "";
+    }
+
+    /**
+     * 更新国际化
+     *
+     * @param i18nDTO 国际化对象
+     */
+    @Override
+    public void updateI18n(I18nDTO i18nDTO) {
+
+    }
+
+    /**
+     * 删除国际化
+     *
+     * @param ids 国际化ID列表
+     */
+    @Override
+    public void deletedI18n(List<String> ids) {
+
+    }
+
+    /**
+     * 查询国际化项列表
+     *
+     * @param i18nId 国际化ID
+     * @return 国际化项列表
+     */
+    @Override
+    public ListResult<I18nItemVO> getI18nItemList(String i18nId) {
+        return null;
+    }
+
+    /**
+     * 新增国际化项
+     *
+     * @param i18nItemDTO 国际化项对象
+     * @return 国际化项ID
+     */
+    @Override
+    public String createI18nItem(I18nItemDTO i18nItemDTO) {
+        return "";
+    }
+
+    /**
+     * 更新国际化项
+     *
+     * @param i18nItemDTO 国际化项对象
+     */
+    @Override
+    public void updateI18nItem(I18nItemDTO i18nItemDTO) {
+
+    }
+
+    /**
+     * 删除国际化项
+     *
+     * @param ids 国际化项ID列表
+     */
+    @Override
+    public void deletedI18nItem(List<String> ids) {
+
     }
 }

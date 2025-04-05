@@ -15,21 +15,28 @@
   -->
 
 <script lang="ts" setup>
-
+import imageUrl from '@/assets/logo.png';
 </script>
 
 <template>
-  <div>
+  <div class="wrapper">
+    <div style="display: flex; align-items: center;">
+      <el-image
+        :src="imageUrl"
+        fit="contain"
+        style="width: 100%; max-width: 64px; margin: 0 auto;"
+      />
+      <a class="title">先知代码托管平台</a>
+    </div>
+
     <el-menu
       :default-active="1"
       :router="true"
       background-color="transparent"
       class="el-menu-demo"
       mode="horizontal"
-      style="margin: 0 auto; width: 100%; max-width: 1200px;"
       @select="handleSelect"
     >
-      <el-menu-item index="/" >首页</el-menu-item>
       <el-menu-item index="/projects">项目</el-menu-item>
       <el-menu-item index="/project_group">分组</el-menu-item>
       <el-menu-item index="/pull_request">合并请求</el-menu-item>
@@ -37,6 +44,17 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.wrapper{
+  display: flex;
+  justify-content: flex-start;
+  .title{
+    margin-left: 30px;
+  }
+  .el-menu{
+    width: 500px;
+    margin-left: 50px;
+  }
+}
 
 </style>

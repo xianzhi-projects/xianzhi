@@ -36,6 +36,10 @@ import Header from "@/layout/components/Header.vue";
 <style lang="scss" scoped>
 .el-header{
 }
+:deep(.el-menu--horizontal.el-menu){
+  background-color: transparent;
+  border-bottom: none;
+}
 .el-main{
   height: calc(-40px + 95vh);
   background-color: #f5f7fa;
