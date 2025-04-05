@@ -33,4 +33,23 @@ public class RoleVO implements Serializable {
      * 主键ID
      */
     private String id;
+
+    /**
+     * 角色编码
+     */
+    private String roleCode;
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
+
+    /**
+     * 角色描述
+     */
+    private String roleDesc;
+    /**
+     * 创建时间
+     */
+    private String createAt;
 }

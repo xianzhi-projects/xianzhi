@@ -32,6 +32,10 @@ public enum DictCodeEnum {
      * 性别
      */
     GENDER("GENDER", "性别"),
+    /**
+     * 是否
+     */
+    YES_NO("YES_NO", "是否"),
 
 
     ;
