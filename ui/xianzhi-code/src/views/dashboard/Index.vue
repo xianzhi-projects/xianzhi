@@ -16,30 +16,14 @@
 
 <script lang="ts" setup>
 
-import Header from "@/layout/components/Header.vue";
 </script>
 
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
-        <Header/>
-      </el-header>
-      <el-main>
-        <router-view/>
-      </el-main>
-      <el-footer>Footer</el-footer>
-    </el-container>
+  <div>
+    dashboard
   </div>
 </template>
 
-<style lang="scss" scoped>
-.el-header{
-}
-.el-main{
-  height: calc(-40px + 95vh);
-  background-color: #f5f7fa;
-  padding: 20px;
-}
+<style scoped>
 
 </style>

@@ -14,32 +14,31 @@
   -  limitations under the License.
   -->
 
-<script lang="ts" setup>
-
-import Header from "@/layout/components/Header.vue";
-</script>
-
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
-        <Header/>
-      </el-header>
-      <el-main>
-        <router-view/>
-      </el-main>
-      <el-footer>Footer</el-footer>
-    </el-container>
+  <div style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+      <el-tab-pane label="我参与的项目" name="first">User</el-tab-pane>
+      <el-tab-pane label="我管理的项目" name="second">Config</el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.el-header{
-}
-.el-main{
-  height: calc(-40px + 95vh);
-  background-color: #f5f7fa;
-  padding: 20px;
-}
+<script lang="ts" setup>
+import {ref} from 'vue'
+import type {TabsPaneContext} from 'element-plus'
 
+const activeName = ref('first')
+
+const handleClick = (tab: TabsPaneContext, event: Event) => {
+  console.log(tab, event)
+}
+</script>
+
+<style>
+.demo-tabs > .el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
 </style>
