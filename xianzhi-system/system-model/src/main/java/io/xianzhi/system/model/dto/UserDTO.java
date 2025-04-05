@@ -91,6 +91,15 @@ public class UserDTO implements Serializable {
      * 头像
      */
     private String avatar;
+    /**
+     * 性别
+     */
     private String gender;
+    /**
+     * 备注
+     */
+    @Length(max = 255, message = "备注长度不能超过255个字符", groups = {CreateGroup.class, UpdateGroup.class})
+    private String remark;
+
 
 }
