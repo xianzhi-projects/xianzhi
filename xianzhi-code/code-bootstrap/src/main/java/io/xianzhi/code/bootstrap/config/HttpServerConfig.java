@@ -48,7 +48,7 @@ public class HttpServerConfig {
     /**
      * 默认的 Git Servlet 映射路径
      */
-    private static final String GIT_SERVLET_MAPPING = "/*";
+    private static final String GIT_SERVLET_MAPPING = "*.git";
     /**
      * Git Servlet 的名称
      */

@@ -15,11 +15,12 @@
   -->
 
 <template>
-  <div style="width: 100%; margin: 0 auto;display: flex;justify-content: space-between;">
-    <div style="display: flex;justify-content: space-between">
+  <div style="width: 1200px; margin: 0 auto;display: flex;justify-content: space-between;">
+    <div >
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="我参与的项目" name="first">User</el-tab-pane>
         <el-tab-pane label="我管理的项目" name="second">Config</el-tab-pane>
+
       </el-tabs>
     </div>
     <div>
