@@ -33,4 +33,9 @@ public class SystemParamVO implements Serializable {
      * 主键ID
      */
     private String id;
+
+    /**
+     * 参数值
+     */
+    private String paramValue;
 }

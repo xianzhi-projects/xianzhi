@@ -14,18 +14,33 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.system.model.constants;
+package io.xianzhi.system.model.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * 系统参数常量
+ * 系统参数枚举
  *
  * @author Max
  * @since 1.0.0
  */
-public interface SystemParamConstant {
+@Getter
+@AllArgsConstructor
+public enum SystemParamEnum {
 
+    /**
+     * 代码服务地址
+     */
+    CODE_SERVER_URL("CODE_SERVER_URL", "代码服务地址"),
 
-
-
-
+    ;
+    /**
+     * 参数编码
+     */
+    private final String code;
+    /**
+     * 参数描述
+     */
+    private final String desc;
 }

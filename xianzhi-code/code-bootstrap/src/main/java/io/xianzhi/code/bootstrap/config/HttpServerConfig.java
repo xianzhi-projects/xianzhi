@@ -102,6 +102,11 @@ public class HttpServerConfig {
     private final ReceivePackFactory<HttpServletRequest> receivePackFactory;
 
     /**
+     * Git 过滤器，用于处理 HTTP 请求并将其转发到 GitServlet。
+     */
+    private final GitFilter gitFilter;
+
+    /**
      * 配置并返回 GitServlet 实例，用于处理 Git 的 HTTP 请求。
      *
      * @return 配置完成的 {@link GitServlet} 对象
@@ -131,15 +136,13 @@ public class HttpServerConfig {
     @Bean
     public FilterRegistrationBean<GitFilter> gitFilter(GitServlet gitServlet, CodeServerProperties codeServerProperties) {
         FilterRegistrationBean<GitFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new GitFilter(gitServlet,codeServerProperties));
+        registrationBean.setFilter(gitFilter);
         registrationBean.addUrlPatterns("/*");
         registrationBean.setName("GitFilter");
         registrationBean.setOrder(1);
         log.info("Registered GitFilter for Git requests");
         return registrationBean;
     }
-
-
 
 
     /**

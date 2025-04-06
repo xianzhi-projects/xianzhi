@@ -17,11 +17,19 @@
 package io.xianzhi.code.bootstrap.filter;
 
 import io.xianzhi.code.bootstrap.properties.CodeServerProperties;
+import io.xianzhi.core.code.CommonCode;
+import io.xianzhi.core.exception.BusinessException;
+import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.system.facade.SystemParamFacade;
+import io.xianzhi.system.model.enums.SystemParamEnum;
+import io.xianzhi.system.model.vo.SystemParamVO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.http.server.GitServlet;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -30,17 +38,22 @@ import java.io.IOException;
  * @since 1.0.0
  */
 @Slf4j
+@Component
+@RequiredArgsConstructor
 public class GitFilter implements Filter {
-
+    /**
+     * GitServlet 实例，用于处理 Git 请求
+     */
     private final GitServlet gitServlet;
+    /**
+     * CodeServerProperties 实例，用于获取配置属性
+     */
     private final CodeServerProperties codeServerProperties;
+    /**
+     * 系统服务参数
+     */
+    private final SystemParamFacade systemParamFacade;
 
-
-    public GitFilter(GitServlet gitServlet, CodeServerProperties codeServerProperties) {
-        this.gitServlet = gitServlet;
-        this.codeServerProperties = codeServerProperties;
-    }
-//
 
     /**
      * The <code>doFilter</code> method of the Filter is called by the container each time a request/response pair is
@@ -71,12 +84,18 @@ public class GitFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String pathInfo = req.getPathInfo() != null ? req.getPathInfo() : req.getServletPath();
-        log.info("Request path: {}, Servlet path: {}, Path info: {}",
-                req.getRequestURI(), req.getServletPath(), req.getPathInfo());
+        log.info("GitFilter pathInfo: {}", pathInfo);
+        ResponseResult<SystemParamVO> result = systemParamFacade.getSystemParamByParamCode(SystemParamEnum.CODE_SERVER_URL.getCode());
+        String codeServerUrl = null;
+        if (result.code().equals(CommonCode.SUCCESS.code()) && result.getData() != null) {
+            codeServerUrl = result.getData().getParamValue();
+        } else {
+            throw new BusinessException(CommonCode.ERROR);
+        }
         if (pathInfo != null && pathInfo.endsWith(".git")) {
             pathInfo = pathInfo.replace(".git", "");
             log.info("Forwarding Git request: {}", pathInfo);
-            resp.sendRedirect(codeServerProperties.getExternalUrl() + pathInfo);
+            resp.sendRedirect(codeServerUrl + pathInfo);
             return;
         }
 
