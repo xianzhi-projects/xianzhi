@@ -74,4 +74,23 @@ public class ProjectDTO implements Serializable {
      */
     @NotNull(message = "code.project.type.not.null")
     private ProjectTypeEnum projectType;
+    /**
+     * 是否添加readME文件
+     */
+    private String readMETemplate;
+
+    /**
+     * 是否添加gitignore模板
+     */
+    private String gitignoreTemplate;
+
+    /**
+     * 是否创建合并请求模板
+     */
+    private String pullRequestTemplate;
+
+    /**
+     * 分支模型
+     */
+    private String branchModel;
 }
