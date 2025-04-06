@@ -56,4 +56,6 @@ public interface ProjectService {
      * @return 项目详情
      */
     ProjectVO getProjectDetails(String id);
+
+    ProjectVO project(String group, String project);
 }

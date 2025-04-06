@@ -16,7 +16,10 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import io.xianzhi.code.bootstrap.dao.mapper.ProjectGroupMapper;
 import io.xianzhi.code.bootstrap.service.ProjectGroupService;
+import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.system.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +34,23 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ProjectGroupServiceImpl implements ProjectGroupService {
+
+    /**
+     * 用户接口
+     */
+    private final UserFacade userFacade;
+    /**
+     * 项目组数据访问接口
+     */
+    private final ProjectGroupMapper projectGroupMapper;
+    /**
+     * 查询分组列表
+     *
+     * @param group 分组名称
+     * @return 分组列表
+     */
+    @Override
+    public ProjectVO group(String group) {
+        return null;
+    }
 }

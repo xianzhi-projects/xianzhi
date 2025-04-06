@@ -8,7 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Layout,
-      children:[
+      children: [
         {
           path: '/projects',
           name: 'projects',
@@ -24,9 +24,24 @@ const router = createRouter({
           name: 'pullRequest',
           component: () => import('@/views/pull_request/Index.vue'),
 
+        },
+        {
+          path: '/:group',
+          component: () => import('@/views/project_group/Index.vue'),
+          children: [
+            {path: 'issues', component: () => import('@/views/issues/Index.vue')},
+          ]
+        },
+        {
+          path: '/:group/:project',
+          component: () => import('@/views/project/Index.vue'),
+          children: [
+            {path: 'issues', component: () => import('@/views/issues/Index.vue')},
+          ]
         }
       ]
     },
+
 
 
   ],

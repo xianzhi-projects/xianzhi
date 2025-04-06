@@ -16,6 +16,8 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.vo.ProjectVO;
+
 /**
  * 项目分组接口
  *
@@ -23,4 +25,10 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface ProjectGroupService {
+    /**
+     * 查询分组列表
+     * @param group 分组名称
+     * @return 分组列表
+     */
+    ProjectVO group(String group);
 }

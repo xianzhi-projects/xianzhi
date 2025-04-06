@@ -77,4 +77,7 @@ public class ProjectController {
         projectService.deletedProject(id);
         return ResponseResult.success();
     }
+
+
+
 }
