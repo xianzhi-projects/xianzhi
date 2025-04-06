@@ -24,7 +24,6 @@ import io.xianzhi.code.bootstrap.handler.RepositoryHandler;
 import io.xianzhi.code.bootstrap.service.ProjectService;
 import io.xianzhi.code.model.dto.ProjectDTO;
 import io.xianzhi.code.model.enums.ProjectTypeEnum;
-import io.xianzhi.code.model.enums.VisibilityEnum;
 import io.xianzhi.code.model.vo.ProjectVO;
 import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.exception.BusinessException;
@@ -112,54 +111,28 @@ public class ProjectServiceImpl implements ProjectService {
         return null;
     }
 
-
+    /**
+     * 检查项目DTO
+     *
+     * @param projectDTO 项目DTO
+     * @return 项目DO和项目分组DO
+     */
     private Pair<ProjectDO, ProjectGroupDO> checkedProjectDTO(ProjectDTO projectDTO) {
         ProjectDO project;
-        ProjectTypeEnum projectType = projectDTO.getProjectType();
-        ProjectGroupDO projectGroup;
-        if (projectType.getCode().equals(ProjectTypeEnum.GROUP.getCode())) {
-            projectGroup = projectGroupMapper.selectProjectGroupById(projectDTO.getProjectGroupId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
-        } else {
-            projectGroup = null;
-        }
+        // 修改项目
         if (StringUtils.hasText(projectDTO.getId())) {
             project = projectMapper.selectProjectById(projectDTO.getId()).orElseThrow(() -> new BusinessException(CommonCode.ERROR));
         } else {
+            // 新增项目
             project = new ProjectDO();
-            if (projectMapper.existsProjectByProjectPathAndGroupIdAndProjectType(projectDTO.getProjectPath(), projectDTO.getProjectGroupId(), projectDTO.getProjectType().getCode())) {
-                throw new BusinessException(CommonCode.ERROR);
-            }
-            if (null == projectGroup) {
+            ProjectTypeEnum projectType = projectDTO.getProjectType();
+            if (projectType.equals(ProjectTypeEnum.GROUP)) {
+                projectGroupMapper.selectProjectGroupById(projectDTO.getProjectGroupId())
+                        .orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.getCode(), "code.project.group.not.exists"));
+            } else {
                 project.setProjectGroupId(UserContextHolder.getCurrentUserId());
-            } else {
-                project.setProjectGroupId(projectGroup.getId());
             }
-            project.setProjectType(projectDTO.getProjectType().getCode());
-            project.setProjectPath(projectDTO.getProjectPath());
-        }
-        if (projectMapper.existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType(projectDTO.getProjectName(), projectDTO.getId(), projectDTO.getProjectGroupId(), projectDTO.getProjectType().getCode())) {
-            throw new BusinessException(CommonCode.ERROR);
-        }
-        project.setProjectName(projectDTO.getProjectName());
-        project.setProjectDesc(projectDTO.getProjectDesc());
-        project.setProjectLogo(projectDTO.getProjectLogo());
-        // 个人项目可以随便修改
-        if (null == projectGroup) {
-            project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());
-        } else {
-            // 分组是私有的，项目只能是私有
-            if (VisibilityEnum.PRIVATE.getCode().equals(projectGroup.getVisibility())) {
-                project.setProjectVisibility(VisibilityEnum.PRIVATE.getCode());
-                // 分组是内部的
-            } else if (VisibilityEnum.INNER.getCode().equals(projectGroup.getVisibility())) {
-                if (projectDTO.getProjectVisibility().equals(VisibilityEnum.PRIVATE) || projectDTO.getProjectVisibility().equals(VisibilityEnum.INNER)) {
-                    project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());
-                } else {
-                    throw new BusinessException(CommonCode.ERROR);
-                }
-            } else {
-                project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());
-            }
+
         }
         return Pair.of(project, Objects.requireNonNullElseGet(projectGroup, ProjectGroupDO::new));
     }

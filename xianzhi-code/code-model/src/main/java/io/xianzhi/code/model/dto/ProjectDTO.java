@@ -18,7 +18,10 @@ package io.xianzhi.code.model.dto;
 
 import io.xianzhi.code.model.enums.ProjectTypeEnum;
 import io.xianzhi.code.model.enums.VisibilityEnum;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 
@@ -34,6 +37,8 @@ public class ProjectDTO implements Serializable {
     /**
      * 主键ID
      */
+    @Length(max = 20, message = "code.project.id.too.long")
+    @NotBlank(message = "code.project.id.not.blank")
     private String id;
     /**
      * 项目分组ID
@@ -42,25 +47,31 @@ public class ProjectDTO implements Serializable {
     /**
      * 项目名称
      */
+    @NotBlank(message = "code.project.name.not.blank")
     private String projectName;
     /**
      * 项目路径
      */
+    @NotBlank(message = "code.project.path.not.blank")
     private String projectPath;
     /**
      * 项目描述
      */
+    @Length(max = 255, message = "code.project.desc.too.long")
     private String projectDesc;
     /**
      * 项目logo
      */
+    @Length(max = 255, message = "code.project.logo.too.long")
     private String projectLogo;
     /**
      * 项目可见性
      */
+    @NotNull(message = "code.project.visibility.not.null")
     private VisibilityEnum projectVisibility;
     /**
      * 项目类型
      */
+    @NotNull(message = "code.project.type.not.null")
     private ProjectTypeEnum projectType;
 }

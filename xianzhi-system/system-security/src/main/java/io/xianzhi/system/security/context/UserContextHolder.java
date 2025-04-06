@@ -44,6 +44,12 @@ public class UserContextHolder extends ContextHolder {
         return getContextOrThrow().getUniqueKey();
     }
 
+
+    public static String getCurrentUserName() {
+        XianZhiOAuth2UserDetails userDetails = (XianZhiOAuth2UserDetails) getContextOrThrow();
+        return userDetails.getUsername();
+    }
+
     /**
      * 是否是否超级管理员
      *
