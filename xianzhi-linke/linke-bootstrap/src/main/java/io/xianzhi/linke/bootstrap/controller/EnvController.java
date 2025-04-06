@@ -16,32 +16,22 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
-import io.xianzhi.core.result.ResponseResult;
-import io.xianzhi.linke.model.vo.ReleaseOrderVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 发布单接口
+ * 环境接口
  *
  * @author Max
  * @since 1.0.0
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/l/releaseOrder")
-public class ReleaseOrderController {
+@RequestMapping(value = "/l/env")
+public class EnvController {
 
-    /**
-     * 查询发布单详情
-     *
-     * @param id 发布单ID
-     * @return 响应信息
-     */
-    @GetMapping(value = "/getReleaseOrderById")
-    public ResponseResult<ReleaseOrderVO> getReleaseOrderById(String id) {
-        return ResponseResult.success();
-    }
+
+
+
 }
