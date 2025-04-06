@@ -29,6 +29,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PullRequestCode implements Result {
+    /**
+     * 已经存在相同的合并请求
+     */
+    PULL_REQUEST_EXIST("code.pull.request.exist", "code.pull.request.exist"),
     ;
 
     /**

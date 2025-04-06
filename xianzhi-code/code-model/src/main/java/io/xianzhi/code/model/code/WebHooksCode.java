@@ -29,6 +29,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum WebHooksCode implements Result {
+
+    /**
+     * web钩子名称已经存在
+     */
+    WEB_HOOK_NAME_EXIST("code.web.hook.name.exist", "code.web.hook.name.exist"),
     ;
 
     /**

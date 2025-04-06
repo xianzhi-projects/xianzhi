@@ -29,6 +29,19 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ProjectGroupCode implements Result {
+
+    /**
+     * 项目组名称已经存在
+     */
+    PROJECT_GROUP_NAME_EXIST("code.project.group.name.exist", "code.project.group.name.exist"),
+    /**
+     * 项目组路径已经存在
+     */
+    PROJECT_GROUP_PATH_EXIST("code.project.group.path.exist", "code.project.group.path.exist"),
+    /**
+     * 项目组不存在
+     */
+    PROJECT_GROUP_NOT_EXIST("code.project.group.not.exist", "code.project.group.not.exist"),
     ;
 
     /**

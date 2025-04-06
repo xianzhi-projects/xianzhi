@@ -16,6 +16,7 @@
 
 package io.xianzhi.code.model.code;
 
+import io.xianzhi.core.code.CommonCode;
 import io.xianzhi.core.result.Result;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,18 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ProjectCode implements Result {
+    /**
+     * 项目名称已经存在
+     */
+    PROJECT_NAME_EXIST(CommonCode.DATA_EXISTS.code(), "code.project.name.exist"),
+    /**
+     * 项目路径已经存在
+     */
+    PROJECT_PATH_EXIST(CommonCode.DATA_EXISTS.code(), "code.project.path.exist"),
+    /**
+     * 项目不存在
+     */
+    PROJECT_NOT_EXIST(CommonCode.DATA_NOT_EXISTS.code(), "code.project.not.exist"),
     ;
 
     /**
