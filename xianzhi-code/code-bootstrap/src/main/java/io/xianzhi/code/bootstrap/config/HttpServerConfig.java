@@ -17,6 +17,7 @@
 package io.xianzhi.code.bootstrap.config;
 
 import io.xianzhi.code.bootstrap.filter.GitFilter;
+import io.xianzhi.code.bootstrap.properties.CodeServerProperties;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -128,9 +129,9 @@ public class HttpServerConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<GitFilter> gitFilter(GitServlet gitServlet) {
+    public FilterRegistrationBean<GitFilter> gitFilter(GitServlet gitServlet, CodeServerProperties codeServerProperties) {
         FilterRegistrationBean<GitFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new GitFilter(gitServlet));
+        registrationBean.setFilter(new GitFilter(gitServlet,codeServerProperties));
         registrationBean.addUrlPatterns("/*");
         registrationBean.setName("GitFilter");
         registrationBean.setOrder(1);

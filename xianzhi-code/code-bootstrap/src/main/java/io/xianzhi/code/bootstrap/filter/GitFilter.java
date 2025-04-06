@@ -16,6 +16,7 @@
 
 package io.xianzhi.code.bootstrap.filter;
 
+import io.xianzhi.code.bootstrap.properties.CodeServerProperties;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,11 +33,15 @@ import java.io.IOException;
 public class GitFilter implements Filter {
 
     private final GitServlet gitServlet;
+    private final CodeServerProperties codeServerProperties;
 
-    public GitFilter(GitServlet gitServlet) {
+
+    public GitFilter(GitServlet gitServlet, CodeServerProperties codeServerProperties) {
         this.gitServlet = gitServlet;
+        this.codeServerProperties = codeServerProperties;
     }
 //
+
     /**
      * The <code>doFilter</code> method of the Filter is called by the container each time a request/response pair is
      * passed through the chain due to a client request for a resource at the end of the chain. The FilterChain passed
@@ -69,7 +74,10 @@ public class GitFilter implements Filter {
         log.info("Request path: {}, Servlet path: {}, Path info: {}",
                 req.getRequestURI(), req.getServletPath(), req.getPathInfo());
         if (pathInfo != null && pathInfo.endsWith(".git")) {
-            req.getRequestDispatcher(pathInfo).forward(req, resp);
+            pathInfo = pathInfo.replace(".git", "");
+            log.info("Forwarding Git request: {}", pathInfo);
+            resp.sendRedirect(codeServerProperties.getExternalUrl() + pathInfo);
+            return;
         }
 
 
