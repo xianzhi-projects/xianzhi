@@ -16,6 +16,9 @@
 
 package io.xianzhi.system.bootstrap.business;
 
+import io.xianzhi.common.redis.RedisHandler;
+import io.xianzhi.system.bootstrap.dao.mapper.DictItemMapper;
+import io.xianzhi.system.bootstrap.dao.mapper.DictMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,4 +33,18 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DictBusiness {
+    /**
+     * 字典信息持久层
+     */
+    private final DictMapper dictMapper;
+    /**
+     * 字典项持久层
+     */
+    private final DictItemMapper dictItemMapper;
+
+    /**
+     * Redis操作类
+     */
+    private final RedisHandler redisHandler;
+
 }

@@ -112,6 +112,11 @@ public class ProjectServiceImpl implements ProjectService {
         return null;
     }
 
+    @Override
+    public ProjectVO project(String group, String project) {
+        return null;
+    }
+
     /**
      * 检查项目DTO
      *
