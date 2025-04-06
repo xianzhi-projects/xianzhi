@@ -19,13 +19,26 @@
 <mapper namespace="io.xianzhi.code.bootstrap.dao.mapper.ProjectMapper">
 
     <select id="selectProjectById" resultType="io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO">
-
+        select * from c_project where id = #{id,jdbcType=VARCHAR} and deleted_flag = 0
     </select>
 
     <select id="existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType" resultType="boolean">
+        select ifnull((select 1 from c_project where project_name = #{projectName,jdbcType=VARCHAR}
+        and project_group_id = #{projectGroupId,jdbcType=VARCHAR}
+        and project_type = #{projectType,jdbcType=VARCHAR}
+        <if test="id != null and id != ''">
+        and id != #{id,jdbcType=VARCHAR}
+        </if> ),0)
 
     </select>
 
     <select id="existsProjectByProjectPathAndGroupIdAndProjectType" resultType="boolean">
+        select ifnull((select 1 from c_project where project_path = #{projectPath,jdbcType=VARCHAR}
+        and project_group_id = #{projectGroupId,jdbcType=VARCHAR}
+        and project_type = #{projectType,jdbcType=VARCHAR}
+
+        ),0)
     </select>
+
+
 </mapper>

@@ -108,6 +108,7 @@ xianzhi:
     access-secret: gO316AfvxcG2JIcgOIWdz2stOEXJdDRb
   code:
     external-url: https://code.xianzhi.io
+    repository-dir: ./repository
   file:
     bucket-name: xianzhi
 rocketmq:

@@ -52,6 +52,11 @@ public class CodeServerProperties implements InitializingBean {
      */
     private String repositoryDir = "/etc/xianzhi/code/repository";
 
+    /**
+     * 默认分支
+     */
+    private String defaultBranch = "main";
+
 
     /**
      * Invoked by the containing {@code BeanFactory} after it has set all bean properties

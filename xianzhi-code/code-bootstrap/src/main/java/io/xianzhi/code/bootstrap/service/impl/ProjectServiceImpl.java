@@ -16,12 +16,13 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
+import io.xianzhi.code.bootstrap.businsess.ProjectGroupBusiness;
 import io.xianzhi.code.bootstrap.dao.dataobj.ProjectDO;
-import io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO;
 import io.xianzhi.code.bootstrap.dao.mapper.ProjectGroupMapper;
 import io.xianzhi.code.bootstrap.dao.mapper.ProjectMapper;
 import io.xianzhi.code.bootstrap.handler.RepositoryHandler;
 import io.xianzhi.code.bootstrap.service.ProjectService;
+import io.xianzhi.code.model.code.ProjectCode;
 import io.xianzhi.code.model.dto.ProjectDTO;
 import io.xianzhi.code.model.enums.ProjectTypeEnum;
 import io.xianzhi.code.model.vo.ProjectVO;
@@ -30,12 +31,9 @@ import io.xianzhi.core.exception.BusinessException;
 import io.xianzhi.system.security.context.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
-import java.util.Objects;
 
 /**
  * 项目接口实现
@@ -57,6 +55,10 @@ public class ProjectServiceImpl implements ProjectService {
      * 项目分组
      */
     private final ProjectGroupMapper projectGroupMapper;
+    /**
+     * 项目分组业务类
+     */
+    private final ProjectGroupBusiness projectGroupBusiness;
 
     /**
      * 仓库处理
@@ -72,11 +74,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String createProject(ProjectDTO projectDTO) {
-        Pair<ProjectDO, ProjectGroupDO> result = checkedProjectDTO(projectDTO);
-        ProjectDO projectDO = result.getFirst();
+        ProjectDO projectDO = checkedProjectDTO(projectDTO);
         projectMapper.insert(projectDO);
         // 创建真正的仓库
-        repositoryHandler.createRepository(projectDO, result.getSecond());
+        repositoryHandler.createRepository(projectDO.getProjectPath(), projectDO.getProjectGroupId(), true, null, null, true);
         return projectDO.getId();
     }
 
@@ -115,9 +116,9 @@ public class ProjectServiceImpl implements ProjectService {
      * 检查项目DTO
      *
      * @param projectDTO 项目DTO
-     * @return 项目DO和项目分组DO
+     * @return 项目DO和
      */
-    private Pair<ProjectDO, ProjectGroupDO> checkedProjectDTO(ProjectDTO projectDTO) {
+    private ProjectDO checkedProjectDTO(ProjectDTO projectDTO) {
         ProjectDO project;
         // 修改项目
         if (StringUtils.hasText(projectDTO.getId())) {
@@ -127,13 +128,28 @@ public class ProjectServiceImpl implements ProjectService {
             project = new ProjectDO();
             ProjectTypeEnum projectType = projectDTO.getProjectType();
             if (projectType.equals(ProjectTypeEnum.GROUP)) {
-                projectGroupMapper.selectProjectGroupById(projectDTO.getProjectGroupId())
-                        .orElseThrow(() -> new BusinessException(CommonCode.DATA_NOT_EXISTS.getCode(), "code.project.group.not.exists"));
+                projectGroupBusiness.getProjectGroupByIdOrThrow(projectDTO.getProjectGroupId());
+                project.setProjectGroupId(projectDTO.getProjectGroupId());
             } else {
                 project.setProjectGroupId(UserContextHolder.getCurrentUserId());
             }
-
+            project.setProjectType(projectType.getCode());
+            // 判断项目路径是否存在
+            if (projectMapper.existsProjectByProjectPathAndGroupIdAndProjectType(projectDTO.getProjectPath(), project.getProjectGroupId(), project.getProjectType())) {
+                log.error("项目路径已经存在, projectPath: {}, groupId: {}", projectDTO.getProjectPath(), project.getProjectGroupId());
+                throw new BusinessException(ProjectCode.PROJECT_PATH_EXIST);
+            }
+            project.setProjectPath(projectDTO.getProjectPath());
         }
-        return Pair.of(project, Objects.requireNonNullElseGet(projectGroup, ProjectGroupDO::new));
+        // 判断项目名称是否存在
+        if (projectMapper.existsProjectByProjectNameAndIdNotAndGroupIdAndProjectType(projectDTO.getProjectName(), project.getId(), project.getProjectGroupId(), project.getProjectType())) {
+            log.error("项目名称已经存在, projectName: {}, id: {},groupId:{}", projectDTO.getProjectName(), project.getId(), project.getProjectGroupId());
+            throw new BusinessException(ProjectCode.PROJECT_NAME_EXIST);
+        }
+        project.setProjectDesc(projectDTO.getProjectDesc());
+        project.setProjectName(projectDTO.getProjectName());
+        project.setProjectVisibility(projectDTO.getProjectVisibility().getCode());
+        project.setProjectLogo(projectDTO.getProjectLogo());
+        return project;
     }
 }

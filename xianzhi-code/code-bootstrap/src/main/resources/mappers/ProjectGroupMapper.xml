@@ -19,5 +19,6 @@
 <mapper namespace="io.xianzhi.code.bootstrap.dao.mapper.ProjectGroupMapper">
 
     <select id="selectProjectGroupById" resultType="io.xianzhi.code.bootstrap.dao.dataobj.ProjectGroupDO">
+        select * from c_project_group where id = #{id,jdbcType=VARCHAR} and deleted_flag = 0
     </select>
 </mapper>
