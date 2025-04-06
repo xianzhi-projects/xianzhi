@@ -17,7 +17,8 @@
           </el-form-item>
           <el-form-item label="代码库路径" required>
             <div style="display: flex;">
-              <el-select v-model="group" placeholder="请选择分组" style="width: 150px; margin-right: 10px;">
+              <el-input v-model="repoSlug" disabled placeholder="111" style="flex: 1;" />
+              <el-select v-model="group" placeholder="请选择分组" style="width: 150px;">
                 <el-option v-for="item in groupOptions" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
               <el-input v-model="repoSlug" placeholder="请输入代码库路径" style="flex: 1;" />
@@ -36,19 +37,19 @@
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="createReadme">创建 README.md</el-checkbox>
-            <el-select v-if="createReadme" v-model="readmeTemplate" placeholder="请选择模板" style="margin-left: 10px;">
+            <el-select  v-model="readmeTemplate"  placeholder="请选择模板" size="default" style="margin-left: 10px; width: 150px" >
               <el-option v-for="item in readmeTemplateOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="createGitignore">创建 .gitignore</el-checkbox>
-            <el-select v-if="createGitignore" v-model="gitignoreTemplate" placeholder="请选择模板" style="margin-left: 10px;">
+            <el-select  v-model="gitignoreTemplate" placeholder="请选择模板" style="margin-left: 10px;width: 150px">
               <el-option v-for="item in gitignoreTemplateOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="createMergeTemplate">创建合并请求模板</el-checkbox>
-            <el-select v-if="createMergeTemplate" v-model="mergeTemplate" placeholder="请选择模板" style="margin-left: 10px;">
+            <el-select  v-model="mergeTemplate" placeholder="请选择模板" style="margin-left: 10px;width: 150px">
               <el-option v-for="item in mergeTemplateOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
