@@ -12,7 +12,7 @@
         <div class="tips">Tips: 建议使用项目的缩写或多个相关代码库</div>
         <el-form label-position="left" label-width="120px">
           <el-form-item label="代码库名称" required>
-            <el-input v-model="repoName" placeholder="请输入代码库名称" />
+            <el-input v-model="repoName" placeholder="请输入代码库名称" style="width: 180px;" />
             <div class="char-counter">{{ repoName.length }}/100</div>
           </el-form-item>
           <el-form-item label="代码库路径" required>
@@ -166,7 +166,6 @@ const handleCancel = () => {
 .char-counter {
   font-size: 12px;
   color: #999;
-  margin-top: 5px;
   text-align: right;
 }
 </style>
