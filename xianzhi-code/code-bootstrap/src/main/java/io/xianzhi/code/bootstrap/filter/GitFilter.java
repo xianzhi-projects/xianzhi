@@ -68,8 +68,12 @@ public class GitFilter implements Filter {
         String pathInfo = req.getPathInfo() != null ? req.getPathInfo() : req.getServletPath();
         log.info("Request path: {}, Servlet path: {}, Path info: {}",
                 req.getRequestURI(), req.getServletPath(), req.getPathInfo());
-
         if (pathInfo != null && pathInfo.endsWith(".git")) {
+            req.getRequestDispatcher(pathInfo).forward(req, resp);
+        }
+
+
+        if (pathInfo != null && pathInfo.endsWith(".git/info/refs")) {
             log.info("Forwarding Git request: {}", pathInfo);
             gitServlet.service(req, resp);
         } else {

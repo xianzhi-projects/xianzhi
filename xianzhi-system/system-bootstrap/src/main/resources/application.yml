@@ -112,7 +112,7 @@ xianzhi:
     access-key: 32aFDOlYVOAxWp7u
     access-secret: gO316AfvxcG2JIcgOIWdz2stOEXJdDRb
   code:
-    external-url: https://code.xianzhi.io
+    external-url: http://192.168.50.69:3001
     repository-dir: ./repository
   file:
     bucket-name: xianzhi
