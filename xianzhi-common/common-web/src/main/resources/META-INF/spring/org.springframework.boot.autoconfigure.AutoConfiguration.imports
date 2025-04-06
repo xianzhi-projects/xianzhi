@@ -16,3 +16,4 @@
 
 io.xianzhi.common.web.handler.GlobeExceptionHandler
 io.xianzhi.common.web.config.JacksonConfig
+io.xianzhi.common.web.controller.FaviconController

@@ -134,6 +134,7 @@ public class ProjectServiceImpl implements ProjectService {
                 project.setProjectGroupId(UserContextHolder.getCurrentUserId());
             }
             project.setProjectType(projectType.getCode());
+
             // 判断项目路径是否存在
             if (projectMapper.existsProjectByProjectPathAndGroupIdAndProjectType(projectDTO.getProjectPath(), project.getProjectGroupId(), project.getProjectType())) {
                 log.error("项目路径已经存在, projectPath: {}, groupId: {}", projectDTO.getProjectPath(), project.getProjectGroupId());

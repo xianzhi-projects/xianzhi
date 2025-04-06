@@ -1,6 +1,9 @@
 server:
   port: 9512
 spring:
+  web:
+    resources:
+      add-mappings: false
   application:
     name: xianzhi-system
   jackson:
@@ -82,7 +85,7 @@ spring:
           public-key-location: classpath:publicKey.txt
 mybatis-plus:
   #配置Mapper映射文件
-  mapper-locations: classpath:/mappers/**/*.xml
+  mapper-locations: classpath*:/mappers/**/*.xml
   # 配置Mybatis数据返回类型别名（默认别名为类名）
   type-aliases-package: io.xianzhi.*.bootstrap.dao.mapper
   configuration:
@@ -100,6 +103,8 @@ xianzhi:
       - /oauth2/token
       # 登录验证码接口
       - /s/captcha/login
+      - /**/*.git/**
+      - /error
   idempotent:
     enable: false
   oss:
@@ -118,4 +123,6 @@ rocketmq:
     send-message-timeout: 30000
   consumer:
     group: C_system
-
+logging:
+  level:
+    org.eclipse.jgit: DEBUG

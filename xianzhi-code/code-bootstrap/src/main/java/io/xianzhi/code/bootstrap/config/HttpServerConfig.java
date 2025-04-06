@@ -16,6 +16,7 @@
 
 package io.xianzhi.code.bootstrap.config;
 
+import io.xianzhi.code.bootstrap.filter.GitFilter;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import org.eclipse.jgit.http.server.UploadPackErrorHandler;
 import org.eclipse.jgit.transport.resolver.ReceivePackFactory;
 import org.eclipse.jgit.transport.resolver.RepositoryResolver;
 import org.eclipse.jgit.transport.resolver.UploadPackFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -124,6 +126,20 @@ public class HttpServerConfig {
         log.info("Registered GitServlet with name '{}' and mapping '{}'", GIT_SERVLET_NAME, GIT_SERVLET_MAPPING);
         return registrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<GitFilter> gitFilter(GitServlet gitServlet) {
+        FilterRegistrationBean<GitFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new GitFilter(gitServlet));
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setName("GitFilter");
+        registrationBean.setOrder(1);
+        log.info("Registered GitFilter for Git requests");
+        return registrationBean;
+    }
+
+
+
 
     /**
      * 配置 GitServlet 的各个组件。

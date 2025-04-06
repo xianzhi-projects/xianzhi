@@ -75,7 +75,7 @@ public class RepositoryHandler {
         }
 
         // 构造仓库完整路径
-        String repositoryPath = codeServerProperties.getRepositoryDir() + "/" + groupId + "/" + projectPath;
+        String repositoryPath = codeServerProperties.getRepositoryDir() + "/" + groupId + "/" + projectPath + "/.git";
         File repoDir = new File(repositoryPath);
 
         try {
