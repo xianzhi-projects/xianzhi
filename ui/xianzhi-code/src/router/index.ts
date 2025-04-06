@@ -10,8 +10,8 @@ const router = createRouter({
       component: Layout,
       children: [
         {
-          path: '/projects',
-          name: 'projects',
+          path: '/',
+          name: 'index',
           component: () => import('@/views/project/Index.vue'),
         },
         {

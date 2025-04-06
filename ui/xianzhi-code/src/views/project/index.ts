@@ -13,22 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-/**
- * 项目信息入参
- */
-export interface ProjectDTO {
-  id: string;
-  projectName: string;
-  projectPath: string;
-  projectDesc: string;
+import {ref} from "vue";
 
+// 是否显示新增项目弹窗
+export const projectEditFlag = ref(false)
 
-}
-
-/**
- * 项目信息出参
- */
-export interface ProjectVO {
-
-}
 

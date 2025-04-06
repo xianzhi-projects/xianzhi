@@ -16,13 +16,10 @@
 
 <script lang="ts" setup>
 
-import TopBar from "@/views/project/components/TopBar.vue";
-import CreateProject from "@/views/project/components/ProjectEdit.vue";
 </script>
 
 <template>
-  <TopBar/>
-  <CreateProject/>
+
 </template>
 
 <style scoped>

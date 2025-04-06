@@ -30,14 +30,14 @@ import imageUrl from '@/assets/logo.png';
     </div>
 
     <el-menu
-      :default-active="1"
+      :default-active="$route.path"
       :router="true"
       background-color="transparent"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
     >
-      <el-menu-item index="/projects">项目</el-menu-item>
+      <el-menu-item index="/">项目</el-menu-item>
       <el-menu-item index="/project_group">分组</el-menu-item>
       <el-menu-item index="/pull_request">合并请求</el-menu-item>
     </el-menu>
