@@ -52,7 +52,7 @@ public class IssuesController {
      */
     @PostMapping(value = "/pageIssuesList")
     public ResponseResult<IssuesVO> pageIssuesList(@RequestBody IssuesPage issuesPage) {
-        return ResponseResult.success();
+        return ResponseResult.success(issuesService.pageIssuesList(issuesPage));
     }
 
     /**
@@ -64,7 +64,7 @@ public class IssuesController {
     @Idempotent
     @PostMapping(value = "/createIssues")
     public ResponseResult<String> createIssues(@RequestBody @Validated(value = CreateGroup.class) IssuesDTO issuesDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(issuesService.createIssues(issuesDTO));
     }
 
     /**
@@ -75,6 +75,7 @@ public class IssuesController {
      */
     @PostMapping(value = "/updateIssues")
     public ResponseResult<Object> updateIssues(@RequestBody @Validated(value = UpdateGroup.class) IssuesDTO issuesDTO) {
+        issuesService.updateIssues(issuesDTO);
         return ResponseResult.success();
     }
 
@@ -86,6 +87,7 @@ public class IssuesController {
      */
     @PostMapping(value = "/deleteIssues")
     public ResponseResult<Object> deleteIssues(@RequestParam(value = "id") String id) {
+        issuesService.deleteIssues(id);
         return ResponseResult.success();
     }
 }

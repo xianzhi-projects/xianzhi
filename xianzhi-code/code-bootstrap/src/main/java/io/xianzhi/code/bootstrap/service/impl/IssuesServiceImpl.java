@@ -17,6 +17,9 @@
 package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.IssuesService;
+import io.xianzhi.code.model.dto.IssuesDTO;
+import io.xianzhi.code.model.page.IssuesPage;
+import io.xianzhi.code.model.vo.IssuesVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +34,45 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class IssuesServiceImpl implements IssuesService {
+    /**
+     * 分页查询Issues列表
+     *
+     * @param issuesPage 分页查询参数
+     * @return Issues列表
+     */
+    @Override
+    public IssuesVO pageIssuesList(IssuesPage issuesPage) {
+        return null;
+    }
+
+    /**
+     * 创建Issues  (幂等)
+     *
+     * @param issuesDTO Issues信息入参
+     * @return Issues ID
+     */
+    @Override
+    public String createIssues(IssuesDTO issuesDTO) {
+        return "";
+    }
+
+    /**
+     * 更新Issues
+     *
+     * @param issuesDTO Issues信息入参
+     */
+    @Override
+    public void updateIssues(IssuesDTO issuesDTO) {
+
+    }
+
+    /**
+     * 删除Issues
+     *
+     * @param id Issues ID
+     */
+    @Override
+    public void deleteIssues(String id) {
+
+    }
 }

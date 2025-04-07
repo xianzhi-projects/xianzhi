@@ -23,11 +23,12 @@ import io.xianzhi.code.model.vo.AgentGroupVO;
 import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * agent分组接口
@@ -53,8 +54,8 @@ public class AgentGroupController {
      */
     @PreAuthorize("@xz.hasPermission('code:agentGroup:list')")
     @PostMapping(value = "/pageAgentGroupList")
-    public ResponseResult<ListResult<AgentGroupVO>> pageAgentGroupList(AgentGroupPage agentGroupPage) {
-        return ResponseResult.success();
+    public ResponseResult<ListResult<AgentGroupVO>> pageAgentGroupList(@RequestBody AgentGroupPage agentGroupPage) {
+        return ResponseResult.success(agentGroupService.pageAgentGroupList(agentGroupPage));
     }
 
     /**
@@ -66,8 +67,8 @@ public class AgentGroupController {
     @Idempotent
     @PreAuthorize("@xz.hasPermission('code:agentGroup:create')")
     @PostMapping(value = "/createAgentGroup")
-    public ResponseResult<String> createAgentGroup(AgentGroupDTO agentGroupDTO) {
-        return ResponseResult.success();
+    public ResponseResult<String> createAgentGroup(@RequestBody @Validated(value = CreateGroup.class) AgentGroupDTO agentGroupDTO) {
+        return ResponseResult.success(agentGroupService.createAgentGroup(agentGroupDTO));
     }
 
     /**
@@ -76,7 +77,9 @@ public class AgentGroupController {
      * @param agentGroupDTO agent分组参数
      * @return 响应信息
      */
-    public ResponseResult<Object> updateAgentGroup(AgentGroupDTO agentGroupDTO) {
+    @PostMapping(value = "/updateAgentGroup")
+    public ResponseResult<Object> updateAgentGroup(@RequestBody @Validated(value = UpdateGroup.class) AgentGroupDTO agentGroupDTO) {
+        agentGroupService.updateAgentGroup(agentGroupDTO);
         return ResponseResult.success();
     }
 
@@ -86,7 +89,9 @@ public class AgentGroupController {
      * @param id agent分组id
      * @return 响应信息
      */
-    public ResponseResult<Object> deleteAgentGroup(String id) {
+    @PostMapping(value = "/deleteAgentGroup")
+    public ResponseResult<Object> deleteAgentGroup(@RequestParam(value = "id") String id) {
+        agentGroupService.deleteAgentGroup(id);
         return ResponseResult.success();
     }
 }

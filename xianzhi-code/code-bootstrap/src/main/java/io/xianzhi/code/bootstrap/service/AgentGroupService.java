@@ -16,6 +16,11 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.AgentGroupDTO;
+import io.xianzhi.code.model.page.AgentGroupPage;
+import io.xianzhi.code.model.vo.AgentGroupVO;
+import io.xianzhi.core.result.ListResult;
+
 /**
  * agent分组接口
  *
@@ -23,4 +28,35 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface AgentGroupService {
+
+    /**
+     * 分页查询agent分组列表
+     *
+     * @param agentGroupPage 分页查询参数
+     * @return agent分组列表
+     */
+    ListResult<AgentGroupVO> pageAgentGroupList(AgentGroupPage agentGroupPage);
+
+    /**
+     * 创建agent分组  (幂等)
+     *
+     * @param agentGroupDTO agent分组参数
+     * @return agent分组id
+     */
+    String createAgentGroup(AgentGroupDTO agentGroupDTO);
+
+    /**
+     * 更新agent分组
+     *
+     * @param agentGroupDTO agent分组参数
+     */
+    void updateAgentGroup(AgentGroupDTO agentGroupDTO);
+
+    /**
+     * 删除agent分组
+     *
+     * @param id agent分组id
+     */
+    void deleteAgentGroup(String id);
+
 }

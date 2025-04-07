@@ -23,10 +23,11 @@ import io.xianzhi.code.model.vo.LabelVO;
 import io.xianzhi.common.idempotent.annotations.Idempotent;
 import io.xianzhi.core.result.ListResult;
 import io.xianzhi.core.result.ResponseResult;
+import io.xianzhi.core.validated.CreateGroup;
+import io.xianzhi.core.validated.UpdateGroup;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Labels 接口
@@ -51,8 +52,8 @@ public class LabelsController {
      * @return 标签列表
      */
     @PostMapping(value = "/pageLabelList")
-    public ResponseResult<ListResult<LabelVO>> pageLabelList(LabelPage labelPage) {
-        return ResponseResult.success();
+    public ResponseResult<ListResult<LabelVO>> pageLabelList(@RequestBody LabelPage labelPage) {
+        return ResponseResult.success(labelService.pageLabelList(labelPage));
     }
 
     /**
@@ -63,8 +64,8 @@ public class LabelsController {
      */
     @Idempotent
     @PostMapping(value = "/createLabel")
-    public ResponseResult<String> createLabel(LabelDTO labelDTO) {
-        return ResponseResult.success();
+    public ResponseResult<String> createLabel(@RequestBody @Validated(value = CreateGroup.class) LabelDTO labelDTO) {
+        return ResponseResult.success(labelService.createLabel(labelDTO));
     }
 
     /**
@@ -74,7 +75,8 @@ public class LabelsController {
      * @return 响应信息
      */
     @PostMapping(value = "/updateLabel")
-    public ResponseResult<Object> updateLabel(LabelDTO labelDTO) {
+    public ResponseResult<Object> updateLabel(@RequestBody @Validated(value = UpdateGroup.class) LabelDTO labelDTO) {
+        labelService.updateLabel(labelDTO);
         return ResponseResult.success();
     }
 
@@ -85,7 +87,8 @@ public class LabelsController {
      * @return 响应信息
      */
     @PostMapping(value = "/deletedLabel")
-    public ResponseResult<Object> deletedLabel(String id) {
+    public ResponseResult<Object> deletedLabel(@RequestParam(value = "id") String id) {
+        labelService.deletedLabel(id);
         return ResponseResult.success();
     }
 }

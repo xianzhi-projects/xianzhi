@@ -59,7 +59,7 @@ public class AgentController {
     }
 
     /**
-     * 薪资agent  (幂等)
+     * 新增agent  (幂等)
      *
      * @param agentDTO agent入参
      * @return 响应信息

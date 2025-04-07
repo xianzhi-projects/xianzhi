@@ -16,6 +16,11 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.LabelDTO;
+import io.xianzhi.code.model.page.LabelPage;
+import io.xianzhi.code.model.vo.LabelVO;
+import io.xianzhi.core.result.ListResult;
+
 /**
  * Label接口
  *
@@ -23,4 +28,34 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface LabelService {
+    /**
+     * 分页查询标签列表
+     *
+     * @param labelPage 分页查询参数
+     * @return 标签列表
+     */
+    ListResult<LabelVO> pageLabelList(LabelPage labelPage);
+
+    /**
+     * 创建标签  (幂等)
+     *
+     * @param labelDTO 标签信息入参
+     * @return 标签ID
+     */
+    String createLabel(LabelDTO labelDTO);
+
+    /**
+     * 更新标签
+     *
+     * @param labelDTO 标签信息入参
+     */
+    void updateLabel(LabelDTO labelDTO);
+
+    /**
+     * 删除标签
+     *
+     * @param id 标签ID
+     */
+    void deletedLabel(String id);
+
 }

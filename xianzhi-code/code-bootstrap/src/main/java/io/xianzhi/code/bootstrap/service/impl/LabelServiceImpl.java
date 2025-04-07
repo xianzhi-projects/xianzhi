@@ -17,6 +17,10 @@
 package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.LabelService;
+import io.xianzhi.code.model.dto.LabelDTO;
+import io.xianzhi.code.model.page.LabelPage;
+import io.xianzhi.code.model.vo.LabelVO;
+import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +35,45 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LabelServiceImpl implements LabelService {
+    /**
+     * 分页查询标签列表
+     *
+     * @param labelPage 分页查询参数
+     * @return 标签列表
+     */
+    @Override
+    public ListResult<LabelVO> pageLabelList(LabelPage labelPage) {
+        return null;
+    }
+
+    /**
+     * 创建标签  (幂等)
+     *
+     * @param labelDTO 标签信息入参
+     * @return 标签ID
+     */
+    @Override
+    public String createLabel(LabelDTO labelDTO) {
+        return "";
+    }
+
+    /**
+     * 更新标签
+     *
+     * @param labelDTO 标签信息入参
+     */
+    @Override
+    public void updateLabel(LabelDTO labelDTO) {
+
+    }
+
+    /**
+     * 删除标签
+     *
+     * @param id 标签ID
+     */
+    @Override
+    public void deletedLabel(String id) {
+
+    }
 }

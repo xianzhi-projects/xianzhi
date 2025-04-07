@@ -17,6 +17,10 @@
 package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.service.AgentGroupService;
+import io.xianzhi.code.model.dto.AgentGroupDTO;
+import io.xianzhi.code.model.page.AgentGroupPage;
+import io.xianzhi.code.model.vo.AgentGroupVO;
+import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,4 +35,45 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AgentGroupServiceImpl implements AgentGroupService {
+    /**
+     * 分页查询agent分组列表
+     *
+     * @param agentGroupPage 分页查询参数
+     * @return agent分组列表
+     */
+    @Override
+    public ListResult<AgentGroupVO> pageAgentGroupList(AgentGroupPage agentGroupPage) {
+        return null;
+    }
+
+    /**
+     * 创建agent分组  (幂等)
+     *
+     * @param agentGroupDTO agent分组参数
+     * @return agent分组id
+     */
+    @Override
+    public String createAgentGroup(AgentGroupDTO agentGroupDTO) {
+        return "";
+    }
+
+    /**
+     * 更新agent分组
+     *
+     * @param agentGroupDTO agent分组参数
+     */
+    @Override
+    public void updateAgentGroup(AgentGroupDTO agentGroupDTO) {
+
+    }
+
+    /**
+     * 删除agent分组
+     *
+     * @param id agent分组id
+     */
+    @Override
+    public void deleteAgentGroup(String id) {
+
+    }
 }

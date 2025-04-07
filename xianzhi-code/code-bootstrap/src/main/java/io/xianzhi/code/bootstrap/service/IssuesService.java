@@ -16,6 +16,10 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.IssuesDTO;
+import io.xianzhi.code.model.page.IssuesPage;
+import io.xianzhi.code.model.vo.IssuesVO;
+
 /**
  * Issues接口
  *
@@ -23,4 +27,34 @@ package io.xianzhi.code.bootstrap.service;
  * @since 1.0.0
  */
 public interface IssuesService {
+    /**
+     * 分页查询Issues列表
+     *
+     * @param issuesPage 分页查询参数
+     * @return Issues列表
+     */
+    IssuesVO pageIssuesList(IssuesPage issuesPage);
+
+    /**
+     * 创建Issues  (幂等)
+     *
+     * @param issuesDTO Issues信息入参
+     * @return Issues ID
+     */
+    String createIssues(IssuesDTO issuesDTO);
+
+    /**
+     * 更新Issues
+     *
+     * @param issuesDTO Issues信息入参
+     */
+    void updateIssues(IssuesDTO issuesDTO);
+
+    /**
+     * 删除Issues
+     *
+     * @param id Issues ID
+     */
+    void deleteIssues(String id);
+
 }
