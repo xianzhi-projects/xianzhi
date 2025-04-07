@@ -16,8 +16,14 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.AddMemberDTO;
+import io.xianzhi.code.model.dto.ImportProjectDTO;
 import io.xianzhi.code.model.dto.ProjectDTO;
+import io.xianzhi.code.model.page.ProjectPage;
 import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.core.result.ListResult;
+
+import java.util.List;
 
 /**
  * 项目接口
@@ -58,4 +64,36 @@ public interface ProjectService {
     ProjectVO getProjectDetails(String id);
 
     ProjectVO project(String group, String project);
+
+    /**
+     * 分页查询项目列表
+     *
+     * @param projectPage 分页查询条件
+     * @return 项目列表
+     */
+    ListResult<ProjectVO> pageProjectList(ProjectPage projectPage);
+
+    /**
+     * 导入项目
+     *
+     * @param importProjectDTO 导入项目入参
+     */
+    void importProject(ImportProjectDTO importProjectDTO);
+
+    /**
+     * 添加成员
+     *
+     * @param projectId 项目ID
+     * @param members   成员信息
+     */
+    void addMember(String projectId, List<AddMemberDTO> members);
+
+    /**
+     * 移除成员
+     *
+     * @param projectId 项目ID
+     * @param members   成员ID
+     */
+    void removeMember(String projectId, List<String> members);
+
 }

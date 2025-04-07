@@ -14,26 +14,32 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.page;
+package io.xianzhi.code.model.dto;
 
-import io.xianzhi.core.base.Page;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
- * 项目信息查询条件
+ * 添加成员入参
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class ProjectPage extends Page implements Serializable {
+public class AddMemberDTO implements Serializable {
 
     /**
-     * 查询所有的项目
+     * 用户ID
      */
-    private Boolean all = false;
+    private String userId;
+    /**
+     * 所属角色
+     */
+    private String roleCode;
+    /**
+     * 过期时间
+     */
+    private LocalDate expireDate;
 }

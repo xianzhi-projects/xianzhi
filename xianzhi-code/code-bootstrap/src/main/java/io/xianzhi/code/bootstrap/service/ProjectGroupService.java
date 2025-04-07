@@ -16,7 +16,14 @@
 
 package io.xianzhi.code.bootstrap.service;
 
+import io.xianzhi.code.model.dto.AddMemberDTO;
+import io.xianzhi.code.model.dto.ProjectGroupDTO;
+import io.xianzhi.code.model.page.ProjectGroupPage;
+import io.xianzhi.code.model.vo.ProjectGroupVO;
 import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.core.result.ListResult;
+
+import java.util.List;
 
 /**
  * 项目分组接口
@@ -27,8 +34,55 @@ import io.xianzhi.code.model.vo.ProjectVO;
 public interface ProjectGroupService {
     /**
      * 查询分组列表
+     *
      * @param group 分组名称
      * @return 分组列表
      */
     ProjectVO group(String group);
+
+    /**
+     * 分页查询项目分组列表
+     *
+     * @param groupPage 分页查询参数
+     * @return 项目分组列表
+     */
+    ListResult<ProjectGroupVO> pageProjectGroupList(ProjectGroupPage groupPage);
+
+    /**
+     * 创建项目分组  (幂等)
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     * @return 项目分组ID
+     */
+    String createProjectGroup(ProjectGroupDTO projectGroupDTO);
+
+    /**
+     * 更新项目分组
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     */
+    void updateProjectGroup(ProjectGroupDTO projectGroupDTO);
+
+    /**
+     * 删除项目分组
+     *
+     * @param id 项目分组ID
+     */
+    void deletedProjectGroup(String id);
+
+    /**
+     * 添加成员
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     */
+    void addMember(String groupId, List<AddMemberDTO> members);
+
+    /**
+     * 移除成员
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     */
+    void removeMember(String groupId, List<String> members);
 }

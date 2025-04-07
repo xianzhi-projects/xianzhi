@@ -18,11 +18,18 @@ package io.xianzhi.code.bootstrap.service.impl;
 
 import io.xianzhi.code.bootstrap.dao.mapper.ProjectGroupMapper;
 import io.xianzhi.code.bootstrap.service.ProjectGroupService;
+import io.xianzhi.code.model.dto.AddMemberDTO;
+import io.xianzhi.code.model.dto.ProjectGroupDTO;
+import io.xianzhi.code.model.page.ProjectGroupPage;
+import io.xianzhi.code.model.vo.ProjectGroupVO;
 import io.xianzhi.code.model.vo.ProjectVO;
+import io.xianzhi.core.result.ListResult;
 import io.xianzhi.system.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 项目分组接口实现
@@ -52,5 +59,69 @@ public class ProjectGroupServiceImpl implements ProjectGroupService {
     @Override
     public ProjectVO group(String group) {
         return null;
+    }
+
+    /**
+     * 分页查询项目分组列表
+     *
+     * @param groupPage 分页查询参数
+     * @return 项目分组列表
+     */
+    @Override
+    public ListResult<ProjectGroupVO> pageProjectGroupList(ProjectGroupPage groupPage) {
+        return null;
+    }
+
+    /**
+     * 创建项目分组  (幂等)
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     * @return 项目分组ID
+     */
+    @Override
+    public String createProjectGroup(ProjectGroupDTO projectGroupDTO) {
+        return "";
+    }
+
+    /**
+     * 更新项目分组
+     *
+     * @param projectGroupDTO 项目分组信息入参
+     */
+    @Override
+    public void updateProjectGroup(ProjectGroupDTO projectGroupDTO) {
+
+    }
+
+    /**
+     * 删除项目分组
+     *
+     * @param id 项目分组ID
+     */
+    @Override
+    public void deletedProjectGroup(String id) {
+
+    }
+
+    /**
+     * 添加成员
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     */
+    @Override
+    public void addMember(String groupId, List<AddMemberDTO> members) {
+
+    }
+
+    /**
+     * 移除成员
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     */
+    @Override
+    public void removeMember(String groupId, List<String> members) {
+
     }
 }

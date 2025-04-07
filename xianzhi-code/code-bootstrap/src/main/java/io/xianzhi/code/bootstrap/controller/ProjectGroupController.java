@@ -17,6 +17,7 @@
 package io.xianzhi.code.bootstrap.controller;
 
 import io.xianzhi.code.bootstrap.service.ProjectGroupService;
+import io.xianzhi.code.model.dto.AddMemberDTO;
 import io.xianzhi.code.model.dto.ProjectGroupDTO;
 import io.xianzhi.code.model.page.ProjectGroupPage;
 import io.xianzhi.code.model.vo.ProjectGroupVO;
@@ -28,6 +29,8 @@ import io.xianzhi.core.validated.UpdateGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 项目分组接口
@@ -51,8 +54,8 @@ public class ProjectGroupController {
      * @return 项目分组列表
      */
     @PostMapping(value = "/pageProjectGroupList")
-    public ResponseResult<ListResult<ProjectGroupVO>> pageProjectGroupList(ProjectGroupPage groupPage) {
-        return ResponseResult.success();
+    public ResponseResult<ListResult<ProjectGroupVO>> pageProjectGroupList(@RequestBody ProjectGroupPage groupPage) {
+        return ResponseResult.success(projectGroupService.pageProjectGroupList(groupPage));
     }
 
     /**
@@ -64,7 +67,7 @@ public class ProjectGroupController {
     @Idempotent
     @PostMapping(value = "/createProjectGroup")
     public ResponseResult<String> createProjectGroup(@RequestBody @Validated(value = CreateGroup.class) ProjectGroupDTO projectGroupDTO) {
-        return ResponseResult.success();
+        return ResponseResult.success(projectGroupService.createProjectGroup(projectGroupDTO));
     }
 
     /**
@@ -75,6 +78,7 @@ public class ProjectGroupController {
      */
     @PostMapping(value = "/updateProjectGroup")
     public ResponseResult<Object> updateProjectGroup(@RequestBody @Validated(value = UpdateGroup.class) ProjectGroupDTO projectGroupDTO) {
+        projectGroupService.updateProjectGroup(projectGroupDTO);
         return ResponseResult.success();
     }
 
@@ -86,6 +90,34 @@ public class ProjectGroupController {
      */
     @PostMapping(value = "/deletedProjectGroup")
     public ResponseResult<Object> deletedProjectGroup(@RequestParam(value = "id") String id) {
+        projectGroupService.deletedProjectGroup(id);
+        return ResponseResult.success();
+    }
+
+    /**
+     * 添加成员 (幂等)
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     * @return 响应信息
+     */
+    @Idempotent
+    @PostMapping(value = "/addMember")
+    public ResponseResult<Object> addMember(@RequestParam(value = "groupId") String groupId, @RequestBody List<AddMemberDTO> members) {
+        projectGroupService.addMember(groupId, members);
+        return ResponseResult.success();
+    }
+
+    /**
+     * 移除成员
+     *
+     * @param groupId 项目分组ID
+     * @param members 成员列表
+     * @return 响应信息
+     */
+    @PostMapping(value = "/removeMember")
+    public ResponseResult<Object> removeMember(@RequestParam(value = "groupId") String groupId, @RequestBody List<String> members) {
+        projectGroupService.removeMember(groupId, members);
         return ResponseResult.success();
     }
 }
