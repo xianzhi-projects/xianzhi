@@ -14,18 +14,18 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.model.vo;
+package io.xianzhi.code.model.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 合并请求出参
+ * 合并请求入参
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-public class MergeRequestVO implements Serializable {
+public class PullRequestDTO implements Serializable {
 }

@@ -14,18 +14,21 @@
  *  limitations under the License.
  */
 
-package io.xianzhi.code.bootstrap.dao.mapper;
+package io.xianzhi.code.model.page;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.xianzhi.code.bootstrap.dao.dataobj.MergeRequestDO;
-import org.apache.ibatis.annotations.Mapper;
+import io.xianzhi.core.base.Page;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
- * MR持久层
+ * 合并请求查询条件
  *
  * @author Max
  * @since 1.0.0
  */
-@Mapper
-public interface MergeRequestMapper extends BaseMapper<MergeRequestDO> {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class PullRequestPage extends Page implements Serializable {
 }

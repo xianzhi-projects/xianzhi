@@ -22,13 +22,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * mr实体
+ * pr实体
  *
  * @author Max
  * @since 1.0.0
  */
 @Data
-@TableName(value = "c_merge_request")
+@TableName(value = "c_pull_request")
 @EqualsAndHashCode(callSuper = true)
-public class MergeRequestDO extends BaseDO {
+class PuLLRequestDO extends BaseDO {
 }

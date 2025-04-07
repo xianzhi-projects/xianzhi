@@ -16,18 +16,17 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
-import io.xianzhi.code.bootstrap.dao.mapper.MergeRequestMapper;
-import io.xianzhi.code.bootstrap.service.MergeRequestService;
-import io.xianzhi.code.model.dto.MergeRequestDTO;
-import io.xianzhi.code.model.page.MergeRequestPage;
-import io.xianzhi.code.model.vo.MergeRequestVO;
+import io.xianzhi.code.bootstrap.service.PullRequestService;
+import io.xianzhi.code.model.dto.PullRequestDTO;
+import io.xianzhi.code.model.page.PullRequestPage;
+import io.xianzhi.code.model.vo.PullRequestVO;
 import io.xianzhi.core.result.ListResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * MR接口实现
+ * PR接口实现
  *
  * @author Max
  * @since 1.0.0
@@ -35,42 +34,38 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MergeRequestServiceImpl implements MergeRequestService {
+public class PullRequestServiceImpl implements PullRequestService {
 
-    /**
-     * 合并请求持久层
-     */
-    private final MergeRequestMapper mergeRequestMapper;
 
     /**
      * 分页查询合并请求列表
      *
-     * @param mergeRequestPage 分页查询参数
+     * @param pullRequestPage 分页查询参数
      * @return 合并请求列表
      */
     @Override
-    public ListResult<MergeRequestVO> pageMergeRequestList(MergeRequestPage mergeRequestPage) {
+    public ListResult<PullRequestVO> pagePullRequestList(PullRequestPage pullRequestPage) {
         return null;
     }
 
     /**
      * 创建合并请求
      *
-     * @param mergeRequestDTO 合并请求入参
+     * @param pullRequestDTO 合并请求入参
      * @return 合并请求ID
      */
     @Override
-    public String createMergeRequest(MergeRequestDTO mergeRequestDTO) {
+    public String createPullRequest(PullRequestDTO pullRequestDTO) {
         return "";
     }
 
     /**
      * 更新合并请求
      *
-     * @param mergeRequestDTO 合并请求入参
+     * @param pullRequestDTO 合并请求入参
      */
     @Override
-    public void updateMergeRequest(MergeRequestDTO mergeRequestDTO) {
+    public void updatePullRequest(PullRequestDTO pullRequestDTO) {
 
     }
 
@@ -80,7 +75,7 @@ public class MergeRequestServiceImpl implements MergeRequestService {
      * @param id 合并请求ID
      */
     @Override
-    public void deletedMergeRequest(String id) {
+    public void deletedPullRequest(String id) {
 
     }
 
@@ -90,7 +85,7 @@ public class MergeRequestServiceImpl implements MergeRequestService {
      * @param id 合并请求ID
      */
     @Override
-    public void closeMergeRequest(String id) {
+    public void closePullRequest(String id) {
 
     }
 }
