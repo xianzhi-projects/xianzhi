@@ -105,19 +105,26 @@ xianzhi:
       - /s/captcha/login
       - /**/*.git/**
       - /error
+  # 是否开启接口幂等校验
   idempotent:
     enable: false
+  # OSS 配置
   oss:
     endpoint: http://192.168.50.240:9001/
     access-key: 32aFDOlYVOAxWp7u
     access-secret: gO316AfvxcG2JIcgOIWdz2stOEXJdDRb
+  # 代码托管服务配置
   code:
     external-url: http://192.168.50.69:3001
     repository-dir: ./repository
+  # 文件配置
   file:
+    # 文件桶名称
     bucket-name: xianzhi
+  # 是否开启字典校验
   dict:
     enable-check: false
+# rocketMQ配置
 rocketmq:
   name-server: 192.168.50.70:9876;192.168.50.71:9876
   producer:
