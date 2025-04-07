@@ -116,6 +116,8 @@ xianzhi:
     repository-dir: ./repository
   file:
     bucket-name: xianzhi
+  dict:
+    enable-check: false
 rocketmq:
   name-server: 192.168.50.70:9876;192.168.50.71:9876
   producer:

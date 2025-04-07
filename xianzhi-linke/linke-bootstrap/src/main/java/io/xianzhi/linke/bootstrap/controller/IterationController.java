@@ -23,7 +23,6 @@ import io.xianzhi.linke.model.dto.IterationDTO;
 import io.xianzhi.linke.model.page.IterationPage;
 import io.xianzhi.linke.model.vo.IterationVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +49,6 @@ public class IterationController {
      * @param iterationPage 查询条件
      * @return 迭代列表
      */
-    @PreAuthorize("@xz.hasPermission('linke:iteration:list')")
     @PostMapping(value = "/pageIterationList")
     public ResponseResult<ListResult<IterationVO>> pageIterationList(@RequestBody IterationPage iterationPage) {
         return ResponseResult.success();

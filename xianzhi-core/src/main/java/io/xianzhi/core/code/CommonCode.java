@@ -132,6 +132,10 @@ public enum CommonCode implements Result {
      * Data Exists
      */
     DATA_EXISTS("XZ-01-000000013", "core.data.exists"),
+    /**
+     * Dictionary Check Failed
+     */
+    DICT_CHECK_FAIL("XZ-01-000000014", "core.dict.check.fail"),
 
 
     ;
