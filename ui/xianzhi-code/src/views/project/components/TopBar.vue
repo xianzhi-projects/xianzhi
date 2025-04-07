@@ -17,15 +17,18 @@
 <!-- src/components/TopBar.vue -->
 <template>
   <div class="top-bar">
-    <!-- 选项卡，用于切换视图，"待审核"带徽章显示1 -->
-    <el-tabs v-model="activeTab">
-      <el-tab-pane name="review">
-        <template #label>
-          <span>待审核 <el-badge :value="1" class="badge" /></span>
-        </template>
-      </el-tab-pane>
-      <el-tab-pane label="待编码" name="coding" />
-    </el-tabs>
+    <div class="toolbar-left">
+      <h1>代码库</h1>
+      <!-- 选项卡，用于切换视图，"待审核"带徽章显示1 -->
+      <el-tabs v-model="activeTab" class="badge">
+        <el-tab-pane name="review">
+          <template #label>
+            <span>待审核 <el-badge :value="1" class="badge" /></span>
+          </template>
+        </el-tab-pane>
+        <el-tab-pane label="待编码" name="coding" />
+      </el-tabs>
+    </div>
     <!-- 右侧工具栏，包含搜索、按钮和用户设置 -->
     <div class="toolbar-right">
       <!-- 搜索输入框，带放大镜图标 -->
@@ -34,6 +37,7 @@
           <el-icon><Search /></el-icon>
         </template>
       </el-input>
+      <el-button  @click="projectEditFlag = true">导入项目</el-button>
       <!-- 导入代码库按钮，蓝色风格 -->
       <el-button type="primary" @click="projectEditFlag = true">新增项目</el-button>
     </div>
@@ -60,6 +64,21 @@ const searchQuery = ref('');
   padding: 0 20px;
   height: 60px;
   background-color: #f5f5f5; /* 顶部栏背景，基于描述近似 */
+  .toolbar-left{
+    display: flex;
+    align-items: center;
+    h1 {
+      margin-right: 20px;
+      border-right: 1px solid gray;
+      padding-right: 10px;
+      font-size: 18px;
+      line-height: 18px;
+      color: #333; /* 标题颜色 */
+    }
+    .badge {
+      margin-top: 15px;
+    }
+  }
 }
 
 .toolbar-right {

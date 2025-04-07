@@ -19,7 +19,32 @@
 </script>
 
 <template>
-
+  <el-menu
+    :router="true"
+    background-color="#3b4e8c"
+    class="el-menu-vertical-demo"
+    default-active="/"
+    text-color="#fff"
+    @close="handleClose"
+    @open="handleOpen"
+  >
+    <el-menu-item index="/">
+      <el-icon><icon-menu /></el-icon>
+      <span>代码库</span>
+    </el-menu-item>
+    <el-menu-item index="/project_group">
+      <el-icon><document /></el-icon>
+      <span>代码组</span>
+    </el-menu-item>
+    <el-menu-item index="/pull_request">
+      <el-icon><setting /></el-icon>
+      <span>合并请求</span>
+    </el-menu-item>
+    <el-menu-item index="4">
+      <el-icon><setting /></el-icon>
+      <span>回收站</span>
+    </el-menu-item>
+  </el-menu>
 </template>
 
 <style scoped>

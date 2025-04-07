@@ -16,7 +16,7 @@
 
 package io.xianzhi.code.bootstrap.service.impl;
 
-import io.xianzhi.code.bootstrap.service.SecretKeyService;
+import io.xianzhi.code.bootstrap.service.KeysService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,5 +30,5 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SecretKeyServiceImpl implements SecretKeyService {
+public class KeysServiceImpl implements KeysService {
 }

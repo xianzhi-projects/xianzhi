@@ -15,8 +15,7 @@
   -->
 
 <script lang="ts" setup>
-
-import Header from "@/layout/components/Header.vue";
+import Aside from "@/layout/components/Aside.vue";
 </script>
 
 <template>
@@ -25,25 +24,32 @@ import Header from "@/layout/components/Header.vue";
       <el-header>
         <Header/>
       </el-header>
-      <el-main>
-        <router-view/>
-      </el-main>
-      <el-footer>Footer</el-footer>
+      <el-container>
+        <el-aside width="200px">
+          <Aside/>
+        </el-aside>
+        <el-container>
+          <el-main>
+            <RouterView/>
+          </el-main>
+          <el-footer>Footer</el-footer>
+        </el-container>
+      </el-container>
     </el-container>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.el-header{
+.common-layout{
+  height: 100VH;
+  .el-container{
+    height: 100%;
+    .el-header{
+      height: 48px;
+    }
+    .el-aside{
+      background-color: #3b4e8c;
+    }
+  }
 }
-:deep(.el-menu--horizontal.el-menu){
-  background-color: transparent;
-  border-bottom: none;
-}
-.el-main{
-  height: calc(-40px + 95vh);
-  background-color: #f5f7fa;
-  padding: 20px;
-}
-
 </style>

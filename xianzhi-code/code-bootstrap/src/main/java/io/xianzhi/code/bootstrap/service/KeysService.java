@@ -22,5 +22,5 @@ package io.xianzhi.code.bootstrap.service;
  * @author Max
  * @since 1.0.0
  */
-public interface SecretKeyService {
+public interface KeysService {
 }

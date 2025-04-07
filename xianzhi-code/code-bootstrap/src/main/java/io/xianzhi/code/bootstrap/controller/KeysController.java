@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 秘钥接口
+ * 部署key
  *
  * @author Max
  * @since 1.0.0
@@ -29,5 +29,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/")
-public class DeployKeyController {
+public class KeysController {
 }
