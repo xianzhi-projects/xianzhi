@@ -16,9 +16,15 @@
 
 package io.xianzhi.linke.bootstrap.controller;
 
+import io.xianzhi.core.enums.EnvEnum;
+import io.xianzhi.core.result.ResponseResult;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 环境接口
@@ -31,7 +37,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/l/env")
 public class EnvController {
 
-
-
+    /**
+     * 获取环境信息
+     *
+     * @return 环境信息
+     */
+    @GetMapping(value = "/getEnv")
+    public ResponseResult<Map<String, String>> getEnv() {
+        Map<String, String> result = new HashMap<>();
+        EnvEnum[] values = EnvEnum.values();
+        for (EnvEnum value : values) {
+            result.put(value.getCode(), value.getDesc());
+        }
+        return ResponseResult.success(result);
+    }
 
 }
